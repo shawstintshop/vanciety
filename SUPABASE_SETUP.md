@@ -1,10 +1,10 @@
-# Supabase Setup Guide for Sprinter Society
+# Supabase Setup Guide for Vanciety
 
 ## Step 1: Create Supabase Project
 
 1. Go to [supabase.com](https://supabase.com) and sign up/log in
 2. Click "New Project"
-3. Enter project name: `sprinter-society`
+3. Enter project name: `vanciety`
 4. Choose region: `us-west-1` (closest to Seattle)
 5. Set a strong database password
 6. Click "Create new project" and wait for initialization

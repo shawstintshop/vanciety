@@ -1,4 +1,4 @@
-# Sprinter Society v2
+# Vanciety
 
 A next-generation van life community platform built with **Next.js 15 App Router**, **Supabase** (PostGIS + pgvector), **Leaflet** realtime GPS, and **AI-powered** features.
 
@@ -53,7 +53,7 @@ A next-generation van life community platform built with **Next.js 15 App Router
 ### 1. Clone & Install
 ```bash
 git clone <repo>
-cd sprinter-society-v2
+cd vanciety
 npm install
 ```
 
@@ -87,7 +87,7 @@ NEXT_PUBLIC_AI_MODEL=ds  # ds|flash|sonnet|opus
 ## Project Structure
 
 ```
-sprinter-society-v2/
+vanciety/
 ├── app/                    # Next.js App Router
 │   ├── layout.tsx         # Root layout
 │   ├── page.tsx           # Homepage
@@ -178,8 +178,8 @@ vercel deploy
 
 ### Docker
 ```bash
-docker build -t sprinter-society .
-docker run -p 3000:3000 sprinter-society
+docker build -t vanciety .
+docker run -p 3000:3000 vanciety
 ```
 
 ## Contributing
@@ -197,7 +197,7 @@ MIT
 
 - **Docs**: [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
 - **Issues**: GitHub Issues
-- **Email**: support@sprintersociety.com
+- **Email**: support@vanciety.com
 
 ---
 

@@ -50,7 +50,7 @@ export default function Login() {
               Welcome Back
             </h1>
             <p className="text-sm text-muted-foreground">
-              Sign in to your Sprinter Society account
+              Sign in to your Vanciety account
             </p>
           </div>
 
@@ -103,7 +103,7 @@ export default function Login() {
           </form>
 
           <div className="text-center text-sm">
-            <span className="text-muted-foreground">New to Sprinter Society? </span>
+            <span className="text-muted-foreground">New to Vanciety? </span>
             <Link href="/auth/signup" className="text-accent hover:underline">
               Join Now
             </Link>

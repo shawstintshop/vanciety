@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold text-accent mb-4">
               <MapPin className="w-6 h-6" />
-              Sprinter Society
+              Vanciety
             </Link>
             <p className="text-sm text-muted-foreground">
               Connecting van owners worldwide. Find your people on the road.
@@ -64,7 +64,7 @@ export default function Footer() {
 
         <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © 2026 Sprinter Society. All rights reserved.
+            © 2026 Vanciety. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground font-mono">
             v1.0.0 · Built for the road

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Sprinter Society | Van Life Community",
+  title: "Vanciety | Van Life Community",
   description: "Connect with verified van owners worldwide. Find your people on the road.",
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23ff6b35'>🚐</text></svg>",

@@ -24,7 +24,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold text-accent">
             <MapPin className="w-6 h-6" />
-            Sprinter Society
+            Vanciety
           </Link>
 
           {/* Desktop Nav */}

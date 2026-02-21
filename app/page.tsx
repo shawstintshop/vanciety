@@ -19,7 +19,7 @@ export default function HomePage() {
               Explore the Map
             </Link>
             <Link href="/auth/signup" className="px-8 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-card transition-colors">
-              Join the Society
+              Join Vanciety
             </Link>
           </div>
         </div>

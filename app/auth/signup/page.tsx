@@ -78,7 +78,7 @@ export default function SignUp() {
         <div className="bg-card border border-border rounded-lg p-8 space-y-6">
           <div className="text-center">
             <h1 className="text-3xl font-display font-bold text-foreground mb-2">
-              Join Sprinter Society
+              Join Vanciety
             </h1>
             <p className="text-sm text-muted-foreground">
               Connect with van owners worldwide
