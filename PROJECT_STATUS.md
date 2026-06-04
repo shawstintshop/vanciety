@@ -35,7 +35,14 @@ App root: /Volumes/AI-DATA/PROJECTS/vanciety_platform/code/primary_app
   - .gitignore protects .env, .env.local, .env.*.local going forward
   - Key rotation required: .env existed in prior commit history (commit 0d11b88). Any real Supabase keys committed there should be rotated in the Supabase dashboard before ingestion runs.
   - Do not run ingestion until Supabase keys are rotated/confirmed safe.
-- VAN-004 — Rotate Supabase keys / confirm secrets safe (manual, owner: Shaw)
+- VAN-004 — Rotate Supabase keys / confirm secrets safe (completed manually by Shaw; new project ref vfrxntxjigtgutevijmb)
+- VAN-005A — Align Supabase client config to current project ref (completed, this commit)
+  - src/integrations/supabase/client.ts rewritten to env-driven (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) with runtime guard
+  - supabase/config.toml project_id updated to vfrxntxjigtgutevijmb
+  - Old ref zyqiiwitxmexkuyeojsm fully purged from repo (0 matches)
+  - scripts/ingestLocations.ts already env-driven (SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY) — no change needed
+  - npm run build passed
+- VAN-005B — Run ingestion (npm run ingest:locations) and verify /map + /van-cards hydrate
 - Future — Lint cleanup pass on the 98 pre-existing issues (separate worker mission)
 
 ## Next Recommended Task

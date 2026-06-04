@@ -1,4 +1,4 @@
-project_id = "zyqiiwitxmexkuyeojsm"
+project_id = "vfrxntxjigtgutevijmb"
 
 [functions.fetch-youtube-videos]
 verify_jwt = false
