@@ -13,6 +13,7 @@ import Vendors from "./pages/Vendors";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import GPSTracking from "./pages/GPSTracking";
+import VanCards from "./pages/VanCards";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/vendors" element={<Vendors />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/gps" element={<GPSTracking />} />
+            <Route path="/van-cards" element={<VanCards />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
