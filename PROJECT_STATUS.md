@@ -28,8 +28,14 @@ App root: /Volumes/AI-DATA/PROJECTS/vanciety_platform/code/primary_app
 
 ## Open Tasks
 
-- VAN-002 — Protect Env + Add Project Status (in progress, this commit)
-- VAN-003 — Untrack and rotate the .env that is currently in git history (discovered during VAN-002; secrets in commit 0d11b88 may be exposed and should be rotated)
+- VAN-002 — Protect Env + Add Project Status (completed, commit 904d4cc)
+- VAN-003 — Untrack .env and prepare key rotation (completed, this commit)
+  - .env removed from git tracking via `git rm --cached .env`
+  - local .env file preserved on disk
+  - .gitignore protects .env, .env.local, .env.*.local going forward
+  - Key rotation required: .env existed in prior commit history (commit 0d11b88). Any real Supabase keys committed there should be rotated in the Supabase dashboard before ingestion runs.
+  - Do not run ingestion until Supabase keys are rotated/confirmed safe.
+- VAN-004 — Rotate Supabase keys / confirm secrets safe (manual, owner: Shaw)
 - Future — Lint cleanup pass on the 98 pre-existing issues (separate worker mission)
 
 ## Next Recommended Task
