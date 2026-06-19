@@ -19,10 +19,11 @@ import {
   Satellite,
   Truck,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useLeafletMap, type LocationType } from "@/hooks/useLeafletMap";
+import type { LocationType } from "@/hooks/useLeafletMap";
+import { useLeafletMap } from "@/hooks/useLeafletMap";
 import { useRealtimePresence } from "@/hooks/useRealtimePresence";
 import { useRealtimeVanLocations } from "@/hooks/useRealtimeVanLocations";
 import FallbackMap from "@/components/FallbackMap";
@@ -30,6 +31,17 @@ import AIVanConcierge from "@/components/AIVanConcierge";
 import Header from "@/components/Header";
 import { Link } from "react-router-dom";
 import { verifiedLocations } from "@/data/vancietyVerified";
+
+// Location type styling (matches useLeafletMap)
+const locationTypeConfig: Record<string, { color: string; label: string; icon: string }> = {
+  campsite: { color: '#10b981', label: 'Campsite', icon: '🏕️' },
+  driveway: { color: '#3b82f6', label: 'Driveway', icon: '🏠' },
+  event: { color: '#f59e0b', label: 'Event', icon: '🎉' },
+  business: { color: '#8b5cf6', label: 'Business', icon: '🏪' },
+  poi: { color: '#ef4444', label: 'POI', icon: '📍' },
+  live_van: { color: '#06b6d4', label: 'Live Van', icon: '🚐' },
+  live_member: { color: '#8b5cf6', label: 'Member', icon: '👤' },
+};
 
 interface Location {
   id: string;
