@@ -48,26 +48,26 @@ export const createVanMarkerSvg = (color: string, size = 40, pulse = false): str
 // Pre-built marker types
 export const VAN_MARKERS = {
   // Your location - orange (brand color)
-  you: (size = 44) => createVanMarkerSvg('#E8722A', size, true),
+  you: (size = 44) => createVanMarkerSvg('#F59E42', size, true),
   
   // Friend/member van - green (brand color)  
-  friend: (size = 36) => createVanMarkerSvg('#2D6A4F', size, true),
+  friend: (size = 36) => createVanMarkerSvg('#4ADE80', size, true),
   
   // Event markers by type
-  event_rally: (size = 36) => createVanMarkerSvg('#E63946', size, false),
-  event_expo: (size = 36) => createVanMarkerSvg('#457B9D', size, false),
-  event_meetup: (size = 36) => createVanMarkerSvg('#2A9D8F', size, false),
-  event_workshop: (size = 36) => createVanMarkerSvg('#E9C46A', size, false),
-  event_gathering: (size = 36) => createVanMarkerSvg('#F4A261', size, false),
+  event_rally: (size = 36) => createVanMarkerSvg('#FF6B6B', size, false),
+  event_expo: (size = 36) => createVanMarkerSvg('#64B5F6', size, false),
+  event_meetup: (size = 36) => createVanMarkerSvg('#4DD0B8', size, false),
+  event_workshop: (size = 36) => createVanMarkerSvg('#FFD54F', size, false),
+  event_gathering: (size = 36) => createVanMarkerSvg('#FFB74D', size, false),
   
   // Campsite
-  campsite: (size = 32) => createVanMarkerSvg('#10b981', size, false),
+  campsite: (size = 32) => createVanMarkerSvg('#34D399', size, false),
   
   // Business / van friendly
-  business: (size = 32) => createVanMarkerSvg('#8b5cf6', size, false),
+  business: (size = 32) => createVanMarkerSvg('#A78BFA', size, false),
   
   // Demo van (for show)
-  demo: (size = 48) => createVanMarkerSvg('#E8722A', size, true),
+  demo: (size = 48) => createVanMarkerSvg('#F59E42', size, true),
 };
 
 // Create a Leaflet divIcon from SVG

@@ -184,8 +184,8 @@ const Map = () => {
       attributionControl: false,
     });
 
-    // CartoDB Voyager tiles — free, clean, beautiful
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    // CartoDB Dark Matter tiles — matches Vanciety dark adventure theme
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
       maxZoom: 19,
       subdomains: "abcd",
     }).addTo(map);
@@ -469,7 +469,7 @@ const Map = () => {
         .leaflet-container {
           width: 100% !important;
           height: 100% !important;
-          background: #f2efe9;
+          background: hsl(220 13% 9%);
         }
         .vanciety-map-marker {
           background: none !important;
