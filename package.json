@@ -7,12 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview",
+    "news:update": "node scripts/update-van-news.mjs",
     "ingest:locations": "tsx scripts/ingestLocations.ts",
-    "import:videos": "tsx scripts/importVideos.ts",
-    "import:products": "tsx scripts/importProducts.ts",
-    "import:locations": "tsx scripts/importLocations.ts"
+    "supabase:seed-verified": "tsx scripts/seed-verified-supabase.ts",
+    "supabase:set-secrets": "bash scripts/set-supabase-secrets.sh"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.10",

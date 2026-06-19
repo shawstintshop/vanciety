@@ -1,43 +1,13 @@
-import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
+const VancietyLogo: React.FC<{ className?: string; size?: 'sm' | 'md' | 'lg' }> = ({ className = '', size = 'md' }) => {
+  const sizes = { sm: 'w-6 h-6 text-sm', md: 'w-8 h-8 text-lg', lg: 'w-12 h-12 text-2xl' };
+  return (
+    <div className={`flex items-center gap-2 ${className}`}>
+      <div className={`${sizes[size]} bg-gradient-hero rounded-lg flex items-center justify-center shrink-0`}>
+        <span className="text-white font-black leading-none">V</span>
+      </div>
+      <span className="font-bold bg-gradient-hero bg-clip-text text-transparent">Vanciety</span>
+    </div>
+  );
+};
 
-interface VancietyLogoProps {
-  compact?: boolean;
-  className?: string;
-  markClassName?: string;
-}
-
-const LOGO_SRC = "/brand/vanciety-logo-transparent.png";
-
-const VancietyLogoMark = ({ className }: { className?: string }) => (
-  <span
-    className={cn(
-      "inline-flex shrink-0 items-center justify-center overflow-visible bg-transparent",
-      className
-    )}
-    aria-hidden="true"
-  >
-    <img
-      src={LOGO_SRC}
-      alt=""
-      className="h-full w-full object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.32)]"
-      draggable={false}
-    />
-  </span>
-);
-
-const VancietyLogo = ({ compact = false, className, markClassName }: VancietyLogoProps) => (
-  <Link
-    to="/"
-    className={cn("group inline-flex items-center gap-3 no-underline", className)}
-    aria-label="Vanciety.com home"
-  >
-    <VancietyLogoMark className={cn(compact ? "h-12 w-12" : "h-16 w-16 sm:h-20 sm:w-20", markClassName)} />
-    {!compact && (
-      <span className="sr-only">Vanciety.com</span>
-    )}
-  </Link>
-);
-
-export { VancietyLogoMark };
 export default VancietyLogo;

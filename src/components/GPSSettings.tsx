@@ -84,8 +84,8 @@ const GPSSettings = () => {
                 <CardTitle>Van GPS Tracking</CardTitle>
                 <CardDescription>
                   {isTracking
-                    ? "Your van location is being shared live"
-                    : "Share your van's location with the community"
+                    ? "Your van area is being shared with members"
+                    : "Share your approximate van area with members"
                   }
                 </CardDescription>
               </div>
@@ -102,17 +102,13 @@ const GPSSettings = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-muted/50 rounded-lg">
                 <MapPin className="w-4 h-4 mx-auto mb-1 text-primary" />
-                <p className="text-xs text-muted-foreground">Latitude</p>
-                <p className="text-sm font-mono font-medium">
-                  {currentPosition.coords.latitude.toFixed(4)}
-                </p>
+                <p className="text-xs text-muted-foreground">Shared area</p>
+                <p className="text-sm font-medium">City/area only</p>
               </div>
               <div className="text-center p-3 bg-muted/50 rounded-lg">
-                <MapPin className="w-4 h-4 mx-auto mb-1 text-primary" />
-                <p className="text-xs text-muted-foreground">Longitude</p>
-                <p className="text-sm font-mono font-medium">
-                  {currentPosition.coords.longitude.toFixed(4)}
-                </p>
+                <Shield className="w-4 h-4 mx-auto mb-1 text-primary" />
+                <p className="text-xs text-muted-foreground">Exact GPS</p>
+                <p className="text-sm font-medium">Hidden in UI</p>
               </div>
               <div className="text-center p-3 bg-muted/50 rounded-lg">
                 <Navigation className="w-4 h-4 mx-auto mb-1 text-accent" />
@@ -174,24 +170,9 @@ const GPSSettings = () => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="public">
-                  <span className="flex items-center gap-2">
-                    Everyone (public map)
-                  </span>
-                </SelectItem>
                 <SelectItem value="friends_only">
                   <span className="flex items-center gap-2">
-                    Friends only
-                  </span>
-                </SelectItem>
-                <SelectItem value="event">
-                  <span className="flex items-center gap-2">
-                    Event participants only
-                  </span>
-                </SelectItem>
-                <SelectItem value="private">
-                  <span className="flex items-center gap-2">
-                    Private (hosting requests only)
+                    Vanciety members only
                   </span>
                 </SelectItem>
               </SelectContent>
@@ -216,15 +197,12 @@ const GPSSettings = () => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="exact">Exact location</SelectItem>
-                <SelectItem value="approximate">City-level only (~5km)</SelectItem>
+                <SelectItem value="approximate">City / area only</SelectItem>
               </SelectContent>
             </Select>
-            {settings.default_precision === 'approximate' && (
-              <p className="text-xs text-muted-foreground">
-                Your exact position will be randomly offset by up to 5 km.
-              </p>
-            )}
+            <p className="text-xs text-muted-foreground">
+              Friend Finder uses approximate member areas only. Exact GPS is used locally to create a safe area marker and is not shown in the UI.
+            </p>
           </div>
 
           {/* Duration */}
@@ -310,7 +288,7 @@ const GPSSettings = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Popular van-friendly GPS trackers that work with Sprinter Society (coming soon):
+            Popular van-friendly GPS trackers planned for Vanciety hardware integrations (coming soon):
           </p>
           <div className="grid gap-3">
             {[

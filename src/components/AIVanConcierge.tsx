@@ -1,188 +1,134 @@
-import { useMemo, useState } from "react";
-import { Brain, ExternalLink, Loader2, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { supabase } from "@/integrations/supabase/client";
-import {
-  aiModeConfig,
-  aiSourceLinks,
-  buildConciergeContext,
-  fallbackSuggestions,
-  type AiConciergeMode,
-} from "@/data/aiConcierge";
+import React, { useState, useRef, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { Brain, Send, Loader2, MapPin, Wrench, Video, Users } from 'lucide-react';
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
 
 interface AIVanConciergeProps {
-  mode?: AiConciergeMode;
+  mode?: 'home' | 'full';
   compact?: boolean;
 }
 
-const typeLabel: Record<string, string> = {
-  event: "Event",
-  video: "Video",
-  vendor: "Vendor",
-  marketplace: "Marketplace",
-  forum: "Forum",
-  gear: "Gear",
-  mechanic: "Service",
-};
+const SUGGESTIONS = [
+  { icon: MapPin, text: 'Best camp spots near me' },
+  { icon: Wrench, text: 'Solar setup for a Sprinter' },
+  { icon: Video, text: 'Van build videos to watch' },
+  { icon: Users, text: 'Find van lifers in my area' },
+];
 
-const modeSourcePriority: Record<AiConciergeMode, string[]> = {
-  home: ["event", "video", "vendor", "gear", "marketplace"],
-  trip: ["event", "vendor", "forum", "video", "marketplace"],
-  build: ["gear", "video", "vendor", "forum", "mechanic"],
-  marketplace: ["marketplace", "gear", "vendor", "video", "forum"],
-  video: ["video", "gear", "vendor", "event", "forum"],
-  community: ["forum", "event", "vendor", "video", "marketplace"],
-  mechanic: ["mechanic", "vendor", "gear", "video", "forum"],
-};
+const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ compact = false }) => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
-const AIVanConcierge = ({ mode = "home", compact = false }: AIVanConciergeProps) => {
-  const config = aiModeConfig[mode];
-  const [question, setQuestion] = useState(config.quickActions[0]?.prompt ?? "");
-  const [answer, setAnswer] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [answerSource, setAnswerSource] = useState<"ai" | "guide" | null>(null);
-  const sourceLinks = useMemo(() => {
-    const priority = modeSourcePriority[mode];
-    return [...aiSourceLinks]
-      .sort((a, b) => priority.indexOf(a.type) - priority.indexOf(b.type))
-      .slice(0, compact ? 6 : 10);
-  }, [compact, mode]);
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-  const askConcierge = async () => {
-    const trimmed = question.trim();
-    if (!trimmed) return;
+  const handleSend = async (text?: string) => {
+    const query = (text ?? input).trim();
+    if (!query) return;
+    setInput('');
+    setMessages(prev => [...prev, { role: 'user', content: query }]);
+    setLoading(true);
 
-    setIsLoading(true);
-    setAnswer("");
-    setAnswerSource(null);
+    // Simulated response — replace with real AI endpoint when ready
+    await new Promise(r => setTimeout(r, 900));
+    const reply = getLocalReply(query);
+    setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
+    setLoading(false);
+  };
 
-    try {
-      const { data, error } = await supabase.functions.invoke("vanciety-ai-concierge", {
-        body: {
-          question: trimmed,
-          mode,
-          context: buildConciergeContext(mode),
-        },
-      });
-
-      if (error) throw error;
-      const reply = typeof data?.answer === "string" ? data.answer.trim() : "";
-      if (!reply) throw new Error("AI assistant returned an empty response.");
-
-      setAnswer(reply);
-      setAnswerSource("ai");
-    } catch (error) {
-      const suggestions = fallbackSuggestions(mode, trimmed);
-      setAnswer(
-        [
-          "Vanciety AI is in guide mode right now, so it is giving you a source-aware path instead of a generated answer.",
-          "Try this next:",
-          ...suggestions.map((item, index) => `${index + 1}. ${item}`),
-        ].join("\n\n")
-      );
-      setAnswerSource("guide");
-      console.info("Vanciety AI concierge fallback:", error);
-    } finally {
-      setIsLoading(false);
+  const getLocalReply = (q: string): string => {
+    const lower = q.toLowerCase();
+    if (lower.includes('solar') || lower.includes('electric')) {
+      return "For a Sprinter van, a common solar setup is 400W panels + a 100Ah LiFePO4 battery + a Victron MPPT controller. Check our Videos page for step-by-step build guides from top creators like Will Prowse and Build A Green RV.";
     }
+    if (lower.includes('camp') || lower.includes('spot') || lower.includes('sleep')) {
+      return "Check our Map page for verified camp spots, driveways, and boondocking locations contributed by the Vanciety community. We have 18+ Pacific Northwest locations and growing.";
+    }
+    if (lower.includes('video') || lower.includes('build') || lower.includes('watch')) {
+      return "Head to our Videos page — we have 21+ real van life videos from channels like Eamon & Bec, Kara and Nate, and Will Prowse, with more added regularly.";
+    }
+    if (lower.includes('friend') || lower.includes('meet') || lower.includes('community')) {
+      return "Use Friend Finder to connect with van lifers near you. It's privacy-first — approximate city-level sharing only, opt-in. Sign up to access it.";
+    }
+    return "Great question! Vanciety is your all-in-one van life hub. You can find camp spots on the Map, watch build videos, post in the Forum, and connect with other van lifers. What specifically can I help you with?";
   };
 
   return (
-    <section className={compact ? "py-8" : "py-14"}>
-      <Card className="vanciety-topo-card overflow-hidden border-primary/25 bg-gradient-to-br from-card via-card to-primary/5 shadow-card">
-        <CardHeader className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge className="bg-primary text-primary-foreground">
-              <Sparkles className="mr-1 h-3 w-3" />
-              {config.eyebrow}
-            </Badge>
-            <Badge variant="secondary">Page-aware</Badge>
-            <Badge variant="outline">Source-aware</Badge>
-            <Badge variant="outline">Trip planning</Badge>
-            <Badge variant="outline">Build research</Badge>
-            <Badge variant="outline">Gear checks</Badge>
+    <Card className={`bg-card/60 border border-border/60 ${compact ? '' : 'w-full max-w-2xl mx-auto'}`}>
+      <CardContent className={`${compact ? 'p-4' : 'p-6'}`}>
+        {/* Header */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
+            <Brain className="w-4 h-4 text-primary" />
           </div>
-          <div>
-            <CardTitle className={compact ? "text-xl" : "text-2xl md:text-3xl"}>{config.title}</CardTitle>
-            <CardDescription className="mt-2 max-w-3xl text-sm md:text-base">
-              {config.description}
-            </CardDescription>
-          </div>
-        </CardHeader>
+          <span className="text-sm font-medium text-foreground">Vanny — van life assistant</span>
+        </div>
 
-        <CardContent className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {config.quickActions.map((action) => (
-                <Button
-                  key={action.label}
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setQuestion(action.prompt)}
-                >
-                  {action.label}
-                </Button>
-              ))}
-            </div>
-
-            <Textarea
-              value={question}
-              onChange={(event) => setQuestion(event.target.value)}
-              placeholder={config.placeholder}
-              className="min-h-[120px] bg-background/80"
-            />
-
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <Button onClick={askConcierge} disabled={isLoading || !question.trim()} className="sm:w-auto">
-                {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Brain className="mr-2 h-4 w-4" />}
-                Ask Vanciety AI
-              </Button>
-              <p className="text-xs text-muted-foreground">
-                Uses the page you are on plus Vanciety source links to guide the answer.
-              </p>
-            </div>
-
-            {answer && (
-              <div className="rounded-xl border bg-background/80 p-4 text-sm leading-relaxed whitespace-pre-line">
-                <div className="mb-2 flex items-center gap-2">
-                  <Badge variant={answerSource === "ai" ? "default" : "secondary"}>
-                    {answerSource === "ai" ? "AI response" : "Guide mode"}
-                  </Badge>
+        {/* Messages */}
+        {messages.length > 0 && (
+          <div className={`space-y-3 mb-4 overflow-y-auto ${compact ? 'max-h-48' : 'max-h-72'}`}>
+            {messages.map((m, i) => (
+              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`rounded-xl px-3 py-2 text-sm max-w-[85%] ${
+                  m.role === 'user'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-foreground'
+                }`}>
+                  {m.content}
                 </div>
-                {answer}
+              </div>
+            ))}
+            {loading && (
+              <div className="flex justify-start">
+                <div className="bg-muted rounded-xl px-3 py-2">
+                  <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+                </div>
               </div>
             )}
+            <div ref={bottomRef} />
           </div>
+        )}
 
-          <div className="space-y-3 rounded-xl border bg-background/60 p-4">
-            <h3 className="text-sm font-semibold">Good links to open next</h3>
-            <div className="space-y-2">
-              {sourceLinks.map((link) => (
-                <a
-                  key={`${link.type}-${link.href}`}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start justify-between gap-3 rounded-lg border bg-card/80 p-3 text-sm transition-colors hover:border-primary/60"
-                >
-                  <span>
-                    <span className="mb-1 block text-[10px] uppercase tracking-wide text-muted-foreground">
-                      {typeLabel[link.type] ?? link.type}
-                    </span>
-                    <span className="line-clamp-2 font-medium">{link.label}</span>
-                  </span>
-                  <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-muted-foreground group-hover:text-primary" />
-                </a>
-              ))}
-            </div>
+        {/* Suggestions */}
+        {messages.length === 0 && (
+          <div className="grid grid-cols-2 gap-2 mb-4">
+            {SUGGESTIONS.map(({ icon: Icon, text }) => (
+              <button
+                key={text}
+                onClick={() => handleSend(text)}
+                className="flex items-center gap-2 rounded-lg border border-border/60 bg-background/50 px-3 py-2 text-left text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground transition-colors"
+              >
+                <Icon className="w-3 h-3 shrink-0" />
+                {text}
+              </button>
+            ))}
           </div>
-        </CardContent>
-      </Card>
-    </section>
+        )}
+
+        {/* Input */}
+        <form onSubmit={e => { e.preventDefault(); handleSend(); }} className="flex gap-2">
+          <Input
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="Ask about van life..."
+            className="flex-1 h-9 text-sm bg-background/60"
+            disabled={loading}
+          />
+          <Button type="submit" size="sm" disabled={loading || !input.trim()} className="h-9 w-9 p-0">
+            <Send className="w-4 h-4" />
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

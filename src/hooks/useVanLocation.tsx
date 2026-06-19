@@ -18,12 +18,23 @@ export interface GPSSettings {
 
 const DEFAULT_SETTINGS: GPSSettings = {
   sharing_enabled: false,
-  default_visibility: 'public',
-  default_precision: 'exact',
+  default_visibility: 'friends_only',
+  default_precision: 'approximate',
   default_duration: 'until_off',
   auto_pause_hours: 8,
   update_interval_sec: 30,
 };
+
+const normalizeGPSSettings = (settings: Partial<GPSSettings> | null | undefined): GPSSettings => ({
+  ...DEFAULT_SETTINGS,
+  ...settings,
+  // Friend Finder is members-only. Do not let legacy public/exact database defaults
+  // become the runtime sharing mode for new location updates.
+  default_visibility: 'friends_only',
+  default_precision: settings?.default_precision === 'exact'
+    ? 'approximate'
+    : settings?.default_precision ?? DEFAULT_SETTINGS.default_precision,
+});
 
 export const useVanLocation = () => {
   const { user } = useAuth();
@@ -55,14 +66,14 @@ export const useVanLocation = () => {
       if (error) throw error;
 
       if (data) {
-        setSettings({
+        setSettings(normalizeGPSSettings({
           sharing_enabled: data.sharing_enabled,
           default_visibility: data.default_visibility as SharingVisibility,
           default_precision: data.default_precision as SharingPrecision,
           default_duration: data.default_duration as SharingDuration,
           auto_pause_hours: data.auto_pause_hours,
           update_interval_sec: data.update_interval_sec,
-        });
+        }));
       }
     } catch (err) {
       console.error('Error loading GPS settings:', err);
@@ -75,7 +86,7 @@ export const useVanLocation = () => {
   const saveSettings = useCallback(async (newSettings: Partial<GPSSettings>) => {
     if (!user) return;
 
-    const merged = { ...settings, ...newSettings };
+    const merged = normalizeGPSSettings({ ...settings, ...newSettings });
     setSettings(merged);
 
     try {
@@ -128,6 +139,7 @@ export const useVanLocation = () => {
     lastSentRef.current = now;
 
     try {
+      const safeSettings = normalizeGPSSettings(settings);
       const { error } = await supabase.rpc('upsert_van_location', {
         p_user_id: user.id,
         p_lat: position.coords.latitude,
@@ -135,9 +147,9 @@ export const useVanLocation = () => {
         p_speed: position.coords.speed,
         p_heading: position.coords.heading,
         p_accuracy: position.coords.accuracy,
-        p_visibility: settings.default_visibility,
-        p_precision: settings.default_precision,
-        p_expires_at: computeExpiry(settings.default_duration),
+        p_visibility: safeSettings.default_visibility,
+        p_precision: safeSettings.default_precision,
+        p_expires_at: computeExpiry(safeSettings.default_duration),
         p_status: (position.coords.speed ?? 0) > 1 ? 'traveling' : 'parked',
         p_message: null,
       });

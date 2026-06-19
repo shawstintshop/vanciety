@@ -25,6 +25,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
+import VancietyGroupImage from "@/components/VancietyGroupImage";
 
 const Forum = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -124,44 +125,47 @@ const Forum = () => {
     }
   };
 
+  const liveStats = [
+    { label: "Loaded topics", value: forumPosts.length.toString() },
+    { label: "Visible categories", value: forumCategories.length.toString() },
+    { label: "Selected lane", value: selectedCategory === "all" ? "All" : forumCategories.find((category) => category.id === selectedCategory)?.name || selectedCategory },
+    { label: "Data source", value: isLoading ? "Loading" : "Supabase" },
+  ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="vanciety-page vanciety-page--forum min-h-screen bg-background">
       <Header />
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="py-12 bg-gradient-to-br from-background to-muted/30">
+        <section className="vanciety-hero-topo py-12">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
+            <div className="grid items-center gap-8 mb-8 lg:grid-cols-[1fr_0.85fr]">
+              <div className="text-center lg:text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 <span className="bg-gradient-hero bg-clip-text text-transparent">
                   Community Forum
                 </span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
                 Connect, learn, and share with the van life community
               </p>
+              </div>
+              <VancietyGroupImage compact className="min-h-[230px]" />
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">12.5K</div>
-                <div className="text-sm text-muted-foreground">Topics</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">45.2K</div>
-                <div className="text-sm text-muted-foreground">Posts</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">8.9K</div>
-                <div className="text-sm text-muted-foreground">Members</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">234</div>
-                <div className="text-sm text-muted-foreground">Online</div>
-              </div>
+            {/* Live Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-4">
+              {liveStats.map((stat) => (
+                <div key={stat.label} className="text-center rounded-xl border bg-card/70 p-4">
+                  <div className="text-2xl font-bold text-foreground truncate">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="max-w-2xl mx-auto mb-8 rounded-xl border bg-card/70 p-3 text-center text-sm text-muted-foreground">
+              Forum metrics are live-loaded from Supabase. If the database is empty, Vanciety shows zero instead of invented community numbers.
             </div>
 
             {/* Search and New Topic */}
