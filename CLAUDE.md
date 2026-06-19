@@ -4,8 +4,7 @@
 
 SprinterSociety is a **van life community platform** (SPA) for Sprinter van owners and enthusiasts. It provides video content, interactive maps, forums, a marketplace, news/events, and a vendor directory. The goal is to be the top Sprinter van community website/app.
 
-**Repository**: `shawstintshop/SprinterSociety-NEW`
-**Origin**: Built with [Lovable](https://lovable.dev/projects/51fb7fd7-4ba7-4b08-bc8d-5910a56d369b)
+**Repository**: `shawstintshop/vanciety`
 
 ---
 
@@ -309,7 +308,7 @@ The project uses shadcn/ui with the `default` style and `slate` base color. Comp
 
 - All client-side env vars must use `VITE_` prefix
 - Current vars: `VITE_SUPABASE_PROJECT_ID`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_SUPABASE_URL`
-- Supabase client is initialized in `src/integrations/supabase/client.ts` with hardcoded values (Lovable pattern)
+- Supabase client is initialized in `src/integrations/supabase/client.ts` using environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`)
 - Edge function secrets are stored in Supabase dashboard, not in `.env`
 
 ---

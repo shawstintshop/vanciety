@@ -1,73 +1,83 @@
-# Welcome to your Lovable project
+# Vanciety — Van Life Community Platform
 
-## Project info
+**Live Site:** https://primaryapp.vercel.app
+**Repo:** https://github.com/shawstintshop/vanciety
 
-**URL**: https://lovable.dev/projects/51fb7fd7-4ba7-4b08-bc8d-5910a56d369b
+Vanciety is the van life community platform for Sprinter van owners and enthusiasts. Connect with fellow adventurers, discover hidden camp spots, stream van build content, and find your community on the road.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+| Layer | Tech |
+|---|---|
+| Framework | React 18 + TypeScript |
+| Build | Vite 5 |
+| Styling | Tailwind CSS + shadcn/ui |
+| Backend | Supabase (PostgreSQL, Auth, Realtime) |
+| Routing | React Router v6 |
+| Maps | Leaflet / OpenStreetMap (free, no API key) |
+| Hosting | Vercel (auto-deploy on push) |
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/51fb7fd7-4ba7-4b08-bc8d-5910a56d369b) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Commands
 
-**Use your preferred IDE**
+```bash
+npm run dev        # Dev server on port 8080
+npm run build      # Production build
+npm run lint       # ESLint check
+npm run preview    # Preview production build
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Data imports
+npm run import:videos     # Import YouTube videos to Supabase
+npm run import:locations  # Import locations to Supabase
+npm run import:products   # Import products to Supabase
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Environment Variables
 
-**Use GitHub Codespaces**
+Copy `.env.example` to `.env` and fill in values:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+```
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── pages/          # Route-level pages
+├── components/     # Shared UI components
+├── contexts/       # Auth context
+├── hooks/          # Custom hooks
+├── integrations/   # Supabase client + types
+└── data/           # Static data files
+supabase/
+├── migrations/     # SQL schema migrations
+└── functions/      # Edge functions (YouTube sync)
+scripts/            # Data import scripts
+public/             # Static assets
+```
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/51fb7fd7-4ba7-4b08-bc8d-5910a56d369b) and click on Share -> Publish.
+## Deployment
 
-## Can I connect a custom domain to my Lovable project?
+Push to `main` → Vercel auto-deploys in ~44 seconds.
 
-Yes, you can!
+```bash
+git add -A && git commit -m "your message" && git push origin main
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Supabase
+
+Project ref: `vfrxntxjigtgutevijmb`
+Dashboard: https://supabase.com/dashboard/project/vfrxntxjigtgutevijmb
