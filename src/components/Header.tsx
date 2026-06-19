@@ -77,7 +77,7 @@ const Header = () => {
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"></span>
           </Button>
 
-          <Button variant="hero" size="sm" className="hidden sm:flex items-center space-x-2">
+          <Button variant="hero" size="sm" className="hidden sm:flex items-center space-x-2" onClick={() => navigate('/auth')}>
             <Crown className="w-4 h-4" />
             <span>Go Premium</span>
           </Button>
@@ -91,6 +91,10 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  <User className="w-4 h-4 mr-2" />
+                  My Profile
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="w-4 h-4 mr-2" />
                   Sign Out
@@ -144,7 +148,7 @@ const Header = () => {
               <span className="font-medium">GPS Tracking</span>
             </Link>
             <div className="pt-3 border-t border-border">
-              <Button variant="hero" className="w-full mb-2">
+              <Button variant="hero" className="w-full mb-2" onClick={() => { navigate('/auth'); setIsMenuOpen(false); }}>
                 <Crown className="w-4 h-4 mr-2" />
                 Go Premium
               </Button>

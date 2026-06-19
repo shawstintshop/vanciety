@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Check, Crown, Star, Zap, Shield, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const PremiumSection = () => {
+  const navigate = useNavigate();
   const features = [
     "Access to 10K+ premium camp spots",
     "Unlimited video streaming in 4K",
@@ -69,7 +71,7 @@ const PremiumSection = () => {
               </div>
 
               {/* CTA Button */}
-              <Button variant="hero" size="lg" className="w-full group">
+              <Button variant="hero" size="lg" className="w-full group" onClick={() => navigate('/auth')}>
                 Start Free Trial
                 <Zap className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" />
               </Button>

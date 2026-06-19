@@ -183,10 +183,10 @@ export const SUCCESS_MESSAGES = {
 // Regular Expressions
 export const REGEX = {
   EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  PHONE: /^[\+]?[1-9][\d]{0,15}$/,
+  PHONE: /^[+]?[1-9][\d]{0,15}$/,
   USERNAME: /^[a-zA-Z0-9_]{3,20}$/,
   PASSWORD: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
-  URL: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/
+  URL: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/
 };
 
 // Date Formats

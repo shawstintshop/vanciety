@@ -19,6 +19,7 @@ import FriendFinder from "./pages/FriendFinder";
 import AIConcierge from "./pages/AIConcierge";
 import About from "./pages/About";
 import VancietyShop from "./pages/VancietyShop";
+import Profile from "./pages/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
 import VancietyTopoSystem from "./components/VancietyTopoSystem";
 import SiteFooter from "./components/SiteFooter";
@@ -50,6 +51,7 @@ const App = () => (
               <Route path="/friend-finder" element={<FriendFinder />} />
               <Route path="/ai" element={<AIConcierge />} />
               <Route path="/about" element={<About />} />
+              <Route path="/profile" element={<Profile />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

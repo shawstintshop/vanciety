@@ -1,8 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Users, MapPin, Star, Crown } from "lucide-react";
 import heroImage from "@/assets/hero-van-lake.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const scrollToVideos = () => {
+    const el = document.getElementById("video-section");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -42,12 +50,12 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
-            <Button variant="hero" size="lg" className="group">
+            <Button variant="hero" size="lg" className="group" onClick={() => navigate('/auth')}>
               Start Your Journey
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             
-            <Button variant="outline" size="lg" className="group">
+            <Button variant="outline" size="lg" className="group" onClick={scrollToVideos}>
               <Play className="w-5 h-5 mr-2" />
               Watch Demo
             </Button>
