@@ -149,7 +149,7 @@ const Header = () => {
           {/* Community dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/forum", "/friend-finder", "/van-cards"]))}>
+              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards"]))}>
                 <Users className="h-4 w-4" />
                 Community
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -160,7 +160,7 @@ const Header = () => {
                 <MessageSquare className="mr-2 h-4 w-4 text-primary-glow" />
                 Forum
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/friend-finder")}>
+              <DropdownMenuItem onClick={() => navigate("/map")}>
                 <Users className="mr-2 h-4 w-4 text-secondary" />
                 Find Members
               </DropdownMenuItem>
@@ -285,7 +285,7 @@ const Header = () => {
                 { label: "Events", to: "/news", icon: Calendar },
                 { label: "Map", to: "/map", icon: MapPin },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
-                { label: "Find Members", to: "/friend-finder", icon: Users },
+                { label: "Find Members", to: "/map", icon: Users },
                 { label: "Vanny AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
