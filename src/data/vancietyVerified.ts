@@ -34,11 +34,11 @@ export const verifiedVendors = [
 ];
 
 export const verifiedLocations = [
-  { id: 'loc-1', name: 'Mount Rainier — Ohanapecosh', type: 'campsite' as const, state: 'WA', latitude: 46.7318, longitude: -121.5685, description: 'Old-growth forest campground at Mount Rainier', amenities: ['restrooms', 'water', 'trails'], verified: true, url: '', imageUrl: '', sourceBadge: 'verified' },
-  { id: 'loc-2', name: 'Olympic Peninsula — Rialto Beach', type: 'campsite' as const, state: 'WA', latitude: 47.9215, longitude: -124.6384, description: 'Dramatic sea stacks and coastal camping', amenities: ['beach', 'trails', 'wildlife'], verified: true, url: '', imageUrl: '', sourceBadge: 'verified' },
-  { id: 'loc-3', name: 'Deception Pass State Park', type: 'campsite' as const, state: 'WA', latitude: 48.4028, longitude: -122.6368, description: 'Iconic bridge and rugged coastline camping', amenities: ['restrooms', 'water', 'trails', 'beach'], verified: true, url: '', imageUrl: '', sourceBadge: 'verified' },
-  { id: 'loc-4', name: 'Smith Rock State Park', type: 'campsite' as const, state: 'OR', latitude: 44.3672, longitude: -121.1420, description: 'World-class rock climbing and camping in the high desert', amenities: ['restrooms', 'water', 'trails', 'climbing'], verified: true, url: '', imageUrl: '', sourceBadge: 'verified' },
-  { id: 'loc-5', name: 'Crater Lake — Mazama Campground', type: 'campsite' as const, state: 'OR', latitude: 42.8684, longitude: -122.1685, description: 'Camp near the deepest lake in the US', amenities: ['restrooms', 'water', 'trails', 'store'], verified: true, url: '', imageUrl: '', sourceBadge: 'verified' },
+  { name: 'Mount Rainier — Ohanapecosh', type: 'campsite', state: 'WA' },
+  { name: 'Olympic Peninsula — Rialto Beach', type: 'campsite', state: 'WA' },
+  { name: 'Deception Pass State Park', type: 'campsite', state: 'WA' },
+  { name: 'Smith Rock State Park', type: 'campsite', state: 'OR' },
+  { name: 'Crater Lake — Mazama Campground', type: 'campsite', state: 'OR' },
 ];
 
 export const verifiedVideos = [

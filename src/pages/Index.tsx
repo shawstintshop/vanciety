@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import VoiceVanny from "@/components/VoiceVanny";
 import PremiumSection from "@/components/PremiumSection";
-import NewsletterSignup from "@/components/NewsletterSignup";
 
 const Index = () => {
   return (
@@ -30,16 +29,6 @@ const Index = () => {
           </div>
         </section>
         <PremiumSection />
-        
-        {/* Newsletter Signup - Van Show CTA */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="mx-auto max-w-2xl">
-            <NewsletterSignup 
-              defaultInterest={["member", "general"]}
-              sourcePage="homepage"
-            />
-          </div>
-        </section>
       </main>
     </div>
   );
