@@ -1,5 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import VancietyLogo from "@/components/VancietyLogo";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,14 +15,28 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
+    <div className="vanciety-page vanciety-page--ai min-h-screen bg-background">
+      <Header />
+      <main className="vanciety-hero-topo flex min-h-screen items-center justify-center px-4 pt-24 text-center">
+        <div className="max-w-lg">
+          <div className="mb-6 flex justify-center">
+            <VancietyLogo />
+          </div>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary-glow">Route not found</p>
+          <h1 className="mb-4 text-5xl font-black text-foreground">404</h1>
+          <p className="mb-6 text-muted-foreground">
+            That Vanciety trail marker does not exist. Head back to the map, Van Intelligence, or the home route.
+          </p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
+            <Button asChild variant="hero">
+              <Link to="/">Return home</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/map">Open map</Link>
+            </Button>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };

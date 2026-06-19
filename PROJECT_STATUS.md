@@ -1,50 +1,94 @@
 # Vanciety Primary App — Project Status
 
-App root: /Volumes/AI-DATA/PROJECTS/vanciety_platform/code/primary_app
+App root: `/Volumes/AI-DATA/PROJECTS/VANCIETY/code/primary_app`
+Supabase project: `Vanciety` / `vfrxntxjigtgutevijmb`
+Last verified: 2026-06-16
 
-## Completed Work
+## Current State
 
-### VAN-001 — Topo Hydration Script + Van Cards UI
-- Status: completed and committed
-- Commit: 55d1b8b
-- Topo hydration script created: scripts/ingestLocations.ts
-- VanCard component created: src/components/VanCard.tsx
-- VanCards page created: src/pages/VanCards.tsx
-- Route /van-cards registered in src/App.tsx
-- package.json script added: ingest:locations
-- Dependencies installed: dotenv ^17.4.2, tsx ^4.22.4
+Vanciety local app and Supabase backend are connected and operational for the safe production path.
 
-## Build / Lint State
+## Completed Backend Work — 2026-06-16
 
-- npm run build: PASSED (vite v5.4.19, ~1.7s, dist/ emitted)
-- npm run lint: FAILS — 98 pre-existing repo-wide issues (84 errors, 14 warnings)
-- New VAN-001 files are lint-clean. The 98 issues live in AuthContext, Forum, Marketplace, Videos, useRealtimeVanLocations, supabase edge function, tailwind.config.ts — all pre-dating VAN-001.
+- Supabase CLI login verified.
+- Vanciety project access verified.
+- Edge Functions deployed:
+  - `fetch-youtube-videos`
+  - `vanciety-ai-concierge`
+- Both functions are ACTIVE and reject unauthenticated calls with HTTP 401.
+- Safe production schema migration applied from temp deploy folder:
+  - `/tmp/vanciety_safe_deploy/supabase/migrations/20260616220000_vanciety_safe_production_schema.sql`
+- Historical local migrations were intentionally not pushed because dry-run showed fake/demo seed migrations and the old unsafe public/exact GPS migration.
+- Live Supabase tables verified present:
+  - `locations`
+  - `forum_posts`
+  - `forum_replies`
+  - `marketplace_items`
+  - `youtube_videos`
+  - `user_locations`
+  - `van_locations`
+  - `gps_sharing_settings`
+- Verified public seed content inserted:
+  - `locations`: 5 verified source/location anchors
+  - `youtube_videos`: 13 verified videos
+  - `forum_posts`: 0 rows intentionally; no fake forum activity
+  - `marketplace_items`: 0 rows intentionally; no fake listings
+- Anonymous writes blocked by RLS for GPS/location/video write paths.
 
-## Ingestion State
+## Friend Finder Security State
 
-- npm run ingest:locations has NOT been run yet.
-- Current blocker: missing SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in local environment.
-- .env.example added with blank placeholders (VAN-002).
+- Default location visibility: `friends_only`
+- Default precision: `approximate`
+- `upsert_van_location()` forces rounded area coordinates
+- Speed, heading, and accuracy are stripped before storage
+- Anonymous writes blocked
+- Public exact GPS path not deployed
 
-## Open Tasks
+## Local Verification
 
-- VAN-002 — Protect Env + Add Project Status (completed, commit 904d4cc)
-- VAN-003 — Untrack .env and prepare key rotation (completed, this commit)
-  - .env removed from git tracking via `git rm --cached .env`
-  - local .env file preserved on disk
-  - .gitignore protects .env, .env.local, .env.*.local going forward
-  - Key rotation required: .env existed in prior commit history (commit 0d11b88). Any real Supabase keys committed there should be rotated in the Supabase dashboard before ingestion runs.
-  - Do not run ingestion until Supabase keys are rotated/confirmed safe.
-- VAN-004 — Rotate Supabase keys / confirm secrets safe (completed manually by Shaw; new project ref vfrxntxjigtgutevijmb)
-- VAN-005A — Align Supabase client config to current project ref (completed, this commit)
-  - src/integrations/supabase/client.ts rewritten to env-driven (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) with runtime guard
-  - supabase/config.toml project_id updated to vfrxntxjigtgutevijmb
-  - Old ref zyqiiwitxmexkuyeojsm fully purged from repo (0 matches)
-  - scripts/ingestLocations.ts already env-driven (SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY) — no change needed
-  - npm run build passed
-- VAN-005B — Run ingestion (npm run ingest:locations) and verify /map + /van-cards hydrate
-- Future — Lint cleanup pass on the 98 pre-existing issues (separate worker mission)
+Commands:
 
-## Next Recommended Task
+```bash
+npm run build
+npm run lint
+npm run dev -- --host 127.0.0.1 --port 5173
+```
 
-Add real SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to a local untracked .env, run `npm run ingest:locations`, then verify /map and /van-cards render hydrated topo data end-to-end.
+Results:
+
+- Build: passed
+- Lint: passed with 0 errors / 13 existing warnings
+- Local server: `http://127.0.0.1:5173/`
+
+Routes verified HTTP 200:
+
+- `/`
+- `/map`
+- `/forum`
+- `/marketplace`
+- `/videos`
+- `/friend-finder`
+- `/gps`
+- `/ai`
+
+## Useful Commands
+
+```bash
+npm run supabase:seed-verified
+npm run supabase:set-secrets
+```
+
+## Remaining Blockers
+
+1. Supabase Edge Function secrets still needed:
+   - `ANTHROPIC_API_KEY`
+   - `YOUTUBE_API_KEY`
+2. Public hosting/domain/DNS still needs final configuration for `vanciety.com`.
+3. Supabase local `config.toml` auth settings differ from remote auth settings; this was not changed during the safe deploy.
+4. Forum and marketplace remain empty until real users/content are added.
+
+## Detailed Report
+
+See:
+
+`docs/VANCIETY_SUPABASE_DEPLOYMENT_20260616.md`

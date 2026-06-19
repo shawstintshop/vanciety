@@ -19,13 +19,15 @@ import {
   Wrench,
   Zap,
   Plus,
-  Loader2
+  Loader2,
+  ExternalLink
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
+import AIVanConcierge from "@/components/AIVanConcierge";
 
 const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,6 +63,31 @@ const Marketplace = () => {
     { value: "fair", label: "Fair" },
     { value: "poor", label: "Poor" }
   ];
+
+  const trustedMarketLinks = [
+    {
+      name: "Van Viewer",
+      url: "https://www.vanviewer.com/",
+      verifiedTitle: "Van Viewer - The Ultimate Camper Van For Sale Marketplace - Buy & Sell Used Camper Vans For Sale",
+      note: "Verified live marketplace for camper vans.",
+    },
+    {
+      name: "Facebook Marketplace vehicles",
+      url: "https://www.facebook.com/marketplace/category/vehicles",
+      verifiedTitle: "New and Used Cars, Trucks & Motorcycles For Sale | Marketplace",
+      note: "Verified live, but user/account/location gated by Facebook.",
+    },
+  ];
+
+  const visibleMarketplaceItems = marketplaceItems.filter((item) => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return true;
+    return [item.title, item.description, item.category, item.condition, item.location, item.profiles?.display_name]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase()
+      .includes(q);
+  });
 
   useEffect(() => {
     fetchMarketplaceItems();
@@ -143,12 +170,12 @@ const Marketplace = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="vanciety-page vanciety-page--marketplace min-h-screen bg-background">
       <Header />
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="py-12 bg-gradient-to-br from-background to-muted/30">
+        <section className="vanciety-hero-topo py-12">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -157,7 +184,7 @@ const Marketplace = () => {
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Buy and sell vans, parts, and gear with the van life community
+                Live community listings through Supabase, with verified external marketplace links when local inventory is empty
               </p>
             </div>
 
@@ -307,6 +334,10 @@ const Marketplace = () => {
           </div>
         </section>
 
+        <section className="container mx-auto px-4">
+          <AIVanConcierge mode="marketplace" compact />
+        </section>
+
         {/* Listings Grid */}
         <section className="py-12"> 
           <div className="container mx-auto px-4">
@@ -315,23 +346,41 @@ const Marketplace = () => {
                 <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
                 <p className="text-muted-foreground">Loading items...</p>
               </div>
-            ) : marketplaceItems.length === 0 ? (
-              <div className="text-center py-8">
+            ) : visibleMarketplaceItems.length === 0 ? (
+              <div className="text-center py-8 rounded-2xl border bg-card p-8">
                 <ShoppingBag className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-semibold mb-2">No items yet</h3>
+                <h3 className="text-lg font-semibold mb-2">No matching Vanciety listings yet</h3>
                 <p className="text-muted-foreground mb-4">
-                  Be the first to list an item in this category!
+                  Member listings will appear here as the community adds vans, parts, and gear. Until then, use these marketplace links to keep searching.
                 </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-6 text-left">
+                  {trustedMarketLinks.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-xl border bg-background p-4 hover:border-primary transition-colors"
+                    >
+                      <div className="flex items-center justify-between gap-3 mb-2">
+                        <span className="font-semibold">{link.name}</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-2">{link.note}</p>
+                      <p className="text-xs text-muted-foreground">Verified title: {link.verifiedTitle}</p>
+                    </a>
+                  ))}
+                </div>
                 {user && (
                   <Button variant="hero" onClick={() => setIsCreateOpen(true)}>
-                    List First Item
+                    List First Vanciety Item
                   </Button>
                 )}
               </div>
             ) : (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {marketplaceItems.map((item) => (
+                  {visibleMarketplaceItems.map((item) => (
                     <Card key={item.id} className="group hover:shadow-glow transition-all duration-300 overflow-hidden">
                       <div className="relative aspect-[4/3] bg-muted flex items-center justify-center">
                         <ShoppingBag className="w-12 h-12 text-muted-foreground" />

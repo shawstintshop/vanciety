@@ -7,6 +7,22 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useYouTubeSync } from "@/hooks/useYouTubeSync";
 import Header from "@/components/Header";
+import AIVanConcierge from "@/components/AIVanConcierge";
+import { verifiedVideos } from "@/data/vancietyVerified";
+
+const verifiedVideoFallback = verifiedVideos.map((video) => ({
+  id: video.youtubeId,
+  youtube_id: video.youtubeId,
+  title: video.title,
+  description: `Van-life video from ${video.channel}.`,
+  thumbnail_url: video.thumbnail,
+  channel_title: video.channel,
+  category: video.category,
+  published_at: new Date().toISOString(),
+  duration: null,
+  view_count: null,
+  source_badge: "VERIFIED",
+}));
 
 const Videos = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,21 +70,23 @@ const Videos = () => {
       if (error) {
         console.error('Error fetching videos:', error);
         toast({
-          title: "Error",
-          description: "Failed to load videos. Please try again.",
+          title: "Showing Vanciety video picks",
+          description: "Newest sync is not available right now, so these curated YouTube videos are shown instead.",
           variant: "destructive",
         });
+        setVideos(verifiedVideoFallback);
         return;
       }
 
-      setVideos(data || []);
+      setVideos(data && data.length ? data : verifiedVideoFallback);
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Error",
-        description: "Failed to load videos. Please try again.",
+        title: "Using verified fallback videos",
+        description: "Live video sync failed, so Vanciety is showing verified YouTube links.",
         variant: "destructive",
       });
+      setVideos(verifiedVideoFallback);
     } finally {
       setLoading(false);
     }
@@ -97,9 +115,10 @@ const Videos = () => {
       console.error('Error refreshing videos:', error);
       toast({
         title: "Error",
-        description: "Failed to refresh videos from YouTube. Please try again.",
+        description: "YouTube edge sync is unavailable. Verified local YouTube links are still displayed.",
         variant: "destructive",
       });
+      setVideos(verifiedVideoFallback);
     } finally {
       setRefreshing(false);
     }
@@ -143,12 +162,12 @@ const Videos = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="vanciety-page vanciety-page--videos min-h-screen bg-background">
       <Header />
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="py-12 bg-gradient-to-br from-background to-muted/30">
+        <section className="vanciety-hero-topo py-12">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -157,7 +176,7 @@ const Videos = () => {
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Stream thousands of van builds, tutorials, and adventures from our community
+                Real YouTube van builds, electrical tutorials, event videos, and off-road van content with verified links
               </p>
             </div>
 
@@ -195,6 +214,10 @@ const Videos = () => {
           </div>
         </section>
 
+        <section className="container mx-auto px-4">
+          <AIVanConcierge mode="video" compact />
+        </section>
+
         {/* Video Grid */}
         <section className="py-12">
           <div className="container mx-auto px-4">
@@ -228,7 +251,7 @@ const Videos = () => {
               </div>
             ) : videos.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-muted-foreground mb-4">No videos found.</p>
+                <p className="text-muted-foreground mb-4">No live videos found. Use verified fallback videos below.</p>
                 <Button onClick={refreshFromYouTube} disabled={refreshing}>
                   {refreshing ? 'Loading...' : 'Load Videos from YouTube'}
                 </Button>
@@ -270,6 +293,12 @@ const Videos = () => {
                       <div className="absolute top-3 left-3 bg-gradient-sunset px-2 py-1 rounded text-white text-xs font-semibold">
                         {videoCategories.find(c => c.id === video.category)?.name || 'Van Life'}
                       </div>
+
+                      {video.source_badge && (
+                        <div className="absolute top-3 right-3 bg-blue-600 px-2 py-1 rounded text-white text-xs font-semibold">
+                          {video.source_badge}
+                        </div>
+                      )}
                     </div>
 
                     <CardContent className="p-4">
@@ -277,18 +306,18 @@ const Videos = () => {
                         {video.title}
                       </CardTitle>
                       <CardDescription className="mb-3 line-clamp-1">
-                        {video.channel_title}
+                        {video.channel_title || 'Verified YouTube source'}
                       </CardDescription>
                       
                       <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <div className="flex items-center space-x-3">
                           <div className="flex items-center">
                             <Eye className="w-4 h-4 mr-1" />
-                            {formatViewCount(video.view_count || 0)}
+                            {video.view_count ? formatViewCount(video.view_count) : 'verified'}
                           </div>
                           <div className="flex items-center">
                             <Star className="w-4 h-4 mr-1 text-secondary" />
-                            {new Date(video.published_at).toLocaleDateString()}
+                            {video.published_at ? new Date(video.published_at).toLocaleDateString() : 'live link'}
                           </div>
                         </div>
                       </div>

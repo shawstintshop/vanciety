@@ -16,17 +16,22 @@ export interface LiveVan {
   display_name?: string;
 }
 
+const toAreaCoordinate = (value: number) => Math.round(value * 20) / 20; // ~3-5 km grid, latitude dependent
+
 export const useRealtimeVanLocations = (enabled = true) => {
   const [liveVans, setLiveVans] = useState<LiveVan[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all public van locations
+  // Fetch authenticated member-visible van areas only.
+  // Exact locations must never be used for Friend Finder/member map rendering.
   const fetchVanLocations = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('van_locations')
-        .select('*')
-        .eq('visibility', 'public')
+        .select('id,user_id,latitude,longitude,speed,heading,accuracy,visibility,status,message,updated_at')
+        .eq('visibility', 'friends_only')
+        .eq('precision', 'approximate')
+        .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
         .order('updated_at', { ascending: false });
 
       if (error) throw error;
@@ -52,11 +57,11 @@ export const useRealtimeVanLocations = (enabled = true) => {
         (data || []).map(v => ({
           id: v.id,
           user_id: v.user_id,
-          latitude: v.latitude,
-          longitude: v.longitude,
-          speed: v.speed,
-          heading: v.heading,
-          accuracy: v.accuracy,
+          latitude: toAreaCoordinate(v.latitude),
+          longitude: toAreaCoordinate(v.longitude),
+          speed: null,
+          heading: null,
+          accuracy: null,
           visibility: v.visibility,
           status: v.status || 'traveling',
           message: v.message,
@@ -71,10 +76,10 @@ export const useRealtimeVanLocations = (enabled = true) => {
     }
   }, []);
 
-  // Find vans near a specific point
+  // Find approximate member-visible vans near a specific point.
   const findNearbyVans = useCallback(async (lat: number, lng: number, radiusMeters = 80467) => {
     try {
-      const { data, error } = await supabase.rpc('nearby_vans', {
+      const { data, error } = await supabase.rpc('nearby_member_van_areas', {
         p_lat: lat,
         p_lng: lng,
         p_radius: radiusMeters,

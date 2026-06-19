@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Navigation, Users, Tent, Coffee, Star, Crown } from "lucide-react";
+import { MapPin, Navigation, Users, Tent, Coffee, Star } from "lucide-react";
 
 interface Location {
   id: string;
@@ -51,7 +51,7 @@ const FallbackMap = ({ locations, onLocationClick }: FallbackMapProps) => {
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl relative overflow-hidden">
+    <div className="w-full h-full min-h-[520px] bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl relative overflow-hidden">
       {/* Map Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/50 to-muted/30"></div>
       
@@ -128,7 +128,7 @@ const FallbackMap = ({ locations, onLocationClick }: FallbackMapProps) => {
                   {selectedLocation.type}
                 </Badge>
                 <span className="text-xs text-muted-foreground">
-                  {selectedLocation.latitude.toFixed(4)}, {selectedLocation.longitude.toFixed(4)}
+                  Approximate map area only
                 </span>
               </div>
             </div>
@@ -147,10 +147,10 @@ const FallbackMap = ({ locations, onLocationClick }: FallbackMapProps) => {
       <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-sm border border-border/50">
         <div className="flex items-center gap-2">
           <MapPin className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium">Interactive Van Life Map</span>
+          <span className="text-sm font-medium">Vanciety Map Preview</span>
         </div>
         <p className="text-xs text-muted-foreground mt-1">
-          {locations.length} locations • Click markers for details
+          {locations.length} source/member areas • Click markers for details
         </p>
       </div>
 

@@ -1,4 +1,11 @@
 project_id = "vfrxntxjigtgutevijmb"
 
 [functions.fetch-youtube-videos]
-verify_jwt = false
+# Uses YOUTUBE_API_KEY and SUPABASE_SERVICE_ROLE_KEY server-side.
+# Must not be callable as an unauthenticated public write/quota endpoint.
+verify_jwt = true
+
+[functions.vanciety-ai-concierge]
+# Uses ANTHROPIC_API_KEY server-side. Keep auth verification enabled and enforce
+# rate limits before public launch.
+verify_jwt = true

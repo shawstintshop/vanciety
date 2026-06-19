@@ -188,6 +188,45 @@ export type Database = {
         }
         Relationships: []
       }
+      gps_sharing_settings: {
+        Row: {
+          auto_pause_hours: number
+          created_at: string
+          default_duration: string
+          default_precision: Database["public"]["Enums"]["sharing_precision"]
+          default_visibility: Database["public"]["Enums"]["sharing_visibility"]
+          id: string
+          sharing_enabled: boolean
+          update_interval_sec: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_pause_hours?: number
+          created_at?: string
+          default_duration?: string
+          default_precision?: Database["public"]["Enums"]["sharing_precision"]
+          default_visibility?: Database["public"]["Enums"]["sharing_visibility"]
+          id?: string
+          sharing_enabled?: boolean
+          update_interval_sec?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_pause_hours?: number
+          created_at?: string
+          default_duration?: string
+          default_precision?: Database["public"]["Enums"]["sharing_precision"]
+          default_visibility?: Database["public"]["Enums"]["sharing_visibility"]
+          id?: string
+          sharing_enabled?: boolean
+          update_interval_sec?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_locations: {
         Row: {
           created_at: string
@@ -224,6 +263,60 @@ export type Database = {
           status?: string | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      van_locations: {
+        Row: {
+          accuracy: number | null
+          created_at: string
+          expires_at: string | null
+          geom: unknown
+          heading: number | null
+          id: string
+          latitude: number
+          longitude: number
+          message: string | null
+          precision: Database["public"]["Enums"]["sharing_precision"]
+          speed: number | null
+          status: string | null
+          updated_at: string
+          user_id: string
+          visibility: Database["public"]["Enums"]["sharing_visibility"]
+        }
+        Insert: {
+          accuracy?: number | null
+          created_at?: string
+          expires_at?: string | null
+          geom?: unknown
+          heading?: number | null
+          id?: string
+          latitude: number
+          longitude: number
+          message?: string | null
+          precision?: Database["public"]["Enums"]["sharing_precision"]
+          speed?: number | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+          visibility?: Database["public"]["Enums"]["sharing_visibility"]
+        }
+        Update: {
+          accuracy?: number | null
+          created_at?: string
+          expires_at?: string | null
+          geom?: unknown
+          heading?: number | null
+          id?: string
+          latitude?: number
+          longitude?: number
+          message?: string | null
+          precision?: Database["public"]["Enums"]["sharing_precision"]
+          speed?: number | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+          visibility?: Database["public"]["Enums"]["sharing_visibility"]
         }
         Relationships: []
       }
@@ -340,10 +433,42 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      nearby_member_van_areas: {
+        Args: {
+          p_lat: number
+          p_lng: number
+          p_radius?: number
+        }
+        Returns: Database["public"]["Tables"]["van_locations"]["Row"][]
+      }
+      nearby_vans: {
+        Args: {
+          p_lat: number
+          p_lng: number
+          p_radius?: number
+        }
+        Returns: Database["public"]["Tables"]["van_locations"]["Row"][]
+      }
+      upsert_van_location: {
+        Args: {
+          p_accuracy?: number | null
+          p_expires_at?: string | null
+          p_heading?: number | null
+          p_lat: number
+          p_lng: number
+          p_message?: string | null
+          p_precision?: Database["public"]["Enums"]["sharing_precision"]
+          p_speed?: number | null
+          p_status?: string | null
+          p_user_id: string
+          p_visibility?: Database["public"]["Enums"]["sharing_visibility"]
+        }
+        Returns: Database["public"]["Tables"]["van_locations"]["Row"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      sharing_precision: "exact" | "approximate"
+      sharing_visibility: "public" | "friends_only" | "event" | "private"
     }
     CompositeTypes: {
       [_ in never]: never

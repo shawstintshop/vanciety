@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -8,88 +8,109 @@ interface UserLocation {
   user_id: string;
   latitude: number;
   longitude: number;
-  status: string; // Changed from union type to string
+  status: string;
   message?: string;
   last_seen: string;
   is_public: boolean;
 }
 
-interface PresenceState {
-  user_id: string;
-  latitude: number;
-  longitude: number;
-  status: string;
-  message?: string;
-  online_at: string;
-}
+const toAreaCoordinate = (value: number) => Math.round(value * 20) / 20; // ~3-5 km grid, latitude dependent
+const isValidCoordinate = (latitude: number, longitude: number) => (
+  Number.isFinite(latitude) &&
+  Number.isFinite(longitude) &&
+  latitude >= -90 &&
+  latitude <= 90 &&
+  longitude >= -180 &&
+  longitude <= 180
+);
 
 export const useRealtimePresence = () => {
   const [memberLocations, setMemberLocations] = useState<UserLocation[]>([]);
-  const [onlineMembers, setOnlineMembers] = useState<Record<string, PresenceState>>({});
+  const [onlineMembers] = useState<Record<string, never>>({});
   const [isSharing, setIsSharing] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
-  // Fetch existing member locations
-  const fetchMemberLocations = async () => {
+  // Fetch existing member areas from the secured Friend Finder location table.
+  // The legacy user_locations table stores exact coordinates and is deprecated.
+  // Realtime presence is intentionally not used for location data because presence
+  // payloads are client-controlled and not protected by table RLS.
+  const fetchMemberLocations = useCallback(async () => {
+    if (!user) {
+      setMemberLocations([]);
+      return;
+    }
+
     try {
       const { data, error } = await supabase
-        .from('user_locations')
-        .select('*')
-        .eq('is_public', true)
-        .order('last_seen', { ascending: false });
+        .from('van_locations')
+        .select('id,user_id,latitude,longitude,status,message,updated_at,expires_at')
+        .eq('visibility', 'friends_only')
+        .eq('precision', 'approximate')
+        .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
+        .order('updated_at', { ascending: false });
 
       if (error) throw error;
 
-      setMemberLocations(data || []);
+      setMemberLocations((data || [])
+        .filter((row) => isValidCoordinate(row.latitude, row.longitude))
+        .map((row) => ({
+          id: row.id,
+          user_id: row.user_id,
+          latitude: toAreaCoordinate(row.latitude),
+          longitude: toAreaCoordinate(row.longitude),
+          status: row.status || 'parked',
+          message: row.message || undefined,
+          last_seen: row.updated_at,
+          is_public: false,
+        })));
     } catch (error) {
       console.error('Error fetching member locations:', error);
     }
-  };
+  }, [user]);
 
-  // Share current location
+  // Share current approximate member area through the hardened RPC only.
   const shareLocation = async (location: { latitude: number; longitude: number }, status: string, message?: string) => {
     if (!user) return;
 
+    if (!isValidCoordinate(location.latitude, location.longitude)) {
+      toast({
+        title: "Location Error",
+        description: "Invalid location coordinates. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
-      const { error } = await supabase
-        .from('user_locations')
-        .upsert({
-          user_id: user.id,
-          latitude: location.latitude,
-          longitude: location.longitude,
-          status,
-          message,
-          is_public: true,
-          last_seen: new Date().toISOString()
-        }, {
-          onConflict: 'user_id'
-        });
+      const { error } = await supabase.rpc('upsert_van_location', {
+        p_user_id: user.id,
+        p_lat: location.latitude,
+        p_lng: location.longitude,
+        p_speed: null,
+        p_heading: null,
+        p_accuracy: null,
+        p_visibility: 'friends_only',
+        p_precision: 'approximate',
+        p_expires_at: null,
+        p_status: status,
+        p_message: message || null,
+      });
 
       if (error) throw error;
 
       setIsSharing(true);
       toast({
-        title: "Location Shared",
-        description: "Your location is now visible to other van lifers!",
+        title: "Area Shared",
+        description: "Your approximate area is visible to signed-in Vanciety members.",
       });
 
-      // Also track in realtime presence
-      const channel = supabase.channel('member-locations');
-      await channel.track({
-        user_id: user.id,
-        latitude: location.latitude,
-        longitude: location.longitude,
-        status,
-        message,
-        online_at: new Date().toISOString(),
-      });
-
+      await fetchMemberLocations();
     } catch (error) {
       console.error('Error sharing location:', error);
       toast({
         title: "Error",
-        description: "Failed to share location. Please try again.",
+        description: "Failed to share approximate area. Please try again.",
         variant: "destructive",
       });
     }
@@ -101,20 +122,17 @@ export const useRealtimePresence = () => {
 
     try {
       const { error } = await supabase
-        .from('user_locations')
-        .update({
-          status: 'offline',
-          is_public: false,
-          last_seen: new Date().toISOString()
-        })
+        .from('van_locations')
+        .delete()
         .eq('user_id', user.id);
 
       if (error) throw error;
 
       setIsSharing(false);
+      setMemberLocations((current) => current.filter((row) => row.user_id !== user.id));
       toast({
         title: "Location Sharing Stopped",
-        description: "Your location is no longer visible to others.",
+        description: "Your area is no longer visible to other members.",
       });
 
     } catch (error) {
@@ -138,7 +156,7 @@ export const useRealtimePresence = () => {
     });
   };
 
-  // Auto-share location (if user has enabled it)
+  // Auto-share approximate area (if user has enabled it)
   const startLocationSharing = async (status: string, message?: string) => {
     try {
       const position = await getCurrentPosition();
@@ -156,49 +174,21 @@ export const useRealtimePresence = () => {
     }
   };
 
-  // Set up realtime subscriptions
+  // Set up database-change subscription for secured van area rows only.
   useEffect(() => {
     fetchMemberLocations();
 
-    // Subscribe to realtime presence for live member tracking
-    const channel = supabase.channel('member-locations', {
-      config: {
-        presence: {
-          key: user?.id || 'anonymous'
-        }
-      }
-    });
+    if (!user) return;
 
-    channel
-      .on('presence', { event: 'sync' }, () => {
-        const newState = channel.presenceState() as Record<string, PresenceState[]>;
-        // Flatten the presence state
-        const flattened: Record<string, PresenceState> = {};
-        Object.entries(newState).forEach(([key, presences]) => {
-          if (presences.length > 0) {
-            flattened[key] = presences[0]; // Take the first presence
-          }
-        });
-        setOnlineMembers(flattened);
-      })
-      .on('presence', { event: 'join' }, ({ key, newPresences }) => {
-        console.log('Member joined:', key, newPresences);
-      })
-      .on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
-        console.log('Member left:', key, leftPresences);
-      })
-      .subscribe();
-
-    // Subscribe to database changes for user locations
     const locationChanges = supabase
-      .channel('user_locations_changes')
-      .on('postgres_changes', 
-        { 
-          event: '*', 
-          schema: 'public', 
-          table: 'user_locations',
-          filter: 'is_public=eq.true'
-        }, 
+      .channel('van_locations_changes')
+      .on('postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'van_locations',
+          filter: 'visibility=eq.friends_only'
+        },
         () => {
           fetchMemberLocations();
         }
@@ -206,10 +196,9 @@ export const useRealtimePresence = () => {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
       supabase.removeChannel(locationChanges);
     };
-  }, [user]);
+  }, [fetchMemberLocations, user]);
 
   return {
     memberLocations,
