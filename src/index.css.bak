@@ -1,0 +1,500 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Premium charcoal + topo cream direction */
+    --background: 222 18% 8%;
+    --foreground: 38 28% 92%;
+
+    --card: 220 16% 11%;
+    --card-foreground: 38 28% 92%;
+
+    --popover: 220 16% 10%;
+    --popover-foreground: 38 28% 92%;
+
+    /* Evergreen primary */
+    --primary: 151 43% 40%;
+    --primary-foreground: 42 38% 96%;
+    --primary-glow: 151 48% 60%;
+
+    /* Desert topo secondary */
+    --secondary: 31 83% 58%;
+    --secondary-foreground: 222 18% 8%;
+
+    /* Deep map blue accent */
+    --accent: 205 52% 42%;
+    --accent-foreground: 42 38% 96%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 38 14% 68%;
+
+    --destructive: 0 74% 58%;
+    --destructive-foreground: 42 38% 96%;
+
+    --border: 38 20% 83% / 0.14;
+    --input: 220 14% 18%;
+    --ring: 151 48% 60%;
+
+    --radius: 0.95rem;
+
+    /* Custom Vanlife Design Tokens */
+    --topo-line: 38 46% 78%;
+    --topo-dot: 31 83% 66%;
+    --topo-charcoal: 222 18% 8%;
+    --gradient-hero: linear-gradient(135deg, hsl(151 43% 34%) 0%, hsl(205 52% 34%) 50%, hsl(31 83% 54%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(220 16% 12%) 0%, hsl(222 18% 8%) 100%);
+    --gradient-sunset: linear-gradient(90deg, hsl(31 83% 58%) 0%, hsl(18 88% 56%) 50%, hsl(7 74% 48%) 100%);
+    --gradient-forest: linear-gradient(180deg, hsl(151 43% 36%) 0%, hsl(160 45% 22%) 100%);
+    
+    --shadow-glow: 0 0 32px hsl(151 48% 60% / 0.24), 0 0 60px hsl(31 83% 58% / 0.08);
+    --shadow-card: 0 18px 44px -18px hsl(220 18% 2% / 0.75);
+    --shadow-hero: 0 32px 80px -28px hsl(220 18% 2% / 0.9);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Mode - Vanlife Adventure Color Palette */
+    --background: 220 13% 9%;
+    --foreground: 35 15% 95%;
+
+    --card: 220 13% 11%;
+    --card-foreground: 35 15% 95%;
+
+    --popover: 220 13% 11%;
+    --popover-foreground: 35 15% 95%;
+
+    /* Forest Green Primary */
+    --primary: 150 40% 25%;
+    --primary-foreground: 35 15% 95%;
+
+    /* Sunset Orange Secondary */
+    --secondary: 25 85% 55%;
+    --secondary-foreground: 220 13% 9%;
+
+    /* Mountain Blue Accent */
+    --accent: 210 60% 45%;
+    --accent-foreground: 35 15% 95%;
+
+    --muted: 220 13% 15%;
+    --muted-foreground: 35 8% 70%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 35 15% 95%;
+
+    --border: 220 13% 20%;
+    --input: 220 13% 15%;
+    --ring: 150 40% 35%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 18% 8%, hsl(var(--primary-glow) / 0.1), transparent 30rem),
+      radial-gradient(circle at 85% 12%, hsl(var(--secondary) / 0.1), transparent 26rem),
+      linear-gradient(180deg, hsl(222 18% 8%) 0%, hsl(220 17% 9%) 48%, hsl(222 18% 7%) 100%);
+  }
+
+  ::selection {
+    background: hsl(var(--secondary) / 0.35);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .vanciety-content-shell {
+    position: relative;
+    min-height: 100vh;
+    isolation: isolate;
+  }
+
+  .vanciety-page {
+    --page-accent: var(--primary);
+    --page-accent-2: var(--secondary);
+    --page-topo-origin-a: 18% 24%;
+    --page-topo-origin-b: 82% 36%;
+    --page-route-angle: 116deg;
+    color: hsl(var(--foreground));
+  }
+
+  .vanciety-page--home { --page-accent: 151 48% 60%; --page-accent-2: 31 83% 58%; --page-topo-origin-a: 13% 16%; --page-topo-origin-b: 82% 18%; --page-route-angle: 128deg; }
+  .vanciety-page--map { --page-accent: 199 62% 56%; --page-accent-2: 151 48% 60%; --page-topo-origin-a: 21% 42%; --page-topo-origin-b: 74% 62%; --page-route-angle: 88deg; }
+  .vanciety-page--friends { --page-accent: 151 48% 60%; --page-accent-2: 190 54% 56%; --page-topo-origin-a: 28% 26%; --page-topo-origin-b: 68% 72%; --page-route-angle: 42deg; }
+  .vanciety-page--intel { --page-accent: 31 83% 58%; --page-accent-2: 205 52% 56%; --page-topo-origin-a: 48% 22%; --page-topo-origin-b: 88% 68%; --page-route-angle: 135deg; }
+  .vanciety-page--videos { --page-accent: 12 82% 58%; --page-accent-2: 278 48% 62%; --page-topo-origin-a: 18% 72%; --page-topo-origin-b: 82% 26%; --page-route-angle: 24deg; }
+  .vanciety-page--news { --page-accent: 35 88% 60%; --page-accent-2: 18 82% 56%; --page-topo-origin-a: 16% 30%; --page-topo-origin-b: 76% 44%; --page-route-angle: 72deg; }
+  .vanciety-page--forum { --page-accent: 264 48% 64%; --page-accent-2: 151 44% 54%; --page-topo-origin-a: 32% 68%; --page-topo-origin-b: 78% 22%; --page-route-angle: 152deg; }
+  .vanciety-page--marketplace { --page-accent: 34 86% 60%; --page-accent-2: 8 72% 56%; --page-topo-origin-a: 70% 26%; --page-topo-origin-b: 18% 70%; --page-route-angle: 108deg; }
+  .vanciety-page--vendors { --page-accent: 204 58% 56%; --page-accent-2: 31 78% 58%; --page-topo-origin-a: 74% 20%; --page-topo-origin-b: 22% 58%; --page-route-angle: 60deg; }
+  .vanciety-page--gps { --page-accent: 184 62% 56%; --page-accent-2: 151 48% 60%; --page-topo-origin-a: 50% 22%; --page-topo-origin-b: 76% 78%; --page-route-angle: 92deg; }
+  .vanciety-page--cards { --page-accent: 302 42% 64%; --page-accent-2: 151 48% 60%; --page-topo-origin-a: 20% 20%; --page-topo-origin-b: 66% 70%; --page-route-angle: 34deg; }
+  .vanciety-page--auth { --page-accent: 151 48% 60%; --page-accent-2: 31 83% 58%; --page-topo-origin-a: 50% 18%; --page-topo-origin-b: 50% 82%; --page-route-angle: 120deg; }
+  .vanciety-page--ai { --page-accent: 268 58% 66%; --page-accent-2: 31 83% 58%; --page-topo-origin-a: 18% 24%; --page-topo-origin-b: 84% 32%; --page-route-angle: 144deg; }
+
+  .vanciety-hero-topo {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid hsl(var(--border));
+    background:
+      radial-gradient(circle at var(--page-topo-origin-a), hsl(var(--page-accent) / 0.2), transparent 28rem),
+      radial-gradient(circle at var(--page-topo-origin-b), hsl(var(--page-accent-2) / 0.16), transparent 30rem),
+      linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.46) 100%);
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: hsl(var(--primary)) }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .typing-effect {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid hsl(var(--primary)); /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .05em; /* Adjust as needed */
+    animation:
+      typing 3.5s steps(40, end) forwards,
+      blink-caret .75s step-end infinite;
+  }
+
+  .scroll-indicator {
+    animation: bounce 2s infinite;
+  }
+
+  .vanciety-hero-topo::before,
+  .vanciety-hero-topo::after,
+  .vanciety-map-grid::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: -18%;
+  }
+
+  .vanciety-hero-topo::before {
+    opacity: 0.18;
+    background-image:
+      repeating-radial-gradient(ellipse at var(--page-topo-origin-a), transparent 0 20px, hsl(var(--topo-line) / 0.72) 21px 22px, transparent 23px 42px),
+      repeating-radial-gradient(ellipse at var(--page-topo-origin-b), hsl(var(--page-accent) / 0.42) 17px 18px, transparent 19px 36px);
+    background-size: 680px 460px, 520px 400px;
+    mask-image: linear-gradient(90deg, black, transparent 84%);
+  }
+
+  .vanciety-hero-topo::after {
+    opacity: 0.16;
+    background-image:
+      repeating-linear-gradient(var(--page-route-angle), transparent 0 24px, hsl(var(--topo-dot) / 0.7) 25px 27px, transparent 28px 54px),
+      linear-gradient(calc(var(--page-route-angle) + 18deg), transparent 0 46%, hsl(var(--page-accent-2) / 0.32) 46.2% 46.6%, transparent 46.8% 100%);
+    background-size: 220px 220px, 820px 420px;
+    mix-blend-mode: screen;
+  }
+
+  .vanciety-hero-topo > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vanciety-page main > section:not(.vanciety-hero-topo) {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .vanciety-page main > section:not(.vanciety-hero-topo)::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.055;
+    background-image:
+      repeating-radial-gradient(ellipse at var(--page-topo-origin-a), transparent 0 19px, hsl(var(--topo-line) / 0.72) 20px 21px, transparent 22px 40px),
+      linear-gradient(var(--page-route-angle), transparent 0 46%, hsl(var(--page-accent) / 0.32) 46.3% 46.7%, transparent 47% 100%);
+    background-size: 560px 380px, 860px 520px;
+    background-position: -8% 16%, 110% 50%;
+    mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+  }
+
+  .vanciety-page main > section:nth-of-type(even):not(.vanciety-hero-topo)::before {
+    opacity: 0.07;
+    background-image:
+      repeating-radial-gradient(ellipse at var(--page-topo-origin-b), transparent 0 17px, hsl(var(--page-accent-2) / 0.62) 18px 19px, transparent 20px 36px),
+      repeating-linear-gradient(calc(var(--page-route-angle) + 90deg), transparent 0 28px, hsl(var(--topo-dot) / 0.42) 29px 31px, transparent 32px 58px);
+    background-size: 500px 340px, 260px 260px;
+    background-position: 96% 8%, 0 0;
+  }
+
+  .vanciety-page main > section > .container,
+  .vanciety-page main > section > [class*="container"] {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vanciety-map-grid {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vanciety-map-grid::before {
+    inset: 0;
+    opacity: 0.09;
+    background-image:
+      linear-gradient(hsl(var(--topo-line) / 0.42) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--topo-line) / 0.42) 1px, transparent 1px),
+      radial-gradient(circle at 28% 32%, hsl(var(--page-accent, var(--primary)) / 0.88) 0 1px, transparent 1.4px);
+    background-size: 36px 36px, 36px 36px, 15px 15px;
+  }
+
+  .vanciety-topo-card,
+  .vanciety-page .shadow-card,
+  .vanciety-page .group.hover\:shadow-glow,
+  .vanciety-page [class*="bg-card"] {
+    border-color: hsl(var(--border));
+  }
+
+  .vanciety-page .bg-card,
+  .vanciety-page [class*="bg-card/"] {
+    box-shadow: 0 18px 52px -32px hsl(var(--page-accent) / 0.42);
+  }
+
+  .vanciety-page a:not(.no-underline) {
+    text-underline-offset: 4px;
+  }
+
+  .vanciety-topo-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, hsl(var(--card) / 0.94), hsl(var(--background) / 0.72));
+  }
+
+  .vanciety-topo-card::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: auto -20% -35% -20%;
+    height: 72%;
+    opacity: 0.08;
+    background: repeating-radial-gradient(ellipse at 50% 100%, transparent 0 18px, hsl(var(--topo-line) / 0.78) 19px 20px, transparent 21px 38px);
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+
+  .vanciety-topo-card:hover::after {
+    opacity: 0.17;
+    transform: translateY(-4px);
+  }
+
+  .vanciety-region-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vanciety-region-card::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background:
+      radial-gradient(ellipse at 18% 22%, hsl(var(--primary-glow) / 0.45), transparent 24rem),
+      radial-gradient(ellipse at 88% 78%, hsl(var(--secondary) / 0.32), transparent 20rem),
+      repeating-linear-gradient(118deg, transparent 0 32px, hsl(var(--topo-line) / 0.12) 33px 34px, transparent 35px 64px);
+    mix-blend-mode: screen;
+  }
+
+  .vanciety-region-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vanciety-home-experience {
+    background:
+      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.26) 52%, hsl(var(--background)) 100%),
+      radial-gradient(circle at 10% 24%, hsl(151 48% 60% / 0.1), transparent 28rem),
+      radial-gradient(circle at 92% 54%, hsl(31 83% 58% / 0.09), transparent 26rem);
+  }
+
+  .vanciety-route-divider {
+    position: relative;
+  }
+
+  .vanciety-route-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -1px;
+    width: min(680px, 84vw);
+    height: 1px;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(90deg, transparent 0 8px, hsl(var(--topo-dot) / 0.7) 9px 12px, transparent 13px 22px);
+  }
+
+  .vanciety-content-shell a:not(.no-underline):focus-visible,
+  .vanciety-footer a:focus-visible {
+    outline: 2px solid hsl(var(--primary-glow));
+    outline-offset: 3px;
+  }
+
+  .vanciety-topo-system {
+    --topo-pointer-x: 50%;
+    --topo-pointer-y: 22%;
+    --topo-drift-x: 0px;
+    --topo-drift-y: 0px;
+    --topo-drift-x-1: 0px;
+    --topo-drift-y-1: 0px;
+    --topo-drift-x-2: 0px;
+    --topo-drift-y-2: 0px;
+    --topo-drift-x-3: 0px;
+    --topo-drift-y-3: 0px;
+    --topo-drift-x-4: 0px;
+    --topo-drift-y-4: 0px;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    overflow: hidden;
+  }
+
+  .vanciety-topo-layer {
+    position: absolute;
+    inset: -12%;
+    /* Fallback and base for individual layer transforms */
+    transform: translate3d(var(--topo-drift-x), var(--topo-drift-y), 0);
+    transition: opacity 300ms ease, transform 150ms ease-out;
+  }
+
+  .vanciety-topo-contours {
+    opacity: 0.105;
+    background-image:
+      radial-gradient(ellipse at 16% 18%, transparent 0 17px, hsl(var(--topo-line) / 0.72) 18px 19px, transparent 20px 34px, hsl(var(--topo-line) / 0.48) 35px 36px, transparent 37px 54px, hsl(var(--topo-line) / 0.28) 55px 56px, transparent 57px),
+      radial-gradient(ellipse at 84% 28%, transparent 0 21px, hsl(var(--topo-line) / 0.54) 22px 23px, transparent 24px 43px, hsl(var(--page-accent, var(--primary)) / 0.26) 44px 45px, transparent 46px 68px, hsl(var(--topo-line) / 0.2) 69px 70px, transparent 71px),
+      radial-gradient(ellipse at 52% 82%, transparent 0 25px, hsl(var(--topo-dot) / 0.36) 26px 27px, transparent 28px 52px, hsl(var(--topo-line) / 0.2) 53px 54px, transparent 55px 78px);
+    background-size: 420px 300px, 520px 380px, 620px 420px;
+    background-position: 0 0, 90px 30px, -140px 140px;
+    filter: saturate(0.8);
+  }
+
+  .vanciety-topo-rings {
+    opacity: 0.045;
+    background-image:
+      repeating-radial-gradient(circle at 78% 70%, transparent 0 18px, hsl(var(--foreground) / 0.4) 19px 20px, transparent 21px 38px),
+      repeating-radial-gradient(circle at 28% 42%, transparent 0 14px, hsl(var(--primary) / 0.45) 15px 16px, transparent 17px 32px);
+    background-size: 720px 720px, 540px 540px;
+    background-position: 20% 50%, 70% 10%;
+    mix-blend-mode: multiply;
+  }
+
+  .vanciety-topo-route {
+    opacity: 0.055;
+    background-image:
+      linear-gradient(112deg, transparent 0 42%, hsl(var(--secondary) / 0.34) 42.2% 42.6%, transparent 42.9% 100%),
+      linear-gradient(36deg, transparent 0 63%, hsl(var(--primary) / 0.28) 63.2% 63.55%, transparent 63.8% 100%),
+      repeating-linear-gradient(90deg, transparent 0 96px, hsl(var(--border) / 0.7) 97px 98px, transparent 99px 192px);
+    background-size: 900px 560px, 820px 520px, 192px 192px;
+    background-position: 18% 40%, 76% 16%, 0 0;
+  }
+
+  .vanciety-topo-badge-grain {
+    opacity: 0.04;
+    background-image:
+      radial-gradient(circle at 24% 28%, hsl(var(--secondary) / 0.45) 0 1px, transparent 1.4px),
+      radial-gradient(circle at 72% 62%, hsl(var(--primary) / 0.55) 0 1px, transparent 1.3px),
+      linear-gradient(135deg, transparent 0 48%, hsl(var(--foreground) / 0.2) 49% 50%, transparent 51% 100%);
+    background-size: 17px 17px, 23px 23px, 320px 320px;
+    filter: contrast(1.1);
+  }
+
+  .vanciety-topo-pointer {
+    inset: 0;
+    opacity: 0.1;
+    transform: none;
+    background: radial-gradient(circle at var(--topo-pointer-x) var(--topo-pointer-y), hsl(var(--secondary) / 0.18), hsl(var(--primary) / 0.08) 18%, transparent 42%);
+  }
+
+  .vanciety-topo-panel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vanciety-topo-panel::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.055;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, transparent 0 18px, hsl(var(--primary) / 0.55) 19px 20px, transparent 21px 38px),
+      radial-gradient(ellipse at 82% 72%, transparent 0 22px, hsl(var(--secondary) / 0.4) 23px 24px, transparent 25px 46px);
+    background-size: 300px 220px, 360px 260px;
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+
+  .vanciety-topo-panel:hover::before {
+    opacity: 0.14;
+    transform: scale(1.015);
+  }
+
+  .vanciety-badge-linework {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vanciety-badge-linework::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: auto -10% -26% -10%;
+    height: 58%;
+    opacity: 0.12;
+    background:
+      radial-gradient(ellipse at 50% 100%, transparent 0 28%, hsl(var(--primary) / 0.5) 28.5% 29%, transparent 29.5% 42%, hsl(var(--secondary) / 0.36) 42.5% 43%, transparent 43.5%),
+      repeating-linear-gradient(110deg, transparent 0 22px, hsl(var(--foreground) / 0.22) 23px 24px, transparent 25px 46px);
+  }

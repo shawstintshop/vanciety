@@ -1,0 +1,60 @@
+{
+  "featured_articles": [
+    {
+      "id": 1,
+      "title": "Mercedes Announces New 2025 Sprinter 4x4 Van with Advanced Off-Road Package",
+      "excerpt": "Mercedes-Benz reveals exciting updates to the Sprinter lineup including improved 4x4 capability, enhanced suspension, and van life-friendly features.",
+      "content": "Mercedes-Benz has unveiled the highly anticipated 2025 Sprinter 4x4 with significant improvements for van life enthusiasts and overlanders. The new model features enhanced ground clearance, improved approach and departure angles, and a more robust suspension system designed for off-road adventures.",
+      "featured_image_url": "/images/hero_van_2_8.jpg",
+      "category": "Industry News",
+      "tags": ["mercedes", "sprinter", "4x4", "2025", "new-model"],
+      "view_count": 5678,
+      "is_featured": true,
+      "published_at": "2025-08-15T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Winnebago Revel Updates: New Interior Layout and Tech Features",
+      "excerpt": "Winnebago announces major updates to the popular Revel van including redesigned interior, upgraded electrical system, and improved storage solutions.",
+      "content": "The 2025 Winnebago Revel receives significant updates based on customer feedback and emerging van life trends. Key improvements include a redesigned kitchen galley, upgraded 400W solar system, and enhanced connectivity options for remote workers.",
+      "featured_image_url": "/images/van_interior_3.jpg",
+      "category": "Industry News",
+      "tags": ["winnebago", "revel", "updates", "interior", "technology"],
+      "view_count": 4321,
+      "is_featured": true,
+      "published_at": "2025-08-12T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Top 10 Van Life Destinations for Winter 2025",
+      "excerpt": "Discover the best warm-weather destinations for van life this winter, from Arizona's desert landscapes to Florida's coastal gems.",
+      "content": "As winter approaches, van lifers are planning their migration south. This comprehensive guide covers the top destinations for escaping cold weather, including detailed information about camping options, local attractions, and community gatherings.",
+      "featured_image_url": "/images/overland_adventure_4.jpeg",
+      "category": "Travel Tips",
+      "tags": ["winter", "destinations", "travel", "warm-weather", "camping"],
+      "view_count": 7892,
+      "is_featured": true,
+      "published_at": "2025-08-10T09:00:00Z"
+    }
+  ],
+  "recent_articles": [
+    {
+      "id": 4,
+      "title": "Essential Van Life Gear: 2025 Complete Packing List",
+      "excerpt": "Updated gear recommendations for van life including must-have items, space-saving solutions, and multi-purpose tools.",
+      "featured_image_url": "/images/community_meetup_2.jpg",
+      "category": "Gear Reviews",
+      "view_count": 3456,
+      "published_at": "2025-08-08T16:00:00Z"
+    },
+    {
+      "id": 5,
+      "title": "Van Life Community Meetup Success in Moab",
+      "excerpt": "Over 200 van lifers gathered in Moab for the annual Sprinter Society meetup featuring workshops, group adventures, and community building.",
+      "featured_image_url": "/images/community_meetup_7.jpg",
+      "category": "Community",
+      "view_count": 2789,
+      "published_at": "2025-08-05T12:00:00Z"
+    }
+  ]
+}

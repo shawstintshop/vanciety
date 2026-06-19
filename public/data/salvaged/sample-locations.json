@@ -1,0 +1,88 @@
+{
+  "camp_spots": [
+    {
+      "id": 1,
+      "name": "Moab Dispersed Camping Area",
+      "description": "Beautiful red rock formations with incredible sunrise and sunset views. Popular spot for van lifers with easy access to Arches and Canyonlands.",
+      "latitude": 38.7331,
+      "longitude": -109.5925,
+      "type": "camp_spot",
+      "amenities": ["Scenic Views", "Hiking Trails", "Dark Skies", "Cell Service"],
+      "rating": 4.8,
+      "review_count": 234,
+      "is_premium_only": false,
+      "is_verified": true
+    },
+    {
+      "id": 2,
+      "name": "Alabama Hills - Lone Pine",
+      "description": "Iconic camping spot with incredible mountain views and unique rock formations. Free camping with amazing photography opportunities.",
+      "latitude": 36.6059,
+      "longitude": -118.1148,
+      "type": "camp_spot",
+      "amenities": ["Mountain Views", "Photography", "Hiking", "Rock Climbing"],
+      "rating": 4.9,
+      "review_count": 187,
+      "is_premium_only": false,
+      "is_verified": true
+    },
+    {
+      "id": 3,
+      "name": "Secret Spot - Sedona Area",
+      "description": "Hidden gem with red rock views and peaceful surroundings. Members-only location with limited access to preserve the area.",
+      "latitude": 34.8697,
+      "longitude": -111.7610,
+      "type": "camp_spot",
+      "amenities": ["Red Rocks", "Quiet", "Secluded", "Hiking Trails"],
+      "rating": 4.7,
+      "review_count": 89,
+      "is_premium_only": true,
+      "is_verified": true
+    }
+  ],
+  "driveway_hosts": [
+    {
+      "id": 4,
+      "name": "Phoenix Driveway - Power & Water",
+      "description": "Friendly host offering driveway parking with electrical hookup and water access. Great base for exploring Phoenix area.",
+      "latitude": 33.4484,
+      "longitude": -112.0740,
+      "type": "driveway_surf",
+      "amenities": ["Electricity", "Water", "WiFi", "Shower Access", "Friendly Host"],
+      "rating": 4.6,
+      "review_count": 67,
+      "is_premium_only": false,
+      "is_verified": true
+    }
+  ],
+  "businesses": [
+    {
+      "id": 5,
+      "name": "Outside Van - Mercedes Sprinter Specialists",
+      "description": "Professional van conversion and repair services specializing in Mercedes Sprinter vans. Full service shop with van life expertise.",
+      "latitude": 40.0150,
+      "longitude": -105.2705,
+      "type": "business",
+      "amenities": ["Van Conversion", "Repairs", "Parts", "Service", "Consultation"],
+      "rating": 4.9,
+      "review_count": 145,
+      "is_premium_only": false,
+      "is_verified": true
+    }
+  ],
+  "events": [
+    {
+      "id": 6,
+      "name": "Quartzsite Van Life Gathering 2025",
+      "description": "Annual van life meetup in Quartzsite with workshops, vendor booths, and community activities. The largest van life gathering in the southwest.",
+      "latitude": 33.6636,
+      "longitude": -114.2289,
+      "type": "meetup",
+      "amenities": ["Workshops", "Vendors", "Community", "Networking", "Entertainment"],
+      "rating": 4.8,
+      "review_count": 312,
+      "is_premium_only": false,
+      "is_verified": true
+    }
+  ]
+}

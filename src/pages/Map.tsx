@@ -22,10 +22,9 @@ import {
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useGoogleMaps } from "@/hooks/useGoogleMaps";
+import { useLeafletMap, type LocationType } from "@/hooks/useLeafletMap";
 import { useRealtimePresence } from "@/hooks/useRealtimePresence";
 import { useRealtimeVanLocations } from "@/hooks/useRealtimeVanLocations";
-import { locationTypeConfig, LocationType } from "@/lib/googleMaps";
 import FallbackMap from "@/components/FallbackMap";
 import Header from "@/components/Header";
 import { Link } from "react-router-dom";
@@ -159,8 +158,8 @@ const Map = () => {
     return locations;
   })();
 
-  const { mapRef, isLoaded, error } = useGoogleMaps({
-    center: { lat: 39.8283, lng: -98.5795 },
+  const { mapRef, isLoaded, error } = useLeafletMap({
+    center: [39.8283, -98.5795],
     zoom: 5,
     locations: allMapLocations,
     onLocationClick: (location) => {

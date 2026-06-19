@@ -1,0 +1,130 @@
+{
+  "featured_products": [
+    {
+      "id": 1,
+      "name": "Goal Zero Yeti 1500X Portable Power Station",
+      "description": "High-capacity lithium power station perfect for van life with 1516Wh capacity, multiple charging options, and reliable backup power for all your devices and appliances.",
+      "price": 1999.95,
+      "sale_price": 1699.95,
+      "category": "Electronics",
+      "brand": "Goal Zero",
+      "images": ["/images/products/goal-zero-yeti-1500x.jpg"],
+      "features": [
+        "1516Wh Lithium Battery",
+        "2000W AC Inverter",
+        "Multiple Charging Ports",
+        "Solar Compatible",
+        "App Control"
+      ],
+      "is_featured": true,
+      "is_daily_deal": true,
+      "affiliate_url": "https://www.goalzero.com/yeti-1500x",
+      "rating": 4.8,
+      "review_count": 342,
+      "sku": "GZ-YETI-1500X"
+    },
+    {
+      "id": 2,
+      "name": "Dometic CFX3 95DZ Dual Zone Electric Cooler",
+      "description": "Professional-grade 12V electric cooler with dual temperature zones, perfect for keeping food fresh and drinks cold during extended van life adventures.",
+      "price": 1299.99,
+      "category": "Appliances",
+      "brand": "Dometic",
+      "images": ["/images/products/dometic-cfx3-95dz.jpg"],
+      "features": [
+        "Dual Temperature Zones",
+        "95L Capacity",
+        "12V/24V/110V Power",
+        "WiFi Connectivity",
+        "Energy Efficient"
+      ],
+      "is_featured": true,
+      "affiliate_url": "https://www.dometic.com/cfx3-95dz",
+      "rating": 4.7,
+      "review_count": 189,
+      "sku": "DOM-CFX3-95DZ"
+    },
+    {
+      "id": 3,
+      "name": "Renogy 800W Solar Panel Kit",
+      "description": "Complete solar power system including 4x 200W monocrystalline panels, MPPT charge controller, and all mounting hardware for van life installations.",
+      "price": 899.99,
+      "sale_price": 749.99,
+      "category": "Electronics",
+      "brand": "Renogy",
+      "images": ["/images/products/renogy-800w-kit.jpg"],
+      "features": [
+        "4x 200W Monocrystalline Panels",
+        "60A MPPT Charge Controller",
+        "Complete Mounting Kit",
+        "MC4 Connectors",
+        "25-Year Warranty"
+      ],
+      "is_featured": true,
+      "is_daily_deal": true,
+      "affiliate_url": "https://www.renogy.com/800-watt-solar-kit",
+      "rating": 4.6,
+      "review_count": 267,
+      "sku": "RNG-800W-KIT"
+    }
+  ],
+  "daily_deals": [
+    {
+      "id": 4,
+      "name": "Yakima SkyBox 16 Carbonite Cargo Box",
+      "description": "Premium roof cargo box with 16 cubic feet of storage space, perfect for van life gear storage and freeing up interior space.",
+      "price": 449.99,
+      "sale_price": 359.99,
+      "category": "Exterior",
+      "brand": "Yakima",
+      "images": ["/images/products/yakima-skybox-16.jpg"],
+      "is_daily_deal": true,
+      "rating": 4.5,
+      "review_count": 156
+    }
+  ],
+  "manufacturers": [
+    {
+      "id": "goal-zero",
+      "name": "Goal Zero",
+      "slug": "goal-zero",
+      "logoUrl": "/images/brands/goal-zero-logo.png",
+      "isFeature": true
+    },
+    {
+      "id": "dometic",
+      "name": "Dometic",
+      "slug": "dometic",
+      "logoUrl": "/images/brands/dometic-logo.png",
+      "isFeature": true
+    },
+    {
+      "id": "renogy",
+      "name": "Renogy",
+      "slug": "renogy",
+      "logoUrl": "/images/brands/renogy-logo.png",
+      "isFeature": true
+    },
+    {
+      "id": "yakima",
+      "name": "Yakima",
+      "slug": "yakima",
+      "logoUrl": "/images/brands/yakima-logo.png",
+      "isFeature": true
+    },
+    {
+      "id": "mercedes",
+      "name": "Mercedes-Benz",
+      "slug": "mercedes",
+      "logoUrl": "/images/brands/mercedes-logo.png",
+      "isFeature": true
+    },
+    {
+      "id": "winnebago",
+      "name": "Winnebago",
+      "slug": "winnebago",
+      "logoUrl": "/images/brands/winnebago-logo.png",
+      "isFeature": true
+    }
+  ]
+}

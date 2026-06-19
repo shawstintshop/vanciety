@@ -1,0 +1,7 @@
+# Netlify redirects for Vanciety beta/live hosting.
+# Works when both vanciety.com and sprintersociety.com are attached to the same Netlify site.
+
+https://sprintersociety.com/* https://vanciety.com/:splat 301!
+https://www.sprintersociety.com/* https://vanciety.com/:splat 301!
+
+/* /index.html 200

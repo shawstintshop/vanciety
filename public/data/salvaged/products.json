@@ -1,0 +1,237 @@
+[
+  {
+    "id": 1,
+    "name": "Goal Zero Yeti 1500X Portable Power Station",
+    "description": "High-capacity lithium battery pack perfect for off-grid van life. Powers laptops, phones, lights, and small appliances for days. Compatible with solar panels for sustainable energy.",
+    "price": 1699.95,
+    "sale_price": 1499.95,
+    "category": "Electronics & Power",
+    "brand": "Goal Zero",
+    "images": [
+      "/images/goal-zero-yeti-1500x.jpg",
+      "/images/goal-zero-yeti-1500x-2.jpg"
+    ],
+    "features": [
+      "1516Wh lithium battery capacity",
+      "1800W AC inverter with surge",
+      "Multiple USB-A and USB-C ports",
+      "12V car port and Anderson Powerpole",
+      "WiFi app control and monitoring",
+      "Solar panel compatible"
+    ],
+    "is_featured": true,
+    "is_daily_deal": true,
+    "affiliate_url": "https://goalzero.com/shop/power-stations/goal-zero-yeti-1500x-portable-power-station/",
+    "rating": 4.8,
+    "review_count": 342,
+    "sku": "GZ-36280",
+    "stock_quantity": 15,
+    "weight": "45.64 lbs",
+    "dimensions": "15.25 x 10.23 x 12.6 inches"
+  },
+  {
+    "id": 2,
+    "name": "Renogy 400W Solar Panel Kit",
+    "description": "Complete solar power system for Mercedes Sprinter vans. Includes 4x 100W monocrystalline panels, 40A MPPT charge controller, and all mounting hardware.",
+    "price": 649.99,
+    "category": "Solar & Power",
+    "brand": "Renogy",
+    "images": [
+      "/images/renogy-400w-solar-kit.jpg",
+      "/images/renogy-solar-panels.jpg"
+    ],
+    "features": [
+      "4x 100W monocrystalline solar panels",
+      "40A MPPT charge controller with LCD",
+      "Z-bracket mounting hardware included",
+      "25-year power output warranty",
+      "Corrosion-resistant aluminum frame",
+      "High efficiency 21% cell conversion"
+    ],
+    "is_featured": true,
+    "is_daily_deal": false,
+    "affiliate_url": "https://renogy.com/400-watt-solar-panel-kit/",
+    "rating": 4.7,
+    "review_count": 156,
+    "sku": "RNG-KIT-400D-1",
+    "stock_quantity": 23,
+    "weight": "95 lbs",
+    "dimensions": "Panel: 47.24 x 21.26 x 1.38 inches each"
+  },
+  {
+    "id": 3,
+    "name": "Nature's Head Composting Toilet",
+    "description": "Self-contained, waterless, odorless composting toilet perfect for van life. No chemicals required, easy to install and maintain. 12V fan included.",
+    "price": 1049.00,
+    "category": "Bathroom & Plumbing",
+    "brand": "Nature's Head",
+    "images": [
+      "/images/natures-head-toilet.jpg",
+      "/images/natures-head-installed.jpg"
+    ],
+    "features": [
+      "Waterless composting technology",
+      "Odorless operation with 12V fan",
+      "Urine diverting design",
+      "Spider handle agitator",
+      "Easy to clean and maintain",
+      "5-year warranty"
+    ],
+    "is_featured": true,
+    "is_daily_deal": false,
+    "affiliate_url": "https://natureshead.net/",
+    "rating": 4.6,
+    "review_count": 89,
+    "sku": "NH-101",
+    "stock_quantity": 8,
+    "weight": "28 lbs",
+    "dimensions": "22.5 x 20.75 x 21.5 inches"
+  },
+  {
+    "id": 4,
+    "name": "Dometic CFX3 55IM Electric Cooler",
+    "description": "Dual-zone electric cooler/freezer with app control. Perfect for van life food storage. Runs on 12V/24V DC or 110V AC power with excellent energy efficiency.",
+    "price": 899.99,
+    "sale_price": 799.99,
+    "category": "Kitchen & Refrigeration",
+    "brand": "Dometic",
+    "images": [
+      "/images/dometic-cfx3-55im.jpg",
+      "/images/dometic-cfx3-interior.jpg"
+    ],
+    "features": [
+      "55 liter dual-zone capacity",
+      "WiFi app control and monitoring",
+      "Energy efficient VDC compressor",
+      "Temperature range: +50°F to -7°F",
+      "Heavy-duty construction",
+      "12V/24V DC and 110V AC compatible"
+    ],
+    "is_featured": true,
+    "is_daily_deal": true,
+    "affiliate_url": "https://dometic.com/en-us/us/products/food-and-beverage/coolers/electric-coolers/dometic-cfx3-55im-_-110311",
+    "rating": 4.9,
+    "review_count": 234,
+    "sku": "DOM-9600000472",
+    "stock_quantity": 12,
+    "weight": "39.7 lbs",
+    "dimensions": "29.9 x 15.7 x 20.1 inches"
+  },
+  {
+    "id": 5,
+    "name": "Fiamma F45S Awning 8ft",
+    "description": "Premium cassette awning for Mercedes Sprinter high roof. Easy one-person setup, durable fabric, and sleek design. Includes LED light strip.",
+    "price": 1299.00,
+    "category": "Exterior & Awnings",
+    "brand": "Fiamma",
+    "images": [
+      "/images/fiamma-f45s-awning.jpg",
+      "/images/fiamma-awning-extended.jpg"
+    ],
+    "features": [
+      "8ft (250cm) premium cassette awning",
+      "One-person easy setup",
+      "Durable acrylic fabric",
+      "Integrated LED light strip",
+      "Wind-resistant up to 25 mph",
+      "Titanium color finish"
+    ],
+    "is_featured": false,
+    "is_daily_deal": false,
+    "affiliate_url": "https://fiamma.com/en/awnings/cassette-awnings/f45s",
+    "rating": 4.5,
+    "review_count": 67,
+    "sku": "FIA-06280A01T",
+    "stock_quantity": 6,
+    "weight": "77 lbs",
+    "dimensions": "100 x 8 x 8 inches (stored)"
+  },
+  {
+    "id": 6,
+    "name": "Victron MultiPlus-II 3000VA Inverter",
+    "description": "Professional grade inverter/charger for serious van life electrical systems. Pure sine wave output, advanced battery charging, and shore power pass-through.",
+    "price": 1549.00,
+    "category": "Electronics & Power",
+    "brand": "Victron Energy",
+    "images": [
+      "/images/victron-multiplus-ii.jpg",
+      "/images/victron-inverter-installed.jpg"
+    ],
+    "features": [
+      "3000VA/2400W continuous power",
+      "120A battery charger",
+      "Pure sine wave output",
+      "VE.Bus communication",
+      "PowerAssist technology",
+      "Remote monitoring capable"
+    ],
+    "is_featured": true,
+    "is_daily_deal": false,
+    "affiliate_url": "https://victronenergy.com/inverters-chargers/multiplus-ii",
+    "rating": 4.8,
+    "review_count": 145,
+    "sku": "VIC-PMP123021102",
+    "stock_quantity": 9,
+    "weight": "59.5 lbs",
+    "dimensions": "20.7 x 10.8 x 8.8 inches"
+  },
+  {
+    "id": 7,
+    "name": "Thule Omnistor 5200 Awning",
+    "description": "Motorized cassette awning with remote control. Premium choice for luxury van builds. Quiet motor, premium fabric, and sleek European design.",
+    "price": 2299.00,
+    "category": "Exterior & Awnings",
+    "brand": "Thule",
+    "images": [
+      "/images/thule-omnistor-5200.jpg",
+      "/images/thule-awning-motorized.jpg"
+    ],
+    "features": [
+      "8ft motorized cassette awning",
+      "Remote control operation",
+      "Premium European engineering",
+      "Wind sensor automatic retract",
+      "LED lighting integrated",
+      "Anodized aluminum construction"
+    ],
+    "is_featured": false,
+    "is_daily_deal": false,
+    "affiliate_url": "https://thule.com/en-us/rv/awnings/thule-omnistor-5200-_-307684",
+    "rating": 4.7,
+    "review_count": 34,
+    "sku": "THU-307684",
+    "stock_quantity": 3,
+    "weight": "88 lbs",
+    "dimensions": "98 x 9 x 9 inches (stored)"
+  },
+  {
+    "id": 8,
+    "name": "Battle Born LiFePO4 100Ah Battery",
+    "description": "Premium lithium iron phosphate battery with 3000+ cycle life. Drop-in replacement for lead acid with built-in BMS. Made in USA with 10-year warranty.",
+    "price": 949.00,
+    "sale_price": 849.00,
+    "category": "Electronics & Power",
+    "brand": "Battle Born Batteries",
+    "images": [
+      "/images/battle-born-lifepo4.jpg",
+      "/images/battle-born-battery-bank.jpg"
+    ],
+    "features": [
+      "100Ah lithium iron phosphate",
+      "3000+ cycle life expectancy",
+      "Built-in battery management system",
+      "100A continuous discharge",
+      "10-year warranty",
+      "Made in Reno, Nevada USA"
+    ],
+    "is_featured": true,
+    "is_daily_deal": true,
+    "affiliate_url": "https://battlebornbatteries.com/product/100ah-12v-lifepo4-deep-cycle-battery/",
+    "rating": 4.9,
+    "review_count": 456,
+    "sku": "BB-BB10012",
+    "stock_quantity": 18,
+    "weight": "31 lbs",
+    "dimensions": "12.75 x 6.875 x 8.95 inches"
+  }
+]

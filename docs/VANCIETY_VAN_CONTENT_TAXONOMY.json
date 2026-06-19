@@ -1,0 +1,32 @@
+{
+  "version": "2026-06-12",
+  "vehicle_types": ["Mercedes Sprinter", "Winnebago Revel", "Custom Sprinter", "Class B Van", "Overland Van", "Transit", "Promaster", "Universal Van"],
+  "content_types": ["event", "show", "trip", "adventure", "video", "forum_thread", "group", "marketplace_listing", "ebay_listing", "retailer_sale", "product", "vendor", "mechanic", "installer", "dealer", "manufacturer", "member_build", "member_upload", "review", "route", "camp_spot"],
+  "product_categories": {
+    "vehicle_sales": ["Sprinter vans", "Winnebago Revel", "custom vans", "used vans", "new vans", "dealer inventory"],
+    "tires_wheels": ["all-terrain tires", "winter tires", "wheels", "spares", "tire carriers", "TPMS"],
+    "audio_stereo": ["head units", "speakers", "subwoofers", "amps", "sound deadening", "CarPlay", "cameras"],
+    "electrical_solar": ["solar panels", "lithium batteries", "inverters", "chargers", "shore power", "alternator charging", "monitoring"],
+    "heating_cooling": ["diesel heaters", "AC units", "roof fans", "insulation", "window covers"],
+    "water_plumbing": ["water tanks", "pumps", "filters", "showers", "hot water", "toilets"],
+    "interior_storage": ["cabinets", "beds", "seats", "mattresses", "storage", "galley", "flooring"],
+    "exterior_accessories": ["roof racks", "ladders", "bumpers", "lights", "awnings", "steps", "ski racks"],
+    "suspension_performance": ["shocks", "springs", "lift kits", "brakes", "engine", "transmission", "tuning"],
+    "navigation_safety": ["GPS", "radios", "Starlink", "recovery gear", "first aid", "security"],
+    "camping_adventure": ["camp chairs", "kitchen gear", "storage bins", "recovery boards", "portable power", "bike racks"]
+  },
+  "video_categories": ["newest", "sprinter", "revel", "van_builds", "van_tours", "tips_tricks", "help_repair", "stereo_audio", "tires_wheels", "accessories", "solar_electrical", "plumbing", "heating_ac", "storage_interior", "events", "trips_adventures", "marketplace_reviews"],
+  "event_categories": ["van_expo", "overland_expo", "revel_rally", "sprinter_meetup", "builder_open_house", "campout", "trip", "adventure", "training", "trade_show"],
+  "business_categories": ["mechanic", "sprinter_specialist", "dealer", "builder", "upfitter", "installer", "audio_shop", "tire_shop", "suspension_shop", "electrical_solar_installer", "manufacturer", "parts_vendor", "campground_host"],
+  "fire_rating": {
+    "icon": "🔥",
+    "scale": [
+      {"score": 1, "label": "Not recommended"},
+      {"score": 2, "label": "Below average"},
+      {"score": 3, "label": "Solid"},
+      {"score": 4, "label": "Recommended"},
+      {"score": 5, "label": "FIRE"}
+    ]
+  },
+  "source_badges": ["OFFICIAL", "VERIFIED", "LIVE_LISTING", "PUBLIC_FORUM", "AUTH_REQUIRED", "PRIVATE_SOURCE", "MEMBER_SUBMITTED", "AI_SUMMARY", "UNKNOWN"]
+}

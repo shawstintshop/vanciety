@@ -1,0 +1,60 @@
+{
+  "version": "2026-06-12",
+  "purpose": "Seed registry for Vanciety Van Intelligence Agent. Each source must be verified before being shown as live content.",
+  "source_badges": ["OFFICIAL", "LIVE_LISTING", "PUBLIC_FORUM", "PUBLIC_SOCIAL", "AUTH_REQUIRED", "PRIVATE_SOURCE", "MEMBER_SUBMITTED", "UNKNOWN"],
+  "categories": {
+    "official_events": [
+      {"name": "Overland Expo", "url": "https://www.overlandexpo.com/", "source_type": "official_event", "access_status": "public", "notes": "Major overland event calendar."},
+      {"name": "Adventure Van Expo", "url": "https://www.adventurevanexpo.com/", "source_type": "official_event", "access_status": "public", "notes": "Van expo events."},
+      {"name": "Northwest Overland Rally", "url": "https://www.nwoverlandrally.com/", "source_type": "official_event", "access_status": "public", "notes": "Regional overland rally."},
+      {"name": "Descend on Bend", "url": "https://www.descendonbend.com/", "source_type": "official_event", "access_status": "public", "notes": "Van-life gathering."}
+    ],
+    "marketplaces": [
+      {"name": "eBay Sprinter Parts", "url": "https://www.ebay.com/sch/i.html?_nkw=mercedes+sprinter+van+parts", "source_type": "marketplace", "access_status": "public_partial", "notes": "Reliable monitoring should use eBay Browse API or saved searches."},
+      {"name": "eBay Winnebago Revel", "url": "https://www.ebay.com/sch/i.html?_nkw=winnebago+revel", "source_type": "marketplace", "access_status": "public_partial", "notes": "Used for vehicles/accessories."},
+      {"name": "Facebook Marketplace", "url": "https://www.facebook.com/marketplace/", "source_type": "marketplace", "access_status": "auth_required", "notes": "Needs user login/session; do not scrape private data without access."},
+      {"name": "Craigslist RVs + Auto Parts", "url": "https://www.craigslist.org/about/sites", "source_type": "marketplace", "access_status": "public", "notes": "Regional monitoring needed."},
+      {"name": "VanViewer", "url": "https://vanviewer.com/", "source_type": "marketplace", "access_status": "public", "notes": "Van listings."},
+      {"name": "Conversion Trader", "url": "https://conversiontrader.com/", "source_type": "marketplace", "access_status": "public", "notes": "Converted van marketplace."}
+    ],
+    "forums_groups": [
+      {"name": "Sprinter Source", "url": "https://sprinter-source.com/forums/", "source_type": "forum", "access_status": "public_partial", "notes": "Core Sprinter owner forum; some posting/search may require login."},
+      {"name": "Class B Forum", "url": "https://www.classbforum.com/forums/", "source_type": "forum", "access_status": "public", "notes": "Class B / RV owner discussions."},
+      {"name": "iRV2 Forums", "url": "https://www.irv2.com/forums/", "source_type": "forum", "access_status": "public", "notes": "RV community, includes van/RV threads."},
+      {"name": "Reddit r/vandwellers", "url": "https://www.reddit.com/r/vandwellers/", "source_type": "social_forum", "access_status": "public_partial", "notes": "Rate limits; API preferred for reliable monitoring."},
+      {"name": "Reddit r/VanLife", "url": "https://www.reddit.com/r/VanLife/", "source_type": "social_forum", "access_status": "public_partial", "notes": "Rate limits; API preferred."},
+      {"name": "Reddit r/SprinterVans", "url": "https://www.reddit.com/r/SprinterVans/", "source_type": "social_forum", "access_status": "public_partial", "notes": "Sprinter-focused subreddit if active."},
+      {"name": "Facebook Revel / Sprinter / Van groups", "url": "https://www.facebook.com/groups/", "source_type": "social_group", "access_status": "auth_required", "notes": "Needs user group access; private groups must be indexed only with explicit permission."}
+    ],
+    "youtube_queries": [
+      "newest sprinter van build",
+      "Mercedes Sprinter van tour",
+      "Winnebago Revel build mods",
+      "van life tips Sprinter",
+      "Sprinter van electrical solar",
+      "Sprinter van stereo upgrade",
+      "Sprinter van tires wheels",
+      "van build accessories",
+      "overland van adventure",
+      "van expo recap"
+    ],
+    "vendors_builders": [
+      {"name": "Outside Van", "url": "https://outsidevan.com/", "source_type": "builder", "access_status": "public"},
+      {"name": "Field Van", "url": "https://fieldvan.com/", "source_type": "builder", "access_status": "public"},
+      {"name": "Storyteller Overland", "url": "https://storytelleroverland.com/", "source_type": "builder_manufacturer", "access_status": "public"},
+      {"name": "EXPLORIST.life", "url": "https://explorist.life/", "source_type": "education_vendor", "access_status": "public"},
+      {"name": "FarOutRide", "url": "https://faroutride.com/", "source_type": "education_build_resource", "access_status": "public"}
+    ],
+    "mechanics_and_dealers": [
+      {"name": "Mercedes-Benz Vans Dealer Locator", "url": "https://www.mbvans.com/en/dealer-locator", "source_type": "dealer_locator", "access_status": "public", "notes": "Use for official Sprinter dealership/service lookup."},
+      {"name": "Google Maps search: Sprinter mechanic near me", "url": "https://www.google.com/maps/search/sprinter+mechanic/", "source_type": "map_search", "access_status": "public_partial", "notes": "Needs location-specific extraction and verification."}
+    ]
+  },
+  "blocked_or_needs_login": [
+    "Facebook Groups and Marketplace",
+    "eBay API / saved searches for reliable listing alerts",
+    "YouTube Data API for newest upload monitoring at scale",
+    "Google Drive OAuth for private source files",
+    "Supabase login/project access for production database persistence"
+  ]
+}

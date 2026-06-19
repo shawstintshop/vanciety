@@ -1,0 +1,370 @@
+[
+  {
+    "file": "20250915212510_8344a6cb-0b6e-4aa8-b157-e405b6f98128.sql",
+    "tables_created": [
+      "forum_posts",
+      "marketplace_items",
+      "profiles",
+      "vendors"
+    ],
+    "rls_enabled": [
+      "forum_posts",
+      "marketplace_items",
+      "profiles",
+      "vendors"
+    ],
+    "policies": [
+      {
+        "policy": "Profiles are viewable by everyone",
+        "table": "profiles",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can update their own profile",
+        "table": "profiles",
+        "operation": "UPDATE"
+      },
+      {
+        "policy": "Users can insert their own profile",
+        "table": "profiles",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Forum posts are viewable by everyone",
+        "table": "forum_posts",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Authenticated users can create posts",
+        "table": "forum_posts",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Users can update their own posts",
+        "table": "forum_posts",
+        "operation": "UPDATE"
+      },
+      {
+        "policy": "Marketplace items are viewable by everyone",
+        "table": "marketplace_items",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Authenticated users can create items",
+        "table": "marketplace_items",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Users can update their own items",
+        "table": "marketplace_items",
+        "operation": "UPDATE"
+      },
+      {
+        "policy": "Vendors are viewable by everyone",
+        "table": "vendors",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Authenticated users can create vendor profiles",
+        "table": "vendors",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Users can update their own vendor profile",
+        "table": "vendors",
+        "operation": "UPDATE"
+      }
+    ],
+    "functions": [
+      "public",
+      "to"
+    ],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915215900_20c61da8-19df-4f87-9534-b03f6574fb57.sql",
+    "tables_created": [
+      "youtube_videos"
+    ],
+    "rls_enabled": [
+      "youtube_videos"
+    ],
+    "policies": [
+      {
+        "policy": "YouTube videos are viewable by everyone",
+        "table": "youtube_videos",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Only authenticated users can manage videos",
+        "table": "youtube_videos",
+        "operation": "ALL"
+      }
+    ],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915220551_fdff427b-7411-4371-a842-b9ecb363aea0.sql",
+    "tables_created": [
+      "locations"
+    ],
+    "rls_enabled": [
+      "locations"
+    ],
+    "policies": [
+      {
+        "policy": "Locations are viewable by everyone",
+        "table": "locations",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Authenticated users can create locations",
+        "table": "locations",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Users can update their own locations",
+        "table": "locations",
+        "operation": "UPDATE"
+      }
+    ],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915222918_39b7c1dc-d865-4741-a78d-be8884463f5d.sql",
+    "tables_created": [
+      "user_locations"
+    ],
+    "rls_enabled": [
+      "user_locations"
+    ],
+    "policies": [
+      {
+        "policy": "Users can view public locations",
+        "table": "user_locations",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can manage their own location",
+        "table": "user_locations",
+        "operation": "ALL"
+      }
+    ],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915223127_e0ed17b1-8725-4e17-9bdd-0c02ca9958d0.sql",
+    "tables_created": [
+      "user_locations"
+    ],
+    "rls_enabled": [
+      "user_locations"
+    ],
+    "policies": [
+      {
+        "policy": "Users can view public locations",
+        "table": "user_locations",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can manage their own location",
+        "table": "user_locations",
+        "operation": "ALL"
+      }
+    ],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915223203_32c9cc3c-4183-4106-a425-f42b942286ab.sql",
+    "tables_created": [
+      "user_locations"
+    ],
+    "rls_enabled": [
+      "user_locations"
+    ],
+    "policies": [
+      {
+        "policy": "Users can view public locations",
+        "table": "user_locations",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can manage their own location",
+        "table": "user_locations",
+        "operation": "ALL"
+      }
+    ],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915223420_06d7ca60-9980-4ceb-9c00-339ca7c6192d.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250915224224_b36f5c7b-81a2-483e-a08d-ace14d212082.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918151741_48129967-ef48-4dbd-98af-5290ff0a9b6a.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918152122_a4400195-f932-4b5a-86d0-598b14bc171d.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918152152_ce91d867-94ac-4576-b219-1b51aa229902.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918153608_5e4fe424-173d-4951-a322-a6a459dad610.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918153726_9016078f-c411-4835-bee1-8498dc7cf85b.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918153752_7f22e389-e2c4-4816-96fc-1ed33d728f41.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20250918155052_9e1b31c2-0d9a-4bbd-9b2d-012e084c8875.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [],
+    "functions": [],
+    "dropped_policies": []
+  },
+  {
+    "file": "20260209000000_add_van_gps_tracking.sql",
+    "tables_created": [
+      "gps_sharing_settings",
+      "van_locations"
+    ],
+    "rls_enabled": [
+      "gps_sharing_settings",
+      "van_locations"
+    ],
+    "policies": [
+      {
+        "policy": "Public locations readable by anyone",
+        "table": "van_locations",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can read own locations",
+        "table": "van_locations",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can insert own locations",
+        "table": "van_locations",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Users can update own locations",
+        "table": "van_locations",
+        "operation": "UPDATE"
+      },
+      {
+        "policy": "Users can delete own locations",
+        "table": "van_locations",
+        "operation": "DELETE"
+      },
+      {
+        "policy": "Users can read own GPS settings",
+        "table": "gps_sharing_settings",
+        "operation": "SELECT"
+      },
+      {
+        "policy": "Users can insert own GPS settings",
+        "table": "gps_sharing_settings",
+        "operation": "INSERT"
+      },
+      {
+        "policy": "Users can update own GPS settings",
+        "table": "gps_sharing_settings",
+        "operation": "UPDATE"
+      }
+    ],
+    "functions": [
+      "cleanup_expired_van_locations",
+      "nearby_vans",
+      "upsert_van_location"
+    ],
+    "dropped_policies": []
+  },
+  {
+    "file": "20260615232500_secure_friend_finder_member_areas.sql",
+    "tables_created": [],
+    "rls_enabled": [],
+    "policies": [
+      {
+        "policy": "Authenticated members can read approximate active van areas",
+        "table": "van_locations",
+        "operation": "SELECT"
+      }
+    ],
+    "functions": [
+      "nearby_member_van_areas",
+      "nearby_vans",
+      "upsert_van_location"
+    ],
+    "dropped_policies": [
+      [
+        "Authenticated members can read approximate active van areas",
+        "van_locations"
+      ],
+      [
+        "Public locations readable by anyone",
+        "van_locations"
+      ],
+      [
+        "Users can insert own locations",
+        "van_locations"
+      ],
+      [
+        "Users can update own locations",
+        "van_locations"
+      ]
+    ]
+  }
+]

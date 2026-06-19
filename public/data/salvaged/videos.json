@@ -1,0 +1,209 @@
+[
+  {
+    "id": 1,
+    "title": "Complete Mercedes Sprinter Van Build in 30 Days",
+    "description": "Follow along as we transform a bare Sprinter van into the ultimate adventure vehicle with solar, kitchen, bed, and bathroom in just 30 days.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/hero_van_2_8.jpg",
+    "category": "Van Builds",
+    "tags": ["sprinter", "build", "solar", "kitchen", "conversion"],
+    "duration": 1800,
+    "view_count": 45230,
+    "likes_count": 2890,
+    "uploaded_by": "vanlife_builder",
+    "is_featured": true,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "VanLife Builder",
+        "avatarUrl": "/images/community_meetup_1.jpg"
+      }
+    }
+  },
+  {
+    "id": 2,
+    "title": "Ultimate Solar Setup for Off-Grid Van Life",
+    "description": "Learn how to design and install a powerful solar system that will keep you powered anywhere. Includes batteries, inverter, and charge controller setup.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/overland_adventure_4.jpeg",
+    "category": "Tech Tips",
+    "tags": ["solar", "electrical", "battery", "off-grid", "power"],
+    "duration": 1200,
+    "view_count": 32100,
+    "likes_count": 1567,
+    "uploaded_by": "solar_expert",
+    "is_featured": true,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "Solar Expert",
+        "avatarUrl": "/images/community_meetup_2.jpg"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "title": "Hidden Gems: Best Free Camping Spots in the West",
+    "description": "Discover incredible free camping locations across the western United States. GPS coordinates and access information included.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/overland_adventure_6.jpg",
+    "category": "Camping Adventures",
+    "tags": ["camping", "free", "boondocking", "western-us", "coordinates"],
+    "duration": 900,
+    "view_count": 28750,
+    "likes_count": 1890,
+    "uploaded_by": "nomad_explorer",
+    "is_featured": false,
+    "is_premium": true,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "Nomad Explorer",
+        "avatarUrl": "/images/community_meetup_7.jpg"
+      }
+    }
+  },
+  {
+    "id": 4,
+    "title": "Van Life Budget: How We Live on $2000/Month",
+    "description": "Complete budget breakdown of our full-time van life including fuel, food, insurance, and unexpected expenses.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/van_interior_3.jpg",
+    "category": "Vanlife Tours",
+    "tags": ["budget", "costs", "finance", "planning", "lifestyle"],
+    "duration": 1500,
+    "view_count": 19420,
+    "likes_count": 1200,
+    "uploaded_by": "budget_vanlife",
+    "is_featured": false,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "Budget Vanlife",
+        "avatarUrl": "/images/van_interior_7.jpg"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "title": "Composting Toilet Installation & Review",
+    "description": "Step-by-step installation of the Nature's Head composting toilet plus honest review after 6 months of use.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/overland_adventure_8.jpg",
+    "category": "How-Tos",
+    "tags": ["toilet", "plumbing", "installation", "review", "hygiene"],
+    "duration": 750,
+    "view_count": 15600,
+    "likes_count": 890,
+    "uploaded_by": "diy_vanlife",
+    "is_featured": false,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "DIY Vanlife",
+        "avatarUrl": "/images/hero_van_1_8.jpeg"
+      }
+    }
+  },
+  {
+    "id": 6,
+    "title": "Best Van Life Products of 2025",
+    "description": "Our top product recommendations for van life including gear we actually use and would buy again.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/hero_van_2_3.jpg",
+    "category": "Product Reviews",
+    "tags": ["products", "gear", "reviews", "recommendations", "2025"],
+    "duration": 1100,
+    "view_count": 22340,
+    "likes_count": 1456,
+    "uploaded_by": "gear_guru",
+    "is_featured": true,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "Gear Guru",
+        "avatarUrl": "/images/hero_van_2_5.png"
+      }
+    }
+  },
+  {
+    "id": 7,
+    "title": "Epic 4x4 Sprinter Build for Overlanding",
+    "description": "Building the ultimate 4x4 Sprinter for serious overlanding adventures. Suspension, tires, armor, and more.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/overland_adventure_4.jpeg",
+    "category": "Overland Expeditions",
+    "tags": ["4x4", "overlanding", "suspension", "armor", "expedition"],
+    "duration": 2100,
+    "view_count": 18900,
+    "likes_count": 1234,
+    "uploaded_by": "overland_specialist",
+    "is_featured": false,
+    "is_premium": true,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "Overland Specialist",
+        "avatarUrl": "/images/overland_adventure_6.jpg"
+      }
+    }
+  },
+  {
+    "id": 8,
+    "title": "Mercedes Sprinter 4x4 Modifications Guide",
+    "description": "Complete guide to modifying your Sprinter for off-road capability including lift kits, differential locks, and tire selection.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/overland_adventure_8.jpg",
+    "category": "4x4 Mods",
+    "tags": ["4x4", "modifications", "lift-kit", "differential", "offroad"],
+    "duration": 1800,
+    "view_count": 16720,
+    "likes_count": 987,
+    "uploaded_by": "4x4_expert",
+    "is_featured": false,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "4x4 Expert",
+        "avatarUrl": "/images/community_meetup_1.jpg"
+      }
+    }
+  },
+  {
+    "id": 9,
+    "title": "Winnebago Revel Van Tour & Review",
+    "description": "In-depth tour of the Winnebago Revel including all systems, storage solutions, and real-world performance review.",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "youtube_video_id": "dQw4w9WgXcQ",
+    "thumbnail_url": "/images/van_interior_3.jpg",
+    "category": "Revel Van Specifics",
+    "tags": ["revel", "winnebago", "tour", "review", "factory-build"],
+    "duration": 1350,
+    "view_count": 24680,
+    "likes_count": 1678,
+    "uploaded_by": "revel_owner",
+    "is_featured": true,
+    "is_premium": false,
+    "is_approved": true,
+    "uploader": {
+      "profile": {
+        "displayName": "Revel Owner",
+        "avatarUrl": "/images/van_interior_7.jpg"
+      }
+    }
+  }
+]

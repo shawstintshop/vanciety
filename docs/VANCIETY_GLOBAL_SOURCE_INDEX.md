@@ -1,0 +1,1153 @@
+# VANCIETY GLOBAL SOURCE INDEX
+
+Generated: 2026-06-12T17:03:19.321647
+
+## Canonical recommendation
+- Recommended primary codebase: `/Volumes/AI-DATA/PROJECTS/VANCIETY/code/primary_app`
+- Reason: it is the current organized Vite/React/Supabase Vanciety app, already has verified source-data layer and current routes; older Sprinter/Lovable/export folders should feed migration, not replace it.
+
+## GitHub repositories found
+- shawstintshop/aiautoparts [GENERAL/OTHER] — https://github.com/shawstintshop/aiautoparts — updated 2026-04-07T15:30:55Z — 
+- shawstintshop/openclaw [GENERAL/OTHER] — https://github.com/shawstintshop/openclaw — updated 2026-05-18T05:28:14Z — Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
+- shawstintshop/pierce-county-events [GENERAL/OTHER] — https://github.com/shawstintshop/pierce-county-events — updated 2026-04-29T16:41:30Z — 
+- shawstintshop/PicZFlip [GENERAL/OTHER] — https://github.com/shawstintshop/PicZFlip — updated 2026-03-31T05:23:21Z — Pic z flip app
+- shawstintshop/piczflip-ios [GENERAL/OTHER] — https://github.com/shawstintshop/piczflip-ios — updated 2026-04-02T19:36:45Z — 
+- shawstintshop/AssetMuse [RELEVANT] — https://github.com/shawstintshop/AssetMuse — updated 2026-04-02T03:28:47Z — AI-powered autonomous website + business builder platform
+- shawstintshop/FD-Home-AI [GENERAL/OTHER] — https://github.com/shawstintshop/FD-Home-AI — updated 2026-03-01T01:26:41Z — Fire Department Ai Website - Home page
+- shawstintshop/Project-11-Singularity [GENERAL/OTHER] — https://github.com/shawstintshop/Project-11-Singularity — updated 2026-05-17T20:31:50Z — 
+- shawstintshop/aipows [GENERAL/OTHER] — https://github.com/shawstintshop/aipows — updated 2026-03-27T17:27:56Z — AIPOWS platform foundation and PicZFlip shell for one-page AI workspace apps.
+- shawstintshop/Vanciety.com [RELEVANT] — https://github.com/shawstintshop/Vanciety.com — updated 2026-03-30T17:34:27Z — Vanlife comminity 
+- shawstintshop/clarifyday-ios [GENERAL/OTHER] — https://github.com/shawstintshop/clarifyday-ios — updated 2026-03-25T16:27:05Z — Private native iOS/iPadOS app for ClarifyDay with SwiftUI, WidgetKit, App Intents, and investor-grade documentation.
+- shawstintshop/Family-Ai-Hub [RELEVANT] — https://github.com/shawstintshop/Family-Ai-Hub — updated 2026-03-16T23:03:02Z — The Family AI Housekeeper - This will be used with an ai agent for each family member then will wrap with bot code for future proofing when bots some online
+- shawstintshop/Ai-overland- [RELEVANT] — https://github.com/shawstintshop/Ai-overland- — updated 2026-03-22T07:21:12Z — All vanlife and overland apps all in one
+- shawstintshop/Script-to-3DPrint [GENERAL/OTHER] — https://github.com/shawstintshop/Script-to-3DPrint — updated 2026-03-22T07:14:06Z — Script to 3DPrint Software Dev Team
+- shawstintshop/aiserver [RELEVANT] — https://github.com/shawstintshop/aiserver — updated 2026-03-19T16:05:34Z — 
+- shawstintshop/docs [GENERAL/OTHER] — https://github.com/shawstintshop/docs — updated 2026-03-19T02:42:02Z — 
+- shawstintshop/trade-show-capture [GENERAL/OTHER] — https://github.com/shawstintshop/trade-show-capture — updated 2026-03-31T05:05:55Z — 
+- shawstintshop/origin-ambient-ai [GENERAL/OTHER] — https://github.com/shawstintshop/origin-ambient-ai — updated 2026-03-04T01:47:33Z — # 1) Create repo on GitHub first (private), then: git clone <your_repo_url> cd <repo_folder>
+- shawstintshop/AI-MULTI-RUNNER-SSSE [GENERAL/OTHER] — https://github.com/shawstintshop/AI-MULTI-RUNNER-SSSE — updated 2026-02-27T18:32:29Z — Single Source Setup & Execution
+- shawstintshop/everpresence-core [GENERAL/OTHER] — https://github.com/shawstintshop/everpresence-core — updated 2026-02-25T04:43:42Z — Deterministic AI companion system for senior care with realtime voice, health ingestion, and safety escalation.
+- shawstintshop/EverPresence-AI [GENERAL/OTHER] — https://github.com/shawstintshop/EverPresence-AI — updated 2026-03-01T01:22:47Z — EverPresence 24hr.Senior AI Assistant
+- shawstintshop/vanciety [RELEVANT] — https://github.com/shawstintshop/vanciety — updated 2026-02-23T07:02:29Z — NEW Vanciety.com files 
+- shawstintshop/Sprinterold [RELEVANT] — https://github.com/shawstintshop/Sprinterold — updated 2026-03-31T04:58:55Z — 
+- shawstintshop/FD.ai [GENERAL/OTHER] — https://github.com/shawstintshop/FD.ai — updated 2026-03-01T01:29:11Z — Central Pierce-Ai Demo Home Page
+- shawstintshop/SprinterSociety [RELEVANT] — https://github.com/shawstintshop/SprinterSociety — updated 2025-09-02T10:28:43Z — 
+
+## Source roots with Vanciety/Sprinter/van-community matches
+- `/Users/darrinshaw/Documents/GitHub/SprinterSociety` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/deployment-20250806-202004/_archive-20250812-190824` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/github/SprinterSociety` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/deployment-20250806-202004/_archive-20250812-190824` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__deployment-20250806-202004/_archive-20250812-190824` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety/SprinterSociety-1` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Sprinter_Society_cursor` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/discord` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/ui` — HIGH — KEEP/UPDATE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/browser` — HIGH — KEEP/UPDATE — 191 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/PicZFlip-main/functions` — HIGH — KEEP/UPDATE — 165 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 3` — HIGH — KEEP/UPDATE — 165 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 2` — HIGH — KEEP/UPDATE — 163 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety` — HIGH — KEEP/UPDATE — 160 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/telegram` — HIGH — KEEP/UPDATE — 160 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/code/primary_app` — HIGH — KEEP/UPDATE — 137 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/Sprinterold` — HIGH — KEEP/UPDATE — 127 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/github/Sprinterold` — HIGH — KEEP/UPDATE — 127 matched files
+- `/Users/darrinshaw/Downloads/Archon/archon-ui-main` — HIGH — KEEP/UPDATE — 124 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/slack` — HIGH — KEEP/UPDATE — 124 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/PicZFlip/functions` — HIGH — KEEP/UPDATE — 107 matched files
+- `/Volumes/AI-DATA/PROJECTS/piczflip_master_old_bak/functions` — HIGH — KEEP/UPDATE — 107 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/msteams` — HIGH — KEEP/UPDATE — 106 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/feishu` — HIGH — KEEP/UPDATE — 101 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/PicZFlip/functions` — HIGH — KEEP/UPDATE — 100 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qqbot` — HIGH — KEEP/UPDATE — 97 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/whatsapp` — HIGH — KEEP/UPDATE — 94 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/voice-call` — HIGH — KEEP/UPDATE — 79 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/imessage` — HIGH — KEEP/UPDATE — 56 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 4` — HIGH — KEEP/UPDATE — 55 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/mattermost` — HIGH — KEEP/UPDATE — 55 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qa-matrix` — HIGH — KEEP/UPDATE — 48 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/PicZFlip-main/web` — HIGH — KEEP/UPDATE — 42 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/plugin-eval` — HIGH — KEEP/UPDATE — 39 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/signal` — HIGH — KEEP/UPDATE — 36 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 2/server` — HIGH — KEEP/UPDATE — 32 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 3/server` — HIGH — KEEP/UPDATE — 32 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety/server` — HIGH — KEEP/UPDATE — 32 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/zalouser` — HIGH — KEEP/UPDATE — 32 matched files
+- `/Volumes/AI-DATA/PROJECTS/core/command-center` — HIGH — KEEP/UPDATE — 31 matched files
+- `/Users/darrinshaw/Downloads/agent_workspace (2)/enterprise-3d-scanning` — HIGH — KEEP/UPDATE — 29 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/zalo` — HIGH — KEEP/UPDATE — 27 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/nostr` — HIGH — KEEP/UPDATE — 24 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/PicZFlip/web` — HIGH — KEEP/UPDATE — 23 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/piczflip_master/web` — HIGH — KEEP/UPDATE — 22 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/nextcloud-talk` — HIGH — KEEP/UPDATE — 21 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/PicZFlip/web` — HIGH — KEEP/UPDATE — 20 matched files
+- `/Volumes/AI-DATA/PROJECTS/piczflip_master_old_bak/web` — HIGH — KEEP/UPDATE — 20 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/apps/api` — HIGH — KEEP/UPDATE — 11 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/webhooks` — HIGH — KEEP/UPDATE — 7 matched files
+- `/Users/darrinshaw` — MEDIUM — KEEP_AS_REFERENCE — 200 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins` — MEDIUM — KEEP_AS_REFERENCE — 200 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/zoom` — MEDIUM — KEEP_AS_REFERENCE — 200 matched files
+- `/Users/darrinshaw/Downloads` — MEDIUM — KEEP_AS_REFERENCE — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/matrix` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 200 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/Sprintersociety-B-Mad` — MEDIUM — KEEP_AS_REFERENCE — 149 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/Sprintersociety-B-Mad` — MEDIUM — KEEP_AS_REFERENCE — 149 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__Sprintersociety-B-Mad` — MEDIUM — KEEP_AS_REFERENCE — 149 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia` — MEDIUM — KEEP_AS_REFERENCE — 141 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/codex` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 133 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qa-lab` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 124 matched files
+- `/Users/darrinshaw/Downloads/Archon` — MEDIUM — KEEP_AS_REFERENCE — 121 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main` — MEDIUM — KEEP_AS_REFERENCE — 120 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main` — MEDIUM — KEEP_AS_REFERENCE — 120 matched files
+- `/Users/darrinshaw/Downloads/piczflip (3)` — MEDIUM — KEEP_AS_REFERENCE — 98 matched files
+- `/Users/darrinshaw/Downloads/piczflip (3) 2` — MEDIUM — KEEP_AS_REFERENCE — 98 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/memory-core` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 97 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/packages/memory-host-sdk` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 95 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/apps/ios` — MEDIUM — KEEP_AS_REFERENCE — 85 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/FD-Home-AI` — MEDIUM — KEEP_AS_REFERENCE — 82 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/vercel` — MEDIUM — KEEP_AS_REFERENCE — 78 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-curated-remote/vercel/0.21.2` — MEDIUM — KEEP_AS_REFERENCE — 78 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps` — MEDIUM — KEEP_AS_REFERENCE — 76 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/qa` — MEDIUM — KEEP_AS_REFERENCE — 74 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/figma` — MEDIUM — KEEP_AS_REFERENCE — 66 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/life-science-research` — MEDIUM — KEEP_AS_REFERENCE — 61 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/twilio-developer-kit/skills` — MEDIUM — KEEP_AS_REFERENCE — 61 matched files
+- `/Volumes/AI-DATA/PROJECTS/_TO_DELETE_LATER_20260405_224300/mobile-ios/clarifyday-ios` — MEDIUM — KEEP_AS_REFERENCE — 61 matched files
+- `/Volumes/AI-DATA/PROJECTS/archive/Xcode/clarifyday-ios` — MEDIUM — KEEP_AS_REFERENCE — 61 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/operations` — MEDIUM — KEEP_AS_REFERENCE — 55 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/oc-path` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 52 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/ngs-analysis` — MEDIUM — KEEP_AS_REFERENCE — 47 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/deployment-20250806-202004` — MEDIUM — KEEP_AS_REFERENCE — 47 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/deployment-20250806-202004` — MEDIUM — KEEP_AS_REFERENCE — 47 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__deployment-20250806-202004` — MEDIUM — KEEP_AS_REFERENCE — 47 matched files
+- `/Volumes/AI-DATA/PROJECTS/archive` — MEDIUM — KEEP_AS_REFERENCE — 47 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/build-ios-apps` — MEDIUM — KEEP_AS_REFERENCE — 45 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/expo` — MEDIUM — KEEP_AS_REFERENCE — 45 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts` — MEDIUM — KEEP_AS_REFERENCE — 44 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/render` — MEDIUM — KEEP_AS_REFERENCE — 42 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/memory-wiki` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 42 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/piczflip_master` — MEDIUM — KEEP_AS_REFERENCE — 41 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/PicZFlip-main` — MEDIUM — KEEP_AS_REFERENCE — 39 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/plugin-dev` — MEDIUM — KEEP_AS_REFERENCE — 38 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/content` — MEDIUM — KEEP_AS_REFERENCE — 38 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/github/Vanciety.com` — MEDIUM — KEEP_AS_REFERENCE — 38 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/Vanciety.com` — MEDIUM — KEEP_AS_REFERENCE — 38 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/google` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 38 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon` — MEDIUM — KEEP_AS_REFERENCE — 37 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/piczflip_master/functions` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 37 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare` — MEDIUM — KEEP_AS_REFERENCE — 36 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/superpowers` — MEDIUM — KEEP_AS_REFERENCE — 36 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon/iterations/v6-tool-library-integration` — MEDIUM — KEEP_AS_REFERENCE — 35 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-primary-runtime/documents/26.601.10930` — MEDIUM — KEEP_AS_REFERENCE — 34 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/line` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 34 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/hyperframes` — MEDIUM — KEEP_AS_REFERENCE — 33 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/build-web-apps/skills/react-best-practices` — MEDIUM — KEEP_AS_REFERENCE — 32 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/notion` — MEDIUM — KEEP_AS_REFERENCE — 32 matched files
+- `/Volumes/AI-DATA/Operations` — MEDIUM — KEEP_AS_REFERENCE — 32 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official` — MEDIUM — KEEP_AS_REFERENCE — 31 matched files
+- `/Users/darrinshaw/Documents/GitHub/sprintersociety-app-` — MEDIUM — KEEP_AS_REFERENCE — 31 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/github/vanciety` — MEDIUM — KEEP_AS_REFERENCE — 31 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/canvas` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 31 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/irc` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 31 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/vanciety` — MEDIUM — KEEP_AS_REFERENCE — 31 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/ollama` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 30 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/xai` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 30 matched files
+- `/Volumes/AI-DATA/PROJECTS/_dashboard` — MEDIUM — KEEP_AS_REFERENCE — 29 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/finalverdict` — MEDIUM — KEEP_AS_REFERENCE — 29 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter` — MEDIUM — KEEP_AS_REFERENCE — 29 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/tlon` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 29 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/daloopa` — MEDIUM — KEEP_AS_REFERENCE — 28 matched files
+- `/Volumes/AI-DATA/PROJECTS/_TO_DELETE_LATER_20260405_224300/mobile-ios/PicZ IOS App/piczflip-ios-app-extracted` — MEDIUM — KEEP_AS_REFERENCE — 28 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/acpx` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 28 matched files
+- `/Volumes/AI-DATA/PROJECTS/piczflip_master_old_bak` — MEDIUM — KEEP_AS_REFERENCE — 28 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/googlechat` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 27 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/hookify` — MEDIUM — KEEP_AS_REFERENCE — 25 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify` — MEDIUM — KEEP_AS_REFERENCE — 25 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/apps/android` — MEDIUM — KEEP_AS_REFERENCE — 25 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-primary-runtime/presentations/26.601.10930` — MEDIUM — KEEP_AS_REFERENCE — 24 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 2/database` — MEDIUM — KEEP_AS_REFERENCE — 24 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 3/database` — MEDIUM — KEEP_AS_REFERENCE — 24 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety/database` — MEDIUM — KEEP_AS_REFERENCE — 24 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety/SprinterSociety-1/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 24 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/google-meet` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 24 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/agent_runs/20260612-105952` — MEDIUM — KEEP_AS_REFERENCE — 24 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev` — MEDIUM — KEEP_AS_REFERENCE — 22 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/minimax` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 22 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis` — MEDIUM — KEEP_AS_REFERENCE — 22 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/skill-creator` — MEDIUM — KEEP_AS_REFERENCE — 21 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_consolidation/20260612-164914` — MEDIUM — KEEP_AS_REFERENCE — 21 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/build-macos-apps` — MEDIUM — KEEP_AS_REFERENCE — 20 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/openai-developers` — MEDIUM — KEEP_AS_REFERENCE — 20 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-curated-remote/openai-developers/1.2.2` — MEDIUM — KEEP_AS_REFERENCE — 20 matched files
+- `/Users/darrinshaw/Documents/Piczflip/PicZFlip/functions` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 20 matched files
+- `/Volumes/AI-DATA/PROJECTS/creative/AlignmentCycles` — MEDIUM — KEEP_AS_REFERENCE — 20 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/apps/swabble` — MEDIUM — KEEP_AS_REFERENCE — 20 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/lmstudio` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 20 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/code-modernization` — MEDIUM — KEEP_AS_REFERENCE — 19 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/build-web-apps` — MEDIUM — KEEP_AS_REFERENCE — 19 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/diffs` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 19 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/file-transfer` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 19 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/open-prose` — MEDIUM — KEEP_AS_REFERENCE — 19 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/synology-chat` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 18 matched files
+- `/Users/darrinshaw/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/latex` — MEDIUM — KEEP_AS_REFERENCE — 17 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon/iterations/v5-parallel-specialized-agents` — MEDIUM — KEEP_AS_REFERENCE — 17 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/FD.ai` — MEDIUM — KEEP_AS_REFERENCE — 17 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qa-lab/src/providers` — MEDIUM — KEEP_AS_REFERENCE — 17 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/ms-vscode.js-debug` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 16 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 16 matched files
+- `/Volumes/AI-DATA/PROJECTS/agency/AssetMuse/GitHub-Repo/apps/web` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 16 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/security-guidance` — MEDIUM — KEEP_AS_REFERENCE — 15 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/Sprintersociety-B-Mad/y/.bmad-infrastructure-devops` — MEDIUM — KEEP_AS_REFERENCE — 15 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/Sprintersociety-B-Mad/y/.bmad-infrastructure-devops` — MEDIUM — KEEP_AS_REFERENCE — 15 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__Sprintersociety-B-Mad/y/.bmad-infrastructure-devops` — MEDIUM — KEEP_AS_REFERENCE — 15 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/math-olympiad` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/heygen` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/remotion` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Volumes__AI-DATA__PROJECTS__vanciety_platform/content/topo` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/GitHub-Repo/packages/api` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/ai` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/ui` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/piczflip_master/asset-muse` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/creative/VanlifeTopo` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/PicZFlip` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Volumes/AI-DATA/PROJECTS/vanciety_platform/content/topo` — MEDIUM — KEEP_AS_REFERENCE — 14 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/mixpanel-headless` — MEDIUM — KEEP_AS_REFERENCE — 13 matched files
+- `/Users/darrinshaw/Downloads/agent_workspace (2)/photo-to-3d-converter` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 13 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/templates` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 13 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/piczflip_master/asset-muse/packages/agents` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 13 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/twitch` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 13 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/morningstar` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/supabase` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-curated-remote/supabase/0.1.6` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/Documents/GitHub/deployment-20250806-202004` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/deployment-20250806-202004/_archive-20250812-190824/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/Downloads/hestia-os_-family-intelligence` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 12 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 2/supabase/functions` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety 3/supabase/functions` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/deployment-20250806-202004/_archive-20250812-190824/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__deployment-20250806-202004/_archive-20250812-190824/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/GitHub-Repo` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/PicZFlip` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/clarifyday/ClarifyDay` — MEDIUM — KEEP_AS_REFERENCE — 12 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/discord` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/imessage` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon/iterations/v4-streamlit-ui-overhaul` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/Downloads/mcp-maps-3d 2` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/Downloads/piczflip (2)/piczflip/functions` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 11 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety/supabase/functions` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/deployment-20250806-202004/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 11 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/claude-md-management` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/playground` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Users/darrinshaw/Downloads/Archon/docs/docs` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon/iterations/v3-mcp-support` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety/SprinterSociety-1/src/hooks` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/gittask` — MEDIUM — KEEP_AS_REFERENCE — 10 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/Family-Ai-Hub` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 10 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/clearance-radar-v2/clearance-radar` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 10 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/ralph-loop` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/build-web-apps/skills/supabase-best-practices` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/dependencies` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-structure-assessment` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-curated-remote/github/0.1.2` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.601.10930` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/Downloads/agent_workspace (2)/ios_integration` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/Downloads/clearance-radar` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/github/SprinterSociety/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety/SprinterSociety-1/src/hooks/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/config` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/seo` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/deployment-20250806/research-crew-project` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/archive/piczold` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/openshell` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/skill-workshop` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/piczflip-ios` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/piczflip-ios/ios-app` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Volumes/AI-DATA/PROJECTS/vanciety_platform` — MEDIUM — KEEP_AS_REFERENCE — 9 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/fakechat` — MEDIUM — KEEP_AS_REFERENCE — 8 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/box/skills/box` — MEDIUM — KEEP_AS_REFERENCE — 8 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/deepnote` — MEDIUM — KEEP_AS_REFERENCE — 8 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/github/skills` — MEDIUM — KEEP_AS_REFERENCE — 8 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/superhuman` — MEDIUM — KEEP_AS_REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Volumes__AI-DATA__PROJECTS__vanciety_platform` — MEDIUM — KEEP_AS_REFERENCE — 8 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/example-plugin` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/feature-dev` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/setup-usd-performance-tuning` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/so-run-operations` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/Downloads/Archon/docs` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 7 matched files
+- `/Users/darrinshaw/Downloads/asset-muse` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/agency/AssetMuse` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/db` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/email` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/community/Vanciety` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/clickclack` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qa-channel` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/test/fixtures/agents/prompt-snapshots/codex-runtime-happy-path` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse` — MEDIUM — KEEP_AS_REFERENCE — 7 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/commit-commands` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/cwc-makers` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/stream` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/tunnel` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workers` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/zaraz` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/magicpath` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/content-agents` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/ovrtx-render-service` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/cpp-native-viewer` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/electron-shm-viewer` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/streaming-viewer-recipe` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/Archon/python/src/server/testing` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/agent-runway` — MEDIUM — KEEP_AS_REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/packages/auth` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/bonjour` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/moonshot` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 6 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/learning-output-style` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/agents-sdk` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/analytics-engine` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/bindings` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/cache-reserve` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/cron-triggers` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/email-routing` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/graphql-api` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/hyperdrive` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/miniflare` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/network-interconnect` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/observability` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/pages` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/pages-functions` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/pipelines` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/pulumi` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/realtime-sfu` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/realtimekit` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/smart-placement` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/spectrum` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/static-assets` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/tail-workers` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/turn` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/turnstile` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/web-analytics` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workerd` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workers-for-platforms` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workers-vpc` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/wrangler` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/so-run-operations/references/so-create-proxy` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-validation-runner` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/GitHub/big-3-super-agent/apps/content-gen` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon/iterations/v2-agentic-workflow` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/files (1) 2/hermes-city` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/hermes-city` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Volumes__AI-DATA__PROJECTS__vanciety_platform/docs/strategy` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/community/SprinterSociety` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/facebrain/apps/api` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/brave` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/diagnostics-otel` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/diagnostics-prometheus` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/open-prose/skills/prose/examples/roadmap` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/perplexity` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/searxng` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/packages/sdk` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/vanciety_platform/docs/strategy` — MEDIUM — KEEP_AS_REFERENCE — 5 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/code-review` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/frontend-design` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/ai-gateway` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/ai-search` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/api-shield` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/bot-management` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/d1` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/durable-objects` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/queues` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/sandbox` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/snippets` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/terraform` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/waf` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/convert-to-usd/references/usd-convert-cad` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/simready-conform-profile` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/simready-conform-profile/references/FET_000_CORE` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/simready-conform-profile/references/FET_001_MINIMAL` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/simready-conform-profile/references/FET_004_SIMULATE_MULTI_BODY_PHYSICS` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/ovui-local-viewer-recipe` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-structure-assessment/references/apply-restructure` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-hydrogen` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/Desktop/Desktop_Archive/piczflip-full/web` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 4 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/Sprintersociety-B-Mad/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/Sprintersociety-B-Mad/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__Sprintersociety-B-Mad/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/db` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/normalization` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/docs` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/docs/.i18n` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/admin-http-rpc` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/lobster` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/security/opengrep` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/src/hooks/bundled` — MEDIUM — KEEP_AS_REFERENCE — 4 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/greptile` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/api` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/browser-rendering` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/c3` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/containers` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/ddos` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/email-workers` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/images` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/kv` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/r2` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/r2-data-catalog` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/r2-sql` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workers-playground` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/notion/skills/notion-knowledge-capture/evaluations` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/notion/skills/notion-meeting-intelligence/evaluations` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/assemble-package-source` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/content-agents/references/material-agent-client` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/content-agents/references/physics-agent-client` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/content-agents/references/texture-agent-client` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/convert-to-usd` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/convert-to-usd/references/mujoco-usd-converter` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/convert-to-usd/references/urdf-usd-converter` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/convert-to-usd/references/usd-convert-gsplat` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/identify-asset-context` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/nv-core-package-sample` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/nv-core-package-sample-validation` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/omni-asset-validate` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/omni-asset-validate-geometry` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/omni-asset-validate-physics` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/preflight` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/simready-validate` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/optimization-report` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-structure-assessment/references/instancing-readiness` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-structure-assessment/references/usd-edit-target-planner` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-validation-runner/references/so-interpret-validators` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-liquid` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-polaris-checkout-extensions` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-polaris-customer-account-extensions` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-pos-ui` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/GitHub/PicZFlip/web` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Users/darrinshaw/Documents/GitHub/SprinterSociety/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Archon/original_archon/iterations/v1-single-agent` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/deployment-20250806-202004/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Sprinter-Society-cursor-main/deployment-20250806-202004/_archive-20250812-190824/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-seti` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-seti` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/piczflip (2)/piczflip/web` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/deployment-20250806-202004/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main/deployment-20250806-202004/_archive-20250812-190824/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__deployment-20250806-202004/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__Downloads__Sprinter-Society-cursor-main__deployment-20250806-202004/_archive-20250812-190824/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Users__darrinshaw__SprinterSociety/SprinterSociety-1/src/integrations` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/GitHub-Repo/packages/auth` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/GitHub-Repo/packages/db` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/facebrain` — MEDIUM — KEEP_AS_REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/ai` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/aipows-shared` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/scoring` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/workers/dedupe` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/speech-core` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 3 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/clangd-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/csharp-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/gopls-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/jdtls-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/kotlin-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/lua-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/php-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/pyright-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/ruby-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/rust-analyzer-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/swift-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/plugins/typescript-lsp` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/argo-smart-routing` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/do-storage` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/vectorize` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workers-ai` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/cloudflare/skills/cloudflare/references/workflows` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/convex` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/simready-conform-profile/references/FET_005_SIMULATE_GRASP_PHYSICS` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/gl-viewport-overlay` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/stage-hierarchy` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/streaming-messages` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/streaming-server` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/troubleshooting` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/cad-conversion` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/report-templates` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-structure-assessment/references/usd-hierarchy-dedupe-candidates` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-validation-runner/references/so-run-validators` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/GitHub/big-3-super-agent` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/Documents/Piczflip/PicZFlip/web` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Users/darrinshaw/Downloads/Archon/.snapshots` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/agency/AssetMuse/GitHub-Repo` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/PicZFlip/.github/workflows` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/config` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/connector-sdk` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/memory` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/ui` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/widgets` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/workers/connectors/nhtsa` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/workers/orchestrator` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/everpresence-core` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/duckduckgo` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/firecrawl` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/tavily` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/packages/plugin-package-contract` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/origin-ambient-ai` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/piczflip_master_old_bak/.github/workflows` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/reports` — MEDIUM — KEEP_AS_REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/notion/skills/notion-research-documentation/evaluations` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/convert-to-usd/references/openusd-exchange-sdk-usdex` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/deploy-content-agents` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/aov-switching` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/camera-auto-select` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/camera-controls` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/camera-picker` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/cloud-assets` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/cloud-deployment` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/headless-shm-cli` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/huggingface-usd` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/local-viewer` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/native-picking-selection` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/object-selection` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/ovrtx-rendering` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/ovui-library` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/ovwidgets-editor-shell` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/prim-info-display` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/prim-pick-effects` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/prim-transform-safety` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/render-settings` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/seg-outline-highlight` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/selection-animation` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/stage-attribute-reads` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/stage-loading` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/stage-management` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/stage-queries` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/streaming-client` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/streaming-lifecycle` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/streaming-vs-local` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/tauri-local-viewer` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/tauri-shm-transform-gizmo` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/transform-manipulator` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/usd-sample-data` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/usd-viewer-app` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewer-backend-interface` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewer-control-patterns` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewer-data-view-patterns` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewer-input-routing` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewer-layout-patterns` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewer-ux-workflow` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewport-overlays` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/viewport-resize` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/webgl-shm-transport` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-realtime-viewer/references/windows-native-setup` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/compare-profiles` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/omniverse-authentication` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/profile-stage` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/setup-usd-performance-tuning/references/install-asset-validator-standalone` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/setup-usd-performance-tuning/references/install-kit` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/setup-usd-performance-tuning/references/install-so-standalone` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/setup-usd-performance-tuning/references/install-so-via-kit` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-usd-performance-tuning/references/usd-structure-assessment/references/restructure-decision` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/Documents/Codex/2026-06-05/start-a-new-project-a-3d/quick-part-scan` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/GitHub/PicZFlip/functions` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2/packages/agents` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2/packages/ai` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2/packages/db` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2/packages/integrations` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2/packages/tools` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse/packages/agents` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse/packages/ai` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse/packages/db` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse/packages/integrations` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/asset-muse/packages/tools` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Users/darrinshaw/Downloads/sprintersociety-app--main` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/github/Ai-overland-` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources/Volumes__AI-DATA__PROJECTS__vanciety_platform__content__topo__TOP_LOCATIONS.md` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/active/agent-tools` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/agent-stack` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/GitHub-Repo/packages/config` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/PicZFlip/notebooks` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/eldereasy` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/Ai-overland-` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/FD-Home-AI/public` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/FD.ai/public` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/PicZFlip/notebooks` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/Project-11-Singularity` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/analytics` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/logging` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/queue` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/packages/workflows` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/apps/ios/fastlane/metadata` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/exa` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/llm-task` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/open-prose/skills/prose/examples` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/open-prose/skills/prose/lib` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/packages/plugin-sdk` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/scripts/clawdock` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/piczflip_master_old_bak/notebooks` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse/packages/agents` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse/packages/ai` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse/packages/db` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse/packages/integrations` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse/packages/tools` — MEDIUM — UPDATE/SELECTIVE_MIGRATION — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/clarifyday-claude-setup/clarifyday-setup` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/clarifyday-claude-setup/clarifyday-setup/.claude/agents` — MEDIUM — KEEP_AS_REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/_TO_DELETE_LATER_20260405_224300` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/apps/macos` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 200 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/apps/web` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 136 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 47 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 47 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/AssetMuse/GitHub-Repo/apps/web` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 43 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/openai` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 35 matched files
+- `/Users/darrinshaw/Desktop/Desktop_Archive/piczflip 2` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 34 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/openrouter` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 29 matched files
+- `/Users/darrinshaw/Downloads/asset-muse 2/apps/web` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 28 matched files
+- `/Users/darrinshaw/Downloads/asset-muse/apps/web` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 28 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/asset-muse-zip/asset-muse/apps/web` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 28 matched files
+- `/Volumes/AI-DATA/PROJECTS/Tax Forms` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 22 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/deepinfra` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 15 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/anthropic` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 14 matched files
+- `/Users/darrinshaw/Downloads/piczflip (1)` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 13 matched files
+- `/Users/darrinshaw/Downloads/piczflip` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/_TO_DELETE_LATER_20260405_224300/mobile-ios/PicZ IOS App/piczflip-ios-app` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qwen` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 12 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/amazon-bedrock` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 11 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/github-copilot` — LOW/MEDIUM — ARCHIVE_AFTER_EXTRACTION — 11 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/oldsprinter/.claude/worktrees/angry-hofstadter/apps/studio` — LOW — ARCHIVE/REFERENCE — 10 matched files
+- `/Volumes/AI-DATA/PROJECTS/PiczFlip.build` — LOW — ARCHIVE/REFERENCE — 9 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/ms-vscode.vscode-js-profile-table` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-defaults` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.vscode-js-profile-table` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-defaults` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Users/darrinshaw/Downloads/valufind-ai (1)` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/Clarify​Day.build` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/XCBuildData` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/comfy` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/kimi-coding` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/vydra` — LOW — ARCHIVE/REFERENCE — 8 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/companionai` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/aiautoparts/apps/aipows-web` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/chutes` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/deepseek` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/litellm` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/memory-lancedb` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/microsoft-foundry` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/mistral` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/venice` — LOW — ARCHIVE/REFERENCE — 7 matched files
+- `/Users/darrinshaw/Documents/Documents - Darrin’s Mac mini (2)/GitHub/Firedept` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/latex` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/media-preview` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/latex` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/media-preview` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/picpastflip` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/valufind-ai` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/apps/shaws-avasis` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/EverPresence-AI` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/anthropic-vertex` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/arcee` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/kilocode` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/migrate-claude` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/migrate-hermes` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/zai` — LOW — ARCHIVE/REFERENCE — 6 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/cpp` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/yaml` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/cpp` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/yaml` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/elevenlabs` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/fal` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/huggingface` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/vercel-ai-gateway` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/volcengine` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/xiaomi` — LOW — ARCHIVE/REFERENCE — 5 matched files
+- `/Users/darrinshaw/Desktop/Desktop_Archive/piczflip-polsia` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/github-authentication` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/markdown-language-features` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/github-authentication` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-language-features` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/amazon-bedrock-mantle` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/fireworks` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/gradium` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/nvidia` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/opencode-go` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/together` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/vllm` — LOW — ARCHIVE/REFERENCE — 4 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/css-language-features` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/debug-server-ready` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/git` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/html-language-features` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/html-language-features/server` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/microsoft-authentication` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/simple-browser` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/typescript-language-features` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/css-language-features` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/debug-server-ready` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/git` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/html-language-features` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/html-language-features/server` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/microsoft-authentication` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/simple-browser` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-language-features` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/client-work` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/facebrain/apps/dashboard` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/alibaba` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/azure-speech` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/byteplus` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/groq` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/microsoft` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/opencode` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/synthetic` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/tencent` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/voyage` — LOW — ARCHIVE/REFERENCE — 3 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/nvidia/skills/omniverse-cad-to-simready/references/validate-usd-minimum` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-polaris-admin-extensions` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/shopify/skills/shopify-polaris-app-home` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/vercel/skills/vercel-services/references/fastapi-vite/frontend` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/.codex/plugins/cache/openai-curated-remote/vercel/0.21.2/skills/vercel-services/references/fastapi-vite/frontend` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/css-language-features/server` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/github` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/javascript` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/json-language-features` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/json-language-features/server` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/markdown-math` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/objective-c` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/perl` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/typescript-basics` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/css-language-features/server` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/github` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/javascript` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/json-language-features` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/json-language-features/server` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-math` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/objective-c` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/perl` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-basics` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/cerebras` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/cloudflare-ai-gateway` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/inworld` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/runway` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/sglang` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/stepfun` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/billing_audit_raw` — LOW — ARCHIVE/REFERENCE — 2 matched files
+- `/Users/darrinshaw/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/github/.claude-plugin` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/expo/skills/expo-cicd-workflows/scripts` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/github/.codex-plugin` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/.codex/.tmp/plugins/plugins/notion/skills/notion-spec-to-implementation/evaluations` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/bat` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/clojure` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/coffeescript` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/configuration-editing` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/csharp` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/css` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/debug-auto-launch` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/emmet` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/fsharp` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/go` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/groovy` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/handlebars` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/html` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/java` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/json` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/less` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/lua` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/markdown-basics` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/notebook-renderers` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/npm` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/php` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/powershell` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/python` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/r` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/razor` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/restructuredtext` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/ruby` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/scss` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/shellscript` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/sql` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/swift` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/terminal-suggest` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-abyss` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-kimbie-dark` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-monokai` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-monokai-dimmed` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-quietlight` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-red` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-solarized-dark` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-solarized-light` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/theme-tomorrow-night-blue` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/tunnel-forwarding` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/vb` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code 2.app/Contents/Resources/app/extensions/xml` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/bat` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/clojure` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/coffeescript` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/configuration-editing` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/csharp` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/css` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/debug-auto-launch` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/emmet` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/fsharp` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/go` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/groovy` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/handlebars` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/html` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/java` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/json` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/less` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/lua` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-basics` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/notebook-renderers` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/npm` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/php` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/powershell` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/python` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/r` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/razor` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/restructuredtext` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ruby` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/scss` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/shellscript` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/sql` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/swift` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/terminal-suggest` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-abyss` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-kimbie-dark` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-monokai` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-monokai-dimmed` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-quietlight` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-red` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-solarized-dark` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-solarized-light` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-tomorrow-night-blue` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/tunnel-forwarding` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/vb` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/xml` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Downloads/piczflip (2)` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Users/darrinshaw/Library/Application Support/Code/User/globalStorage/ms-edgedevtools.vscode-edge-devtools` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/.claude` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/SHAW_PORTAL` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/code` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/VANCIETY/source_imports/local_scattered_sources` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/_audit` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/agent-runway/dashboard` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/community` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/facebrain/apps/worker` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/copilot-proxy` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/deepgram` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/document-extract` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/qianfan` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/senseaudio` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/incoming/github/shawstintshop/openclaw/extensions/tts-local-cli` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/PROJECTS/sandbox` — LOW — ARCHIVE/REFERENCE — 1 matched files
+- `/Volumes/AI-DATA/Shaw Metroplis/download_update_imports/20260612-claude-updates/extracted/clarifyday-claude-setup/clarifyday-setup/.claude` — LOW — ARCHIVE/REFERENCE — 1 matched files
+
+## Top extracted URLs
+- https://fonts.googleapis.com (231)
+- https://fonts.gstatic.com (223)
+- https://example.com (147)
+- http://www.w3.org/2000/svg (132)
+- https://tksnhszrvplqperxnuzh.supabase.co (130)
+- https://api.openai.com/v1 (128)
+- https://github.com/openai/plugins (124)
+- https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css (120)
+- https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap (120)
+- http://localhost:3000 (86)
+- https://deno.land/std@0.168.0/http/server.ts (82)
+- http://www.apple.com/DTDs/PropertyList-1.0.dtd (75)
+- https://unpkg.com/@supabase/supabase-js@2 (75)
+- https://piczflip.com/og-image.png (58)
+- https://github.com/openclaw/openclaw (53)
+- https://matrix.example.org (51)
+- https://... (48)
+- http://www.apache.org/licenses/LICENSE-2.0 (47)
+- https://github.com/sponsors/ljharb (46)
+- https://github.com/sponsors/sindresorhus (46)
+- http://127.0.0.1:18789 (46)
+- http://localhost:8000 (45)
+- https://feross.org/support (44)
+- https://github.com/sponsors/feross (44)
+- https://vercel.com/sitemap/docs.xml (44)
+- https://tksnhszrvplqperxnuzh.supabase.co/functions/v1/get-maps-config (43)
+- http://www.apache.org/licenses/ (43)
+- https://openai.com/ (43)
+- https://openrouter.ai/api/v1 (42)
+- https://github.com/chalk/ansi-styles?sponsor=1 (41)
+- https://github.com/sponsors/ai (41)
+- https://opencollective.com/browserslist (40)
+- https://supabase.com (40)
+- https://generativelanguage.googleapis.com/v1beta (40)
+- https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=optional (40)
+- https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&family=Inter:wght@400;500;600;700&display=swap (38)
+- https://polsia.com/api/beacon/pixel?s= (38)
+- https://github.com/sponsors/isaacs (37)
+- https://images.unsplash.com/photo-1506905925346-21bda4d32df4 (37)
+- https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css (37)
+- https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap (37)
+- https://github.com/sponsors/jonschlinkert (36)
+- http://127.0.0.1:${port (36)
+- https://devforum.zoom.us/ (36)
+- https://opencollective.com/postcss/ (35)
+- http://localhost:5173 (35)
+- http://localhost (35)
+- https://your-project.supabase.co (34)
+- https://zoom.us/oauth/token (34)
+- https://maps.google.com/mapfiles/ms/icons/camping.png (33)
+- https://example.com/image.png (33)
+- https://api.example.com (33)
+- https://marketplace.zoom.us/ (33)
+- https://github.com/chalk/chalk?sponsor=1 (32)
+- https://facebook.com/sprintersociety (31)
+- https://instagram.com/sprintersociety (31)
+- https://zoom.us (31)
+- https://github.com/sponsors/epoberezkin (30)
+- https://www.sprintersociety.com (30)
+- https://github.com/microsoft/vscode.git (30)
+- https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions (30)
+- https://code.visualstudio.com/ (30)
+- https://youtube.com/@sprintersociety (29)
+- http://127.0.0.1:11434 (29)
+- https://chatgpt.com/backend-api (29)
+- http://json-schema.org/draft-07/schema# (29)
+- http://127.0.0.1:18789/ (28)
+- https://code.visualstudio.com/docs/setup/enterprise (28)
+- https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js (28)
+- https://waze.com/ul?ll=${lat (27)
+- https://github.com/sponsors/nzakas (26)
+- https://opencollective.com/eslint (26)
+- https://opencollective.com/typescript-eslint (26)
+- https://maps.google.com/?q=${location.coordinates (26)
+- https://proxy.example.com/v1 (26)
+- https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap (26)
+- https://github.com/chalk/ansi-regex?sponsor=1 (25)
+- https://github.com/chalk/strip-ansi?sponsor=1 (25)
+- https://github.com/chalk/wrap-ansi?sponsor=1 (25)
+- https://github.com/sponsors/rawify (25)
+- https://clawhub.ai (25)
+- https://api.anthropic.com (25)
+- https://docs.openclaw.ai/tools/web (25)
+- https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz (24)
+- http://localhost:5000 (24)
+- https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg (24)
+- https://waze.com/ul?ll=${location.coordinates (24)
+- https://example.com/a.png (24)
+- https://console.cloud.google.com (23)
+- https://sprintersociety.com (23)
+- https://your-actual-project.supabase.co (23)
+- https://api.x.ai/v1 (23)
+- https://api.moonshot.ai/v1 (23)
+- http://[::1 (23)
+- https://deno.land/std@0.190.0/http/server.ts (22)
+- https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&auto=format&fit=crop&q=80 (22)
+- https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&auto=format&fit=crop&q=80 (22)
+- https://images.unsplash.com/photo-1504280390367-361c6d9f38f4 (22)
+- https://www.facebook.com (22)
+- https://www.google.com/maps/dir/?api=1&destination=${lat (22)
+- https://generativelanguage.googleapis.com (22)
+- https://openclaw.ai (22)
+- https://api.minimax.io/anthropic (22)
+- https://shopify.dev/ (22)
+- https://eslint.org/version-support (21)
+- https://esm.sh/@supabase/supabase-js@2.53.0 (21)
+- https://paulmillr.com/funding/ (21)
+- https://images.unsplash.com/photo-1507525428034-b723cf961d3e (21)
+- https://images.unsplash.com/photo-1544551763-46a013bb70d5 (21)
+- https://images.unsplash.com/photo-1558618666-fbd6c4cd4d15 (21)
+- https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&auto=format&fit=crop&q=80 (21)
+- https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&auto=format&fit=crop&q=80 (21)
+- https://shopify-dev-staging${serverNumber (21)
+- https://shopify-dev.shop.dev/ (21)
+- https://github.com/sponsors/tannerlinsley (20)
+- https://opencollective.com/babel (20)
+- https://github.com/sponsors/SuperchupuDev (20)
+- http://localhost:8080 (20)
+- https://tksnhszrvplqperxnuzh.supabase.co/storage/v1/object/public/van-photos/shawlife_Sprinter_van_exterior_with_a_bike_rack_on_the_back_sw_7af0f5fd-c4e3-43b6-b01f-80090c4e8b32_2.png (20)
+- https://docs.openclaw.ai (20)
+- https://example.com/cron (20)
+- https://custom.ultimateears.com (20)
+- https://pro.ultimateears.com (20)
+- http://opensource.logitech.com (20)
+- https://vercel.com/{team (20)
+- https://daloopa.com/src/{fundamental_id (20)
+- https://opencollective.com/libvips (19)
+- https://{s (19)
+- https://esm.sh/@supabase/supabase-js@2 (19)
+- https://maps.googleapis.com/maps/api/js?key=${data.apiKey (19)
+- https://chat.example.com (19)
+- https://support.logitech.com/response-center (19)
+- https://www.logitech.com/legal/product-privacy-policy.html (19)
+- http://schemas.openxmlformats.org/wordprocessingml/2006/main (19)
+- https://opencollective.com/express (18)
+- https://api.telegram.org (18)
+- https://example.com/image.jpg (18)
+- http://127.0.0.1:${address.port (18)
+- http://127.0.0.1 (18)
+- https://piczflip.polsia.app (18)
+- https://vercel.com/dashboard/{team (18)
+- https://api.zoom.us/v2 (18)
+- https://github.com/sponsors/antonk52 (17)
+- https://i.ytimg.com/vi/2Vv-BfVoq4g/maxresdefault.jpg (17)
+- https://i.ytimg.com/vi/9bZkp7q19f0/maxresdefault.jpg (17)
+- https://i.ytimg.com/vi/HAIP40nNjvg/maxresdefault.jpg (17)
+- https://i.ytimg.com/vi/LXb3EKWsInQ/maxresdefault.jpg (17)
+- https://i.ytimg.com/vi/M7lc1UVf-VE/maxresdefault.jpg (17)
+- https://i.ytimg.com/vi/ZZ5LpwO-An4/maxresdefault.jpg (17)
+- https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg (17)
+
+## Top extracted YouTube IDs
+- string (49)
+- dQw4w9WgXcQ (36)
+- solar-kit-installation (16)
+- 01F4QDVJUq0 (15)
+- 1UPvi1ltk-M (14)
+- 5qqdY-AwvjU (14)
+- CW2nSLzLeXU (14)
+- M9GN2wwJoOw (14)
+- xjcM89BRqzE (14)
+- -c-pky4H-rQ (13)
+- WVDQEoe6ZWY (10)
+- YpHsKFhMmE4 (10)
+- qH8kYKN8JfY (10)
+- w7PfpzQCS0g (10)
+- xXHPd5rqBPo (10)
+- rmwDjISev7E (10)
+- kJQP7kiw5Fk (10)
+- 9bZkp7q19f0 (9)
+- jNQXAC9IVRw (9)
+- y6120QOlsfU (9)
+- 18I4ZiQfUi8 (8)
+- 2ReEYIeE79Q (8)
+- 9_Up7CWL6l4 (8)
+- FMbrNWdVLko (8)
+- JfxyakPvWvA (8)
+- XetpFC8HEKg (8)
+- bykg5rugjzQ (8)
+- dtimom6kXig (8)
+- h0fPji_FDEI (8)
+- kd2r6GTRIoA (8)
+- tXkTA4Hkcik (8)
+- Ge_LDxf7LpI (8)
+- Moy25MABCZ8 (7)
+- demo10 (7)
+- demo11 (7)
+- demo12 (7)
+- interior1 (7)
+- interior2 (7)
+- interior3 (7)
+- interior4 (7)
+- interior5 (7)
+- interior6 (7)
+- interior7 (7)
+- interior8 (7)
+- interior9 (7)
+- oJdls_rD7LY (7)
+- plumb1 (7)
+- plumb2 (7)
+- plumb3 (7)
+- plumb4 (7)
+- plumb5 (7)
+- plumb6 (7)
+- plumb7 (7)
+- plumb8 (7)
+- reviews1 (7)
+- reviews10 (7)
+- reviews2 (7)
+- reviews3 (7)
+- reviews4 (7)
+- reviews5 (7)
+- reviews6 (7)
+- reviews7 (7)
+- reviews8 (7)
+- reviews9 (7)
+- solar10 (7)
+- solar3 (7)
+- solar4 (7)
+- solar5 (7)
+- solar6 (7)
+- solar7 (7)
+- solar8 (7)
+- solar9 (7)
+- tools1 (7)
+- tools10 (7)
+- tools2 (7)
+- tools3 (7)
+- tools4 (7)
+- tools5 (7)
+- tools6 (7)
+- tools7 (7)
+- tools8 (7)
+- tools9 (7)
+- vanlife1 (7)
+- vanlife10 (7)
+- vanlife11 (7)
+- vanlife12 (7)
+- vanlife2 (7)
+- vanlife3 (7)
+- vanlife4 (7)
+- vanlife5 (7)
+- vanlife6 (7)
+- vanlife7 (7)
+- vanlife8 (7)
+- vanlife9 (7)
+- videoIdMatch (6)
+- best_conversion_companies (6)
+- coolest_accessories (6)
+- sprinter2025_build (6)
+- sprinter_accessories (6)
+- abc123 (5)
+- videoCard (4)
+- storage1 (3)
+- travel1 (3)
+- example1 (3)
+- example2 (3)
+- example3 (3)
+- example4 (3)
+- example5 (3)
+- extractVideoId (3)
+- formData (3)
+- number (3)
+- 37rv2-nP5BQ (2)
+- 4oEbABQbQfc (2)
+- gme5z-6yAWE (2)
+- jIwfxcZDVLQ (2)
+- xnSVDwal_jo (2)
+- normalizeOptionalString (2)
+- VbZk6M4jrdI (2)
+- VIDEO_ID (1)
+- YQHsXMglC9A (1)
+- ZbZSe6N_BXs (1)
+- xvFZjo5PgG0 (1)
+- selectedVideo (1)
+- 2Lor2jWV8J4 (1)
+- 2i5Is3-QCA8 (1)
+- 5rx5_R-Axrg (1)
+- FfmRg-52qy4 (1)
+- Ixw3ebxYxKI (1)
+- OwcgNvBUPic (1)
+- 5kkIJNUGFho (1)
+- SaWSPZoPX34 (1)
+- mMSKQvlmFuQ (1)
+- video_123 (1)
+- String (1)
+- 8pRc_s2VQIo (1)
+- 4jca9JXxjws (1)
+- BHGUHV-3oYU (1)
+- VARCHAR (1)
+- zp7NtW_hKJI (1)
+- 0zh1iD9zrw8 (1)
+- HerriyuIIV4 (1)
+- JWaLSBhC6jc (1)
+- NzGSEGCxhfk (1)
+- T3brLmI-LxE (1)
+- Y38PB3anIk4 (1)
+- amMSnEKccYA (1)
+- elxUJA86r70 (1)
+- hSTqup-a59E (1)
+- sJYViMd9aZY (1)
+- yPWbI9sKeIA (1)

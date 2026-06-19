@@ -45,6 +45,53 @@ App root: /Volumes/AI-DATA/PROJECTS/vanciety_platform/code/primary_app
 - VAN-005B — Run ingestion (npm run ingest:locations) and verify /map + /van-cards hydrate
 - Future — Lint cleanup pass on the 98 pre-existing issues (separate worker mission)
 
-## Next Recommended Task
+## VAN-006 — Import Salvaged Content (completed, June 18 2026 21:36)
+  - ✅ 50 images imported (39 MB) → `public/images/salvaged/`
+  - ✅ 13 data files imported (152 KB) → `public/data/salvaged/`
+  - ✅ 36 SQL migrations imported (228 KB) → `supabase/migrations/salvaged/`
+  - ✅ 3 documentation files imported (16 KB) → `docs/salvaged/`
+  - ✅ Total: 102 files, ~40 MB
+  - ✅ Verified: Images accessible at `/images/salvaged/*`, data at `/data/salvaged/*`
+  - ✅ Documented: IMPORTED_CONTENT_INDEX.md created
+  - Note: "Professional Sprinter" athletics logo found (not van-related) - will need van life logo
+  - Next: Review videoDatabase.ts (69 KB, 1,693 lines), import products/locations to Supabase
 
-Add real SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to a local untracked .env, run `npm run ingest:locations`, then verify /map and /van-cards render hydrated topo data end-to-end.
+## VAN-007 — Test Vanciety Demo Site (completed, June 18 2026 21:00)
+  - ✅ Dev server running: http://localhost:8080 (PID 85642)
+  - ✅ Homepage: Working (hero, nav, video cards, premium section)
+  - ✅ Videos page: EXCELLENT (13+ real van life videos loading)
+  - ✅ Map page: Structure working, 5 locations loaded (Google Maps needs API key)
+  - ✅ Forum page: Structure working (empty - needs seed data)
+  - ✅ Console: Zero JS errors, 3 warnings (Maps API key, React Router future flags)
+  - ⚠️ Blocker: Missing VITE_GOOGLE_MAPS_API_KEY (map stuck on "Initializing...")
+  - ⚠️ YouTube sync: Returns 0 results (Edge Function needs debugging)
+  - Full report: TEST_RESULTS_20260618.md
+
+## VAN-008 — Import Real YouTube Videos (completed, June 18 2026 22:05)
+  - ✅ Extracted 8 real YouTube video IDs from videoDatabase.ts (79 others were placeholders)
+  - ✅ Created realVideos.json with complete metadata
+  - ✅ Created importVideos.ts script
+  - ✅ Added `npm run import:videos` command
+  - ✅ Imported 8 videos to Supabase youtube_videos table
+  - ✅ Verified: Videos page now shows 21 total videos (13 existing + 8 new)
+  - ✅ Channels: Eamon & Bec, Vancity Vanlife, Outside Van, Kara and Nate, cheaprvliving, Gone with the Wynns, Will Prowse, Build A Green RV
+  - ✅ Fixed "0 videos found" issue on homepage
+  - Full report: IMPORTED_VIDEO_SUMMARY.md
+
+## Next Recommended Tasks
+
+Priority 1: Fix Google Maps integration
+  - Add VITE_GOOGLE_MAPS_API_KEY to .env
+  - Restart dev server
+  - Verify map loads
+
+Priority 2: YouTube API Integration
+  - Get YouTube Data API key (free tier: 10,000 queries/day)
+  - Update fetch-youtube-videos Edge Function to pull from 19 curated channels
+  - Channels list: docs/salvaged/video-links.md
+  - Target: 200+ real van life videos
+
+Priority 3: Import Products & Locations
+  - Import salvaged/products.json to Supabase products table
+  - Import salvaged/northwest-locations.json to locations table
+  - Run `npm run ingest:locations` for additional location data

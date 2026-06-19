@@ -1,0 +1,76 @@
+import { useEffect, useRef } from 'react';
+import { Button } from "@/components/ui/button";
+import { ArrowDown } from "lucide-react";
+
+const Hero = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = heroRef.current;
+        const xPos = (clientX / offsetWidth - 0.5) * 2; // -1 to 1
+        const yPos = (clientY / offsetHeight - 0.5) * 2; // -1 to 1
+
+        // Adjust these multipliers for desired parallax intensity
+        heroRef.current.style.setProperty('--topo-drift-x-1', `${xPos * -15}px`);
+        heroRef.current.style.setProperty('--topo-drift-y-1', `${yPos * -10}px`);
+        heroRef.current.style.setProperty('--topo-drift-x-2', `${xPos * 20}px`);
+        heroRef.current.style.setProperty('--topo-drift-y-2', `${yPos * 15}px`);
+        heroRef.current.style.setProperty('--topo-drift-x-3', `${xPos * -25}px`);
+        heroRef.current.style.setProperty('--topo-drift-y-3', `${yPos * -20}px`);
+        heroRef.current.style.setProperty('--topo-drift-x-4', `${xPos * 30}px`);
+        heroRef.current.style.setProperty('--topo-drift-y-4', `${yPos * 25}px`);
+      }
+    };
+
+    const currentHeroRef = heroRef.current;
+    if (currentHeroRef) {
+      currentHeroRef.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      if (currentHeroRef) {
+        currentHeroRef.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+
+  return (
+    <section ref={heroRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden vanciety-hero-topo">
+      {/* Parallax Background Topo Map */}
+      <div className="vanciety-topo-system" id="hero-topo-system">
+        <div className="vanciety-topo-layer vanciety-topo-contours" style={{ transform: 'translate3d(var(--topo-drift-x-1), var(--topo-drift-y-1), 0)' }} />
+        <div className="vanciety-topo-layer vanciety-topo-rings" style={{ transform: 'translate3d(var(--topo-drift-x-2), var(--topo-drift-y-2), 0)' }} />
+        <div className="vanciety-topo-layer vanciety-topo-route" style={{ transform: 'translate3d(var(--topo-drift-x-3), var(--topo-drift-y-3), 0)' }} />
+        <div className="vanciety-topo-layer vanciety-topo-badge-grain" style={{ transform: 'translate3d(var(--topo-drift-x-4), var(--topo-drift-y-4), 0)' }} />
+        <div className="vanciety-topo-layer vanciety-topo-pointer" />
+        <div className="absolute inset-0 bg-black/50" /> {/* Overlay for text readability */}
+      </div>
+
+      <div className="relative z-10 text-center text-white p-4">
+        {/* Animated Headline */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter mb-8 max-w-4xl mx-auto">
+          <span className="block typing-effect">Your Van. Your Community. Your Life.</span>
+        </h1>
+
+        {/* Call to Action */}
+        <Button
+          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
+          size="lg"
+          asChild
+        >
+          <a href="/join">Join the Community</a>
+        </Button>
+      </div>
+
+      {/* Subtle Scroll Indicator */}
+      <div className="absolute bottom-10 z-10">
+        <ArrowDown className="h-10 w-10 text-white scroll-indicator" />
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

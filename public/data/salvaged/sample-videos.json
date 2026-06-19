@@ -1,0 +1,90 @@
+{
+  "featured_videos": [
+    {
+      "id": 1,
+      "title": "Ultimate Sprinter Van Build Tour - $180k Mercedes Van Life Setup",
+      "description": "Take a complete tour of this incredible Mercedes Sprinter van conversion featuring custom cabinetry, lithium power system, and luxury amenities perfect for full-time vanlife.",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "youtube_video_id": "dQw4w9WgXcQ",
+      "thumbnail_url": "/images/van_interior_3.jpg",
+      "category": "Van Builds",
+      "tags": ["mercedes", "sprinter", "conversion", "luxury", "build"],
+      "duration": 1245,
+      "view_count": 45678,
+      "likes_count": 2341,
+      "is_featured": true,
+      "is_premium": false,
+    "is_approved": true
+    },
+    {
+      "id": 2,
+      "title": "Solar Power Setup for Van Life - Complete 800W System Install",
+      "description": "Learn how to install a complete solar power system in your van including battery bank, inverter, charge controller and 800 watts of solar panels.",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "youtube_video_id": "dQw4w9WgXcQ",
+      "thumbnail_url": "/images/overland_adventure_4.jpeg",
+      "category": "Tech Tips",
+      "tags": ["solar", "electrical", "power", "diy", "tutorial"],
+      "duration": 892,
+      "view_count": 32145,
+      "likes_count": 1876,
+      "is_featured": true,
+      "is_premium": false,
+    "is_approved": true
+    },
+    {
+      "id": 3,
+      "title": "Epic Overlanding Adventure - Moab to Monument Valley",
+      "description": "Join us on an incredible overland journey through Utah's most spectacular landscapes in our Mercedes Sprinter 4x4 adventure van.",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "youtube_video_id": "dQw4w9WgXcQ",
+      "thumbnail_url": "/images/overland_adventure_6.jpg",
+      "category": "Camping Adventures",
+      "tags": ["overlanding", "utah", "moab", "adventure", "travel"],
+      "duration": 1456,
+      "view_count": 67890,
+      "likes_count": 3241,
+      "is_featured": true,
+      "is_premium": false,
+    "is_approved": true
+    }
+  ],
+  "categories": {
+    "Van Builds": [
+      {
+        "id": 4,
+        "title": "Budget Sprinter Conversion - Under $50k Build",
+        "description": "Complete budget-friendly Sprinter van conversion showing how to build a functional van life setup without breaking the bank.",
+        "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "thumbnail_url": "/images/van_interior_7.jpg",
+        "category": "Van Builds",
+        "view_count": 28456,
+        "likes_count": 1654
+      }
+    ],
+    "Tech Tips": [
+      {
+        "id": 5,
+        "title": "Best Van Life Apps and Tech Setup 2024",
+        "description": "Essential apps, devices and tech setup for modern van life including internet, navigation, and communication solutions.",
+        "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "thumbnail_url": "/images/overland_adventure_8.jpg",
+        "category": "Tech Tips",
+        "view_count": 19876,
+        "likes_count": 987
+      }
+    ],
+    "Product Reviews": [
+      {
+        "id": 6,
+        "title": "Goal Zero vs Bluetti - Best Van Life Power Station",
+        "description": "Comprehensive comparison of the top portable power stations for van life and overlanding adventures.",
+        "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "thumbnail_url": "/images/community_meetup_1.jpg",
+        "category": "Product Reviews",
+        "view_count": 34567,
+        "likes_count": 2134
+      }
+    ]
+  }
+}
