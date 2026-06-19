@@ -200,6 +200,14 @@ const Map = () => {
 
     mapInstanceRef.current = map;
 
+    // Force Leaflet to recalculate size after DOM settles
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 500);
+
     return () => {
       map.remove();
       mapInstanceRef.current = null;
@@ -294,17 +302,17 @@ const Map = () => {
   events.forEach((e) => { catCounts[e.category] = (catCounts[e.category] || 0) + 1; });
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="fixed inset-0 bg-background flex flex-col">
       <Header />
 
       {/* Full-screen map layout */}
-      <div className="flex-1 relative pt-16">
+      <div className="flex-1 relative" style={{ marginTop: '64px' }}>
         
         {/* ── Map Container ─────────────────────────────── */}
-        <div ref={mapContainerRef} className="absolute inset-0 top-16 z-0" />
+        <div ref={mapContainerRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%' }} />
 
         {/* ── Top Bar (floating over map) ────────────────── */}
-        <div className="absolute top-20 left-4 right-4 z-[500] pointer-events-none">
+        <div className="absolute top-4 left-4 right-4 z-[500] pointer-events-none">
           <div className="max-w-4xl mx-auto pointer-events-auto">
             <div className="bg-background/90 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 p-3">
               <div className="flex items-center gap-3">
@@ -369,7 +377,7 @@ const Map = () => {
 
         {/* ── Sidebar Event List ─────────────────────────── */}
         {showSidebar && (
-          <div className="absolute top-44 sm:top-48 bottom-4 right-4 w-80 z-[500] hidden sm:flex flex-col">
+          <div className="absolute top-28 bottom-4 right-4 w-80 z-[500] hidden sm:flex flex-col">
             <div className="bg-background/92 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 overflow-hidden flex flex-col max-h-full">
               <div className="p-3 border-b border-border/40 flex items-center justify-between">
                 <h3 className="font-semibold text-sm flex items-center gap-2">
@@ -458,6 +466,11 @@ const Map = () => {
 
       {/* ── Custom CSS for map markers ────────────────────── */}
       <style>{`
+        .leaflet-container {
+          width: 100% !important;
+          height: 100% !important;
+          background: #f2efe9;
+        }
         .vanciety-map-marker {
           background: none !important;
           border: none !important;
