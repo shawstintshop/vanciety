@@ -10,6 +10,7 @@ import Map from "./pages/Map";
 import Forum from "./pages/Forum";
 import Marketplace from "./pages/Marketplace";
 import Vendors from "./pages/Vendors";
+import VendorSignup from "./pages/VendorSignup";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import GPSTracking from "./pages/GPSTracking";
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/marketplace" element={<Marketplace />} />
               {/* <Route path="/shop" element={<VancietyShop />} /> */}
               <Route path="/vendors" element={<Vendors />} />
+              <Route path="/vendor-signup" element={<VendorSignup />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/gps" element={<GPSTracking />} />
               {/* <Route path="/van-cards" element={<VanCards />} />
