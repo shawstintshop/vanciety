@@ -1,84 +1,112 @@
 # Vanciety Status
 
-**Production**: https://primaryapp.vercel.app ✅ LIVE  
-**Repo**: https://github.com/shawstintshop/vanciety  
-**Last verified**: 2026-06-20 01:05 PST
+**Last Updated**: 2026-06-20 02:15 PST  
+**Status**: Production audit complete, database schema ready  
+**Production URL**: https://primaryapp.vercel.app  
+**Local Dev**: http://localhost:8080
 
-## Current State
+## Current State - DEMO MODE
 
-**WORKING** — Site is live and rendering correctly.
+**Critical Finding**: Vanciety is currently running in DEMO mode with mixed real/fake data.
 
-## Recent Fix (2026-06-20 01:05)
+### What Works (Real Data)
+- ✅ Videos page (uses `youtube_videos` table with fallback)
+- ✅ Forum page (uses `forum_posts` table)
+- ✅ Marketplace (uses `marketplace_items` table but likely empty)
+- ✅ Map (uses `locations` table with fallback)
+- ✅ Basic authentication (Supabase Auth)
 
-**Issue**: White page on production and local dev — React failing to boot silently.
+### What's Hardcoded (Fake Data)
+- ❌ Vendors page (100% hardcoded array, no database)
+- ❌ News/Events page (100% hardcoded array, no database)
 
-**Root cause**: `AuthProvider` was wrapping `BrowserRouter` in App.tsx. `AuthProvider` calls `useNavigate()` which requires being inside a Router context. This caused React to fail silently during initialization.
+### What's Missing (Critical Gaps)
+- ❌ No user role system (member, manufacturer, coordinator, admin)
+- ❌ No manufacturer self-service platform
+- ❌ No Stripe payment integration
+- ❌ No event submission/approval workflow
+- ❌ No admin moderation panel
 
-**Fix**: Moved `BrowserRouter` to wrap `AuthProvider` instead:
-```tsx
-<QueryClientProvider client={queryClient}>
-  <BrowserRouter>
-    <AuthProvider>
-      {/* rest of app */}
-    </AuthProvider>
-  </BrowserRouter>
-</QueryClientProvider>
-```
+## Production Audit Complete
 
-**Commit**: `4e545d0` — "fix: move BrowserRouter outside AuthProvider to fix useNavigate error"
+**Audit Report**: `AUDIT_REPORT.md` (9,958 bytes)  
+**Database Migrations Created**:
+1. `supabase/migrations/20260620020000_user_roles_and_profiles.sql` (3,913 bytes)
+2. `supabase/migrations/20260620021000_manufacturer_platform.sql` (9,895 bytes)
+3. `supabase/migrations/20260620022000_event_management.sql` (11,901 bytes)
 
-**Deployed**: Vercel production, 16s build time
+**Implementation Plan**: `IMPLEMENTATION_PLAN.md` (9,291 bytes)
 
-## Verification
+## Database Schema Ready
 
-- ✅ Local dev server: http://localhost:8080
-- ✅ Production: https://primaryapp.vercel.app
-- ✅ Homepage renders with hero, nav, Vanny AI widget, feature cards
-- ✅ No console errors
-- ✅ React initializing correctly
+### New Tables Created (Pending Migration)
+- `profiles` (enhanced with roles + subscriptions)
+- `manufacturer_profiles` (business details, verification)
+- `manufacturer_products` (product catalog)
+- `manufacturer_subscriptions` (Stripe integration)
+- `manufacturer_analytics` (views, clicks, inquiries)
+- `event_submissions` (coordinator workflow)
+- `events` (public calendar)
+- `event_rsvps` (RSVP tracking)
+- `coordinator_applications` (coordinator approval)
 
-## Tech Stack
+### Role System Defined
+- **Member**: Regular users (free)
+- **Manufacturer**: Business accounts with paid subscriptions
+- **Coordinator**: Can submit events for approval
+- **Admin**: Full access to moderation/management
 
-- React 18 + TypeScript
-- Vite 5.4.21
-- React Router v6
-- Supabase (vfrxntxjigtgutevijmb)
-- Tailwind CSS
-- Deployed on Vercel
+## Timeline to Production-Ready
 
-## Environment
+**Estimate**: 7-10 days (following implementation plan)
 
-- `VITE_SUPABASE_URL` — ✅ set in Vercel production
-- `VITE_SUPABASE_ANON_KEY` — ✅ set in Vercel production
+### Phase 1: Database & Roles (Days 1-2)
+- Apply migrations to Supabase
+- Generate TypeScript types
+- Update auth context with role detection
 
-## Build Commands
+### Phase 2: Manufacturer Platform (Days 3-5)
+- Stripe integration
+- Manufacturer signup flow
+- Product dashboard
+- Analytics tracking
 
-```bash
-npm run dev -- --port 8080    # Local dev server
-npm run build                  # Production build
-npm run lint                   # ESLint check
-git push                       # Auto-deploys to Vercel
-npx vercel --prod             # Manual production deploy
-```
+### Phase 3: Event Management (Days 6-7)
+- Coordinator application
+- Event submission workflow
+- Admin approval interface
 
-## Next Actions
+### Phase 4: Update Pages (Days 8-9)
+- Remove all hardcoded data
+- Update /vendors to use manufacturer_products
+- Update /news to use events table
+- Seed database with real initial data
 
-1. **Content**: Import more YouTube videos, map sources, events, vendors
-2. **Products table**: Apply products schema migration to Supabase
-3. **Stripe integration**: Premium membership payments
-4. **Design refinement**: Per SHAW's design preferences (centered hero, less busy, clear nav)
-5. **Old content cleanup**: Archive/delete old SprinterSociety/Vanciety duplicates
+### Phase 5: Testing & Launch (Day 10)
+- Full QA testing
+- Role-based access testing
+- Payment integration testing
+- Soft launch with beta users
+
+## Disaster Recovery System
+
+**Status**: ✅ Implemented 2026-06-20
+
+- Deployment script with git tagging: `scripts/deploy-production.sh`
+- Database backup script: `scripts/backup-database.sh`
+- GitHub Actions pre-deploy checks: `.github/workflows/pre-deploy-checks.yml`
+- Weekly backup cron job: Monday 2am → SMS to 253-318-1658
+- Emergency rollback procedures: `QUICK_REFERENCE.md`
+- Full playbook: `DISASTER_RECOVERY.md`
 
 ## Known Issues
 
-None blocking. Site is production-ready.
+1. Production site uses hardcoded data for vendors and events
+2. No role-based access control
+3. No manufacturer payment platform
+4. No event submission workflow
+5. No admin panel
 
-## Important Files
+## Next Actions
 
-- `/src/App.tsx` — Main app component, routing
-- `/src/contexts/AuthContext.tsx` — Supabase auth provider
-- `/src/integrations/supabase/client.ts` — Supabase client config
-- `/src/pages/Index.tsx` — Homepage
-- `vercel.json` — Vercel deployment config
-- `.env` — Local environment variables (not committed)
-- `.env.example` — Environment variable template
+See `NEXT_ACTIONS.md` for prioritized roadmap.

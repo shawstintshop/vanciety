@@ -1,195 +1,211 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { 
-  Search, 
-  Filter, 
-  Star, 
-  MapPin,
-  Phone,
-  Globe,
-  Mail,
-  Truck,
-  Wrench,
-  Zap,
-  ShoppingBag,
-  Users,
-  Crown,
-  ExternalLink,
-  Verified
+import {
+  Search, Filter, MapPin, Globe, ShoppingBag, ExternalLink,
+  Verified, Wrench, Zap, Truck, Star, Camera, Compass,
+  Package, Link2, Users, Tent, Hammer, ShoppingCart,
+  ArrowRight, Sparkles, Plus, Eye, Phone
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import AIVanConcierge from "@/components/AIVanConcierge";
+import { supabase } from "@/integrations/supabase/client";
+
+// ── All Van Life Categories ──────────────────────────────────
+const VENDOR_CATEGORIES = [
+  { id: "all",            name: "All Vendors",          icon: ShoppingBag, color: "bg-orange-500" },
+  { id: "builders",       name: "Van Builders",         icon: Hammer,      color: "bg-blue-600" },
+  { id: "manufacturers",  name: "Manufacturers",        icon: Truck,       color: "bg-indigo-600" },
+  { id: "parts",          name: "Parts & Components",   icon: Wrench,      color: "bg-green-600" },
+  { id: "electrical",     name: "Electrical & Solar",   icon: Zap,         color: "bg-yellow-600" },
+  { id: "tours",          name: "Tours & Experiences",  icon: Compass,     color: "bg-pink-600" },
+  { id: "rentals",        name: "Van Rentals",          icon: Tent,        color: "bg-teal-600" },
+  { id: "gear",           name: "Accessories & Gear",   icon: Package,     color: "bg-purple-600" },
+  { id: "services",       name: "Services",             icon: Star,        color: "bg-cyan-600" },
+  { id: "affiliate",      name: "Top Picks (Affiliate)",icon: Link2,       color: "bg-rose-600" },
+  { id: "dealerships",    name: "Dealerships",          icon: ShoppingCart, color: "bg-amber-600" },
+];
+
+// ── Seed vendors (shown until DB has real data) ──────────────
+const SEED_VENDORS = [
+  {
+    id: "seed-1", business_name: "Vancraft Customs", category: "builders",
+    description: "Full custom Sprinter & Transit conversions. Off-grid solar, plumbing, and luxury interiors.",
+    location: "Portland, OR", website_url: "https://vancraftcustoms.com",
+    logo_url: null, images: [], services: ["Custom Builds", "Solar Install", "Plumbing"],
+    rating: 4.9, reviews_count: 127, verified: true, featured: true, status: "active",
+  },
+  {
+    id: "seed-2", business_name: "Winnebago", category: "manufacturers",
+    description: "Iconic American RV & camper van manufacturer. Revel, Solis, and Ekko models.",
+    location: "Forest City, IA", website_url: "https://www.winnebago.com",
+    logo_url: null, images: [], services: ["Class B Vans", "Adventure Vehicles"],
+    rating: 4.7, reviews_count: 892, verified: true, featured: true, status: "active",
+  },
+  {
+    id: "seed-3", business_name: "Victron Energy", category: "electrical",
+    description: "Premium solar charge controllers, inverters, and battery monitors for off-grid living.",
+    location: "Global", website_url: "https://www.victronenergy.com",
+    logo_url: null, images: [], services: ["Solar Controllers", "Inverters", "Battery Monitors"],
+    rating: 4.8, reviews_count: 2341, verified: true, featured: true, status: "active",
+  },
+  {
+    id: "seed-4", business_name: "Escape Campervans", category: "rentals",
+    description: "Colorful campervan rentals across the US. Pick up and drop off at major cities.",
+    location: "Multiple US Locations", website_url: "https://www.escapecampervans.com",
+    logo_url: null, images: [], services: ["Van Rentals", "One-Way Trips", "Festival Vans"],
+    rating: 4.5, reviews_count: 3200, verified: true, featured: false, status: "active",
+  },
+  {
+    id: "seed-5", business_name: "Overland Expo", category: "tours",
+    description: "Premier overland and van life events with classes, demos, and community gathering.",
+    location: "Nationwide", website_url: "https://www.overlandexpo.com",
+    logo_url: null, images: [], services: ["Events", "Classes", "Community"],
+    rating: 4.6, reviews_count: 1500, verified: true, featured: false, status: "active",
+  },
+  {
+    id: "seed-6", business_name: "Amazon Van Life Essentials", category: "affiliate",
+    description: "Curated van life gear, solar panels, kitchen setups, and must-have accessories — all available on Amazon.",
+    location: "Online", website_url: "https://amazon.com",
+    logo_url: null, images: [], services: ["Solar Panels", "Kitchen Gear", "Storage", "Bedding"],
+    rating: 4.4, reviews_count: 50000, verified: true, featured: true, status: "active",
+  },
+];
+
+type Vendor = typeof SEED_VENDORS[number];
 
 const Vendors = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [vendors, setVendors] = useState<Vendor[]>(SEED_VENDORS);
+  const [loading, setLoading] = useState(true);
 
-  const vendorCategories = [
-    { id: "all", name: "All Vendors", count: "156", icon: ShoppingBag },
-    { id: "parts", name: "Van Parts & Service", count: "34", icon: Wrench },
-    { id: "electrical", name: "Electrical & Solar", count: "28", icon: Zap },
-    { id: "builders", name: "Van Builders", count: "19", icon: Truck },
-    { id: "accessories", name: "Accessories", count: "42", icon: ShoppingBag },
-    { id: "gear", name: "Outdoor Gear", count: "33", icon: ShoppingBag }
-  ];
+  // Try loading from Supabase, fall back to seed data
+  useEffect(() => {
+    const loadVendors = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("vendors")
+          .select("*")
+          .eq("status", "active")
+          .order("featured", { ascending: false })
+          .order("rating", { ascending: false });
 
-  const featuredVendors = [
-    {
-      id: 1,
-      name: "Adventure Van Co.",
-      category: "Van Builders",
-      description: "Premium van conversions with 15+ years experience. Specializing in Mercedes Sprinter and Ford Transit builds.",
-      location: "Denver, CO",
-      rating: 4.9,
-      reviews: 147,
-      verified: true,
-      premium: true,
-      logo: "https://images.unsplash.com/photo-1544978503-7ad5ac882d5d?w=200&h=200&fit=crop",
-      coverImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop",
-      services: ["Complete Builds", "Electrical Systems", "Custom Interiors", "4x4 Conversions"],
-      priceRange: "$50K - $200K",
-      contact: {
-        phone: "(555) 123-4567",
-        email: "info@adventurevan.co",
-        website: "www.adventurevan.co"
-      },
-      featured: true,
-      discount: "10% off for community members"
-    },
-    {
-      id: 2,
-      name: "Solar Solutions Van",
-      category: "Electrical & Solar", 
-      description: "Complete solar and electrical installations for van life. Off-grid power specialists with mobile service.",
-      location: "Phoenix, AZ",
-      rating: 4.8,
-      reviews: 203,
-      verified: true,
-      premium: true,
-      logo: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=200&h=200&fit=crop",
-      coverImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=300&fit=crop",
-      services: ["Solar Installation", "Lithium Batteries", "Inverter Systems", "Mobile Service"],
-      priceRange: "$2K - $15K",
-      contact: {
-        phone: "(555) 234-5678",
-        email: "solar@vanpower.com",
-        website: "www.solarsolutionsvan.com"
-      },
-      featured: true,
-      discount: "Free consultation for community members"
-    },
-    {
-      id: 3,
-      name: "Overland Parts Direct",
-      category: "Van Parts & Service",
-      description: "Your one-stop shop for van parts, accessories, and maintenance. Fast shipping nationwide.",
-      location: "Austin, TX",
-      rating: 4.7,
-      reviews: 89,
-      verified: true,
-      premium: false,
-      logo: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200&h=200&fit=crop", 
-      coverImage: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=300&fit=crop",
-      services: ["OEM Parts", "Aftermarket Upgrades", "Tool Rental", "Technical Support"],
-      priceRange: "$10 - $5K",
-      contact: {
-        phone: "(555) 345-6789",
-        email: "parts@overlanddirect.com",
-        website: "www.overlandpartsdirect.com"
-      },
-      featured: false,
-      discount: "5% off first order"
-    },
-    {
-      id: 4,
-      name: "Van Life Gear Co.",
-      category: "Accessories",
-      description: "Premium accessories and gear designed specifically for van life. From kitchen setups to storage solutions.",
-      location: "Portland, OR",
-      rating: 4.6,
-      reviews: 156,
-      verified: true,
-      premium: false,
-      logo: "https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=200&h=200&fit=crop",
-      coverImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop",
-      services: ["Kitchen Equipment", "Storage Solutions", "Comfort Accessories", "Outdoor Gear"],
-      priceRange: "$25 - $2K",
-      contact: {
-        phone: "(555) 456-7890",
-        email: "gear@vanlifeco.com", 
-        website: "www.vanlifegear.co"
-      },
-      featured: false,
-      discount: "Free shipping over $100"
-    },
-    {
-      id: 5,
-      name: "Mountain View Van Service",
-      category: "Van Parts & Service",
-      description: "Professional van maintenance and repair services. Specializing in Sprinter and Transit mechanical work.",
-      location: "Boulder, CO",
-      rating: 4.8,
-      reviews: 78,
-      verified: true,
-      premium: false,
-      logo: "https://images.unsplash.com/photo-1544978503-7ad5ac882d5d?w=200&h=200&fit=crop",
-      coverImage: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=300&fit=crop",
-      services: ["Engine Repair", "Transmission Service", "4x4 Maintenance", "Pre-purchase Inspections"],
-      priceRange: "$100 - $8K",
-      contact: {
-        phone: "(555) 567-8901",
-        email: "service@mountainviewvan.com",
-        website: "www.mountainviewvan.com"
-      },
-      featured: false,
-      discount: "Community member discount available"
-    },
-    {
-      id: 6,
-      name: "Wilderness Outfitters",
-      category: "Outdoor Gear",
-      description: "Everything you need for outdoor adventures. From camping gear to outdoor cooking equipment.",
-      location: "Salt Lake City, UT",
-      rating: 4.5,
-      reviews: 234,
-      verified: false,
-      premium: false,
-      logo: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200&h=200&fit=crop",
-      coverImage: "https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=600&h=300&fit=crop",
-      services: ["Camping Gear", "Hiking Equipment", "Outdoor Cooking", "Adventure Clothing"],
-      priceRange: "$15 - $1K",
-      contact: {
-        phone: "(555) 678-9012",
-        email: "info@wildernessoutfitters.com",
-        website: "www.wildernessoutfitters.com" 
-      },
-      featured: false,
-      discount: "Seasonal sales and clearance"
+        if (!error && data && data.length > 0) {
+          setVendors(data.map((v: any) => ({
+            ...v,
+            services: v.services || [],
+            images: v.images || [],
+          })));
+        }
+        // If no data or error, keep seed vendors
+      } catch {
+        // Keep seed data on error
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadVendors();
+  }, []);
+
+  // Track vendor views
+  const trackView = async (vendorId: string) => {
+    try {
+      await supabase.from("vendor_analytics").insert({
+        vendor_id: vendorId,
+        event_type: "view",
+      });
+    } catch {
+      // Silent fail for analytics
     }
-  ];
+  };
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: vendors.length };
+    vendors.forEach((v) => {
+      counts[v.category] = (counts[v.category] || 0) + 1;
+    });
+    return counts;
+  }, [vendors]);
+
+  const filteredVendors = useMemo(() => {
+    return vendors.filter((vendor) => {
+      const matchesCategory = selectedCategory === "all" || vendor.category === selectedCategory;
+      const q = searchQuery.trim().toLowerCase();
+      const matchesSearch =
+        !q ||
+        [vendor.business_name, vendor.category, vendor.location, vendor.description, ...(vendor.services || [])]
+          .join(" ")
+          .toLowerCase()
+          .includes(q);
+      return matchesCategory && matchesSearch;
+    });
+  }, [vendors, selectedCategory, searchQuery]);
+
+  const getCategoryIcon = (categoryId: string) => {
+    const cat = VENDOR_CATEGORIES.find((c) => c.id === categoryId);
+    return cat ? cat.icon : ShoppingBag;
+  };
+
+  const getCategoryColor = (categoryId: string) => {
+    const cat = VENDOR_CATEGORIES.find((c) => c.id === categoryId);
+    return cat ? cat.color : "bg-gray-500";
+  };
+
+  const getCategoryLabel = (categoryId: string) => {
+    const cat = VENDOR_CATEGORIES.find((c) => c.id === categoryId);
+    return cat ? cat.name : categoryId;
+  };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="vanciety-page vanciety-page--vendors min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-16">
-        {/* Hero Section */}
-        <section className="py-12 bg-gradient-to-br from-background to-muted/30">
+        {/* ── Hero Section ───────────────────────────────────── */}
+        <section className="vanciety-hero-topo py-14">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <div className="text-center mb-10">
+              <Badge className="mb-4 bg-orange-600 text-white text-sm px-4 py-1">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                Van Life Vendor Directory
+              </Badge>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4">
                 <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Van Life Vendors
+                  Find Your Build Partners
                 </span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Trusted businesses and services for the van life community
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Builders, manufacturers, parts suppliers, tours, rentals, gear — every vendor
+                the van life community trusts, in one directory.
               </p>
             </div>
 
-            {/* Search & Controls */}
+            {/* ── Vendor Signup CTA ─────────────────────────── */}
+            <div className="max-w-2xl mx-auto mb-10">
+              <Card className="border-2 border-orange-500/30 bg-gradient-to-r from-orange-500/5 to-amber-500/5">
+                <CardContent className="p-6 flex flex-col sm:flex-row items-center gap-4">
+                  <div className="flex-1 text-center sm:text-left">
+                    <h3 className="text-lg font-bold mb-1">Are you a vendor?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      List your business, upload photos & videos, and reach the van life community.
+                      Free to start.
+                    </p>
+                  </div>
+                  <Button asChild variant="hero" size="lg" className="whitespace-nowrap">
+                    <Link to="/vendor-signup">
+                      <Plus className="w-4 h-4 mr-2" />
+                      List Your Business
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* ── Search & Filters ─────────────────────────── */}
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-4 mb-6">
                 <div className="relative flex-1">
@@ -201,20 +217,19 @@ const Vendors = () => {
                     className="pl-10"
                   />
                 </div>
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Filter className="w-4 h-4" />
-                  Filters
-                </Button>
-                <Button variant="hero" className="flex items-center gap-2">
-                  <ShoppingBag className="w-4 h-4" />
-                  Join as Vendor
+                <Button asChild variant="hero" className="flex items-center gap-2">
+                  <Link to="/vendor-signup">
+                    <Plus className="w-4 h-4" />
+                    Add Your Business
+                  </Link>
                 </Button>
               </div>
 
-              {/* Category Pills */}
+              {/* ── Category Pills ─────────────────────────── */}
               <div className="flex flex-wrap gap-2 justify-center">
-                {vendorCategories.map((category) => {
+                {VENDOR_CATEGORIES.map((category) => {
                   const Icon = category.icon;
+                  const count = categoryCounts[category.id] || 0;
                   return (
                     <Button
                       key={category.id}
@@ -225,7 +240,7 @@ const Vendors = () => {
                     >
                       <Icon className="w-4 h-4" />
                       {category.name}
-                      <span className="text-xs opacity-75">({category.count})</span>
+                      <span className="text-xs opacity-75">({count})</span>
                     </Button>
                   );
                 })}
@@ -234,185 +249,218 @@ const Vendors = () => {
           </div>
         </section>
 
-        {/* Vendors Grid */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {featuredVendors.map((vendor) => (
-                <Card key={vendor.id} className="group hover:shadow-glow transition-all duration-300 overflow-hidden">
-                  {/* Cover Image */}
-                  <div className="relative h-48">
-                    <img
-                      src={vendor.coverImage}
-                      alt={vendor.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        {/* ── AI Concierge ────────────────────────────────── */}
+        <section className="container mx-auto px-4 py-4">
+          <AIVanConcierge mode="mechanic" compact />
+        </section>
+
+        {/* ── Featured Vendors ────────────────────────────── */}
+        {selectedCategory === "all" && filteredVendors.some((v) => v.featured) && (
+          <section className="py-8">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <Star className="w-6 h-6 text-orange-500" />
+                Featured Vendors
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredVendors
+                  .filter((v) => v.featured)
+                  .map((vendor) => (
+                    <VendorCard
+                      key={vendor.id}
+                      vendor={vendor}
+                      getCategoryLabel={getCategoryLabel}
+                      getCategoryColor={getCategoryColor}
+                      getCategoryIcon={getCategoryIcon}
+                      onView={() => trackView(vendor.id)}
+                      featured
                     />
-                    
-                    {/* Badges */}
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      {vendor.premium && (
-                        <Badge className="bg-gradient-sunset text-white flex items-center gap-1">
-                          <Crown className="w-3 h-3" />
-                          Premium Partner
-                        </Badge>
-                      )}
-                      {vendor.verified && (
-                        <Badge className="bg-gradient-forest text-white flex items-center gap-1">
-                          <Verified className="w-3 h-3" />
-                          Verified
-                        </Badge>
-                      )}
-                    </div>
+                  ))}
+              </div>
+            </div>
+          </section>
+        )}
 
-                    {/* Logo */}
-                    <div className="absolute -bottom-8 left-6">
-                      <img
-                        src={vendor.logo}
-                        alt={`${vendor.name} logo`}
-                        className="w-16 h-16 rounded-xl border-4 border-background object-cover"
-                      />
-                    </div>
-                  </div>
+        {/* ── All Vendors Grid ────────────────────────────── */}
+        <section className="py-8">
+          <div className="container mx-auto px-4">
+            <div className="mb-6 rounded-2xl border bg-card p-4 text-sm text-muted-foreground">
+              <strong className="text-foreground">Before you book:</strong> Open the business site for current
+              services, location, contact options, availability, and warranty details.
+            </div>
 
-                  <CardContent className="pt-12 p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <CardTitle className="text-xl mb-1 group-hover:text-primary transition-colors">
-                          {vendor.name}
-                        </CardTitle>
-                        <Badge variant="secondary" className="mb-2">
-                          {vendor.category}
-                        </Badge>
-                      </div>
-                      
-                      <div className="text-right">
-                        <div className="flex items-center gap-1 mb-1">
-                          <Star className="w-4 h-4 text-secondary fill-current" />
-                          <span className="font-medium">{vendor.rating}</span>
-                          <span className="text-sm text-muted-foreground">({vendor.reviews})</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <MapPin className="w-3 h-3" />
-                          {vendor.location}
-                        </div>
-                      </div>
-                    </div>
+            <h2 className="text-2xl font-bold mb-6">
+              {selectedCategory === "all"
+                ? `All Vendors (${filteredVendors.length})`
+                : `${getCategoryLabel(selectedCategory)} (${filteredVendors.length})`}
+            </h2>
 
-                    <CardDescription className="mb-4 line-clamp-2">
-                      {vendor.description}
-                    </CardDescription>
-
-                    {/* Services */}
-                    <div className="mb-4">
-                      <p className="text-sm font-medium mb-2">Services:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {vendor.services.map((service) => (
-                          <Badge key={service} variant="outline" className="text-xs">
-                            {service}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Price Range */}
-                    <div className="mb-4">
-                      <span className="text-sm font-medium">Price Range: </span>
-                      <span className="text-sm text-primary font-semibold">{vendor.priceRange}</span>
-                    </div>
-
-                    {/* Special Offer */}
-                    {vendor.discount && (
-                      <div className="mb-4 p-3 bg-gradient-card rounded-lg">
-                        <p className="text-sm font-medium text-secondary">🎉 Special Offer</p>
-                        <p className="text-sm text-muted-foreground">{vendor.discount}</p>
-                      </div>
-                    )}
-
-                    {/* Contact Info */}
-                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                      <div className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 text-muted-foreground" />
-                        <span>{vendor.contact.phone}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-muted-foreground" />
-                        <span className="truncate">{vendor.contact.email}</span>
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-2">
-                      <Button variant="hero" className="flex-1">
-                        Contact Vendor
-                      </Button>
-                      <Button variant="outline" size="icon" asChild>
-                        <a href={`https://${vendor.contact.website}`} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredVendors.map((vendor) => (
+                <VendorCard
+                  key={vendor.id}
+                  vendor={vendor}
+                  getCategoryLabel={getCategoryLabel}
+                  getCategoryColor={getCategoryColor}
+                  getCategoryIcon={getCategoryIcon}
+                  onView={() => trackView(vendor.id)}
+                />
               ))}
             </div>
 
-            {/* Load More */}
-            <div className="text-center mt-12">
-              <Button variant="outline" size="lg">
-                Load More Vendors
+            {filteredVendors.length === 0 && (
+              <div className="text-center py-16 rounded-2xl border bg-card mt-4">
+                <ShoppingBag className="w-12 h-12 text-muted-foreground/40 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">No vendors in this category yet</h3>
+                <p className="text-muted-foreground mb-4">Be the first to list your business!</p>
+                <Button asChild variant="hero">
+                  <Link to="/vendor-signup">
+                    <Plus className="w-4 h-4 mr-2" />
+                    List Your Business
+                  </Link>
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── Bottom CTA ──────────────────────────────────── */}
+        <section className="py-16 bg-gradient-to-r from-orange-500/10 to-amber-500/10">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-4">Join the Vanciety Vendor Network</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              Whether you build vans, sell parts, run tours, or have the perfect gear recommendation —
+              list your business and connect with thousands of van lifers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild variant="hero" size="lg">
+                <Link to="/vendor-signup">
+                  <Plus className="w-5 h-5 mr-2" />
+                  List Your Business — Free
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link to="/vendor-signup#pricing">
+                  See Pricing Plans
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
               </Button>
             </div>
           </div>
         </section>
-
-        {/* Become a Vendor CTA */}
-        <section className="py-16 bg-gradient-to-br from-muted/30 to-background">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">
-                Join Our Vendor Network
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Connect with thousands of van life enthusiasts and grow your business with our community
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-sunset rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">50K+ Active Members</h3>
-                <p className="text-sm text-muted-foreground">Reach engaged van life enthusiasts</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-forest rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">Verified Reviews</h3>
-                <p className="text-sm text-muted-foreground">Build trust with authentic feedback</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Crown className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">Premium Features</h3>
-                <p className="text-sm text-muted-foreground">Enhanced listings and analytics</p>
-              </div>
-            </div>
-
-            <Button variant="hero" size="lg" className="mb-4">
-              Apply to Become a Vendor
-            </Button>
-            <p className="text-sm text-muted-foreground">
-              Join 150+ trusted vendors serving our community
-            </p>
-          </div>
-        </section>
       </main>
     </div>
+  );
+};
+
+// ── Vendor Card Component ──────────────────────────────────
+interface VendorCardProps {
+  vendor: Vendor;
+  getCategoryLabel: (id: string) => string;
+  getCategoryColor: (id: string) => string;
+  getCategoryIcon: (id: string) => React.ComponentType<any>;
+  onView: () => void;
+  featured?: boolean;
+}
+
+const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIcon, onView, featured }: VendorCardProps) => {
+  const CategoryIcon = getCategoryIcon(vendor.category);
+
+  return (
+    <Card
+      className={`group hover:shadow-glow transition-all duration-300 overflow-hidden ${
+        featured ? "border-orange-500/40 ring-1 ring-orange-500/20" : ""
+      }`}
+    >
+      {/* Card header with gradient */}
+      <div className={`relative h-40 ${getCategoryColor(vendor.category)} bg-opacity-90`}>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent" />
+        {vendor.logo_url ? (
+          <img src={vendor.logo_url} alt={vendor.business_name} className="absolute bottom-4 left-4 w-16 h-16 rounded-xl bg-white p-1 object-contain" />
+        ) : (
+          <div className="absolute bottom-4 left-4 w-16 h-16 rounded-xl bg-white/90 flex items-center justify-center">
+            <CategoryIcon className="w-8 h-8 text-gray-700" />
+          </div>
+        )}
+        <div className="absolute top-4 right-4 flex gap-2">
+          {featured && (
+            <Badge className="bg-orange-500 text-white">
+              <Star className="w-3 h-3 mr-1" /> Featured
+            </Badge>
+          )}
+          {vendor.verified && (
+            <Badge className="bg-green-600 text-white">
+              <Verified className="w-3 h-3 mr-1" /> Verified
+            </Badge>
+          )}
+        </div>
+        <div className="absolute top-4 left-4">
+          <Badge variant="secondary" className="bg-white/90 text-gray-800 text-xs">
+            {getCategoryLabel(vendor.category)}
+          </Badge>
+        </div>
+      </div>
+
+      <CardContent className="p-5">
+        <div className="mb-3">
+          <CardTitle className="text-lg mb-1">{vendor.business_name}</CardTitle>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <MapPin className="w-3.5 h-3.5" />
+            {vendor.location || "Location not set"}
+          </div>
+        </div>
+
+        <CardDescription className="text-sm mb-4 line-clamp-2">{vendor.description}</CardDescription>
+
+        {/* Services Tags */}
+        {vendor.services && vendor.services.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {vendor.services.slice(0, 4).map((service: string) => (
+              <Badge key={service} variant="outline" className="text-xs">
+                {service}
+              </Badge>
+            ))}
+            {vendor.services.length > 4 && (
+              <Badge variant="outline" className="text-xs">+{vendor.services.length - 4} more</Badge>
+            )}
+          </div>
+        )}
+
+        {/* Rating */}
+        {vendor.rating && (
+          <div className="flex items-center gap-2 mb-4 text-sm">
+            <div className="flex items-center gap-1">
+              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <span className="font-semibold">{vendor.rating}</span>
+            </div>
+            <span className="text-muted-foreground">
+              ({vendor.reviews_count?.toLocaleString()} reviews)
+            </span>
+          </div>
+        )}
+
+        {/* Actions */}
+        <div className="flex gap-2">
+          {vendor.website_url && (
+            <Button
+              asChild
+              variant="hero"
+              className="flex-1"
+              onClick={onView}
+            >
+              <a href={vendor.website_url} target="_blank" rel="noreferrer">
+                <Globe className="w-4 h-4 mr-2" />
+                Visit Site
+                <ExternalLink className="w-3.5 h-3.5 ml-2" />
+              </a>
+            </Button>
+          )}
+          <Button variant="outline" size="icon" title="View details">
+            <Eye className="w-4 h-4" />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
