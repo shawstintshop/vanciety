@@ -227,12 +227,13 @@ const Map = () => {
     filteredEvents.forEach((event) => {
       if (!event.latitude || !event.longitude) return;
 
-      // Primary event marker: branded Revel van icon (160x84 source → keep aspect ratio)
+      // Primary event marker: branded Revel van icon on a light chip so the
+      // black van stays visible against the dark CartoDB map tiles (see index.css).
       const icon = L.icon({
         iconUrl: "/brand/van-revel-black.png",
-        iconSize: [46, 24],
-        iconAnchor: [23, 24],
-        popupAnchor: [0, -24],
+        iconSize: [54, 32],
+        iconAnchor: [27, 32],
+        popupAnchor: [0, -32],
         className: "vanciety-map-marker",
       });
 

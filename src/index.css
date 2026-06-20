@@ -127,3 +127,24 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Event van markers: the brand van art is black and the map uses dark
+   CartoDB tiles, so it needs a light chip + shadow to stay visible.
+   Scoped to img.* so the divIcon demo marker is unaffected. */
+img.vanciety-map-marker {
+  background: rgba(248, 245, 238, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  padding: 3px 5px;
+  box-sizing: border-box;
+  object-fit: contain;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+img.vanciety-map-marker:hover {
+  transform: scale(1.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+}
