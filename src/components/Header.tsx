@@ -102,7 +102,7 @@ const Header = () => {
                 <FileCode className="mr-2 h-4 w-4 text-accent" />
                 3D Print Files
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/vendors")}>
+              <DropdownMenuItem onClick={() => navigate("/manufacturers")}>
                 <Wrench className="mr-2 h-4 w-4 text-muted-foreground" />
                 Brands &amp; Makers
               </DropdownMenuItem>

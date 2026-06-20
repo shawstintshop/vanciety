@@ -11,6 +11,8 @@ import Forum from "./pages/Forum";
 import Marketplace from "./pages/Marketplace";
 import Vendors from "./pages/Vendors";
 import VendorSignup from "./pages/VendorSignup";
+import Manufacturers from "./pages/Manufacturers";
+import ManufacturerDetail from "./pages/ManufacturerDetail";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import GPSTracking from "./pages/GPSTracking";
@@ -45,6 +47,8 @@ const App = () => (
               <Route path="/shop" element={<VancietyShop />} />
               <Route path="/vendors" element={<Vendors />} />
               <Route path="/vendor-signup" element={<VendorSignup />} />
+              <Route path="/manufacturers" element={<Manufacturers />} />
+              <Route path="/manufacturers/:slug" element={<ManufacturerDetail />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/gps" element={<GPSTracking />} />
               <Route path="/van-cards" element={<VanCards />} />
