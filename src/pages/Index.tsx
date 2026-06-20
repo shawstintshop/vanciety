@@ -4,6 +4,7 @@ import AIVanConcierge from "@/components/AIVanConcierge";
 import VoiceVanny from "@/components/VoiceVanny";
 import PremiumSection from "@/components/PremiumSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import HomeConversionFlow from "@/components/HomeConversionFlow";
 
 const Index = () => {
   return (
@@ -11,6 +12,10 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+
+        {/* Conversion flow: search + chips, guided choices, featured, trust */}
+        <HomeConversionFlow />
+
         <section id="vanciety-ai-helper" className="container mx-auto scroll-mt-24 px-4 py-10">
           <div className="grid gap-6 lg:grid-cols-2">
             <div>

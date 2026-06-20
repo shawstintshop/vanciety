@@ -23,6 +23,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -30,7 +31,8 @@ import Header from "@/components/Header";
 import AIVanConcierge from "@/components/AIVanConcierge";
 
 const Marketplace = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") ?? "");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [marketplaceItems, setMarketplaceItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
