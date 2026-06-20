@@ -1,10 +1,12 @@
 const VancietyLogo: React.FC<{ className?: string; size?: 'sm' | 'md' | 'lg' }> = ({ className = '', size = 'md' }) => {
-  const sizes = { sm: 'w-6 h-6 text-sm', md: 'w-8 h-8 text-lg', lg: 'w-12 h-12 text-2xl' };
+  const sizes = { sm: 'h-6', md: 'h-8', lg: 'h-12' };
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className={`${sizes[size]} bg-gradient-hero rounded-lg flex items-center justify-center shrink-0`}>
-        <span className="text-white font-black leading-none">V</span>
-      </div>
+      <img
+        src="/brand/van-topo-dark.png"
+        alt="Vanciety"
+        className={`${sizes[size]} w-auto shrink-0 object-contain`}
+      />
       <span className="font-bold bg-gradient-hero bg-clip-text text-transparent">Vanciety</span>
     </div>
   );

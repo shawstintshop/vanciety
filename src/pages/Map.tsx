@@ -227,15 +227,13 @@ const Map = () => {
     filteredEvents.forEach((event) => {
       if (!event.latitude || !event.longitude) return;
 
-      const markerType = eventCategoryToMarker(event.category);
-      const svgHtml = VAN_MARKERS[markerType](36);
-
-      const icon = L.divIcon({
-        html: svgHtml,
+      // Primary event marker: branded Revel van icon (160x84 source → keep aspect ratio)
+      const icon = L.icon({
+        iconUrl: "/brand/van-revel-black.png",
+        iconSize: [46, 24],
+        iconAnchor: [23, 24],
+        popupAnchor: [0, -24],
         className: "vanciety-map-marker",
-        iconSize: [36, 36],
-        iconAnchor: [18, 36],
-        popupAnchor: [0, -36],
       });
 
       const marker = L.marker([event.latitude, event.longitude], { icon })
