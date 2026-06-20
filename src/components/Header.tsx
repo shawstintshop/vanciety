@@ -1,321 +1,156 @@
 import { Button } from "@/components/ui/button";
+import { Search, Menu, Bell, MessageSquare, MapPin, Video, Calendar, ShoppingBag, Crown, User, LogOut, Satellite } from "lucide-react";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import {
-  Search,
-  Menu,
-  MapPin,
-  Video,
-  Calendar,
-  ShoppingBag,
-  Crown,
-  User,
-  LogOut,
-  Satellite,
-  Brain,
-  Users,
-  Sparkles,
-  Wrench,
-  MessageSquare,
-  ChevronDown,
-  FileCode,
-  Layers,
-  BookOpen,
-  Star,
-  Tag,
-  PlusCircle,
-  Package,
-} from "lucide-react";
-import { FormEvent, useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, Link, useLocation } from "react-router-dom";
-import VancietyLogo from "./VancietyLogo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [siteSearch, setSiteSearch] = useState("");
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleSignOut = async () => {
     await signOut();
-    navigate("/");
+    navigate('/');
   };
-
-  const handleSiteSearch = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const query = siteSearch.trim();
-    if (!query) return;
-    navigate(`/van-intelligence?topic=${encodeURIComponent(query)}`);
-    setSiteSearch("");
-    setIsMenuOpen(false);
-  };
-
-  const isActive = (path: string) => location.pathname === path;
-  const isGroupActive = (paths: string[]) => paths.some((p) => location.pathname.startsWith(p));
-
-  const navLinkClass = (active: boolean) =>
-    `flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition-colors ${
-      active
-        ? "bg-primary/15 text-primary-glow"
-        : "text-foreground/80 hover:bg-primary/10 hover:text-primary-glow"
-    }`;
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/88 shadow-[0_10px_40px_rgba(0,0,0,.24)] backdrop-blur-xl">
-      <div className="container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
-        <VancietyLogo />
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">V</span>
+          </div>
+          <h1 className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+            VanLife Community
+          </h1>
+        </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary navigation">
-
-          {/* Marketplace dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/marketplace", "/shop", "/vendors"]))}>
-                <ShoppingBag className="h-4 w-4" />
-                Marketplace
-                <ChevronDown className="h-3 w-3 opacity-60" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-52 border-border bg-popover text-popover-foreground">
-              <DropdownMenuItem onClick={() => navigate("/marketplace")}>
-                <Package className="mr-2 h-4 w-4 text-primary-glow" />
-                Buy Parts
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/shop")}>
-                <Tag className="mr-2 h-4 w-4 text-secondary" />
-                Sell an Item
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/marketplace")}>
-                <Layers className="mr-2 h-4 w-4 text-muted-foreground" />
-                Used Gear
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => navigate("/shop")}>
-                <FileCode className="mr-2 h-4 w-4 text-accent" />
-                3D Print Files
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/vendors")}>
-                <Wrench className="mr-2 h-4 w-4 text-muted-foreground" />
-                Brands &amp; Makers
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Learn dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/videos", "/van-intelligence"]))}>
-                <BookOpen className="h-4 w-4" />
-                Learn
-                <ChevronDown className="h-3 w-3 opacity-60" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-52 border-border bg-popover text-popover-foreground">
-              <DropdownMenuItem onClick={() => navigate("/van-intelligence")}>
-                <Brain className="mr-2 h-4 w-4 text-primary-glow" />
-                Guides &amp; Builds
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/videos")}>
-                <Video className="mr-2 h-4 w-4 text-secondary" />
-                How-To Videos
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/van-intelligence")}>
-                <Star className="mr-2 h-4 w-4 text-accent" />
-                Product Reviews
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Events — direct */}
-          <Link to="/news" className={navLinkClass(isActive("/news"))}>
-            <Calendar className="h-4 w-4" />
-            Events
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-6">
+          <Link to="/videos" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <Video className="w-4 h-4" />
+            <span>Videos</span>
           </Link>
-
-          {/* Map — direct */}
-          <Link to="/map" className={navLinkClass(isActive("/map"))}>
-            <MapPin className="h-4 w-4" />
-            Map
+          <Link to="/map" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <MapPin className="w-4 h-4" />
+            <span>Map</span>
           </Link>
-
-          {/* Community dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/forum", "/friend-finder", "/van-cards"]))}>
-                <Users className="h-4 w-4" />
-                Community
-                <ChevronDown className="h-3 w-3 opacity-60" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-52 border-border bg-popover text-popover-foreground">
-              <DropdownMenuItem onClick={() => navigate("/forum")}>
-                <MessageSquare className="mr-2 h-4 w-4 text-primary-glow" />
-                Forum
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/friend-finder")}>
-                <Users className="mr-2 h-4 w-4 text-secondary" />
-                Find Members
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/van-cards")}>
-                <Satellite className="mr-2 h-4 w-4 text-muted-foreground" />
-                Van Cards
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Vanny — direct */}
-          <Link to="/ai" className={navLinkClass(isActive("/ai"))}>
-            <Sparkles className="h-4 w-4" />
-            Vanny
+          <Link to="/forum" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <MessageSquare className="w-4 h-4" />
+            <span>Forum</span>
           </Link>
-
+          <Link to="/news" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <Calendar className="w-4 h-4" />
+            <span>Events</span>
+          </Link>
+          <Link to="/marketplace" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <ShoppingBag className="w-4 h-4" />
+            <span>Shop</span>
+          </Link>
+          <Link to="/gps" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+            <Satellite className="w-4 h-4" />
+            <span>GPS</span>
+          </Link>
         </nav>
 
-        {/* Right side */}
-        <div className="flex items-center gap-2 lg:gap-3">
-          <form
-            onSubmit={handleSiteSearch}
-            className="hidden items-center rounded-full border border-border/80 bg-card/80 px-3 py-2 shadow-sm ring-1 ring-white/5 focus-within:border-primary/60 sm:flex lg:w-56"
-          >
-            <Search className="mr-2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="search"
-              value={siteSearch}
-              onChange={(event) => setSiteSearch(event.target.value)}
-              placeholder="Search parts, guides, gear..."
-              className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
-              aria-label="Search Vanciety"
+        {/* Search and Actions */}
+        <div className="flex items-center space-x-4">
+          <div className="hidden sm:flex items-center bg-muted rounded-lg px-3 py-2 w-64">
+            <Search className="w-4 h-4 text-muted-foreground mr-2" />
+            <input 
+              type="text" 
+              placeholder="Search vans, spots, videos..."
+              className="bg-transparent border-none outline-none flex-1 text-sm placeholder:text-muted-foreground"
             />
-          </form>
-
-          {/* Sell CTA */}
-          <Button
-            variant="outline"
-            size="sm"
-            className="hidden items-center gap-2 sm:flex text-foreground border-secondary/50 hover:border-secondary hover:text-secondary"
-            onClick={() => navigate("/shop")}
-          >
-            <PlusCircle className="h-4 w-4" />
-            Sell
+          </div>
+          
+          <Button variant="ghost" size="icon" className="relative">
+            <Bell className="w-4 h-4" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"></span>
           </Button>
 
-          <Button
-            variant="hero"
-            size="sm"
-            className="hidden items-center gap-2 sm:flex"
-            onClick={() => navigate(user ? "/van-cards" : "/auth")}
-          >
-            <Crown className="h-4 w-4" />
-            {user ? "My Account" : "Join Free"}
+          <Button variant="hero" size="sm" className="hidden sm:flex items-center space-x-2" onClick={() => navigate('/auth')}>
+            <Crown className="w-4 h-4" />
+            <span>Go Premium</span>
           </Button>
 
-          {user && (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="flex items-center gap-2 text-foreground">
-                  <User className="h-4 w-4" />
-                  <span className="hidden sm:inline">Account</span>
+                <Button variant="outline" size="sm" className="flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">Profile</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="border-border bg-popover text-popover-foreground">
-                <DropdownMenuItem onClick={() => navigate("/van-cards")}>My Listings</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/van-cards")}>Van Cards</DropdownMenuItem>
-                <DropdownMenuSeparator />
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  <User className="w-4 h-4 mr-2" />
+                  My Profile
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleSignOut}>
-                  <LogOut className="mr-2 h-4 w-4" />
+                  <LogOut className="w-4 h-4 mr-2" />
                   Sign Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          ) : (
+            <Button variant="outline" size="sm" onClick={() => navigate('/auth')}>
+              Sign In
+            </Button>
           )}
 
-          {/* Mobile menu toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-foreground md:flex xl:hidden"
+          {/* Mobile Menu Button */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-            aria-label="Toggle navigation"
           >
-            <Menu className="h-4 w-4" />
+            <Menu className="w-4 h-4" />
           </Button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="border-t border-border/80 bg-background/96 backdrop-blur-xl xl:hidden">
-          <nav className="container mx-auto px-4 py-4" aria-label="Mobile navigation">
-
-            <div className="mb-3 text-[11px] uppercase tracking-widest text-muted-foreground">Marketplace</div>
-            <div className="mb-4 grid grid-cols-2 gap-2">
-              {[
-                { label: "Buy Parts", to: "/marketplace", icon: Package },
-                { label: "Sell an Item", to: "/shop", icon: PlusCircle },
-                { label: "Used Gear", to: "/marketplace", icon: Layers },
-                { label: "3D Print Files", to: "/shop", icon: FileCode },
-                { label: "Brands & Makers", to: "/vendors", icon: Wrench },
-              ].map(({ label, to, icon: Icon }) => (
-                <Link
-                  key={label}
-                  to={to}
-                  className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-primary/10 hover:text-primary-glow"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  {label}
-                </Link>
-              ))}
-            </div>
-
-            <div className="mb-3 text-[11px] uppercase tracking-widest text-muted-foreground">Discover</div>
-            <div className="mb-4 grid grid-cols-2 gap-2">
-              {[
-                { label: "Guides & Builds", to: "/van-intelligence", icon: Brain },
-                { label: "How-To Videos", to: "/videos", icon: Video },
-                { label: "Events", to: "/news", icon: Calendar },
-                { label: "Map", to: "/map", icon: MapPin },
-                { label: "Forum", to: "/forum", icon: MessageSquare },
-                { label: "Find Members", to: "/friend-finder", icon: Users },
-                { label: "Vanny AI", to: "/ai", icon: Sparkles },
-              ].map(({ label, to, icon: Icon }) => (
-                <Link
-                  key={label}
-                  to={to}
-                  className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-primary/10 hover:text-primary-glow"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  {label}
-                </Link>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 pt-2">
-              <Button
-                variant="outline"
-                className="w-full border-secondary/50 text-foreground"
-                onClick={() => { navigate("/shop"); setIsMenuOpen(false); }}
-              >
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Sell an Item
-              </Button>
-              <Button
-                variant="hero"
-                className="w-full"
-                onClick={() => { navigate(user ? "/van-cards" : "/auth"); setIsMenuOpen(false); }}
-              >
-                <Crown className="mr-2 h-4 w-4" />
-                {user ? "My Account" : "Join Free"}
+        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
+          <nav className="container mx-auto px-4 py-4 space-y-3">
+            <Link to="/videos" className="flex items-center space-x-3 text-foreground hover:text-primary transition-colors py-2" onClick={() => setIsMenuOpen(false)}>
+              <Video className="w-5 h-5" />
+              <span className="font-medium">Videos</span>
+            </Link>
+            <Link to="/map" className="flex items-center space-x-3 text-foreground hover:text-primary transition-colors py-2" onClick={() => setIsMenuOpen(false)}>
+              <MapPin className="w-5 h-5" />
+              <span className="font-medium">Map</span>
+            </Link>
+            <Link to="/forum" className="flex items-center space-x-3 text-foreground hover:text-primary transition-colors py-2" onClick={() => setIsMenuOpen(false)}>
+              <MessageSquare className="w-5 h-5" />
+              <span className="font-medium">Forum</span>
+            </Link>
+            <Link to="/news" className="flex items-center space-x-3 text-foreground hover:text-primary transition-colors py-2" onClick={() => setIsMenuOpen(false)}>
+              <Calendar className="w-5 h-5" />
+              <span className="font-medium">Events</span>
+            </Link>
+            <Link to="/marketplace" className="flex items-center space-x-3 text-foreground hover:text-primary transition-colors py-2" onClick={() => setIsMenuOpen(false)}>
+              <ShoppingBag className="w-5 h-5" />
+              <span className="font-medium">Shop</span>
+            </Link>
+            <Link to="/gps" className="flex items-center space-x-3 text-foreground hover:text-primary transition-colors py-2" onClick={() => setIsMenuOpen(false)}>
+              <Satellite className="w-5 h-5" />
+              <span className="font-medium">GPS Tracking</span>
+            </Link>
+            <div className="pt-3 border-t border-border">
+              <Button variant="hero" className="w-full mb-2" onClick={() => { navigate('/auth'); setIsMenuOpen(false); }}>
+                <Crown className="w-4 h-4 mr-2" />
+                Go Premium
               </Button>
             </div>
           </nav>

@@ -26,10 +26,8 @@ import { useLeafletMap, type LocationType } from "@/hooks/useLeafletMap";
 import { useRealtimePresence } from "@/hooks/useRealtimePresence";
 import { useRealtimeVanLocations } from "@/hooks/useRealtimeVanLocations";
 import FallbackMap from "@/components/FallbackMap";
-import AIVanConcierge from "@/components/AIVanConcierge";
 import Header from "@/components/Header";
 import { Link } from "react-router-dom";
-import { verifiedLocations } from "@/data/vancietyVerified";
 
 interface Location {
   id: string;
@@ -43,31 +41,14 @@ interface Location {
   reviews_count?: number;
   verified?: boolean;
   status?: string;
-  url?: string;
-  imageUrl?: string;
-  sourceBadge?: string;
 }
-
-const verifiedLocationFallback: Location[] = verifiedLocations.map((location) => ({
-  id: location.id,
-  name: location.name,
-  description: location.description,
-  latitude: location.latitude,
-  longitude: location.longitude,
-  type: location.type,
-  amenities: location.amenities,
-  verified: location.verified,
-  url: location.url,
-  imageUrl: location.imageUrl,
-  sourceBadge: location.sourceBadge,
-}));
 
 const Map = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
-  const [locations, setLocations] = useState<Location[]>(verifiedLocationFallback);
+  const [locations, setLocations] = useState<Location[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
   const [showLiveVans, setShowLiveVans] = useState(true);
   const { toast } = useToast();
@@ -123,19 +104,17 @@ const Map = () => {
         throw error;
       }
 
-      const mapped = (data || []).map(location => ({
+      setLocations((data || []).map(location => ({
         ...location,
         type: location.type as LocationType
-      }));
-      setLocations(mapped.length ? mapped : verifiedLocationFallback.filter((location) => selectedFilter === "all" || location.type === selectedFilter));
+      })));
     } catch (error) {
       console.error('Error fetching locations:', error);
       toast({
-        title: "Using verified map anchors",
-        description: "Live Supabase locations are unavailable, so Vanciety is showing verified official location/event sources.",
+        title: "Error",
+        description: "Failed to load locations. Please try again.",
         variant: "destructive",
       });
-      setLocations(verifiedLocationFallback.filter((location) => selectedFilter === "all" || location.type === selectedFilter));
     } finally {
       setLoading(false);
     }
@@ -148,7 +127,7 @@ const Map = () => {
   // Convert live GPS vans to map locations
   const liveVanLocations: Location[] = liveVans.map(van => ({
     id: van.id,
-    name: van.display_name || 'Van member',
+    name: van.display_name || 'Sprinter',
     description: van.message || `${van.status === 'traveling' ? 'On the road' : 'Parked'} — updated ${new Date(van.updated_at).toLocaleTimeString()}`,
     latitude: van.latitude,
     longitude: van.longitude,
@@ -211,13 +190,31 @@ const Map = () => {
 
   const sidebarCount = sidebarItems.length + (selectedFilter === "all" && showLiveVans ? liveVans.length : 0);
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-16">
+          <div className="container mx-auto px-4 py-12 text-center">
+            <h1 className="text-2xl font-bold mb-4">Map Loading Error</h1>
+            <p className="text-muted-foreground mb-4">{error}</p>
+            <Button onClick={() => window.location.reload()}>
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Retry
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   return (
-    <div className="vanciety-page vanciety-page--map min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <Header />
 
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="vanciety-hero-topo py-10">
+        <section className="py-8 bg-gradient-to-br from-background to-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-6">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -226,7 +223,7 @@ const Map = () => {
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Discover verified camp and event anchors, view opt-in member areas, and connect with van-friendly resources
+                Discover real camping spots, track live Sprinters, connect with fellow van lifers, and find van-friendly businesses
               </p>
             </div>
 
@@ -236,7 +233,7 @@ const Map = () => {
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search camp spots, cities, areas, or verified sources..."
+                    placeholder="Search locations, cities, or coordinates..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10"
@@ -305,7 +302,7 @@ const Map = () => {
 
                   <Button variant="outline" className="flex items-center gap-2">
                     <Plus className="w-4 h-4" />
-                    Suggest Location
+                    Add Location
                   </Button>
                 </div>
               </div>
@@ -337,29 +334,22 @@ const Map = () => {
           </div>
         </section>
 
-        <section className="container mx-auto px-4">
-          <AIVanConcierge mode="trip" compact />
-        </section>
-
         {viewMode === 'map' ? (
           <div className="flex flex-col lg:flex-row min-h-[calc(100vh-200px)]">
             {/* Map Container */}
             <div className="relative flex-1">
-              {loading ? (
+              {error ? (
+                <FallbackMap
+                  locations={allMapLocations}
+                  onLocationClick={handleLocationClick}
+                />
+              ) : loading ? (
                 <div className="w-full h-full min-h-[500px] bg-muted animate-pulse flex items-center justify-center">
                   <p className="text-muted-foreground">Loading map...</p>
                 </div>
               ) : !isLoaded ? (
-                <div className="min-h-[calc(100vh-200px)] p-4">
-                  <FallbackMap
-                    locations={allMapLocations}
-                    onLocationClick={handleLocationClick}
-                  />
-                  <div className="mt-3 rounded-xl border border-border/70 bg-background/80 p-3 text-sm text-muted-foreground">
-                    {error
-                      ? `Google Maps is unavailable: ${error}`
-                      : "Google Maps is not active in this browser session. Vanciety is showing the real source/member area list as an approximate map preview."}
-                  </div>
+                <div className="w-full h-full min-h-[500px] bg-muted flex items-center justify-center">
+                  <p className="text-muted-foreground">Initializing Google Maps...</p>
                 </div>
               ) : (
                 <div
@@ -389,7 +379,7 @@ const Map = () => {
             <div className="w-full lg:w-96 bg-muted/20 p-4 overflow-y-auto max-h-[calc(100vh-200px)]">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold">
-                  {selectedFilter === "live_vans" ? "Live Van Members" : "Verified Map Sources"}
+                  {selectedFilter === "live_vans" ? "Live Sprinters" : "Locations"}
                 </h3>
                 <Badge variant="secondary">{sidebarCount} found</Badge>
               </div>
@@ -399,7 +389,7 @@ const Map = () => {
                 <div className="mb-4">
                   <h4 className="text-sm font-semibold text-primary flex items-center gap-2 mb-2">
                     <Satellite className="w-4 h-4" />
-                    Live Van Members ({liveVans.length})
+                    Live Sprinters ({liveVans.length})
                   </h4>
                   <div className="space-y-2 mb-4">
                     {liveVans.slice(0, 5).map(van => (
@@ -408,7 +398,7 @@ const Map = () => {
                         className="hover:shadow-glow transition-all duration-300 cursor-pointer border-primary/20"
                         onClick={() => handleLocationClick({
                           id: van.id,
-                          name: van.display_name || 'Van member',
+                          name: van.display_name || 'Sprinter',
                           latitude: van.latitude,
                           longitude: van.longitude,
                           type: 'live_van' as LocationType,
@@ -422,7 +412,7 @@ const Map = () => {
                               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium truncate">{van.display_name || 'Van member'}</p>
+                              <p className="text-sm font-medium truncate">{van.display_name || 'Sprinter'}</p>
                               <p className="text-xs text-muted-foreground">
                                 {van.status === 'traveling' ? 'On the road' : 'Parked'}
                                 {van.speed ? ` — ${(van.speed * 2.237).toFixed(0)} mph` : ''}
@@ -456,7 +446,7 @@ const Map = () => {
                   {liveVanLocations.length === 0 ? (
                     <div className="text-center py-8">
                       <Satellite className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                      <p className="text-muted-foreground mb-2">No van members are sharing right now.</p>
+                      <p className="text-muted-foreground mb-2">No live Sprinters sharing right now.</p>
                       <Link to="/gps">
                         <Button variant="hero" size="sm">
                           <Satellite className="w-4 h-4 mr-2" />
@@ -510,7 +500,7 @@ const Map = () => {
                     </div>
                   ) : locations.length === 0 ? (
                     <div className="text-center py-8">
-                      <p className="text-muted-foreground mb-4">No live Supabase locations found for this filter. Verified official anchors remain available in All Locations.</p>
+                      <p className="text-muted-foreground mb-4">No locations found.</p>
                       <Button variant="outline" onClick={fetchLocations}>
                         <RefreshCw className="w-4 h-4 mr-2" />
                         Refresh

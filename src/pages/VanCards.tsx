@@ -4,7 +4,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Users, AlertTriangle } from "lucide-react";
 import Header from "@/components/Header";
 import VanCard, { VanCardProfile } from "@/components/VanCard";
-import VancietyGroupImage from "@/components/VancietyGroupImage";
 
 const VanCards = () => {
   const [profiles, setProfiles] = useState<VanCardProfile[]>([]);
@@ -42,24 +41,21 @@ const VanCards = () => {
   }, []);
 
   return (
-    <div className="vanciety-page vanciety-page--cards min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <Header />
 
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
-          <div className="container mx-auto grid items-center gap-8 px-4 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="text-center lg:text-left">
+        <section className="py-12 bg-gradient-to-br from-background to-muted/30">
+          <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="bg-gradient-hero bg-clip-text text-transparent">
                 Van Cards
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Meet the members of the Vanciety community
             </p>
-            </div>
-            <VancietyGroupImage compact className="min-h-[250px]" />
           </div>
         </section>
 
