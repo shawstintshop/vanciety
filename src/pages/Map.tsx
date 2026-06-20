@@ -5,18 +5,29 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Search, MapPin, Navigation, Users, Calendar, Star,
   Locate, Share2, Eye, EyeOff, Sparkles, Truck, Filter,
-  ChevronDown, ChevronUp, X, Compass, Tent, Wrench
+  ChevronDown, ChevronUp, X, Compass, Tent, Wrench, Factory
 } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { VAN_MARKERS, EVENT_PINS, eventCategoryToMarker } from "@/components/map/VanMarkers";
+import { useRealtimeVanLocations } from "@/hooks/useRealtimeVanLocations";
+import { VAN_MARKERS, EVENT_PINS, eventCategoryToMarker, createEventPinSvg } from "@/components/map/VanMarkers";
 import EventDetailPanel, { type MapEvent } from "@/components/map/EventDetailPanel";
+import { MANUFACTURERS } from "@/data/manufacturers";
+
+// Hoisted once — the event marker icon is identical for every event.
+const EVENT_ICON = L.icon({
+  iconUrl: "/brand/van-revel-black.png",
+  iconSize: [54, 32],
+  iconAnchor: [27, 32],
+  popupAnchor: [0, -32],
+  className: "vanciety-map-marker",
+});
 
 // ── Demo Data (shown until DB has real events) ───────────────
 const DEMO_EVENTS: MapEvent[] = [
@@ -96,6 +107,16 @@ const DEMO_VAN = {
   status: "At the Van Show!",
 };
 
+// Demo live members (approximate areas) — shown on the Live Members layer
+// alongside real-time members from useRealtimeVanLocations.
+type DemoMember = { id: string; latitude: number; longitude: number; display_name: string; status: string; message?: string };
+const DEMO_MEMBERS: DemoMember[] = [
+  { id: "m1", latitude: 39.7392, longitude: -104.9903, display_name: "RockyMtnRoamer", status: "Parked", message: "Boondocking near Denver 🏔️" },
+  { id: "m2", latitude: 36.1699, longitude: -115.1398, display_name: "DesertNomad", status: "Traveling", message: "Heading to Zion" },
+  { id: "m3", latitude: 47.6062, longitude: -122.3321, display_name: "PNWVanLife", status: "Parked", message: "Coffee + rain ☕" },
+  { id: "m4", latitude: 30.2672, longitude: -97.7431, display_name: "ATXAdventures", status: "At a meetup" },
+];
+
 // ── Category filter config ──────────────────────────────────
 const CATEGORIES = [
   { id: "all", label: "All Events", icon: MapPin, color: "text-orange-500" },
@@ -112,7 +133,18 @@ const Map = () => {
   const navigate = useNavigate();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
-  const markersRef = useRef<L.Marker[]>([]);
+  // One Leaflet layer group per layer so toggling/refreshing one never churns the others.
+  const eventLayerRef = useRef<L.LayerGroup | null>(null);
+  const memberLayerRef = useRef<L.LayerGroup | null>(null);
+  const manufacturerLayerRef = useRef<L.LayerGroup | null>(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialLayer = searchParams.get("layer"); // e.g. "events" | "members" | "manufacturers"
+  const [activeLayers, setActiveLayers] = useState({
+    events: !initialLayer || initialLayer === "events",
+    members: initialLayer === "members",
+    manufacturers: initialLayer === "manufacturers",
+  });
 
   const [events, setEvents] = useState<MapEvent[]>(DEMO_EVENTS);
   const [selectedEvent, setSelectedEvent] = useState<MapEvent | null>(null);
@@ -121,6 +153,32 @@ const Map = () => {
   const [showSidebar, setShowSidebar] = useState(true);
   const [isLocating, setIsLocating] = useState(false);
   const [showLocationSharing, setShowLocationSharing] = useState(false);
+
+  // Real-time members — only subscribes when the layer is on AND the user is signed in.
+  const { liveVans } = useRealtimeVanLocations(activeLayers.members && !!user);
+  // Demo members are always available to make the layer demonstrable; real ones merge in.
+  const members = useMemo(
+    () => [
+      ...DEMO_MEMBERS,
+      ...liveVans.map((v) => ({
+        id: v.id, latitude: v.latitude, longitude: v.longitude,
+        display_name: v.display_name || "Member", status: v.status || "Sharing", message: v.message || undefined,
+      })),
+    ],
+    [liveVans]
+  );
+
+  // Toggle a layer on/off and reflect it in the URL (shareable deep links).
+  const toggleLayer = (key: "events" | "members" | "manufacturers") => {
+    setActiveLayers((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      const on = (Object.keys(next) as (keyof typeof next)[]).filter((k) => next[k]);
+      const sp = new URLSearchParams(searchParams);
+      if (on.length === 1) sp.set("layer", on[0]); else sp.delete("layer");
+      setSearchParams(sp, { replace: true });
+      return next;
+    });
+  };
 
   // Try loading real events from Supabase
   useEffect(() => {
@@ -163,14 +221,14 @@ const Map = () => {
     loadEvents();
   }, []);
 
-  // Filter events
-  const filteredEvents = events.filter((event) => {
+  // Filter events (memoized so unrelated state changes don't churn markers)
+  const filteredEvents = useMemo(() => events.filter((event) => {
     const matchesCat = selectedCategory === "all" || event.category === selectedCategory;
     const q = searchQuery.trim().toLowerCase();
     const matchesSearch = !q || [event.name, event.city, event.state, event.category, ...(event.tags || [])]
       .join(" ").toLowerCase().includes(q);
     return matchesCat && matchesSearch;
-  });
+  }), [events, selectedCategory, searchQuery]);
 
   // Initialize Leaflet map
   useEffect(() => {
@@ -200,6 +258,14 @@ const Map = () => {
 
     mapInstanceRef.current = map;
 
+    // Create one layer group per layer; add to map based on initial toggle state.
+    eventLayerRef.current = L.layerGroup();
+    memberLayerRef.current = L.layerGroup();
+    manufacturerLayerRef.current = L.layerGroup();
+    if (activeLayers.events) eventLayerRef.current.addTo(map);
+    if (activeLayers.members) memberLayerRef.current.addTo(map);
+    if (activeLayers.manufacturers) manufacturerLayerRef.current.addTo(map);
+
     // Force Leaflet to recalculate size after DOM settles
     setTimeout(() => {
       map.invalidateSize();
@@ -214,65 +280,115 @@ const Map = () => {
     };
   }, []);
 
-  // Update markers when events or filter changes
+  // Helper: add/remove a layer group from the map based on its toggle.
+  const syncLayer = (group: L.LayerGroup | null, on: boolean) => {
+    const map = mapInstanceRef.current;
+    if (!map || !group) return;
+    if (on) group.addTo(map); else map.removeLayer(group);
+  };
+
+  // ── Layer 1: Events ──────────────────────────────────────────
   useEffect(() => {
     const map = mapInstanceRef.current;
-    if (!map) return;
+    const group = eventLayerRef.current;
+    if (!map || !group) return;
+    group.clearLayers();
 
-    // Clear existing markers
-    markersRef.current.forEach((m) => m.remove());
-    markersRef.current = [];
-
-    // Add event markers
     filteredEvents.forEach((event) => {
       if (!event.latitude || !event.longitude) return;
-
-      // Primary event marker: branded Revel van icon on a light chip so the
-      // black van stays visible against the dark CartoDB map tiles (see index.css).
-      const icon = L.icon({
-        iconUrl: "/brand/van-revel-black.png",
-        iconSize: [54, 32],
-        iconAnchor: [27, 32],
-        popupAnchor: [0, -32],
-        className: "vanciety-map-marker",
-      });
-
-      const marker = L.marker([event.latitude, event.longitude], { icon })
-        .addTo(map)
+      const marker = L.marker([event.latitude, event.longitude], { icon: EVENT_ICON })
         .on("click", () => {
           setSelectedEvent(event);
           map.flyTo([event.latitude, event.longitude], Math.max(map.getZoom(), 7), { duration: 0.8 });
         });
-
-      // Tooltip on hover
       marker.bindTooltip(
         `<div style="font-weight:600;font-size:13px">${event.name}</div>
          <div style="font-size:11px;color:#666">${event.city}, ${event.state}</div>
          <div style="font-size:11px;color:#888">${new Date(event.start_date).toLocaleDateString()}</div>`,
         { direction: "top", offset: [0, -10], className: "vanciety-tooltip" }
       );
-
-      markersRef.current.push(marker);
+      group.addLayer(marker);
     });
 
-    // Add demo van marker
-    const demoVanSvg = VAN_MARKERS.demo(48);
-    const demoIcon = L.divIcon({
-      html: demoVanSvg,
-      className: "vanciety-map-marker vanciety-van-demo",
-      iconSize: [48, 48],
-      iconAnchor: [24, 24],
-    });
+    syncLayer(group, activeLayers.events);
+  }, [filteredEvents, activeLayers.events]);
 
-    const demoMarker = L.marker([DEMO_VAN.latitude, DEMO_VAN.longitude], { icon: demoIcon, zIndexOffset: 1000 })
-      .addTo(map)
+  // ── Layer 2: Live Members (real-time + demo) ─────────────────
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    const group = memberLayerRef.current;
+    if (!map || !group) return;
+    group.clearLayers();
+
+    // Vanciety HQ van
+    const hqIcon = L.divIcon({
+      html: VAN_MARKERS.demo(48), className: "vanciety-map-marker vanciety-van-demo",
+      iconSize: [48, 48], iconAnchor: [24, 24],
+    });
+    L.marker([DEMO_VAN.latitude, DEMO_VAN.longitude], { icon: hqIcon, zIndexOffset: 1000 })
       .bindTooltip(
         `<div style="font-weight:700;font-size:14px">🚐 ${DEMO_VAN.name}</div>
          <div style="font-size:12px;color:#E8722A;font-weight:600">${DEMO_VAN.status}</div>`,
-        { direction: "top", offset: [0, -20], className: "vanciety-tooltip", permanent: false }
-      );
-    markersRef.current.push(demoMarker);
-  }, [filteredEvents]);
+        { direction: "top", offset: [0, -20], className: "vanciety-tooltip" }
+      )
+      .addTo(group);
+
+    // Member vans (green glowing van; coordinates are area-snapped for privacy)
+    members.forEach((m) => {
+      const icon = L.divIcon({
+        html: VAN_MARKERS.friend(36), className: "vanciety-map-marker",
+        iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -16],
+      });
+      L.marker([m.latitude, m.longitude], { icon })
+        .bindPopup(
+          `<div style="min-width:160px">
+             <div style="font-weight:700;font-size:14px">${m.display_name}</div>
+             <div style="font-size:12px;color:#4ADE80;font-weight:600">${m.status}</div>
+             ${m.message ? `<div style="font-size:12px;color:#666;margin-top:2px">${m.message}</div>` : ""}
+             <div style="font-size:11px;color:#999;margin-top:4px">📍 Approximate area</div>
+           </div>`,
+          { className: "vanciety-tooltip" }
+        )
+        .bindTooltip(m.display_name, { direction: "top", offset: [0, -12], className: "vanciety-tooltip" })
+        .addTo(group);
+    });
+
+    syncLayer(group, activeLayers.members);
+  }, [members, activeLayers.members]);
+
+  // ── Layer 3: Manufacturers ───────────────────────────────────
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    const group = manufacturerLayerRef.current;
+    if (!map || !group) return;
+    group.clearLayers();
+
+    MANUFACTURERS.forEach((m) => {
+      const icon = L.divIcon({
+        html: createEventPinSvg("#A78BFA", "🏭", 34), className: "vanciety-map-marker",
+        iconSize: [34, 44], iconAnchor: [17, 44], popupAnchor: [0, -44],
+      });
+      L.marker([m.latitude, m.longitude], { icon })
+        .on("click", () => navigate(`/manufacturers/${m.slug}`))
+        .bindTooltip(
+          `<div style="font-weight:600;font-size:13px">${m.name}</div>
+           <div style="font-size:11px;color:#888">${m.city}, ${m.state}</div>
+           <div style="font-size:11px;color:#A78BFA">View brand →</div>`,
+          { direction: "top", offset: [0, -40], className: "vanciety-tooltip" }
+        )
+        .addTo(group);
+    });
+
+    syncLayer(group, activeLayers.manufacturers);
+  }, [activeLayers.manufacturers, navigate]);
+
+  // Deep link: /map?layer=manufacturers&focus=:slug flies to that brand.
+  useEffect(() => {
+    const focus = searchParams.get("focus");
+    if (!focus || !mapInstanceRef.current) return;
+    const m = MANUFACTURERS.find((x) => x.slug === focus);
+    if (m) mapInstanceRef.current.flyTo([m.latitude, m.longitude], 7, { duration: 1 });
+  }, [searchParams]);
 
   // Fly to user location
   const handleLocateMe = useCallback(() => {
@@ -341,7 +457,37 @@ const Map = () => {
                 </Button>
               </div>
 
-              {/* Category filter pills */}
+              {/* Layer toggles (multi-select) */}
+              <div className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-hide border-b border-border/40">
+                {[
+                  { key: "events" as const, label: "Events", icon: Calendar, count: filteredEvents.length, dot: "bg-orange-500" },
+                  { key: "members" as const, label: "Live Members", icon: Users, count: members.length, dot: "bg-green-500" },
+                  { key: "manufacturers" as const, label: "Manufacturers", icon: Factory, count: MANUFACTURERS.length, dot: "bg-violet-400" },
+                ].map((layer) => {
+                  const Icon = layer.icon;
+                  const on = activeLayers[layer.key];
+                  const disabled = layer.key === "members" && !user;
+                  return (
+                    <Button
+                      key={layer.key}
+                      variant={on ? "hero" : "outline"}
+                      size="sm"
+                      disabled={disabled}
+                      onClick={() => toggleLayer(layer.key)}
+                      title={disabled ? "Sign in to see live members" : undefined}
+                      className="flex-shrink-0 text-xs"
+                    >
+                      <span className={`mr-1.5 inline-block h-2 w-2 rounded-full ${layer.dot}`} />
+                      <Icon className="w-3.5 h-3.5 mr-1" />
+                      {layer.label}
+                      <span className="ml-1 opacity-60">({layer.count})</span>
+                    </Button>
+                  );
+                })}
+              </div>
+
+              {/* Category filter pills — only when the Events layer is on */}
+              {activeLayers.events && (
               <div className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-hide">
                 {CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
@@ -362,15 +508,20 @@ const Map = () => {
                   );
                 })}
               </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* ── Event Count Badge (floating) ───────────────── */}
+        {/* ── Layer Count Badge (floating, layer-aware) ──── */}
         <div className="absolute bottom-24 left-4 z-[500]">
           <Badge className="bg-background/90 backdrop-blur-xl text-foreground shadow-lg border border-border/60 text-sm px-4 py-2">
             <Sparkles className="w-4 h-4 mr-2 text-orange-500" />
-            {filteredEvents.length} events across the USA
+            {[
+              activeLayers.events && `${filteredEvents.length} events`,
+              activeLayers.members && `${members.length} members`,
+              activeLayers.manufacturers && `${MANUFACTURERS.length} brands`,
+            ].filter(Boolean).join(" · ") || "No layers selected"}
           </Badge>
         </div>
 

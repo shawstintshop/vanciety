@@ -134,8 +134,8 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Events — direct */}
-          <Link to="/news" className={navLinkClass(isActive("/news"))}>
+          {/* Events — now lives on the merged map */}
+          <Link to="/events" className={navLinkClass(isActive("/events"))}>
             <Calendar className="h-4 w-4" />
             Events
           </Link>
@@ -282,7 +282,7 @@ const Header = () => {
               {[
                 { label: "Guides & Builds", to: "/van-intelligence", icon: Brain },
                 { label: "How-To Videos", to: "/videos", icon: Video },
-                { label: "Events", to: "/news", icon: Calendar },
+                { label: "Events", to: "/events", icon: Calendar },
                 { label: "Map", to: "/map", icon: MapPin },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
                 { label: "Find Members", to: "/map", icon: Users },
