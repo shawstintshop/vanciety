@@ -1,22 +1,17 @@
-type TopoBackgroundProps = {
-  className?: string;
-  opacity?: number;
-};
+import React from 'react';
 
-const TopoBackground = ({ className = '', opacity = 0.22 }: TopoBackgroundProps) => {
-  return (
-    <div
-      aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 ${className}`}
-      style={{
-        backgroundImage: "url('/brand/van-topo-dark.png')",
-        backgroundRepeat: 'repeat',
-        backgroundSize: '220px auto',
-        backgroundPosition: 'center',
-        opacity,
-      }}
-    />
-  );
-};
+const TopoBackground = () => (
+  <div
+    className="absolute inset-0 w-full h-full"
+    style={{
+      backgroundImage: 'url(/images/topo-background.avif)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      opacity: 0.15,
+      zIndex: 0,
+    }}
+  />
+);
 
 export default TopoBackground;

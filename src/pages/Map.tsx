@@ -8,7 +8,7 @@ import {
   ChevronDown, ChevronUp, X, Compass, Tent, Wrench, Factory
 } from "lucide-react";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
@@ -131,6 +131,13 @@ const Map = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEventsPage = location.pathname === "/events";
+  const bannerImage = isEventsPage ? "/images/vanciety-large-van-event.jpg" : "/images/van-tech-shop.jpg";
+  const bannerTitle = isEventsPage ? "2026 Van Life Events" : "Mechanics & Map";
+  const bannerSubtitle = isEventsPage
+    ? "Discover meetups, rallies, workshops, and van gatherings across the country."
+    : "Find trusted van tech shops, specialists, and community map layers in one place.";
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   // One Leaflet layer group per layer so toggling/refreshing one never churns the others.
@@ -417,11 +424,28 @@ const Map = () => {
   events.forEach((e) => { catCounts[e.category] = (catCounts[e.category] || 0) + 1; });
 
   return (
-    <div className="fixed inset-0 bg-background flex flex-col">
+    <div className="fixed inset-0 bg-background flex flex-col pt-16">
       <Header />
 
+      <div className="relative shrink-0 overflow-hidden border-b border-white/10 h-40 md:h-48">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bannerImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+        <div className="relative z-10 container mx-auto flex h-full items-end px-4 pb-5 md:pb-6">
+          <div className="max-w-3xl text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-lime-400">
+              {isEventsPage ? "Events" : "Map & Mechanics"}
+            </p>
+            <h1 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">{bannerTitle}</h1>
+            <p className="mt-2 max-w-2xl text-sm text-white/80 md:text-base">{bannerSubtitle}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Full-screen map layout */}
-      <div className="flex-1 relative" style={{ marginTop: '64px' }}>
+      <div className="flex-1 relative">
         
         {/* ── Map Container ─────────────────────────────── */}
         <div ref={mapContainerRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%' }} />

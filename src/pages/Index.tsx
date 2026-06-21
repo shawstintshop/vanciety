@@ -13,7 +13,6 @@ import VancietyLogo from "@/components/VancietyLogo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import heroImage from "@/assets/hero-van-lake.jpg";
 
 const LIME = "text-lime-500";
 
@@ -144,17 +143,18 @@ const Index = () => {
       <main className="pt-16">
         {/* ════════ SECTION 1 — HERO ════════ */}
         <section className="relative isolate overflow-hidden border-b border-white/10">
-          <div className="absolute inset-0 z-0">
-            <img src={heroImage} alt="Van in the mountains" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gray-950/85" />
-            <div className="absolute inset-0 bg-gradient-to-b from-gray-950/70 via-gray-950/80 to-gray-950" />
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: "url(/images/sprinter-red-rocks-arch.png)" }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent" />
           </div>
-          <TopoBackground className="z-0" opacity={0.18} />
+          <TopoBackground />
 
           <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
             {/* Top row: brand lockup + audience checklist */}
             <div className="mb-12 flex flex-col items-start justify-between gap-8 lg:flex-row">
-              <VancietyLogo size="lg" />
+              <VancietyLogo />
 
               <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
                 {HERO_CHECKLIST.map((item) => (
@@ -198,21 +198,28 @@ const Index = () => {
           <div className="container mx-auto grid gap-6 px-4 lg:grid-cols-12">
             {/* LEFT — For Van Owners */}
             <div className="lg:col-span-3">
-              <div className="h-full rounded-2xl bg-gray-100 p-6 text-gray-900">
-                <Badge className="mb-4 bg-lime-500 text-gray-950 hover:bg-lime-500">For Van Owners</Badge>
-                <ul className="space-y-5">
-                  {OWNER_FEATURES.map(({ icon: Icon, title, desc }) => (
-                    <li key={title} className="flex gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-lime-500/15 text-lime-600">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="font-semibold">{title}</p>
-                        <p className="text-sm text-gray-600">{desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+              <div className="relative isolate h-full overflow-hidden rounded-2xl bg-gray-100 p-6 text-white">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: "url(/images/vans-camping-forest.jpg)" }}
+                />
+                <div className="absolute inset-0 bg-black/55" />
+                <div className="relative z-10">
+                  <Badge className="mb-4 bg-lime-500 text-gray-950 hover:bg-lime-500">For Van Owners</Badge>
+                  <ul className="space-y-5">
+                    {OWNER_FEATURES.map(({ icon: Icon, title, desc }) => (
+                      <li key={title} className="flex gap-3">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-lime-500/20 text-lime-300">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <div>
+                          <p className="font-semibold text-white">{title}</p>
+                          <p className="text-sm text-white/75">{desc}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -290,60 +297,81 @@ const Index = () => {
                     ))}
                   </div>
 
-                  {/* Upcoming Events */}
-                  <div className="mt-6 flex items-center justify-between">
-                    <h4 className="font-bold">Upcoming Events Near You</h4>
-                    <Link to={R.events} className={`text-xs font-semibold ${LIME} hover:underline`}>
-                      View All
-                    </Link>
+                <div className="mt-6 rounded-2xl overflow-hidden border border-white/10 bg-gray-950/60">
+                  <div
+                    className="relative isolate p-5 text-white"
+                    style={{ backgroundImage: "url(/images/vanciety-large-van-event.jpg)", backgroundSize: 'cover', backgroundPosition: 'center' }}
+                  >
+                    <div className="absolute inset-0 bg-black/55" />
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-bold">Upcoming Events Near You</h4>
+                        <Link to={R.events} className={`text-xs font-semibold ${LIME} hover:underline`}>
+                          View All
+                        </Link>
+                      </div>
+                      <div className="mt-3 space-y-2">
+                        {EVENTS.map((e) => (
+                          <Link
+                            key={e.name}
+                            to={R.events}
+                            className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 p-3 transition-colors hover:border-lime-500/40"
+                          >
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-lime-500/15 text-lime-400">
+                              <Calendar className="h-5 w-5" />
+                            </span>
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-sm font-semibold text-white">{e.name}</p>
+                              <p className="text-xs text-white/75">{e.loc}</p>
+                            </div>
+                            <span className="shrink-0 text-xs text-white/65">{e.date}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-3 space-y-2">
-                    {EVENTS.map((e) => (
-                      <Link
-                        key={e.name}
-                        to={R.events}
-                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3 transition-colors hover:border-lime-500/40"
-                      >
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-lime-500/15 text-lime-400">
-                          <Calendar className="h-5 w-5" />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate text-sm font-semibold">{e.name}</p>
-                          <p className="text-xs text-gray-400">{e.loc}</p>
-                        </div>
-                        <span className="shrink-0 text-xs text-gray-400">{e.date}</span>
-                      </Link>
-                    ))}
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
 
             {/* RIGHT — For Vendors & Companies */}
             <div className="lg:col-span-3">
-              <div className="h-full rounded-2xl bg-gray-100 p-6 text-gray-900">
-                <Badge className="mb-4 bg-gray-900 text-white hover:bg-gray-900">For Vendors &amp; Companies</Badge>
-                <ul className="space-y-5">
-                  {VENDOR_FEATURES.map(({ icon: Icon, title, desc }) => (
-                    <li key={title} className="flex gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gray-900/10 text-gray-900">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="font-semibold">{title}</p>
-                        <p className="text-sm text-gray-600">{desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+              <div className="relative isolate h-full overflow-hidden rounded-2xl bg-gray-100 p-6 text-white">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: "url(/images/sprinter-specialists-shop.jpg)" }}
+                />
+                <div className="absolute inset-0 bg-black/55" />
+                <div className="relative z-10">
+                  <Badge className="mb-4 bg-gray-900 text-white hover:bg-gray-900">For Vendors &amp; Companies</Badge>
+                  <ul className="space-y-5">
+                    {VENDOR_FEATURES.map(({ icon: Icon, title, desc }) => (
+                      <li key={title} className="flex gap-3">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/10 text-white">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <div>
+                          <p className="font-semibold text-white">{title}</p>
+                          <p className="text-sm text-white/75">{desc}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* ════════ SECTION 3 — HOW IT WORKS ════════ */}
-        <section className="bg-white py-16 text-gray-900">
-          <div className="container mx-auto px-4">
+        <section className="relative isolate overflow-hidden py-16 text-gray-900">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url(/images/vans-driveway-meetup.jpg)" }}
+          />
+          <div className="absolute inset-0 bg-white/80" />
+          <div className="relative z-10 container mx-auto px-4">
             <div className="grid gap-10 lg:grid-cols-12">
               {/* Steps */}
               <div className="lg:col-span-7">
