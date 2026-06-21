@@ -20,7 +20,7 @@ const NotFound = () => {
       <main className="vanciety-hero-topo flex min-h-screen items-center justify-center px-4 pt-24 text-center">
         <div className="max-w-lg">
           <div className="mb-6 flex justify-center">
-            <VancietyLogo />
+            <VancietyLogo className="h-16 w-[260px] max-w-full sm:h-18 sm:w-[280px]" />
           </div>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary-glow">Route not found</p>
           <h1 className="mb-4 text-5xl font-black text-foreground">404</h1>

@@ -49,7 +49,7 @@ const Auth = () => {
         <Card className="vanciety-topo-card w-full max-w-md border-border/80 bg-card/95 shadow-hero">
           <CardHeader className="text-center">
             <div className="mb-4 flex justify-center">
-              <VancietyLogo />
+              <VancietyLogo className="h-16 w-[260px] max-w-full sm:h-18 sm:w-[280px]" />
             </div>
             <div className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary-glow">
               <ShieldCheck className="h-3.5 w-3.5" />

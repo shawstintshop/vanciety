@@ -21,42 +21,51 @@ const SUGGESTIONS = [
   { icon: Users, text: 'Find van lifers in my area' },
 ];
 
+const VANA_FRAMES = [
+  '/images/vana/vana-friendly-welcome.jpg',
+  '/images/vana/vana-route-guidance.jpg',
+  '/images/vana/vana-problem-solving.jpg',
+  '/images/vana/vana-tech-support.jpg',
+  '/images/vana/vana-community-finder.jpg',
+  '/images/vana/vana-adventure-ready.jpg',
+];
+
 const GUIDE_CARDS = [
   {
     title: '2022 Sprinter VS30 V6 Diesel EGR Valve',
     description: 'Diagnose, clean, remove, inspect, and verify the EGR valve with real videos and official references.',
     to: '/van-intelligence?guide=egr-v6-diesel',
-    image: '/images/vanciety-van-tech-mechanics.jpg',
+    image: VANA_FRAMES[0],
   },
   {
     title: 'Van events and real meetups',
     description: 'Jump to official events, shows, and trip-planning sources first.',
     to: '/events',
-    image: '/images/vanciety-large-van-event.jpg',
+    image: VANA_FRAMES[1],
   },
   {
     title: 'Driveway meetups and member help',
     description: 'Use the friend-finder path for member-based help and driveway style meetups.',
     to: '/friend-finder',
-    image: '/images/vanciety-driveway-meetup.jpg',
+    image: VANA_FRAMES[2],
   },
   {
     title: 'Builds, community, and questions',
     description: 'Open the forum-style path for questions, build feedback, and member discussion.',
     to: '/forum',
-    image: '/images/vanciety-group-collage.jpg',
+    image: VANA_FRAMES[3],
   },
   {
     title: 'Watch real videos',
     description: 'Go straight to the video library for real install and maintenance videos.',
     to: '/videos',
-    image: '/images/vanciety-image-library.jpg',
+    image: VANA_FRAMES[4],
   },
   {
     title: 'About the platform',
     description: 'See what Vanciety is and how the system is organized.',
     to: '/about',
-    image: '/images/vanciety-about-image-library.jpg',
+    image: VANA_FRAMES[5],
   },
 ];
 

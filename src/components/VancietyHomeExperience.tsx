@@ -74,26 +74,26 @@ const VancietyHomeExperience = () => {
 
         <div className="mb-12 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <VancietyConceptVisual
-            src="/images/vanciety-large-van-event.jpg"
-            alt="Vanciety large van event concept with thousands of van people, vendor tents, and rigs in a forest venue"
-            title="From huge van events to local member meetups"
-            caption="Vanciety should show the big picture: official event discovery, member planning, and the feeling of thousands of people gathering around the same van obsession."
-            badge="Events all over the USA"
+            src="/images/vana/vana-friendly-welcome.jpg"
+            alt="Vana friendly welcome image"
+            title="Ask Vana first"
+            caption="The home page should start with Vana as the route guide, then send people to the right van repair, events, videos, or help page."
+            badge="Home assistant"
           />
           <div className="grid gap-4 sm:grid-cols-2">
             <VancietyConceptVisual
               compact
-              src="/images/vanciety-driveway-meetup.jpg"
-              alt="Vanciety driveway van meetup concept with vans parked at a member home"
-              title="Driveway surfing"
-              caption="Meet up at member homes safely: approximate area first, direct message second, exact address only one-to-one."
-              badge="Member meetups"
+              src="/images/vana/vana-route-guidance.jpg"
+              alt="Vana route guidance image"
+              title="Route guidance"
+              caption="Help visitors get to the correct guide immediately instead of wandering around the site."
+              badge="Guidance"
             />
             <VancietyConceptVisual
               compact
-              src="/images/vanciety-van-tech-mechanics.jpg"
-              alt="Vanciety van help and mechanics concept with vans at a service shop"
-              title="Van Help + Mechanics"
+              src="/images/vana/vana-tech-support.jpg"
+              alt="Vana tech support image"
+              title="Van help + mechanics"
               caption="Find repair help, trusted shops, upfitters, parts questions, and service prep in one clean help flow."
               badge="Van help"
             />

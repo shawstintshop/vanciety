@@ -256,18 +256,21 @@ const Index = () => {
                   <div className="mt-6 grid gap-4 lg:grid-cols-2">
                     <Link to="/van-intelligence?guide=egr-v6-diesel" className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-lime-500/40 hover:bg-lime-500/10">
                       <div className="aspect-[16/9] overflow-hidden">
-                        <img src="/images/vanciety-van-tech-mechanics.jpg" alt="Sprinter van tech shop and EGR guide" className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
+                        <img src="/images/vana/vana-friendly-welcome.jpg" alt="Vana friendly welcome" className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
                       </div>
                       <div className="p-4">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400">Start here</p>
-                        <p className="mt-1 text-sm font-semibold text-white">2022 Sprinter VS30 V6 Diesel EGR Valve</p>
-                        <p className="mt-1 text-sm text-gray-300">The exact repair guide visitors need first.</p>
+                        <p className="mt-1 text-sm font-semibold text-white">Ask Vana first</p>
+                        <p className="mt-1 text-sm text-gray-300">She sends visitors to the exact repair, events, video, or help path.</p>
                       </div>
                     </Link>
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                       {[
-                        { title: "Real videos", image: "/images/vanciety-large-van-event.jpg", to: "/videos" },
-                        { title: "Repair help + mechanics", image: "/images/vanciety-driveway-meetup.jpg", to: "/vendors" },
+                        { title: "Route guidance", image: "/images/vana/vana-route-guidance.jpg", to: "/van-intelligence?guide=egr-v6-diesel" },
+                        { title: "Tech support", image: "/images/vana/vana-tech-support.jpg", to: "/vendors" },
+                        { title: "Community finder", image: "/images/vana/vana-community-finder.jpg", to: "/friend-finder" },
+                        { title: "Problem solving", image: "/images/vana/vana-problem-solving.jpg", to: "/forum" },
+                        { title: "Adventure ready", image: "/images/vana/vana-adventure-ready.jpg", to: "/videos" },
                       ].map((item) => (
                         <Link key={item.title} to={item.to} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-lime-500/40 hover:bg-lime-500/10">
                           <div className="aspect-[16/9] overflow-hidden">

@@ -70,7 +70,7 @@ const Header = () => {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/88 shadow-[0_10px_40px_rgba(0,0,0,.24)] backdrop-blur-xl">
       <div className="container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
-        <VancietyLogo />
+        <VancietyLogo className="h-14 w-[220px] max-w-[240px] sm:h-16 sm:w-[250px] md:h-18 md:w-[270px]" />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary navigation">
