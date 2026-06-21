@@ -3,9 +3,8 @@ import type { LucideIcon } from "lucide-react";
 import {
   Check, Bot, Search, Calendar, Wrench, User, Users, Globe, Megaphone,
   BarChart3, ShoppingBag, Building2, Video, Star, ArrowRight, UserPlus,
-  Compass, Mountain, Tent, Truck, Caravan, TreePine, Crown, Ticket,
-  Link2, Sparkles, Cpu, Send, MessageSquare, Image as ImageIcon,
-  Map as MapIcon, DollarSign,
+  Compass, Mountain, Tent, Sparkles, Cpu, Send, MessageSquare, Image as ImageIcon,
+  Map as MapIcon,
 } from "lucide-react";
 import Header from "@/components/Header";
 import TopoBackground from "@/components/TopoBackground";
@@ -102,23 +101,6 @@ const ECOSYSTEM: { icon: LucideIcon; label: string }[] = [
   { icon: ShoppingBag, label: "Marketplace" },
 ];
 
-const REVENUE: { icon: LucideIcon; title: string; desc: string }[] = [
-  { icon: Crown, title: "Vendor Subscriptions", desc: "Monthly plans with unlimited features" },
-  { icon: DollarSign, title: "Marketplace Fees", desc: "2-5% on transactions" },
-  { icon: Star, title: "Featured Listings & Ads", desc: "Premium placement in search & categories" },
-  { icon: Ticket, title: "Event Ticket & Booth Fees", desc: "Sell tickets, booths and sponsorships" },
-  { icon: Link2, title: "Affiliate Partnerships", desc: "Earn from products, insurance, memberships" },
-  { icon: Sparkles, title: "Premium User Memberships", desc: "Advanced tools, AI assistant, trip planning" },
-];
-
-const PHASES: { icon: LucideIcon; label: string; phase: string }[] = [
-  { icon: Caravan, label: "VAN LIFE", phase: "Phase 1" },
-  { icon: Compass, label: "OVERLANDING", phase: "Phase 2" },
-  { icon: Truck, label: "RV LIFE", phase: "Phase 3" },
-  { icon: Tent, label: "CAMPING", phase: "Phase 4" },
-  { icon: Mountain, label: "HIKING", phase: "Phase 5" },
-  { icon: TreePine, label: "OUTDOOR LIFE", phase: "And Beyond" },
-];
 
 const STATS: { icon: LucideIcon; value: string; label: string }[] = [
   { icon: Tent, value: "10,000+", label: "Products" },
@@ -515,40 +497,17 @@ const Index = () => {
               </div>
             </div>
 
-            {/* CENTER — Revenue streams */}
-            <div className="rounded-2xl border border-white/10 bg-gray-950 p-6">
+            {/* RIGHT — Stats */}
+            <div className="rounded-2xl border border-white/10 bg-gray-950 p-6 lg:col-span-2">
               <h3 className="text-xl font-black">
-                Revenue <span className={LIME}>Streams</span>
+                VanCiety by the <span className={LIME}>Numbers</span>
               </h3>
-              <ul className="mt-5 space-y-4">
-                {REVENUE.map(({ icon: Icon, title, desc }) => (
-                  <li key={title} className="flex gap-3">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-lime-500/15 text-lime-400">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold">{title}</p>
-                      <p className="text-xs text-gray-400">{desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* RIGHT — Expand into every adventure market */}
-            <div className="rounded-2xl border border-white/10 bg-gray-950 p-6">
-              <h3 className="text-xl font-black">
-                Expand Into Every <span className={LIME}>Adventure Market</span>
-              </h3>
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                {PHASES.map(({ icon: Icon, label, phase }, idx) => (
-                  <div key={label} className="relative rounded-xl border border-white/10 bg-white/5 p-4">
-                    <Icon className="h-6 w-6 text-lime-400" />
-                    <p className="mt-2 text-sm font-bold">{label}</p>
-                    <p className="text-[11px] uppercase tracking-wide text-gray-400">{phase}</p>
-                    {idx < PHASES.length - 1 && (
-                      <ArrowRight className="absolute -right-2.5 top-1/2 hidden h-4 w-4 -translate-y-1/2 text-lime-500 sm:block" />
-                    )}
+              <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                {STATS.map(({ icon: Icon, value, label }) => (
+                  <div key={label} className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+                    <Icon className={`mx-auto mb-2 h-5 w-5 ${LIME}`} />
+                    <p className="text-xl font-black">{value}</p>
+                    <p className="text-xs text-gray-400">{label}</p>
                   </div>
                 ))}
               </div>
