@@ -19,6 +19,17 @@ export default {
 		},
 		extend: {
 			colors: {
+				/* Dark-topo earthy highlights */
+				moss: {
+					DEFAULT: '#4a7c59',
+					light: '#86b29a',
+					dark: '#33543d',
+					glow: '#5f9d74'
+				},
+				gold: {
+					DEFAULT: '#8b6914',
+					light: '#c79a3a'
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
