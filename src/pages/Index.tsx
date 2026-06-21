@@ -8,6 +8,8 @@ import {
   Map as MapIcon, DollarSign,
 } from "lucide-react";
 import Header from "@/components/Header";
+import TopoBackground from "@/components/TopoBackground";
+import VancietyLogo from "@/components/VancietyLogo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -141,24 +143,18 @@ const Index = () => {
 
       <main className="pt-16">
         {/* ════════ SECTION 1 — HERO ════════ */}
-        <section className="relative overflow-hidden border-b border-white/10">
+        <section className="relative isolate overflow-hidden border-b border-white/10">
           <div className="absolute inset-0 z-0">
             <img src={heroImage} alt="Van in the mountains" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gray-950/85" />
             <div className="absolute inset-0 bg-gradient-to-b from-gray-950/70 via-gray-950/80 to-gray-950" />
           </div>
+          <TopoBackground className="z-0" opacity={0.18} />
 
           <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
             {/* Top row: brand lockup + audience checklist */}
             <div className="mb-12 flex flex-col items-start justify-between gap-8 lg:flex-row">
-              <div>
-                <div className="text-2xl font-black tracking-tight">
-                  VAN<span className={LIME}>CIETY</span>
-                </div>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                  The Van Industry Operating System
-                </p>
-              </div>
+              <VancietyLogo size="lg" />
 
               <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
                 {HERO_CHECKLIST.map((item) => (
