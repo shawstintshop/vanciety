@@ -171,10 +171,10 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Vanny — direct */}
+          {/* Vana — direct */}
           <Link to="/ai" className={navLinkClass(isActive("/ai"))}>
             <Sparkles className="h-4 w-4" />
-            Vanny
+            Vana
           </Link>
 
         </nav>
@@ -286,7 +286,7 @@ const Header = () => {
                 { label: "Map", to: "/map", icon: MapPin },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
                 { label: "Find Members", to: "/map", icon: Users },
-                { label: "Vanny AI", to: "/ai", icon: Sparkles },
+                { label: "Vana AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
                   key={label}

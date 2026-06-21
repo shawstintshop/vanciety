@@ -66,11 +66,20 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ compact = false }) => {
     <Card className={`bg-card/60 border border-border/60 ${compact ? '' : 'w-full max-w-2xl mx-auto'}`}>
       <CardContent className={`${compact ? 'p-4' : 'p-6'}`}>
         {/* Header */}
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
-            <Brain className="w-4 h-4 text-primary" />
+        <div className="mb-4 flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5">
+            <img
+              src="/images/vanciety-sprinter-society.png"
+              alt="Vana mascot"
+              className="h-full w-full object-contain"
+            />
           </div>
-          <span className="text-sm font-medium text-foreground">Vanny — van life assistant</span>
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
+              <Brain className="w-4 h-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground">Vana — van life assistant</span>
+          </div>
         </div>
 
         {/* Messages */}

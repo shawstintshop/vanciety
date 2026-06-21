@@ -404,7 +404,7 @@ const Index = () => {
                       </span>
                       <div className="max-w-[85%] rounded-2xl rounded-tl-sm border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-200">
                         <span className="flex items-center gap-1 text-lime-400">
-                          <Sparkles className="h-3.5 w-3.5" /> Vanny is typing
+                          <Sparkles className="h-3.5 w-3.5" /> Vana is typing
                           <span className="ml-1 inline-flex gap-0.5">
                             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
                             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
@@ -417,7 +417,7 @@ const Index = () => {
                       <input
                         type="text"
                         readOnly
-                        placeholder="Ask Vanny anything..."
+                        placeholder="Ask Vana anything..."
                         className="min-w-0 flex-1 bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-500"
                       />
                       <Send className="h-4 w-4 text-lime-400" />
