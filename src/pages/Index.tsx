@@ -136,7 +136,7 @@ const Index = () => {
           <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
             {/* Top row: brand lockup + audience checklist */}
             <div className="mb-12 flex flex-col items-start justify-between gap-8 lg:flex-row">
-              <VancietyLogo />
+              <div className="h-12" />
 
               <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
                 {HERO_CHECKLIST.map((item) => (
