@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import TopoBackground from "@/components/TopoBackground";
+import AIVanConcierge from "@/components/AIVanConcierge";
 import VancietyLogo from "@/components/VancietyLogo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -252,8 +253,36 @@ const Index = () => {
                     <span className="text-sm text-gray-400">Search for products, companies, events...</span>
                   </div>
 
+                  <div className="mt-6 grid gap-4 lg:grid-cols-2">
+                    <Link to="/van-intelligence?guide=egr-v6-diesel" className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                      <div className="aspect-[16/9] overflow-hidden">
+                        <img src="/images/vanciety-van-tech-mechanics.jpg" alt="Sprinter van tech shop and EGR guide" className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
+                      </div>
+                      <div className="p-4">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400">Start here</p>
+                        <p className="mt-1 text-sm font-semibold text-white">2022 Sprinter VS30 V6 Diesel EGR Valve</p>
+                        <p className="mt-1 text-sm text-gray-300">The exact repair guide visitors need first.</p>
+                      </div>
+                    </Link>
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                      {[
+                        { title: "Real videos", image: "/images/vanciety-large-van-event.jpg", to: "/videos" },
+                        { title: "Repair help + mechanics", image: "/images/vanciety-driveway-meetup.jpg", to: "/vendors" },
+                      ].map((item) => (
+                        <Link key={item.title} to={item.to} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                          <div className="aspect-[16/9] overflow-hidden">
+                            <img src={item.image} alt={item.title} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
+                          </div>
+                          <div className="p-4">
+                            <p className="text-sm font-semibold text-white">{item.title}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Recommended For You */}
-                  <div className="mt-6 flex items-center justify-between">
+<div className="mt-6 flex items-center justify-between">
                     <h4 className="font-bold">Recommended For You</h4>
                     <Link to={R.products} className={`text-xs font-semibold ${LIME} hover:underline`}>
                       View All
@@ -387,41 +416,11 @@ const Index = () => {
                     AI Powered Everything
                   </span>
                   <p className="mt-4 text-gray-300">
-                    AI understands your van, your style, and your goals to deliver smarter
-                    recommendations, automate marketing, answer questions and save time.
+                    Ask Vana first. She routes visitors to the exact guide, video, event, or repair page they need before they start scrolling.
                   </p>
 
-                  {/* Floating chat mockup */}
-                  <div className="mt-6 space-y-3 rounded-2xl border border-white/10 bg-gray-950/60 p-4">
-                    <div className="flex justify-end">
-                      <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-lime-500 px-4 py-2 text-sm font-medium text-gray-950">
-                        What's the best battery for my 2020 Sprinter?
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lime-500/15 text-lime-400">
-                        <Bot className="h-4 w-4" />
-                      </span>
-                      <div className="max-w-[85%] rounded-2xl rounded-tl-sm border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-200">
-                        <span className="flex items-center gap-1 text-lime-400">
-                          <Sparkles className="h-3.5 w-3.5" /> Vana is typing
-                          <span className="ml-1 inline-flex gap-0.5">
-                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
-                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
-                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2">
-                      <input
-                        type="text"
-                        readOnly
-                        placeholder="Ask Vana anything..."
-                        className="min-w-0 flex-1 bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-500"
-                      />
-                      <Send className="h-4 w-4 text-lime-400" />
-                    </div>
+                  <div className="mt-6">
+                    <AIVanConcierge compact />
                   </div>
                 </div>
               </div>
