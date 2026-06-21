@@ -13,6 +13,10 @@ import Vendors from "./pages/Vendors";
 import VendorSignup from "./pages/VendorSignup";
 import Manufacturers from "./pages/Manufacturers";
 import ManufacturerDetail from "./pages/ManufacturerDetail";
+import Companies from "./pages/Companies";
+import CompanyProfile from "./pages/CompanyProfile";
+import VendorDashboard from "./pages/VendorDashboard";
+import ForVendors from "./pages/ForVendors";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import GPSTracking from "./pages/GPSTracking";
@@ -50,6 +54,10 @@ const App = () => (
               <Route path="/vendor-signup" element={<VendorSignup />} />
               <Route path="/manufacturers" element={<Manufacturers />} />
               <Route path="/manufacturers/:slug" element={<ManufacturerDetail />} />
+              <Route path="/companies" element={<Companies />} />
+              <Route path="/companies/:slug" element={<CompanyProfile />} />
+              <Route path="/for-vendors" element={<ForVendors />} />
+              <Route path="/dashboard/vendor" element={<VendorDashboard />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/gps" element={<GPSTracking />} />
               <Route path="/van-cards" element={<VanCards />} />

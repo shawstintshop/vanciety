@@ -30,6 +30,8 @@ import {
   Tag,
   PlusCircle,
   Package,
+  Building2,
+  Store,
 } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -146,6 +148,12 @@ const Header = () => {
             Map
           </Link>
 
+          {/* Companies directory — direct */}
+          <Link to="/companies" className={navLinkClass(isGroupActive(["/companies"]))}>
+            <Building2 className="h-4 w-4" />
+            Companies
+          </Link>
+
           {/* Community dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -195,6 +203,16 @@ const Header = () => {
               aria-label="Search Vanciety"
             />
           </form>
+
+          {/* For Vendors CTA */}
+          <Button
+            size="sm"
+            className="hidden items-center gap-2 sm:flex bg-lime-500 text-gray-950 hover:bg-lime-400"
+            onClick={() => navigate("/for-vendors")}
+          >
+            <Store className="h-4 w-4" />
+            For Vendors
+          </Button>
 
           {/* Sell CTA */}
           <Button
