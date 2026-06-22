@@ -29,30 +29,41 @@ const YOUTUBE_CHANNELS = [
 ];
 
 const NEWS_RSS_FEEDS = [
+  // Direct publication feeds — include og:image in RSS or have scrapable pages
   {
-    url: "https://news.google.com/rss/search?q=van+life&hl=en-US&gl=US&ceid=US:en",
+    url: "https://www.outsideonline.com/feed/",
     category: "news",
-    source: "Google News",
+    source: "Outside Magazine",
   },
   {
-    url: "https://news.google.com/rss/search?q=stealth+camping+van&hl=en-US&gl=US&ceid=US:en",
-    category: "stealth",
-    source: "Google News",
-  },
-  {
-    url: "https://news.google.com/rss/search?q=overland+van+build&hl=en-US&gl=US&ceid=US:en",
+    url: "https://expeditionportal.com/feed/",
     category: "overland",
-    source: "Google News",
+    source: "Expedition Portal",
   },
   {
-    url: "https://news.google.com/rss/search?q=van+conversion+build&hl=en-US&gl=US&ceid=US:en",
+    url: "https://www.motortrend.com/rss/news/",
+    category: "news",
+    source: "MotorTrend",
+  },
+  {
+    url: "https://www.caranddriver.com/rss/all.xml/",
+    category: "news",
+    source: "Car and Driver",
+  },
+  {
+    url: "https://www.thedrive.com/feed",
+    category: "news",
+    source: "The Drive",
+  },
+  {
+    url: "https://www.autoevolution.com/rss/news.xml",
     category: "builds",
-    source: "Google News",
+    source: "autoevolution",
   },
   {
-    url: "https://news.google.com/rss/search?q=van+camping+tips&hl=en-US&gl=US&ceid=US:en",
-    category: "camping",
-    source: "Google News",
+    url: "https://www.autoblog.com/rss.xml",
+    category: "news",
+    source: "Autoblog",
   },
   {
     url: "https://www.reddit.com/r/vandwellers/new/.rss",
@@ -75,40 +86,60 @@ const NEWS_RSS_FEEDS = [
     source: "r/CampingandHiking",
   },
   {
-    url: "https://expeditionportal.com/feed/",
-    category: "overland",
-    source: "Expedition Portal",
+    url: "https://www.reddit.com/r/camping/new/.rss",
+    category: "camping",
+    source: "r/camping",
   },
   {
-    url: "https://www.outsideonline.com/feed/",
-    category: "camping",
-    source: "Outside Magazine",
+    url: "https://www.reddit.com/r/stealthcamping/new/.rss",
+    category: "stealth",
+    source: "r/stealthcamping",
+  },
+  {
+    url: "https://www.reddit.com/r/boondocking/new/.rss",
+    category: "stealth",
+    source: "r/boondocking",
   },
 ];
 
 const HOW_TO_FEEDS = [
   {
-    url: "https://news.google.com/rss/search?q=van+conversion+how+to+DIY&hl=en-US&gl=US&ceid=US:en",
-    category: "how_to",
-    source: "Google News",
-  },
-  {
     url: "https://www.reddit.com/r/vandwellers/search.rss?q=how+to&sort=new",
     category: "how_to",
     source: "r/vandwellers",
+  },
+  {
+    url: "https://www.reddit.com/r/vanlife/search.rss?q=diy+build&sort=new",
+    category: "how_to",
+    source: "r/vanlife",
+  },
+  {
+    url: "https://expeditionportal.com/category/how-to/feed/",
+    category: "how_to",
+    source: "Expedition Portal",
   },
 ];
 
 const PRODUCT_FEEDS = [
   {
-    url: "https://news.google.com/rss/search?q=van+life+gear+products+2025&hl=en-US&gl=US&ceid=US:en",
+    url: "https://www.outdoorgearlab.com/rss",
     category: "products",
-    source: "Google News",
+    source: "OutdoorGearLab",
   },
   {
-    url: "https://news.google.com/rss/search?q=camping+van+solar+equipment&hl=en-US&gl=US&ceid=US:en",
+    url: "https://gearjunkie.com/feed",
     category: "products",
-    source: "Google News",
+    source: "Gear Junkie",
+  },
+  {
+    url: "https://www.rei.com/blog/feed",
+    category: "products",
+    source: "REI Blog",
+  },
+  {
+    url: "https://www.reddit.com/r/CampingGear/new/.rss",
+    category: "products",
+    source: "r/CampingGear",
   },
 ];
 
