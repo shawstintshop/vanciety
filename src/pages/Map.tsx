@@ -21,13 +21,16 @@ import { VAN_MARKERS, EVENT_PINS, eventCategoryToMarker, createEventPinSvg } fro
 import EventDetailPanel, { type MapEvent } from "@/components/map/EventDetailPanel";
 import { MANUFACTURERS } from "@/data/manufacturers";
 
-// Hoisted once — the event marker icon is identical for every event.
-const EVENT_ICON = L.icon({
-  iconUrl: "/brand/van-revel-black.png",
-  iconSize: [54, 32],
-  iconAnchor: [27, 32],
-  popupAnchor: [0, -32],
-  className: "vanciety-map-marker",
+// Hoisted once — clean orange location pin, not the brand logo.
+const EVENT_ICON = L.divIcon({
+  html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
+    <path d="M14 0C6.268 0 0 6.268 0 14c0 9.333 14 22 14 22S28 23.333 28 14C28 6.268 21.732 0 14 0z" fill="#f97316" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="14" cy="14" r="5" fill="#fff"/>
+  </svg>`,
+  iconSize: [28, 36],
+  iconAnchor: [14, 36],
+  popupAnchor: [0, -36],
+  className: "",
 });
 
 // ── Demo Data (shown until DB has real events) ───────────────
@@ -160,7 +163,7 @@ const Map = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSidebar, setShowSidebar] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const [mobileView, setMobileView] = useState<"list" | "map">(isEventsPage ? "list" : "map");
+  const [mobileView, setMobileView] = useState<"list" | "map">("map");
   const [isLocating, setIsLocating] = useState(false);
   const [showLocationSharing, setShowLocationSharing] = useState(false);
 
