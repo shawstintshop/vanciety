@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import HomeFeed from "@/components/HomeFeed";
 import type { LucideIcon } from "lucide-react";
 import {
   Bot, Calendar, Wrench, Users,
@@ -342,7 +343,8 @@ const Index = () => {
           </div>
         </section>
 
-
+        {/* ════════ LIVE CONTENT FEED ════════ */}
+        <HomeFeed />
 
       </main>
     </div>
