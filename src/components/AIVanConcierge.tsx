@@ -1,11 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+/**
+ * AIVanConcierge — Embedded Vanna widget
+ * Used on Videos, Marketplace, Vendors, Shop, and AI pages.
+ *
+ * Uses the client-side vannaRouter for instant responses + page links.
+ * Drop-in replacement for the Supabase edge function version.
+ */
+
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
-import { Send, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { Send, ExternalLink } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { routeVannaQuestion } from '@/lib/vannaRouter';
 
-// Inline SVG van mascot — no broken external image
+// Inline SVG van mascot
 function VanIcon({ size = 28 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna">
@@ -30,6 +39,8 @@ function VanIcon({ size = 28 }: { size?: number }) {
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  page?: string;
+  pageLabel?: string;
 }
 
 interface AIVanConciergeProps {
@@ -38,51 +49,47 @@ interface AIVanConciergeProps {
 }
 
 const MODE_SUGGESTIONS: Record<string, string[]> = {
-  home: ['Find van lifers near me', 'Best solar setup?', 'Stealth camping tips'],
-  full: ['Find van lifers near me', 'Best solar setup?', 'Stealth camping tips'],
-  video: ['Best van build videos?', 'Solar install guide?', 'Sprinter conversion tips?'],
+  home:        ['Find van lifers near me', 'Best solar setup?', 'Stealth camping tips'],
+  full:        ['Find van lifers near me', 'Best solar setup?', 'Stealth camping tips'],
+  video:       ['Best van build videos?', 'Solar install guide?', 'Sprinter conversion tips?'],
   marketplace: ['What should I check before buying?', 'How do I list my van?', 'Fair price for a Sprinter?'],
-  mechanic: ['Find a Sprinter mechanic', 'What certifications matter?', 'Common Sprinter issues?'],
-  shop: ['Best power station for van life?', 'What ventilation do I need?', 'Solar panel recommendations?'],
+  mechanic:    ['Find a Sprinter mechanic', 'What certifications matter?', 'Common Sprinter issues?'],
+  shop:        ['Best power station for van life?', 'What ventilation do I need?', 'Solar panel recommendations?'],
 };
-
-
 
 const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact = false }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSend = async (text?: string) => {
+  const handleSend = useCallback((text?: string) => {
     const query = (text ?? input).trim();
     if (!query || loading) return;
     setInput('');
-    const newMessages: Message[] = [...messages, { role: 'user', content: query }];
-    setMessages(newMessages);
+
+    const userMsg: Message = { role: 'user', content: query };
+    setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('vanciety-ai-concierge', {
-        body: {
-          question: query,
-          mode,
-          history: newMessages.slice(-6).map((m) => ({ role: m.role, content: m.content })),
-        },
-      });
-      const reply = error
-        ? "Sorry, I hit a snag — please try again!"
-        : (data?.answer ?? "I'm not sure about that one. Try asking in the /forum!");
-      setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
-    } catch {
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'Oops — something went wrong. Try again!' }]);
-    } finally {
+
+    setTimeout(() => {
+      const result = routeVannaQuestion(query);
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: result.answer, page: result.page, pageLabel: result.pageLabel },
+      ]);
       setLoading(false);
-    }
-  };
+    }, 380);
+  }, [input, loading]);
+
+  const handleNavigate = useCallback((page: string) => {
+    navigate(page);
+  }, [navigate]);
 
   const suggestions = MODE_SUGGESTIONS[mode] ?? MODE_SUGGESTIONS.home;
 
@@ -96,7 +103,7 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
           </div>
           <div>
             <span className="text-sm font-semibold text-foreground">Vanna</span>
-            <p className="text-xs text-muted-foreground">AI van life assistant</p>
+            <p className="text-xs text-muted-foreground">AI van life guide</p>
           </div>
           <div className="ml-auto flex items-center gap-1.5">
             <span className="w-2 h-2 bg-green-400 rounded-full" />
@@ -108,19 +115,31 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
         {messages.length > 0 && (
           <div className={`space-y-3 mb-4 overflow-y-auto ${compact ? 'max-h-48' : 'max-h-72'}`}>
             {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                {m.role === 'assistant' && (
-                  <div className="w-6 h-6 rounded-full bg-orange-600/15 border border-orange-500/20 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
-                    <VanIcon size={16} />
+              <div key={i} className="flex flex-col">
+                <div className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  {m.role === 'assistant' && (
+                    <div className="w-6 h-6 rounded-full bg-orange-600/15 border border-orange-500/20 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
+                      <VanIcon size={16} />
+                    </div>
+                  )}
+                  <div className={`rounded-xl px-3 py-2 text-sm max-w-[85%] leading-relaxed ${
+                    m.role === 'user'
+                      ? 'bg-primary text-primary-foreground rounded-tr-sm'
+                      : 'bg-muted text-foreground rounded-tl-sm'
+                  }`}>
+                    {m.content}
                   </div>
-                )}
-                <div className={`rounded-xl px-3 py-2 text-sm max-w-[85%] leading-relaxed ${
-                  m.role === 'user'
-                    ? 'bg-primary text-primary-foreground rounded-tr-sm'
-                    : 'bg-muted text-foreground rounded-tl-sm'
-                }`}>
-                  {m.content}
                 </div>
+                {/* CTA link button */}
+                {m.role === 'assistant' && m.page && m.pageLabel && (
+                  <button
+                    onClick={() => handleNavigate(m.page!)}
+                    className="ml-8 mt-1.5 self-start flex items-center gap-1.5 text-xs font-semibold text-orange-400 hover:text-orange-300 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 hover:border-orange-400/50 rounded-full px-3 py-1 transition-all"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    {m.pageLabel}
+                  </button>
+                )}
               </div>
             ))}
             {loading && (
@@ -167,7 +186,7 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
             maxLength={500}
           />
           <Button type="submit" size="sm" disabled={loading || !input.trim()} className="h-9 w-9 p-0">
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+            <Send className="w-4 h-4" />
           </Button>
         </form>
       </CardContent>
