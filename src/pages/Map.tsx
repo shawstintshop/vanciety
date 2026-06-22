@@ -17,7 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { useRealtimeVanLocations } from "@/hooks/useRealtimeVanLocations";
-import { VAN_MARKERS, EVENT_PINS, eventCategoryToMarker, createEventPinSvg } from "@/components/map/VanMarkers";
+import { VAN_MARKERS, EVENT_PINS, eventCategoryToMarker, createEventPinSvg, VAN_MARKER_KEYFRAMES } from "@/components/map/VanMarkers";
 import EventDetailPanel, { type MapEvent } from "@/components/map/EventDetailPanel";
 import { MANUFACTURERS } from "@/data/manufacturers";
 
@@ -821,6 +821,7 @@ const Map = () => {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-4px); }
         }
+        ${VAN_MARKER_KEYFRAMES}
       `}</style>
     </div>
   );
