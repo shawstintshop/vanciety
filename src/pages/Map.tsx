@@ -443,7 +443,7 @@ const Map = () => {
   events.forEach((e) => { catCounts[e.category] = (catCounts[e.category] || 0) + 1; });
 
   return (
-    <div className="fixed inset-0 bg-background flex flex-col pt-16">
+    <div className="fixed inset-0 bg-background flex flex-col" style={{ paddingTop: '64px' }}>
       <Seo
         title={isEventsPage ? "Vanciety Events | Van Life Meetups, Rallies, and Workshops" : "Vanciety Map | Events, Members, and Manufacturers"}
         description={isEventsPage ? "Browse van life events, rallies, workshops, and meetups with a mobile-friendly list and map experience." : "Explore Vanciety events, live members, and manufacturer map layers."}
@@ -489,15 +489,12 @@ const Map = () => {
         </div>
       </div>
 
-      {/* Full-screen map layout */}
-      <div className="flex-1 relative">
-        
-        {/* ── Map Container ─────────────────────────────── */}
-        <div ref={mapContainerRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%' }} />
+      {/* Full-screen map layout — flex-col on mobile so control bar never overlaps map */}
+      <div className="flex-1 flex flex-col overflow-hidden">
 
-        {/* ── Top Bar (floating over map) ────────────────── */}
-        <div className="absolute top-4 left-4 right-4 z-[500] pointer-events-none">
-          <div className="max-w-4xl mx-auto pointer-events-auto">
+        {/* ── Top Control Bar (always on top, never overlaps) ── */}
+        <div className="relative z-[500] bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2 sm:absolute sm:top-4 sm:left-4 sm:right-4 sm:bg-transparent sm:border-0 sm:px-0 sm:py-0">
+          <div className="max-w-4xl mx-auto">
             <div className="bg-background/90 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 p-3">
               <div className="flex items-center gap-3">
                 {/* Search */}
@@ -592,6 +589,12 @@ const Map = () => {
           </div>
         </div>
 
+        {/* ── Map + List area (fills remaining space) ─────── */}
+        <div className="flex-1 relative overflow-hidden">
+
+        {/* ── Map Container ─────────────────────────────── */}
+        <div ref={mapContainerRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%' }} />
+
         {/* ── Layer Count Badge (floating, layer-aware) ──── */}
         <div className="absolute bottom-24 left-4 z-[500]">
           <Badge className="bg-background/90 backdrop-blur-xl text-foreground shadow-lg border border-border/60 text-sm px-4 py-2">
@@ -666,7 +669,7 @@ const Map = () => {
         )}
 
         {isEventsPage && isMobile && mobileView === "list" && (
-          <div className="absolute inset-x-4 top-28 bottom-24 z-[500] sm:hidden">
+          <div className="absolute inset-x-0 inset-y-0 z-[500] sm:hidden">
             <div className="h-full overflow-hidden rounded-2xl border border-border/60 bg-background/94 shadow-xl backdrop-blur-xl">
               <div className="flex items-center justify-between border-b border-border/40 p-3">
                 <h3 className="font-semibold text-sm flex items-center gap-2">
@@ -675,7 +678,7 @@ const Map = () => {
                 </h3>
                 <Badge variant="secondary" className="text-xs">{filteredEvents.length}</Badge>
               </div>
-              <div className="h-[calc(100%-53px)] overflow-y-auto p-2 space-y-2">
+              <div className="h-[calc(100%-53px)] overflow-y-auto p-2 pb-24 space-y-2">
                 {filteredEvents.map((event) => (
                   <button
                     key={`mobile-${event.id}`}
@@ -715,7 +718,7 @@ const Map = () => {
         <EventDetailPanel event={selectedEvent} onClose={() => setSelectedEvent(null)} />
 
         {/* ── Location Sharing FAB ────────────────────────── */}
-        <div className="absolute bottom-24 right-4 z-[500] flex flex-col gap-3">
+        <div className="absolute bottom-6 right-4 z-[500] flex flex-col gap-3">
           <Button
             variant="hero"
             size="lg"
@@ -737,6 +740,7 @@ const Map = () => {
             {showLocationSharing ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
           </Button>
         </div>
+        </div>{/* end map+list area */}
       </div>
 
       {/* ── Custom CSS for map markers ────────────────────── */}
