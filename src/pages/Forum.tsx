@@ -59,12 +59,7 @@ const Forum = () => {
     setLoadIssue(null);
     let query = supabase
       .from('forum_posts')
-      .select(`
-        *,
-        profiles!forum_posts_user_id_fkey (
-          display_name
-        )
-      `)
+      .select('*')
       .order('created_at', { ascending: false });
 
     if (selectedCategory !== 'all') {
@@ -76,7 +71,7 @@ const Forum = () => {
     if (error) {
       console.error('Error fetching posts:', error);
       setForumPosts([]);
-      setLoadIssue('Forum posts are unavailable right now. Vanciety is showing a clean empty state instead of a dead-end error.');
+      setLoadIssue('Unable to load forum posts right now. Please try refreshing the page.');
     } else {
       setForumPosts(data || []);
     }
@@ -129,19 +124,19 @@ const Forum = () => {
   };
 
   const liveStats = [
-    { label: "Loaded topics", value: forumPosts.length.toString() },
-    { label: "Visible categories", value: forumCategories.length.toString() },
-    { label: "Selected lane", value: selectedCategory === "all" ? "All" : forumCategories.find((category) => category.id === selectedCategory)?.name || selectedCategory },
-    { label: "Data source", value: isLoading ? "Loading" : "Supabase" },
+    { label: "Topics", value: isLoading ? "—" : forumPosts.length.toString() },
+    { label: "Categories", value: forumCategories.length.toString() },
+    { label: "Active Filter", value: selectedCategory === "all" ? "All" : forumCategories.find((category) => category.id === selectedCategory)?.name || selectedCategory },
+    { label: "Status", value: isLoading ? "Loading..." : loadIssue ? "Offline" : "Live" },
   ];
 
   return (
-    <div className="vanciety-page vanciety-page--forum min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
+        <section className="bg-gray-950 border-b border-white/10 py-12">
           <div className="container mx-auto px-4">
             <div className="grid items-center gap-8 mb-8 lg:grid-cols-[1fr_0.85fr]">
               <div className="text-center lg:text-left">
@@ -170,7 +165,7 @@ const Forum = () => {
             <div className="max-w-2xl mx-auto mb-8 rounded-xl border bg-card/70 p-3 text-center text-sm text-muted-foreground">
               {loadIssue
                 ? loadIssue
-                : "Forum metrics are live-loaded from Supabase. If the database is empty, Vanciety shows zero instead of invented community numbers."}
+                : "Ask questions, share your build, and get real answers from the van life community."}
             </div>
 
             {/* Search and New Topic */}
