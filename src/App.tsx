@@ -30,6 +30,10 @@ import VancietyShop from "./pages/VancietyShop";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Accessibility from "./pages/Accessibility";
+import Campfire from "./pages/Campfire";
+import TripJournals from "./pages/TripJournals";
+import ResourceBoard from "./pages/ResourceBoard";
+import Icebreaker from "./pages/Icebreaker";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
 
@@ -86,6 +90,10 @@ const App = () => (
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/accessibility" element={<Accessibility />} />
+              <Route path="/campfire" element={<Campfire />} />
+              <Route path="/journals" element={<TripJournals />} />
+              <Route path="/resources" element={<ResourceBoard />} />
+              <Route path="/icebreaker" element={<Icebreaker />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

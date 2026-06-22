@@ -29,6 +29,9 @@ import {
   Tag,
   PlusCircle,
   Package,
+  Flame,
+  MapPin,
+  Zap,
 } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -112,7 +115,7 @@ const Header = () => {
           {/* Community dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard", "/friend-finder"]))}>
+              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard", "/friend-finder", "/campfire", "/journals", "/resources", "/icebreaker"]))}>
                 <Users className="h-4 w-4" />
                 Community
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -130,6 +133,23 @@ const Header = () => {
               <DropdownMenuItem onClick={() => navigate("/van-cards")}>
                 <Satellite className="mr-2 h-4 w-4 text-muted-foreground" />
                 Van Cards
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => navigate("/campfire")}>
+                <Flame className="mr-2 h-4 w-4 text-orange-400" />
+                Campfire Boards
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/journals")}>
+                <BookOpen className="mr-2 h-4 w-4 text-emerald-400" />
+                Trip Journals
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/resources")}>
+                <MapPin className="mr-2 h-4 w-4 text-green-400" />
+                Resource Board
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/icebreaker")}>
+                <Zap className="mr-2 h-4 w-4 text-violet-400" />
+                Icebreaker
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -246,6 +266,10 @@ const Header = () => {
                 { label: "Events", to: "/events", icon: Calendar },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
                 { label: "Find Members", to: "/friend-finder", icon: Users },
+                { label: "Campfire", to: "/campfire", icon: Flame },
+                { label: "Trip Journals", to: "/journals", icon: BookOpen },
+                { label: "Resources", to: "/resources", icon: MapPin },
+                { label: "Icebreaker", to: "/icebreaker", icon: Zap },
                 { label: "Vana AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
