@@ -5,7 +5,8 @@
  */
 
 import { useState } from "react";
-import { ExternalLink, Star, ShoppingBag, Zap, Sun, Wind, Shield, Package, Lightbulb, Flame, ChefHat, BedDouble } from "lucide-react";
+import { ExternalLink, Star, ShoppingBag, Zap, Sun, Wind, Thermometer, Shield, Package, Lightbulb, Flame, ChefHat, BedDouble } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   AFFILIATE_PRODUCTS,
@@ -122,7 +123,7 @@ function ProductCard({ product }: { product: AffiliateProduct }) {
   );
 }
 
-export default function VancietyShop() {
+export default function VanShop() {
   const [activeCategory, setActiveCategory] = useState<ProductCategory | "all" | "featured">("featured");
 
   const displayedProducts =
