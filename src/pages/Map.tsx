@@ -474,7 +474,7 @@ const Map = () => {
       />
       <Header />
 
-      <div className="relative shrink-0 overflow-hidden border-b border-white/10 h-40 md:h-48">
+      <div className="relative shrink-0 overflow-hidden border-b border-white/10 h-40 md:h-48 hidden sm:block">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${bannerImage})` }}
@@ -491,11 +491,10 @@ const Map = () => {
         </div>
       </div>
 
-      {/* Full-screen map layout — flex-col on mobile so control bar never overlaps map */}
+            {/* Full-screen map layout — flex-col so control bar never overlaps map */}
       <div className="flex-1 flex flex-col overflow-hidden">
-
         {/* ── Top Control Bar (always on top, never overlaps) ── */}
-        <div className="relative z-[500] bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2 sm:absolute sm:top-4 sm:left-4 sm:right-4 sm:bg-transparent sm:border-0 sm:px-0 sm:py-0">
+        <div className="relative z-[500] shrink-0 bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2 sm:absolute sm:top-4 sm:left-4 sm:right-4 sm:bg-transparent sm:border-0 sm:px-0 sm:py-0">
           <div className="max-w-4xl mx-auto">
             <div className="bg-background/90 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 p-3">
               <div className="flex items-center gap-3">
@@ -591,7 +590,7 @@ const Map = () => {
           </div>
         </div>
 
-        {/* ── Map + List area (fills remaining space) ─────── */}
+        {/* ── Map + List area (fills remaining space below control bar) ─── */}
         <div className="flex-1 relative overflow-hidden">
 
         {/* ── Map Container ─────────────────────────────── */}
@@ -671,47 +670,61 @@ const Map = () => {
         )}
 
         {isEventsPage && isMobile && mobileView === "list" && (
-          <div className="absolute inset-x-0 inset-y-0 z-[500] sm:hidden flex flex-col">
-            <div className="flex flex-col h-full rounded-2xl border border-border/60 bg-background/94 shadow-xl backdrop-blur-xl overflow-hidden">
-              <div className="flex items-center justify-between border-b border-border/40 p-3">
-                <h3 className="font-semibold text-sm flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-orange-500" />
-                  Event List
-                </h3>
-                <Badge variant="secondary" className="text-xs">{filteredEvents.length}</Badge>
-              </div>
-              <div className="flex-1 overflow-y-auto overscroll-contain p-2 pb-6 space-y-2" style={{WebkitOverflowScrolling: 'touch'}}>
-                {filteredEvents.map((event) => (
-                  <button
-                    key={`mobile-${event.id}`}
-                    onClick={() => {
-                      handleEventClick(event);
-                      setMobileView("map");
-                    }}
-                    className="w-full rounded-xl border border-transparent bg-card p-3 text-left transition hover:border-orange-500/30 hover:bg-orange-500/5"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="text-2xl mt-0.5">
-                        {{ rally: "🚐", expo: "🎪", meetup: "🤝", workshop: "🔧", gathering: "🏕️" }[event.category] || "📍"}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h4 className="truncate text-sm font-semibold">{event.name}</h4>
-                        <p className="mt-1 text-xs text-muted-foreground">{event.city}, {event.state}</p>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {new Date(event.start_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                          {event.cost_info && ` · ${event.cost_info}`}
-                        </p>
-                      </div>
+          // List panel fills the map area only (below the control bar) — never covers controls
+          <div className="absolute inset-0 z-[400] sm:hidden flex flex-col bg-background">
+            <div className="flex items-center justify-between border-b border-border/40 px-4 py-3 shrink-0">
+              <h3 className="font-semibold text-sm flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-orange-500" />
+                Event List
+                <Badge variant="secondary" className="text-xs ml-1">{filteredEvents.length}</Badge>
+              </h3>
+              <button
+                onClick={() => setMobileView("map")}
+                className="text-xs text-muted-foreground underline"
+              >
+                View Map
+              </button>
+            </div>
+            <div
+              className="flex-1 overflow-y-auto p-3 space-y-2"
+              style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }}
+            >
+              {filteredEvents.map((event) => (
+                <button
+                  key={`mobile-${event.id}`}
+                  onClick={() => {
+                    handleEventClick(event);
+                    setMobileView("map");
+                  }}
+                  className="w-full rounded-xl border border-border/40 bg-card p-3 text-left transition active:bg-orange-500/10"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="text-2xl mt-0.5">
+                      {{ rally: "🚐", expo: "🎪", meetup: "🤝", workshop: "🔧", gathering: "🏕️" }[event.category] || "📍"}
                     </div>
-                  </button>
-                ))}
-                {filteredEvents.length === 0 && (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Calendar className="w-8 h-8 mx-auto mb-2 opacity-40" />
-                    <p className="text-sm">No events match your search</p>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="truncate text-sm font-semibold">{event.name}</h4>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{event.city}, {event.state}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">
+                        {new Date(event.start_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                        {event.cost_info && ` · ${event.cost_info}`}
+                      </p>
+                      {event.rsvp_count !== undefined && event.rsvp_count > 0 && (
+                        <p className="mt-0.5 text-xs text-green-500 font-medium">{event.rsvp_count} going</p>
+                      )}
+                    </div>
+                    <div className="text-muted-foreground shrink-0 self-center">
+                      <ChevronUp className="w-4 h-4 rotate-90" />
+                    </div>
                   </div>
-                )}
-              </div>
+                </button>
+              ))}
+              {filteredEvents.length === 0 && (
+                <div className="text-center py-12 text-muted-foreground">
+                  <Calendar className="w-8 h-8 mx-auto mb-2 opacity-40" />
+                  <p className="text-sm">No events match your search</p>
+                </div>
+              )}
             </div>
           </div>
         )}
