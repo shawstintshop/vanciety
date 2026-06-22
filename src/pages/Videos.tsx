@@ -16,7 +16,8 @@ const verifiedVideoFallback = verifiedVideos.map((video) => ({
   youtube_id: video.youtubeId,
   title: video.title,
   description: `Van-life video from ${video.channel}.`,
-  thumbnail_url: video.thumbnail,
+  // Always derive thumbnail from YouTube CDN — never undefined
+  thumbnail_url: video.thumbnail || `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`,
   channel_title: video.channel,
   category: video.category,
   published_at: new Date().toISOString(),
@@ -39,17 +40,24 @@ const Videos = () => {
   useYouTubeSync();
 
   const videoCategories = [
-    { id: "all", name: "All Videos" },
-    { id: "builds", name: "Van Builds & Tours" },
-    { id: "electrical", name: "Electrical & Solar" },
-    { id: "plumbing", name: "Plumbing & Heating" },
-    { id: "mods", name: "Mods & Upgrades" },
-    { id: "maintenance", name: "Maintenance & Repairs" },
-    { id: "camping", name: "Camping Spots & Travel" },
-    { id: "tips", name: "Tips, Tricks & Hacks" },
-    { id: "offroad", name: "Offroad Adventures" },
-    { id: "reviews", name: "Product Reviews & Installs" },
-    { id: "van-life", name: "General Van Life" }
+    { id: "all",                name: "All Videos" },
+    { id: "van-tours",          name: "Van Tours" },
+    { id: "van-companies",      name: "Van Companies & Builders" },
+    { id: "van-products",       name: "Van Products" },
+    { id: "van-manufacturers",  name: "Van Manufacturers" },
+    { id: "van-upgrades",       name: "Van Upgrades" },
+    { id: "van-mechanics",      name: "Van Mechanics" },
+    { id: "sprinter-mechanics", name: "Sprinter Mechanics" },
+    { id: "sprinter-van",       name: "Mercedes Sprinter Vans" },
+    { id: "sprinter-mods",      name: "Sprinter Mods" },
+    { id: "revel-mods",         name: "Revel Van Mods" },
+    { id: "builds",             name: "Electrical & Solar Builds" },
+    { id: "maintenance",        name: "Maintenance & Repairs" },
+    { id: "camping",            name: "Camping Spots & Travel" },
+    { id: "tips",               name: "Tips, Tricks & Hacks" },
+    { id: "offroad",            name: "Offroad Adventures" },
+    { id: "reviews",            name: "Product Reviews & Installs" },
+    { id: "van-life",           name: "General Van Life" },
   ];
 
   // Fetch videos from database
@@ -280,10 +288,18 @@ const Videos = () => {
                   >
                     <div className="relative aspect-video">
                       <img
-                        src={video.thumbnail_url}
+                        src={video.thumbnail_url || `https://img.youtube.com/vi/${video.youtube_id}/hqdefault.jpg`}
                         alt={video.title}
                         className="w-full h-full object-cover"
                         loading="lazy"
+                        onError={(e) => {
+                          // Fallback to maxresdefault if hqdefault fails
+                          const img = e.currentTarget;
+                          if (!img.dataset.fallback) {
+                            img.dataset.fallback = '1';
+                            img.src = `https://img.youtube.com/vi/${video.youtube_id}/maxresdefault.jpg`;
+                          }
+                        }}
                       />
                       
                       {/* Overlay */}
