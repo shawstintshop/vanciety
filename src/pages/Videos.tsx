@@ -31,7 +31,7 @@ const Videos = () => {
   const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [sourceNote, setSourceNote] = useState<string>("Loading current video library...");
+  const [sourceNote, setSourceNote] = useState<string>("");
   const { toast } = useToast();
   
   // Auto-sync YouTube videos daily
@@ -71,23 +71,23 @@ const Videos = () => {
 
       if (error) {
         console.error('Error fetching videos:', error);
-        setSourceNote('Live YouTube sync is unavailable right now, so Vanciety is showing verified fallback videos.');
+        setSourceNote('');
         toast({
-          title: "Showing Vanciety video picks",
-          description: "Newest sync is not available right now, so these curated YouTube videos are shown instead.",
+          title: "Showing curated video picks",
+          description: "Newest sync is not available right now. Showing curated van life videos.",
         });
         setVideos(verifiedVideoFallback);
         return;
       }
 
       setVideos(data && data.length ? data : verifiedVideoFallback);
-      setSourceNote(data && data.length ? 'Live video library loaded from Supabase.' : 'No live records were found, so verified fallback videos are shown.');
+      setSourceNote('');
     } catch (error) {
       console.error('Error:', error);
-      setSourceNote('Live video sync failed, so Vanciety is showing verified YouTube links.');
+      setSourceNote('');
       toast({
-        title: "Using verified fallback videos",
-        description: "Live video sync failed, so Vanciety is showing verified YouTube links.",
+        title: "Showing curated video picks",
+        description: "Some videos may be curated picks while we reconnect to the live library.",
       });
       setVideos(verifiedVideoFallback);
     } finally {
@@ -112,16 +112,16 @@ const Videos = () => {
         description: `Fetched ${data.count} real van life videos from YouTube!`,
       });
 
-      setSourceNote(`Live video sync refreshed successfully. ${data.count} videos pulled from YouTube.`);
+      setSourceNote('');
 
       // Refresh the local data
       await fetchVideos();
     } catch (error) {
       console.error('Error refreshing videos:', error);
-      setSourceNote('Refresh failed, so verified fallback videos remain available below.');
+      setSourceNote('');
       toast({
         title: "Refresh unavailable",
-        description: "YouTube sync is unavailable right now. Verified local YouTube links are still displayed.",
+        description: "Could not refresh right now. Curated van life videos are still available below.",
       });
       setVideos(verifiedVideoFallback);
     } finally {
@@ -170,7 +170,7 @@ const Videos = () => {
     <div className="vanciety-page vanciety-page--videos min-h-screen bg-background">
       <Seo
         title="Vanciety Videos | Verified Van Build, Repair, and Travel Videos"
-        description="Watch verified van life videos for builds, repairs, installs, travel, and product walkthroughs with live or fallback YouTube sourcing."
+        description="Watch van life videos for builds, repairs, installs, travel, and product walkthroughs."
         canonicalPath="/videos"
       />
       <Header />
@@ -244,9 +244,11 @@ const Videos = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             {/* Header with refresh button */}
-            <div className="mb-4 rounded-2xl border border-white/10 bg-card/70 p-4 text-sm text-muted-foreground">
-              {sourceNote}
-            </div>
+            {sourceNote && (
+              <div className="mb-4 rounded-2xl border border-white/10 bg-card/70 p-4 text-sm text-muted-foreground">
+                {sourceNote}
+              </div>
+            )}
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">
                 {selectedCategory === "all" ? "Latest Videos" : videoCategories.find(c => c.id === selectedCategory)?.name}
@@ -276,9 +278,9 @@ const Videos = () => {
               </div>
             ) : videos.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-muted-foreground mb-4">No live videos found. Use verified fallback videos below.</p>
+                <p className="text-muted-foreground mb-4">No videos found for this filter. Try a different category or clear your search.</p>
                 <Button onClick={refreshFromYouTube} disabled={refreshing}>
-                  {refreshing ? 'Loading...' : 'Load Videos from YouTube'}
+                  {refreshing ? 'Loading...' : 'Load Videos'}
                 </Button>
               </div>
             ) : (
