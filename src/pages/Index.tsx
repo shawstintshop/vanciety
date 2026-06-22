@@ -541,35 +541,6 @@ const Index = () => {
           </p>
         </section>
 
-        {/* ════════ SECTION 7 — FOOTER BAR ════════ */}
-        <footer className="border-t border-white/10 bg-black py-10">
-          <div className="container mx-auto grid gap-8 px-4 text-center lg:grid-cols-3 lg:text-left">
-            <div>
-              <div className="text-xl font-black tracking-tight">
-                VAN<span className={LIME}>CIETY</span>
-              </div>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">
-                Built by the van community. Powered by AI. Driven by adventure.
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center">
-              <p className="text-sm font-bold uppercase tracking-[0.15em] text-gray-300">
-                One Platform. Every Van. Every Adventure.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 lg:items-end">
-              <p className="text-sm text-gray-300">Join the Movement. Build the Future.</p>
-              <Button asChild size="lg" className="bg-lime-500 font-semibold text-gray-950 hover:bg-lime-400">
-                <Link to={R.auth}>
-                  Get Started Free
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </footer>
       </main>
     </div>
   );

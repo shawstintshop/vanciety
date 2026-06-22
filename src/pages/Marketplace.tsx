@@ -32,6 +32,7 @@ import AIVanConcierge from "@/components/AIVanConcierge";
 const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("newest");
   const [marketplaceItems, setMarketplaceItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -79,15 +80,29 @@ const Marketplace = () => {
     },
   ];
 
-  const visibleMarketplaceItems = marketplaceItems.filter((item) => {
-    const q = searchQuery.trim().toLowerCase();
-    if (!q) return true;
-    return [item.title, item.description, item.category, item.condition, item.location, item.profiles?.display_name]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase()
-      .includes(q);
-  });
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+  const visibleMarketplaceItems = marketplaceItems
+    .filter((item) => {
+      if (!normalizedSearch) return true;
+      return [item.title, item.description, item.category, item.condition, item.location, item.profiles?.display_name]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase()
+        .includes(normalizedSearch);
+    })
+    .sort((a, b) => {
+      const aFeatured = Boolean(a.featured || a.is_featured || a.promoted);
+      const bFeatured = Boolean(b.featured || b.is_featured || b.promoted);
+      if (aFeatured !== bFeatured) return aFeatured ? -1 : 1;
+      if (sortBy === 'price-low') return Number(a.price || 0) - Number(b.price || 0);
+      if (sortBy === 'price-high') return Number(b.price || 0) - Number(a.price || 0);
+      const aTime = new Date(a.created_at || 0).getTime();
+      const bTime = new Date(b.created_at || 0).getTime();
+      return bTime - aTime;
+    });
+
+  const featuredItems = visibleMarketplaceItems.filter((item) => Boolean(item.featured || item.is_featured || item.promoted)).slice(0, 4);
+  const latestItems = visibleMarketplaceItems.filter((item) => !Boolean(item.featured || item.is_featured || item.promoted));
 
   useEffect(() => {
     fetchMarketplaceItems();

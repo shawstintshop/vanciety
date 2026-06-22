@@ -28,8 +28,8 @@ import AIConcierge from "./pages/AIConcierge";
 import About from "./pages/About";
 import VancietyShop from "./pages/VancietyShop";
 import { AuthProvider } from "./contexts/AuthContext";
+import SiteFooter from "./components/SiteFooter";
 // import VancietyTopoSystem from "./components/VancietyTopoSystem";
-// import SiteFooter from "./components/SiteFooter";
 
 const queryClient = new QueryClient();
 
@@ -70,7 +70,7 @@ const App = () => (
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
-            {/* <SiteFooter /> */}
+            <SiteFooter />
           </div>
         </TooltipProvider>
       </AuthProvider>

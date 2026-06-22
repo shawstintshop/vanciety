@@ -10,7 +10,7 @@ interface Message {
 }
 
 interface AIVanConciergeProps {
-  mode?: 'home' | 'full' | 'video';
+  mode?: 'home' | 'full' | 'video' | 'marketplace';
   compact?: boolean;
 }
 
