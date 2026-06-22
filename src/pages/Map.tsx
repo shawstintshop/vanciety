@@ -21,17 +21,8 @@ import { VAN_MARKERS, EVENT_PINS, eventCategoryToMarker, createEventPinSvg } fro
 import EventDetailPanel, { type MapEvent } from "@/components/map/EventDetailPanel";
 import { MANUFACTURERS } from "@/data/manufacturers";
 
-// Hoisted once — clean orange location pin, not the brand logo.
-const EVENT_ICON = L.divIcon({
-  html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
-    <path d="M14 0C6.268 0 0 6.268 0 14c0 9.333 14 22 14 22S28 23.333 28 14C28 6.268 21.732 0 14 0z" fill="#f97316" stroke="#fff" stroke-width="1.5"/>
-    <circle cx="14" cy="14" r="5" fill="#fff"/>
-  </svg>`,
-  iconSize: [28, 36],
-  iconAnchor: [14, 36],
-  popupAnchor: [0, -36],
-  className: "",
-});
+// Event markers are built per-event using category-specific van SVGs from VanMarkers.ts.
+// No hoisted icon — each event gets its own divIcon in the useEffect below.
 
 // ── Demo Data (shown until DB has real events) ───────────────
 const DEMO_EVENTS: MapEvent[] = [
@@ -325,7 +316,15 @@ const Map = () => {
 
     filteredEvents.forEach((event) => {
       if (!event.latitude || !event.longitude) return;
-      const marker = L.marker([event.latitude, event.longitude], { icon: EVENT_ICON })
+      const markerType = eventCategoryToMarker(event.category);
+      const eventIcon = L.divIcon({
+        html: VAN_MARKERS[markerType](36),
+        className: "vanciety-map-marker",
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+        popupAnchor: [0, -20],
+      });
+      const marker = L.marker([event.latitude, event.longitude], { icon: eventIcon })
         .on("click", () => {
           setSelectedEvent(event);
           map.flyTo([event.latitude, event.longitude], Math.max(map.getZoom(), 7), { duration: 0.8 });
@@ -672,8 +671,8 @@ const Map = () => {
         )}
 
         {isEventsPage && isMobile && mobileView === "list" && (
-          <div className="absolute inset-x-0 inset-y-0 z-[500] sm:hidden">
-            <div className="h-full overflow-hidden rounded-2xl border border-border/60 bg-background/94 shadow-xl backdrop-blur-xl">
+          <div className="absolute inset-x-0 inset-y-0 z-[500] sm:hidden flex flex-col">
+            <div className="flex flex-col h-full rounded-2xl border border-border/60 bg-background/94 shadow-xl backdrop-blur-xl overflow-hidden">
               <div className="flex items-center justify-between border-b border-border/40 p-3">
                 <h3 className="font-semibold text-sm flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-orange-500" />
@@ -681,7 +680,7 @@ const Map = () => {
                 </h3>
                 <Badge variant="secondary" className="text-xs">{filteredEvents.length}</Badge>
               </div>
-              <div className="h-[calc(100%-53px)] overflow-y-auto p-2 pb-24 space-y-2">
+              <div className="flex-1 overflow-y-auto overscroll-contain p-2 pb-6 space-y-2" style={{WebkitOverflowScrolling: 'touch'}}>
                 {filteredEvents.map((event) => (
                   <button
                     key={`mobile-${event.id}`}

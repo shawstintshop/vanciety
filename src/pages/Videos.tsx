@@ -32,6 +32,7 @@ const Videos = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [sourceNote, setSourceNote] = useState<string>("");
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const { toast } = useToast();
   
   // Auto-sync YouTube videos daily
@@ -72,10 +73,6 @@ const Videos = () => {
       if (error) {
         console.error('Error fetching videos:', error);
         setSourceNote('');
-        toast({
-          title: "Showing curated video picks",
-          description: "Newest sync is not available right now. Showing curated van life videos.",
-        });
         setVideos(verifiedVideoFallback);
         return;
       }
@@ -85,13 +82,10 @@ const Videos = () => {
     } catch (error) {
       console.error('Error:', error);
       setSourceNote('');
-      toast({
-        title: "Showing curated video picks",
-        description: "Some videos may be curated picks while we reconnect to the live library.",
-      });
       setVideos(verifiedVideoFallback);
     } finally {
       setLoading(false);
+      setIsInitialLoad(false);
     }
   };
 
@@ -149,21 +143,12 @@ const Videos = () => {
     fetchVideos();
   }, [selectedCategory, searchQuery]);
 
-  // Initial data load - try to fetch from YouTube if no videos exist
+  // Initial data load — silently fall back to curated videos if DB is empty.
+  // Never call refreshFromYouTube on mount; that triggers the edge function and
+  // shows an error toast if it fails, which is jarring on first load.
   useEffect(() => {
-    const initializeData = async () => {
-      const { data } = await supabase
-        .from('youtube_videos')
-        .select('id')
-        .limit(1);
-
-      if (!data || data.length === 0) {
-        console.log('No videos found, fetching real van life videos from YouTube...');
-        await refreshFromYouTube();
-      }
-    };
-
-    initializeData();
+    // fetchVideos already falls back to verifiedVideoFallback if DB is empty.
+    // Nothing extra needed here.
   }, []);
 
   return (
