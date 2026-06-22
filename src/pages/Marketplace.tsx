@@ -36,7 +36,7 @@ const Marketplace = () => {
   const [sortBy, setSortBy] = useState("newest");
   const [marketplaceItems, setMarketplaceItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadIssue, setLoadIssue] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [newItem, setNewItem] = useState({ 
     title: "", 
@@ -112,15 +112,10 @@ const Marketplace = () => {
 
   const fetchMarketplaceItems = async () => {
     setIsLoading(true);
-    setLoadIssue(null);
+    setLoadError(false);
     let query = supabase
       .from('marketplace_items')
-      .select(`
-        *,
-        profiles!marketplace_items_user_id_fkey (
-          display_name
-        )
-      `)
+      .select('*')
       .eq('is_sold', false)
       .order('created_at', { ascending: false });
 
@@ -133,7 +128,7 @@ const Marketplace = () => {
     if (error) {
       console.error('Error fetching items:', error);
       setMarketplaceItems([]);
-      setLoadIssue('Live marketplace listings are unavailable right now. Vanciety is showing a clean fallback instead of a broken page.');
+      setLoadError(true);
     } else {
       setMarketplaceItems(data || []);
     }
@@ -189,7 +184,7 @@ const Marketplace = () => {
   };
 
   return (
-    <div className="vanciety-page vanciety-page--marketplace min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <Seo
         title="Vanciety Marketplace | Vans, Parts, Gear, and Listings"
         description="Shop and list vans, parts, tools, and adventure gear on the Vanciety marketplace with verified fallback links when inventory is still growing."
@@ -217,7 +212,7 @@ const Marketplace = () => {
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
+        <section className="bg-background border-b border-border py-12">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -226,7 +221,7 @@ const Marketplace = () => {
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Live community listings through Supabase, with verified external marketplace links when local inventory is empty
+                Buy and sell vans, parts, gear, and accessories with the Vanciety community.
               </p>
             </div>
 
@@ -383,9 +378,10 @@ const Marketplace = () => {
         {/* Listings Grid */}
         <section className="py-12"> 
           <div className="container mx-auto px-4">
-            {loadIssue && (
-              <div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-4 text-sm text-muted-foreground">
-                <strong className="text-foreground">Marketplace sync note:</strong> {loadIssue}
+            {loadError && (
+              <div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-4 text-sm">
+                <strong className="text-foreground">Unable to load listings right now.</strong>{" "}
+                <span className="text-muted-foreground">Please try refreshing the page. You can still browse trusted van life marketplaces below.</span>
               </div>
             )}
             {isLoading ? (
@@ -408,9 +404,9 @@ const Marketplace = () => {
             ) : visibleMarketplaceItems.length === 0 ? (
               <div className="text-center py-8 rounded-2xl border bg-card p-8">
                 <ShoppingBag className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-semibold mb-2">No live Vanciety listings yet</h3>
+                <h3 className="text-lg font-semibold mb-2">No listings yet — be the first!</h3>
                 <p className="text-muted-foreground mb-4">
-                  Be the first to post a van, part, or gear listing. Until member inventory fills in, use the verified marketplace links below so shoppers still have somewhere useful to go.
+                  Post your van, parts, or gear for free. While the community is getting started, check out these trusted van marketplaces:
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-6 text-left">
                   {trustedMarketLinks.map((link) => (
@@ -426,7 +422,7 @@ const Marketplace = () => {
                         <ExternalLink className="w-4 h-4" />
                       </div>
                       <p className="text-sm text-muted-foreground mb-2">{link.note}</p>
-                      <p className="text-xs text-muted-foreground">Verified title: {link.verifiedTitle}</p>
+                      <p className="text-xs text-muted-foreground">{link.note}</p>
                     </a>
                   ))}
                 </div>
@@ -466,9 +462,11 @@ const Marketplace = () => {
                         </div>
 
                         {/* Price */}
-                        <div className="absolute bottom-3 left-3 bg-background/90 px-3 py-1 rounded-lg">
-                          <span className="text-lg font-bold text-primary">${item.price}</span>
-                        </div>
+                        {item.price != null && (
+                          <div className="absolute bottom-3 left-3 bg-background/90 px-3 py-1 rounded-lg">
+                            <span className="text-lg font-bold text-primary">${Number(item.price).toLocaleString()}</span>
+                          </div>
+                        )}
                       </div>
 
                       <CardContent className="p-4">
@@ -486,16 +484,14 @@ const Marketplace = () => {
                             {item.category}
                           </Badge>
                           <Badge variant="secondary" className="text-xs capitalize">
-                            {item.condition.replace('-', ' ')}
+                            {(item.condition ?? '').replace('-', ' ') || 'Unknown'}
                           </Badge>
                         </div>
 
                         {/* Seller Info */}
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium">
-                              {item.profiles?.display_name || 'Anonymous'}
-                            </span>
+                            <span className="text-sm font-medium">Community Member</span>
                           </div>
                         </div>
 
@@ -503,7 +499,7 @@ const Marketplace = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1 text-sm text-muted-foreground">
                             <MapPin className="w-3 h-3" />
-                            <span>{item.location}</span>
+                            <span>{item.location ?? 'Location not set'}</span>
                           </div>
                           <Button variant="outline" size="sm" className="flex items-center gap-1">
                             <MessageCircle className="w-3 h-3" />
