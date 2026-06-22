@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
+import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
@@ -158,6 +159,8 @@ const Map = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showSidebar, setShowSidebar] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileView, setMobileView] = useState<"list" | "map">(isEventsPage ? "list" : "map");
   const [isLocating, setIsLocating] = useState(false);
   const [showLocationSharing, setShowLocationSharing] = useState(false);
 
@@ -186,6 +189,22 @@ const Map = () => {
       return next;
     });
   };
+
+  // Try loading real events from Supabase
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      setShowSidebar(!mobile);
+      if (isEventsPage) {
+        setMobileView((current) => (mobile ? current : "map"));
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isEventsPage]);
 
   // Try loading real events from Supabase
   useEffect(() => {
@@ -425,6 +444,32 @@ const Map = () => {
 
   return (
     <div className="fixed inset-0 bg-background flex flex-col pt-16">
+      <Seo
+        title={isEventsPage ? "Vanciety Events | Van Life Meetups, Rallies, and Workshops" : "Vanciety Map | Events, Members, and Manufacturers"}
+        description={isEventsPage ? "Browse van life events, rallies, workshops, and meetups with a mobile-friendly list and map experience." : "Explore Vanciety events, live members, and manufacturer map layers."}
+        canonicalPath={isEventsPage ? "/events" : "/map"}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: isEventsPage ? "Vanciety Events" : "Vanciety Map Events",
+          itemListElement: filteredEvents.slice(0, 20).map((event, index) => ({
+            "@type": "Event",
+            position: index + 1,
+            name: event.name,
+            startDate: event.start_date,
+            endDate: event.end_date,
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            eventStatus: "https://schema.org/EventScheduled",
+            location: {
+              "@type": "Place",
+              name: event.venue_name || `${event.city}, ${event.state}`,
+              address: `${event.city}, ${event.state}`,
+            },
+            url: event.registration_url || "https://vanciety.com/events",
+            description: event.short_description || event.description,
+          })),
+        }}
+      />
       <Header />
 
       <div className="relative shrink-0 overflow-hidden border-b border-white/10 h-40 md:h-48">
@@ -471,6 +516,16 @@ const Map = () => {
                   <Locate className={`w-4 h-4 ${isLocating ? "animate-spin" : ""}`} />
                   <span className="hidden sm:inline ml-2">Near Me</span>
                 </Button>
+                {isEventsPage && isMobile && (
+                  <div className="flex items-center rounded-xl border border-border/60 bg-background/70 p-1 sm:hidden">
+                    <Button variant={mobileView === "list" ? "hero" : "ghost"} size="sm" onClick={() => setMobileView("list")}>
+                      List
+                    </Button>
+                    <Button variant={mobileView === "map" ? "hero" : "ghost"} size="sm" onClick={() => setMobileView("map")}>
+                      Map
+                    </Button>
+                  </div>
+                )}
                 <Button
                   variant="outline"
                   size="sm"
@@ -599,6 +654,52 @@ const Map = () => {
                   );
                 })}
 
+                {filteredEvents.length === 0 && (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Calendar className="w-8 h-8 mx-auto mb-2 opacity-40" />
+                    <p className="text-sm">No events match your search</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isEventsPage && isMobile && mobileView === "list" && (
+          <div className="absolute inset-x-4 top-28 bottom-24 z-[500] sm:hidden">
+            <div className="h-full overflow-hidden rounded-2xl border border-border/60 bg-background/94 shadow-xl backdrop-blur-xl">
+              <div className="flex items-center justify-between border-b border-border/40 p-3">
+                <h3 className="font-semibold text-sm flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-orange-500" />
+                  Event List
+                </h3>
+                <Badge variant="secondary" className="text-xs">{filteredEvents.length}</Badge>
+              </div>
+              <div className="h-[calc(100%-53px)] overflow-y-auto p-2 space-y-2">
+                {filteredEvents.map((event) => (
+                  <button
+                    key={`mobile-${event.id}`}
+                    onClick={() => {
+                      handleEventClick(event);
+                      setMobileView("map");
+                    }}
+                    className="w-full rounded-xl border border-transparent bg-card p-3 text-left transition hover:border-orange-500/30 hover:bg-orange-500/5"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="text-2xl mt-0.5">
+                        {{ rally: "🚐", expo: "🎪", meetup: "🤝", workshop: "🔧", gathering: "🏕️" }[event.category] || "📍"}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="truncate text-sm font-semibold">{event.name}</h4>
+                        <p className="mt-1 text-xs text-muted-foreground">{event.city}, {event.state}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {new Date(event.start_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                          {event.cost_info && ` · ${event.cost_info}`}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
                 {filteredEvents.length === 0 && (
                   <div className="text-center py-8 text-muted-foreground">
                     <Calendar className="w-8 h-8 mx-auto mb-2 opacity-40" />

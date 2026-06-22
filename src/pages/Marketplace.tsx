@@ -28,6 +28,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
 import AIVanConcierge from "@/components/AIVanConcierge";
+import Seo from "@/components/Seo";
 
 const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,6 +36,7 @@ const Marketplace = () => {
   const [sortBy, setSortBy] = useState("newest");
   const [marketplaceItems, setMarketplaceItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadIssue, setLoadIssue] = useState<string | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [newItem, setNewItem] = useState({ 
     title: "", 
@@ -110,6 +112,7 @@ const Marketplace = () => {
 
   const fetchMarketplaceItems = async () => {
     setIsLoading(true);
+    setLoadIssue(null);
     let query = supabase
       .from('marketplace_items')
       .select(`
@@ -128,8 +131,9 @@ const Marketplace = () => {
     const { data, error } = await query;
 
     if (error) {
-      toast.error('Failed to load marketplace items');
       console.error('Error fetching items:', error);
+      setMarketplaceItems([]);
+      setLoadIssue('Live marketplace listings are unavailable right now. Vanciety is showing a clean fallback instead of a broken page.');
     } else {
       setMarketplaceItems(data || []);
     }
@@ -186,6 +190,29 @@ const Marketplace = () => {
 
   return (
     <div className="vanciety-page vanciety-page--marketplace min-h-screen bg-background">
+      <Seo
+        title="Vanciety Marketplace | Vans, Parts, Gear, and Listings"
+        description="Shop and list vans, parts, tools, and adventure gear on the Vanciety marketplace with verified fallback links when inventory is still growing."
+        canonicalPath="/marketplace"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Vanciety Marketplace",
+          itemListElement: visibleMarketplaceItems.slice(0, 20).map((item, index) => ({
+            "@type": "Product",
+            position: index + 1,
+            name: item.title,
+            description: item.description,
+            category: item.category,
+            offers: {
+              "@type": "Offer",
+              price: item.price,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+            },
+          })),
+        }}
+      />
       <Header />
       
       <main className="pt-16">
@@ -356,17 +383,34 @@ const Marketplace = () => {
         {/* Listings Grid */}
         <section className="py-12"> 
           <div className="container mx-auto px-4">
+            {loadIssue && (
+              <div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-4 text-sm text-muted-foreground">
+                <strong className="text-foreground">Marketplace sync note:</strong> {loadIssue}
+              </div>
+            )}
             {isLoading ? (
-              <div className="text-center py-8">
-                <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
-                <p className="text-muted-foreground">Loading items...</p>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {[...Array(6)].map((_, index) => (
+                  <Card key={index} className="overflow-hidden">
+                    <div className="aspect-[4/3] animate-pulse bg-muted" />
+                    <CardContent className="space-y-3 p-4">
+                      <div className="h-5 w-3/4 animate-pulse rounded bg-muted" />
+                      <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                      <div className="h-4 w-2/3 animate-pulse rounded bg-muted" />
+                      <div className="flex gap-2">
+                        <div className="h-8 flex-1 animate-pulse rounded bg-muted" />
+                        <div className="h-8 w-10 animate-pulse rounded bg-muted" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             ) : visibleMarketplaceItems.length === 0 ? (
               <div className="text-center py-8 rounded-2xl border bg-card p-8">
                 <ShoppingBag className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-semibold mb-2">No matching Vanciety listings yet</h3>
+                <h3 className="text-lg font-semibold mb-2">No live Vanciety listings yet</h3>
                 <p className="text-muted-foreground mb-4">
-                  Member listings will appear here as the community adds vans, parts, and gear. Until then, use these marketplace links to keep searching.
+                  Be the first to post a van, part, or gear listing. Until member inventory fills in, use the verified marketplace links below so shoppers still have somewhere useful to go.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-6 text-left">
                   {trustedMarketLinks.map((link) => (
@@ -386,11 +430,22 @@ const Marketplace = () => {
                     </a>
                   ))}
                 </div>
-                {user && (
-                  <Button variant="hero" onClick={() => setIsCreateOpen(true)}>
-                    List First Vanciety Item
+                <div className="flex flex-wrap justify-center gap-3">
+                  {user ? (
+                    <Button variant="hero" onClick={() => setIsCreateOpen(true)}>
+                      List First Vanciety Item
+                    </Button>
+                  ) : (
+                    <Button variant="hero" onClick={() => window.location.assign('/auth')}>
+                      Join Free to List an Item
+                    </Button>
+                  )}
+                  <Button asChild variant="outline">
+                    <a href="https://www.vanviewer.com/" target="_blank" rel="noreferrer">
+                      Search Trusted Marketplaces
+                    </a>
                   </Button>
-                )}
+                </div>
               </div>
             ) : (
               <>

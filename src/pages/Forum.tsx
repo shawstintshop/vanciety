@@ -32,6 +32,7 @@ const Forum = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [forumPosts, setForumPosts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadIssue, setLoadIssue] = useState<string | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [newPost, setNewPost] = useState({ title: "", content: "", category: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,6 +56,7 @@ const Forum = () => {
 
   const fetchForumPosts = async () => {
     setIsLoading(true);
+    setLoadIssue(null);
     let query = supabase
       .from('forum_posts')
       .select(`
@@ -72,8 +74,9 @@ const Forum = () => {
     const { data, error } = await query;
 
     if (error) {
-      toast.error('Failed to load forum posts');
       console.error('Error fetching posts:', error);
+      setForumPosts([]);
+      setLoadIssue('Forum posts are unavailable right now. Vanciety is showing a clean empty state instead of a dead-end error.');
     } else {
       setForumPosts(data || []);
     }
@@ -165,7 +168,9 @@ const Forum = () => {
             </div>
 
             <div className="max-w-2xl mx-auto mb-8 rounded-xl border bg-card/70 p-3 text-center text-sm text-muted-foreground">
-              Forum metrics are live-loaded from Supabase. If the database is empty, Vanciety shows zero instead of invented community numbers.
+              {loadIssue
+                ? loadIssue
+                : "Forum metrics are live-loaded from Supabase. If the database is empty, Vanciety shows zero instead of invented community numbers."}
             </div>
 
             {/* Search and New Topic */}
@@ -279,23 +284,45 @@ const Forum = () => {
           {/* Topics List */}
           <div className="lg:col-span-3 space-y-4">
             {isLoading ? (
-              <div className="text-center py-8">
-                <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
-                <p className="text-muted-foreground">Loading posts...</p>
+              <div className="grid gap-4">
+                {[...Array(4)].map((_, index) => (
+                  <Card key={index}>
+                    <CardContent className="p-6">
+                      <div className="flex gap-4">
+                        <div className="h-10 w-10 animate-pulse rounded-full bg-muted" />
+                        <div className="flex-1 space-y-3">
+                          <div className="h-5 w-2/3 animate-pulse rounded bg-muted" />
+                          <div className="h-4 w-1/3 animate-pulse rounded bg-muted" />
+                          <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                          <div className="h-4 w-5/6 animate-pulse rounded bg-muted" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             ) : forumPosts.length === 0 ? (
               <Card>
                 <CardContent className="text-center py-8">
                   <MessageSquare className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-lg font-semibold mb-2">No posts yet</h3>
+                  <h3 className="text-lg font-semibold mb-2">No posts in this lane yet</h3>
                   <p className="text-muted-foreground mb-4">
-                    Be the first to start a discussion in this category!
+                    Be the first to ask a question, share a fix, or start a van build discussion.
                   </p>
-                  {user && (
-                    <Button variant="hero" onClick={() => setIsCreateOpen(true)}>
-                      Create First Post
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {user ? (
+                      <Button variant="hero" onClick={() => setIsCreateOpen(true)}>
+                        Create First Post
+                      </Button>
+                    ) : (
+                      <Button variant="hero" onClick={() => window.location.assign('/auth')}>
+                        Join Free to Post
+                      </Button>
+                    )}
+                    <Button variant="outline" onClick={() => setSelectedCategory('all')}>
+                      Browse All Categories
                     </Button>
-                  )}
+                  </div>
                 </CardContent>
               </Card>
             ) : (

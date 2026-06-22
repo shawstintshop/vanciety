@@ -74,61 +74,31 @@ const Header = () => {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary navigation">
 
-          {/* Marketplace dropdown */}
+          {/* Explore dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/marketplace", "/shop", "/vendors"]))}>
+              <button className={navLinkClass(isGroupActive(["/marketplace", "/shop", "/vendors", "/van-intelligence", "/videos"]))}>
                 <ShoppingBag className="h-4 w-4" />
-                Marketplace
+                Explore
                 <ChevronDown className="h-3 w-3 opacity-60" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-52 border-border bg-popover text-popover-foreground">
               <DropdownMenuItem onClick={() => navigate("/marketplace")}>
                 <Package className="mr-2 h-4 w-4 text-primary-glow" />
-                Buy Parts
+                Marketplace
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/shop")}>
-                <Tag className="mr-2 h-4 w-4 text-secondary" />
-                Sell an Item
+              <DropdownMenuItem onClick={() => navigate("/vendors")}>
+                <Wrench className="mr-2 h-4 w-4 text-secondary" />
+                Vendors
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/marketplace")}>
-                <Layers className="mr-2 h-4 w-4 text-muted-foreground" />
-                Used Gear
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => navigate("/shop")}>
-                <FileCode className="mr-2 h-4 w-4 text-accent" />
-                3D Print Files
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/manufacturers")}>
-                <Wrench className="mr-2 h-4 w-4 text-muted-foreground" />
-                Brands &amp; Makers
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Learn dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/videos", "/van-intelligence"]))}>
-                <BookOpen className="h-4 w-4" />
-                Learn
-                <ChevronDown className="h-3 w-3 opacity-60" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-52 border-border bg-popover text-popover-foreground">
               <DropdownMenuItem onClick={() => navigate("/van-intelligence")}>
-                <Brain className="mr-2 h-4 w-4 text-primary-glow" />
-                Guides &amp; Builds
+                <Brain className="mr-2 h-4 w-4 text-accent" />
+                Van Intelligence
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/videos")}>
-                <Video className="mr-2 h-4 w-4 text-secondary" />
+                <Video className="mr-2 h-4 w-4 text-muted-foreground" />
                 How-To Videos
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/van-intelligence")}>
-                <Star className="mr-2 h-4 w-4 text-accent" />
-                Product Reviews
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -249,14 +219,14 @@ const Header = () => {
         <div className="border-t border-border/80 bg-background/96 backdrop-blur-xl xl:hidden">
           <nav className="container mx-auto px-4 py-4" aria-label="Mobile navigation">
 
-            <div className="mb-3 text-[11px] uppercase tracking-widest text-muted-foreground">Marketplace</div>
+            <div className="mb-3 text-[11px] uppercase tracking-widest text-muted-foreground">Explore</div>
             <div className="mb-4 grid grid-cols-2 gap-2">
               {[
-                { label: "Buy Parts", to: "/marketplace", icon: Package },
+                { label: "Marketplace", to: "/marketplace", icon: Package },
+                { label: "Vendors", to: "/vendors", icon: Wrench },
+                { label: "Van Intelligence", to: "/van-intelligence", icon: Brain },
+                { label: "How-To Videos", to: "/videos", icon: Video },
                 { label: "Sell an Item", to: "/shop", icon: PlusCircle },
-                { label: "Used Gear", to: "/marketplace", icon: Layers },
-                { label: "3D Print Files", to: "/shop", icon: FileCode },
-                { label: "Brands & Makers", to: "/vendors", icon: Wrench },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
                   key={label}
@@ -270,14 +240,12 @@ const Header = () => {
               ))}
             </div>
 
-            <div className="mb-3 text-[11px] uppercase tracking-widest text-muted-foreground">Discover</div>
+            <div className="mb-3 text-[11px] uppercase tracking-widest text-muted-foreground">Community</div>
             <div className="mb-4 grid grid-cols-2 gap-2">
               {[
-                { label: "Guides & Builds", to: "/van-intelligence", icon: Brain },
-                { label: "How-To Videos", to: "/videos", icon: Video },
                 { label: "Events", to: "/events", icon: Calendar },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
-                { label: "Find Members", to: "/dashboard", icon: Users },
+                { label: "Find Members", to: "/friend-finder", icon: Users },
                 { label: "Vana AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link

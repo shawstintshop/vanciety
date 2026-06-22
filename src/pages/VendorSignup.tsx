@@ -49,6 +49,25 @@ const PRICING_TIERS = [
   },
 ];
 
+const inferSeoTags = (text: string) => {
+  const normalized = text.toLowerCase();
+  const tags = [
+    ["solar", "Solar"],
+    ["battery", "Battery Systems"],
+    ["inverter", "Inverters"],
+    ["sprinter", "Sprinter"],
+    ["transit", "Transit"],
+    ["revel", "Revel"],
+    ["electrical", "Electrical"],
+    ["plumbing", "Plumbing"],
+    ["cabinet", "Cabinetry"],
+    ["heater", "Heating"],
+    ["off-grid", "Off-Grid"],
+  ].filter(([needle]) => normalized.includes(needle)).map(([, label]) => label);
+
+  return tags.slice(0, 6);
+};
+
 const VendorSignup = () => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -78,6 +97,12 @@ const VendorSignup = () => {
   const updateForm = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
+
+  const aiTags = inferSeoTags(`${form.business_name} ${form.description} ${form.services}`);
+  const categoryLabel = CATEGORIES.find((category) => category.id === form.category)?.label || "Vendor";
+  const aiSnippet = form.business_name
+    ? `${form.business_name} is a ${categoryLabel.toLowerCase()}${form.location ? ` based in ${form.location}` : ""} focused on ${form.services || "van life services and products"}.`
+    : "Add business details to preview the AI listing optimization layer.";
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -385,6 +410,42 @@ const VendorSignup = () => {
                     />
                   </div>
                 </div>
+
+                <Card className="border-orange-500/20 bg-orange-500/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Sparkles className="w-5 h-5 text-orange-500" />
+                      AI listing optimization preview
+                    </CardTitle>
+                    <CardDescription>
+                      This is the first practical layer for vendor AI: better listing copy, stronger tags, and cleaner lead intake before a full automation system is added.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">Suggested snippet</p>
+                      <p className="mt-2 text-sm text-muted-foreground">{aiSnippet}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">Suggested tags</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {(aiTags.length ? aiTags : [categoryLabel]).map((tag) => (
+                          <Badge key={tag} variant="secondary">{tag}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="grid gap-3 md:grid-cols-2 text-sm text-muted-foreground">
+                      <div className="rounded-xl border bg-background/70 p-3">
+                        <p className="font-medium text-foreground">Next AI step</p>
+                        <p className="mt-1">Vision-assisted component tagging from uploaded van build photos.</p>
+                      </div>
+                      <div className="rounded-xl border bg-background/70 p-3">
+                        <p className="font-medium text-foreground">Lead qualification path</p>
+                        <p className="mt-1">Budget, timeline, and van type questions before a human vendor reply.</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
                 <div className="flex justify-between pt-4">
                   <Button variant="outline" onClick={() => setStep(1)}>Back</Button>

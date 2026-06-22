@@ -132,42 +132,50 @@ const Index = () => {
           <TopoBackground />
 
           <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
-            {/* Top row: brand lockup + audience checklist */}
-            <div className="mb-10 flex flex-col items-start justify-between gap-6 lg:flex-row">
-              <div className="h-10" />
-
-              <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
-                {HERO_CHECKLIST.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-200">
-                    <Check className={`h-4 w-4 shrink-0 ${LIME}`} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="mb-6">
+              <Badge className="border border-lime-500/30 bg-lime-500/10 text-lime-300 hover:bg-lime-500/10">
+                Ask Vana first
+              </Badge>
             </div>
 
             {/* Headline + body */}
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-                One Platform. Every Van.
+                Find the exact van help you need
                 <br />
-                <span className={LIME}>Every Product. Every Adventure.</span>
+                <span className={LIME}>before you start scrolling.</span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
-                VanCiety is the #1 hub for everything van life. Research products, find companies,
-                discover events, meet people, find trusted mechanics, watch videos and get AI-powered
-                answers &ndash; all in one place.
+                Start with Vana, then jump straight to the right repair guide, video, vendor,
+                event, or community path. Vanciety is being shaped into a real utility hub first,
+                not a cluttered directory.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="bg-lime-500 font-semibold text-gray-950 hover:bg-lime-400">
-                  <Link to={R.auth}>
-                    Get Started Free
+                  <Link to="/ai">
+                    Ask Vana
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white hover:bg-white/10">
-                  <Link to={R.products}>Explore the Platform</Link>
+                  <Link to="/van-intelligence?guide=egr-v6-diesel">Open Repair Guide</Link>
                 </Button>
+              </div>
+              <div className="mt-8 grid gap-3 md:grid-cols-3">
+                {[
+                  { title: "Marketplace", desc: "Parts, gear, and community listings without dead-end error states.", to: "/marketplace" },
+                  { title: "Events", desc: "Meetups, rallies, and workshops with a mobile-friendly event path.", to: "/events" },
+                  { title: "Community", desc: "Forum help, saved research, and member tools where they actually matter.", to: "/forum" },
+                ].map((item) => (
+                  <Link
+                    key={item.title}
+                    to={item.to}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-lime-500/40 hover:bg-lime-500/10"
+                  >
+                    <p className="text-sm font-semibold text-white">{item.title}</p>
+                    <p className="mt-1 text-sm text-gray-300">{item.desc}</p>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -287,67 +295,34 @@ const Index = () => {
                     </div>
                   </div>
 
-                  {/* Recommended For You */}
-<div className="mt-6 flex items-center justify-between">
-                    <h4 className="font-bold">Recommended For You</h4>
-                    <Link to={R.products} className={`text-xs font-semibold ${LIME} hover:underline`}>
-                      View All
-                    </Link>
-                  </div>
-                  <div className="mt-3 flex gap-3 overflow-x-auto pb-2">
-                    {PRODUCTS.map((p) => (
-                      <Link
-                        key={p.name}
-                        to={R.products}
-                        className="flex w-40 shrink-0 flex-col rounded-xl border border-white/10 bg-white/5 p-3 transition-colors hover:border-lime-500/40"
-                      >
-                        <div className="mb-2 flex h-20 items-center justify-center rounded-lg bg-gradient-to-br from-gray-700 to-gray-800">
-                          <ShoppingBag className="h-7 w-7 text-gray-500" />
-                        </div>
-                        <p className="line-clamp-2 text-xs font-semibold">{p.name}</p>
-                        <p className={`mt-1 text-sm font-bold ${LIME}`}>{p.price}</p>
-                        <div className="mt-1 flex items-center gap-1">
-                          <Stars />
-                          <span className="text-[10px] text-gray-400">({p.reviews})</span>
-                        </div>
+                  <div className="mt-6 rounded-2xl border border-white/10 bg-gray-950/60 p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <h4 className="font-bold text-white">Choose a clean route instead of digging through everything</h4>
+                        <p className="mt-1 text-sm text-gray-400">Only the sections that need deeper AI or saved research should get it.</p>
+                      </div>
+                      <Link to="/ai" className={`text-xs font-semibold ${LIME} hover:underline`}>
+                        Open Vana
                       </Link>
-                    ))}
-                  </div>
-
-                <div className="mt-6 rounded-2xl overflow-hidden border border-white/10 bg-gray-950/60">
-                  <div
-                    className="relative isolate p-5 text-white"
-                    style={{ backgroundImage: "url(/images/vanciety-large-van-event.jpg)", backgroundSize: 'cover', backgroundPosition: 'center' }}
-                  >
-                    <div className="absolute inset-0 bg-black/55" />
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-bold">Upcoming Events Near You</h4>
-                        <Link to={R.events} className={`text-xs font-semibold ${LIME} hover:underline`}>
-                          View All
+                    </div>
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                      {[
+                        { title: "Repair help", desc: "Symptoms, tools, steps, videos, docs, and next actions.", to: "/van-intelligence?guide=egr-v6-diesel" },
+                        { title: "Find a vendor", desc: "Builders, parts suppliers, installers, and local specialists.", to: "/vendors" },
+                        { title: "Watch real videos", desc: "Verified YouTube installs, maintenance, and van build content.", to: "/videos" },
+                        { title: "Go to events", desc: "Upcoming meetups, expos, rallies, and workshop routes.", to: "/events" },
+                      ].map((item) => (
+                        <Link
+                          key={item.title}
+                          to={item.to}
+                          className="rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-lime-500/40 hover:bg-lime-500/10"
+                        >
+                          <p className="text-sm font-semibold text-white">{item.title}</p>
+                          <p className="mt-1 text-xs text-gray-400">{item.desc}</p>
                         </Link>
-                      </div>
-                      <div className="mt-3 space-y-2">
-                        {EVENTS.map((e) => (
-                          <Link
-                            key={e.name}
-                            to={R.events}
-                            className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 p-3 transition-colors hover:border-lime-500/40"
-                          >
-                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-lime-500/15 text-lime-400">
-                              <Calendar className="h-5 w-5" />
-                            </span>
-                            <div className="min-w-0 flex-1">
-                              <p className="truncate text-sm font-semibold text-white">{e.name}</p>
-                              <p className="text-xs text-white/75">{e.loc}</p>
-                            </div>
-                            <span className="shrink-0 text-xs text-white/65">{e.date}</span>
-                          </Link>
-                        ))}
-                      </div>
+                      ))}
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>

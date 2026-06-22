@@ -1,14 +1,11 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+Disallow: /auth
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /vendor-dashboard
+Disallow: /vendor-dashboard/
+Disallow: /admin
+Disallow: /admin/
+
+Sitemap: https://vanciety.com/sitemap.xml

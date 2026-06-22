@@ -12,6 +12,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import AIVanConcierge from "@/components/AIVanConcierge";
+import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 
 // ── All Van Life Categories ──────────────────────────────────
@@ -162,6 +163,24 @@ const Vendors = () => {
 
   return (
     <div className="vanciety-page vanciety-page--vendors min-h-screen bg-background">
+      <Seo
+        title="Vanciety Vendors | Builders, Installers, Parts, and Van Services"
+        description="Browse Vanciety vendors for van builders, electrical installers, parts suppliers, tours, rentals, and trusted services."
+        canonicalPath="/vendors"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Vanciety Vendor Directory",
+          itemListElement: vendors.slice(0, 12).map((vendor, index) => ({
+            "@type": "LocalBusiness",
+            position: index + 1,
+            name: vendor.business_name,
+            description: vendor.description,
+            url: vendor.website_url || "https://vanciety.com/vendors",
+            areaServed: vendor.location,
+          })),
+        }}
+      />
       <Header />
 
       <main className="pt-16">
@@ -440,7 +459,7 @@ const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIco
         )}
 
         {/* Actions */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-col sm:flex-row">
           {vendor.website_url && (
             <Button
               asChild
@@ -455,7 +474,15 @@ const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIco
               </a>
             </Button>
           )}
-          <Button variant="outline" size="icon" title="View details">
+          {(vendor as any).contact_phone && (
+            <Button asChild variant="outline" className="flex-1 sm:flex-none">
+              <a href={`tel:${(vendor as any).contact_phone}`}>
+                <Phone className="w-4 h-4 mr-2" />
+                Call
+              </a>
+            </Button>
+          )}
+          <Button variant="outline" size="icon" title="View details" className="sm:flex-none">
             <Eye className="w-4 h-4" />
           </Button>
         </div>
