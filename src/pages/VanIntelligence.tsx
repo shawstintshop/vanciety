@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, BookOpen, CheckCircle2, ExternalLink, Gauge, MapPinned, ShieldAlert, TriangleAlert, Video, Wrench } from "lucide-react";
+import { ArrowLeft, BookOpen, CheckCircle2, ExternalLink, Gauge, MapPinned, ShieldAlert, TriangleAlert, Video, Wrench, BookmarkPlus } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const VANA_FRAMES = [
   { src: "/images/vana/vana-friendly-welcome.jpg", alt: "Vana friendly welcome" },
@@ -16,10 +19,10 @@ const VANA_FRAMES = [
 ];
 
 const PRECHECKS = [
-  "Confirm your engine and model year first.",
-  "Do not start if the issue is electrical, wiring-related, or unrelated to soot buildup.",
-  "Have a new gasket ready if the unit needs to come off.",
-  "Use the factory source first, then the video, then forum notes.",
+  "Rough idle, hesitation, reduced power, or limp mode.",
+  "EGR fault code or check-engine light.",
+  "Buck/judder during acceleration or soot buildup symptoms.",
+  "The fault returns after clearing codes or after a short road test.",
 ];
 
 const CLEANING_FLOW = [
@@ -132,8 +135,114 @@ const visualSteps = [
   { title: "6. Adventure ready", image: VANA_FRAMES[5].src, note: "Clean, test, and move back to the road." },
 ];
 
+const visualCards = [
+  {
+    title: "A. Visual route map",
+    copy: "Six frames that show the visitor the path from symptom to source to repair.",
+    compact: false,
+    image: VANA_FRAMES[0].src,
+    badge: "Route",
+  },
+  {
+    title: "B. Factory + video support",
+    copy: "Keep the visual cards smaller than the text sections so they read as cues, not billboards.",
+    compact: true,
+    image: VANA_FRAMES[2].src,
+    badge: "Support",
+  },
+  {
+    title: "C. Community confirmation",
+    copy: "Use one compact image card for forum and owner evidence.",
+    compact: true,
+    image: VANA_FRAMES[4].src,
+    badge: "Community",
+  },
+];
+
 const VanIntelligence = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const saveThisGuide = async () => {
+    if (!user) {
+      toast.info("Sign in to save this guide.");
+      navigate("/auth");
+      return;
+    }
+
+    const title = "2022 Sprinter V6 Diesel EGR Cleaning";
+    const canonicalTopic = "egr-cleaning";
+    const slug = "2022-sprinter-v6-diesel-egr-cleaning";
+    const guideUrl = "/van-intelligence?guide=egr-v6-diesel";
+
+    const { data: existingCollection, error: collectionError } = await supabase
+      .from("member_collections")
+      .select("id")
+      .eq("user_id", user.id)
+      .eq("slug", slug)
+      .maybeSingle();
+
+    if (collectionError) {
+      toast.error("Could not save this guide right now.");
+      return;
+    }
+
+    let collectionId = existingCollection?.id;
+
+    if (!collectionId) {
+      const { data: createdCollection, error: createError } = await supabase
+        .from("member_collections")
+        .insert({
+          user_id: user.id,
+          title,
+          slug,
+          query_text: "2022 Sprinter V6 diesel EGR cleaning",
+          canonical_topic: canonicalTopic,
+          topic_category: "maintenance",
+          topic_aliases: ["egr valve", "egr cleaning", "sprinter egr", "diesel egr"],
+          summary: "Saved guide for EGR cleaning, factory references, videos, and forum evidence.",
+          vehicle_context: {
+            engine: "V6 diesel",
+            model: "2022 Sprinter 2500",
+          },
+        })
+        .select("id")
+        .single();
+
+      if (createError || !createdCollection) {
+        toast.error("Could not save this guide right now.");
+        return;
+      }
+
+      collectionId = createdCollection.id;
+    }
+
+    const { error: itemError } = await supabase.from("collection_items").upsert({
+      collection_id: collectionId,
+      item_type: "note",
+      source_table: "guide",
+      source_id: slug,
+      title,
+      description: "Saved starting point for the V6 diesel EGR repair guide.",
+      url: guideUrl,
+      source_badge: "MANUAL",
+      topic_key: canonicalTopic,
+      topic_label: "EGR cleaning",
+      topic_score: 1,
+      is_new: false,
+      metadata: {
+        section: "Van Intelligence",
+        origin: "manual-save",
+      },
+    }, { onConflict: "collection_id,source_table,source_id" });
+
+    if (itemError) {
+      toast.error("Saved the collection, but could not attach the guide item.");
+      return;
+    }
+
+    toast.success("Guide saved to your member page.");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -157,12 +266,18 @@ const VanIntelligence = () => {
               <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground md:text-xl">
                 Use facts first: factory references, manufacturer diagrams, real videos, and forum evidence. Then decide whether to clean, replace, or diagnose deeper.
               </p>
+              <div className="mt-6 flex justify-center">
+                <Button variant="outline" onClick={saveThisGuide} className="gap-2">
+                  <BookmarkPlus className="h-4 w-4" />
+                  Save this guide
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="container mx-auto px-4 py-12">
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <Card className="border-border/80 bg-card/90 shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-2xl">
@@ -202,6 +317,23 @@ const VanIntelligence = () => {
                 ))}
               </CardContent>
             </Card>
+          </div>
+        </section>
+
+        <section className="container mx-auto px-4 pb-12">
+          <div className="grid gap-6 lg:grid-cols-3">
+            {visualCards.map((card) => (
+              <Card key={card.title} className="overflow-hidden border-border/80 bg-card/90 shadow-lg">
+                <div className={card.compact ? "aspect-[4/3]" : "aspect-video"}>
+                  <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" />
+                </div>
+                <CardHeader className="space-y-2">
+                  <Badge className="w-fit bg-primary text-primary-foreground">{card.badge}</Badge>
+                  <CardTitle className="text-xl">{card.title}</CardTitle>
+                  <CardDescription>{card.copy}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
           </div>
         </section>
 

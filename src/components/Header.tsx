@@ -70,7 +70,7 @@ const Header = () => {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/88 shadow-[0_10px_40px_rgba(0,0,0,.24)] backdrop-blur-xl">
       <div className="container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
-        <VancietyLogo className="h-14 w-[220px] max-w-[240px] sm:h-16 sm:w-[250px] md:h-18 md:w-[270px]" />
+        <VancietyLogo className="h-12 w-[180px] max-w-[200px] sm:h-14 sm:w-[220px] md:h-16 md:w-[240px]" />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary navigation">
@@ -211,7 +211,7 @@ const Header = () => {
             variant="hero"
             size="sm"
             className="hidden items-center gap-2 sm:flex"
-            onClick={() => navigate(user ? "/van-cards" : "/auth")}
+            onClick={() => navigate(user ? "/dashboard" : "/auth")}
           >
             <Crown className="h-4 w-4" />
             {user ? "My Account" : "Join Free"}

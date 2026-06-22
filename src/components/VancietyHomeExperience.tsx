@@ -72,7 +72,7 @@ const VancietyHomeExperience = () => {
           })}
         </div>
 
-        <div className="mb-12 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mb-12 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
           <VancietyConceptVisual
             src="/images/vana/vana-friendly-welcome.jpg"
             alt="Vana friendly welcome image"
@@ -80,7 +80,7 @@ const VancietyHomeExperience = () => {
             caption="The home page should start with Vana as the route guide, then send people to the right van repair, events, videos, or help page."
             badge="Home assistant"
           />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             <VancietyConceptVisual
               compact
               src="/images/vana/vana-route-guidance.jpg"
