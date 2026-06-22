@@ -192,12 +192,12 @@ const ForVendors = () => {
         {/* Hero */}
         <section className="bg-gray-950 px-6 py-20 sm:py-28">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge className="mb-6 border-lime-500/40 bg-lime-500/10 text-lime-400 hover:bg-lime-500/10">
+            <Badge className="mb-6 border-primary/40 bg-primary/10 text-primary hover:bg-primary/10">
               For Van Life Brands
             </Badge>
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl">
               Your Van Life Business.{" "}
-              <span className="text-lime-400">Powered by Vanciety.</span>
+              <span className="text-primary">Powered by Vanciety.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-300 sm:text-xl">
               Join 1,000+ van life brands already on the platform. Get found by
@@ -207,7 +207,7 @@ const ForVendors = () => {
               <Button
                 asChild
                 size="lg"
-                className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+                className="bg-primary text-primary-foreground hover:bg-amber-500"
               >
                 <Link to={VENDOR_CTA}>List Your Company Free →</Link>
               </Button>
@@ -225,7 +225,7 @@ const ForVendors = () => {
                   className="border-gray-800 bg-gray-950 text-white"
                 >
                   <CardContent className="p-8">
-                    <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-lime-500/10 text-lime-400">
+                    <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <Icon className="h-6 w-6" />
                     </div>
                     <h3 className="text-xl font-bold">{title}</h3>
@@ -254,12 +254,12 @@ const ForVendors = () => {
                   key={tier.name}
                   className={`relative flex flex-col bg-white ${
                     tier.popular
-                      ? "border-2 border-lime-500 shadow-lg"
+                      ? "border-2 border-primary shadow-lg"
                       : "border border-gray-200"
                   }`}
                 >
                   {tier.popular && (
-                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-lime-500 text-gray-950 hover:bg-lime-500">
+                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground hover:bg-primary">
                       Most Popular
                     </Badge>
                   )}
@@ -276,7 +276,7 @@ const ForVendors = () => {
                           key={feature}
                           className="flex items-start gap-2 text-sm text-gray-700"
                         >
-                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-lime-600" />
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -285,7 +285,7 @@ const ForVendors = () => {
                       asChild
                       className={`mt-8 w-full ${
                         tier.popular
-                          ? "bg-lime-500 text-gray-950 hover:bg-lime-400"
+                          ? "bg-primary text-primary-foreground hover:bg-amber-500"
                           : "bg-gray-900 text-white hover:bg-gray-800"
                       }`}
                     >
@@ -324,11 +324,11 @@ const ForVendors = () => {
                   className="border-gray-800 bg-gray-900 text-white"
                 >
                   <CardContent className="p-8">
-                    <Quote className="h-8 w-8 text-lime-400" />
+                    <Quote className="h-8 w-8 text-primary" />
                     <p className="mt-4 text-gray-300">{t.quote}</p>
                     <div className="mt-6">
                       <p className="font-semibold text-white">{t.name}</p>
-                      <p className="text-sm text-lime-400">{t.company}</p>
+                      <p className="text-sm text-primary">{t.company}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -351,9 +351,9 @@ const ForVendors = () => {
             <div className="grid gap-8 md:grid-cols-4">
               {steps.map(({ icon: Icon, title }, index) => (
                 <div key={title} className="text-center">
-                  <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-lime-500/10 text-lime-400">
+                  <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Icon className="h-7 w-7" />
-                    <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-lime-500 text-sm font-bold text-gray-950">
+                    <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-sm font-bold text-gray-950">
                       {index + 1}
                     </span>
                   </div>
@@ -379,7 +379,7 @@ const ForVendors = () => {
                   value={`item-${index}`}
                   className="border-gray-800"
                 >
-                  <AccordionTrigger className="text-left text-white hover:text-lime-400 hover:no-underline">
+                  <AccordionTrigger className="text-left text-white hover:text-primary hover:no-underline">
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-400">

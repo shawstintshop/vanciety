@@ -201,5 +201,5 @@ export const CATEGORY_META: Record<
   stealth: { label: "Stealth Spots", emoji: "🌙", color: "bg-indigo-600" },
   overland: { label: "Overland", emoji: "🏔️", color: "bg-orange-600" },
   builds: { label: "Builds", emoji: "🚐", color: "bg-teal-600" },
-  camping: { label: "Camping", emoji: "⛺", color: "bg-lime-600" },
+  camping: { label: "Camping", emoji: "⛺", color: "bg-primary" },
 };

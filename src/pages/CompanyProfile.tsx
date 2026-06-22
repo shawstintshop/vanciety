@@ -139,7 +139,7 @@ function StarRow({
           height={size}
           className={
             i <= rounded
-              ? "fill-lime-500 text-lime-500"
+              ? "fill-primary text-primary"
               : "fill-transparent text-gray-600"
           }
         />
@@ -414,7 +414,7 @@ const CompanyProfile = () => {
         <Header />
         <main className="pt-16">
           <div className="flex items-center justify-center py-32">
-            <Loader2 className="h-8 w-8 animate-spin text-lime-500" />
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
         </main>
       </div>
@@ -432,7 +432,7 @@ const CompanyProfile = () => {
               We couldn&apos;t find the company you&apos;re looking for. It may
               have moved or no longer be published.
             </p>
-            <Button asChild className="bg-lime-500 text-gray-950 hover:bg-lime-400">
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-amber-500">
               <Link to="/companies">Browse all companies</Link>
             </Button>
           </div>
@@ -484,7 +484,7 @@ const CompanyProfile = () => {
                         {company.name}
                       </h1>
                       {company.verified && (
-                        <Badge className="gap-1 border-lime-500/30 bg-lime-500/15 text-lime-400">
+                        <Badge className="gap-1 border-primary/30 bg-primary/15 text-primary">
                           <BadgeCheck className="h-3.5 w-3.5" />
                           Verified
                         </Badge>
@@ -521,7 +521,7 @@ const CompanyProfile = () => {
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Button
                     onClick={() => goToTab("contact")}
-                    className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+                    className="bg-primary text-primary-foreground hover:bg-amber-500"
                   >
                     Contact
                   </Button>
@@ -567,7 +567,7 @@ const CompanyProfile = () => {
                 <TabsTrigger
                   key={key}
                   value={key}
-                  className="rounded-md px-3 py-1.5 text-sm text-gray-400 data-[state=active]:bg-lime-500 data-[state=active]:text-gray-950"
+                  className="rounded-md px-3 py-1.5 text-sm text-gray-400 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
                   {label}
                 </TabsTrigger>
@@ -591,11 +591,11 @@ const CompanyProfile = () => {
                 {activePromotions.map((promo) => (
                   <div
                     key={promo.id}
-                    className="rounded-lg border border-lime-500/30 bg-lime-500/10 p-4"
+                    className="rounded-lg border border-primary/30 bg-primary/10 p-4"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-lime-300">
+                        <p className="font-semibold text-amber-300">
                           {promo.title}
                         </p>
                         {promo.description && (
@@ -606,7 +606,7 @@ const CompanyProfile = () => {
                         {promo.promo_code && (
                           <p className="mt-1 text-sm text-gray-300">
                             Code:{" "}
-                            <span className="font-mono font-semibold text-lime-300">
+                            <span className="font-mono font-semibold text-amber-300">
                               {promo.promo_code}
                             </span>
                           </p>
@@ -616,7 +616,7 @@ const CompanyProfile = () => {
                         <Button
                           asChild
                           size="sm"
-                          className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+                          className="bg-primary text-primary-foreground hover:bg-amber-500"
                         >
                           <a
                             href={promo.target_url}
@@ -756,7 +756,7 @@ const CompanyProfile = () => {
                       )}
                       {service.price_starting_at !== null &&
                         service.price_starting_at !== undefined && (
-                          <p className="mt-3 font-semibold text-lime-400">
+                          <p className="mt-3 font-semibold text-primary">
                             Starting at {formatPrice(service.price_starting_at)}
                           </p>
                         )}
@@ -764,7 +764,7 @@ const CompanyProfile = () => {
                     <CardFooter>
                       <Button
                         onClick={() => requestServiceQuote(service.id)}
-                        className="w-full bg-lime-500 text-gray-950 hover:bg-lime-400"
+                        className="w-full bg-primary text-primary-foreground hover:bg-amber-500"
                       >
                         Request Quote
                       </Button>
@@ -790,7 +790,7 @@ const CompanyProfile = () => {
                   <Link
                     key={event.id}
                     to="/events"
-                    className="block rounded-lg border border-white/10 bg-gray-900 p-4 transition hover:border-lime-500/40"
+                    className="block rounded-lg border border-white/10 bg-gray-900 p-4 transition hover:border-primary/40"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
@@ -846,7 +846,7 @@ const CompanyProfile = () => {
                         rel="noopener noreferrer"
                         className="flex aspect-video w-full items-center justify-center bg-gray-800 transition hover:bg-gray-700"
                       >
-                        <PlayCircle className="h-12 w-12 text-lime-500" />
+                        <PlayCircle className="h-12 w-12 text-primary" />
                       </a>
                     )}
                     <div className="p-3">
@@ -867,7 +867,7 @@ const CompanyProfile = () => {
           <TabsContent value="reviews" className="space-y-8 pb-16">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               <div className="flex flex-col items-center justify-center rounded-lg border border-white/10 bg-gray-900 p-6 text-center">
-                <p className="text-5xl font-bold text-lime-400">
+                <p className="text-5xl font-bold text-primary">
                   {avgRating.toFixed(1)}
                 </p>
                 <StarRow rating={avgRating} size={18} className="mt-2" />
@@ -891,7 +891,7 @@ const CompanyProfile = () => {
                       </span>
                       <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-800">
                         <div
-                          className="h-full bg-lime-500"
+                          className="h-full bg-primary"
                           style={{ width: `${pct}%` }}
                         />
                       </div>
@@ -911,7 +911,7 @@ const CompanyProfile = () => {
                     Want to share your experience?{" "}
                     <Link
                       to="/auth"
-                      className="font-semibold text-lime-400 hover:underline"
+                      className="font-semibold text-primary hover:underline"
                     >
                       Sign in to write a review
                     </Link>
@@ -993,7 +993,7 @@ const CompanyProfile = () => {
                     <Button
                       type="submit"
                       disabled={reviewForm.formState.isSubmitting}
-                      className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+                      className="bg-primary text-primary-foreground hover:bg-amber-500"
                     >
                       {reviewForm.formState.isSubmitting && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1013,7 +1013,7 @@ const CompanyProfile = () => {
               ) : (
                 <Button
                   onClick={() => setShowReviewForm(true)}
-                  className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+                  className="bg-primary text-primary-foreground hover:bg-amber-500"
                 >
                   <MessageSquare className="mr-2 h-4 w-4" />
                   Write a Review
@@ -1038,7 +1038,7 @@ const CompanyProfile = () => {
                           {review.reviewer_name || "Anonymous"}
                         </span>
                         {review.verified_customer && (
-                          <Badge className="gap-1 border-lime-500/30 bg-lime-500/15 text-lime-400">
+                          <Badge className="gap-1 border-primary/30 bg-primary/15 text-primary">
                             <BadgeCheck className="h-3 w-3" />
                             Verified
                           </Badge>
@@ -1161,7 +1161,7 @@ const CompanyProfile = () => {
                 <Button
                   type="submit"
                   disabled={leadForm.formState.isSubmitting}
-                  className="w-full bg-lime-500 text-gray-950 hover:bg-lime-400 sm:w-auto"
+                  className="w-full bg-primary text-primary-foreground hover:bg-amber-500 sm:w-auto"
                 >
                   {leadForm.formState.isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1210,7 +1210,7 @@ function ProductCard({
         )}
         <div className="mt-2 flex items-center justify-between">
           {price !== null && price !== undefined ? (
-            <span className="font-semibold text-lime-400">
+            <span className="font-semibold text-primary">
               {formatPrice(price)}
             </span>
           ) : (
@@ -1223,7 +1223,7 @@ function ProductCard({
             <Button
               asChild
               onClick={() => onView(product)}
-              className="w-full bg-lime-500 text-gray-950 hover:bg-lime-400"
+              className="w-full bg-primary text-primary-foreground hover:bg-amber-500"
             >
               <a href={url} target="_blank" rel="noopener noreferrer">
                 View Product

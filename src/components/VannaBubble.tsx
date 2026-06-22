@@ -207,7 +207,7 @@ export default function VannaBubble() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white">Vanna</p>
-              <p className="text-xs text-green-400">Online — ask me anything</p>
+              <p className="text-xs text-amber-400">Online — ask me anything</p>
             </div>
             <button
               onClick={() => setIsOpen(false)}

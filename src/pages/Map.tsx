@@ -482,7 +482,7 @@ const Map = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         <div className="relative z-10 container mx-auto flex h-full items-end px-4 pb-5 md:pb-6">
           <div className="max-w-3xl text-white">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-lime-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
               {isEventsPage ? "Events" : "Map & Mechanics"}
             </p>
             <h1 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">{bannerTitle}</h1>
@@ -649,7 +649,7 @@ const Map = () => {
                           {event.rsvp_count !== undefined && event.rsvp_count > 0 && (
                             <div className="flex items-center gap-1 mt-1">
                               <Users className="w-3 h-3 text-green-500" />
-                              <span className="text-xs text-green-600 font-medium">{event.rsvp_count} going</span>
+                              <span className="text-xs text-emerald-600 font-medium">{event.rsvp_count} going</span>
                             </div>
                           )}
                         </div>

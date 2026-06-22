@@ -349,7 +349,7 @@ const VanIntelligence = () => {
               <CardContent className="grid gap-3 sm:grid-cols-2">
                 {TOOL_LIST.map((tool) => (
                   <div key={tool} className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/50 p-3 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-lime-500" />
+                    <CheckCircle2 className="h-4 w-4 text-primary" />
                     {tool}
                   </div>
                 ))}

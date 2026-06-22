@@ -133,7 +133,7 @@ const Companies = () => {
           <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:py-20">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Find Every Van Life Brand in{" "}
-              <span className="text-lime-400">One Place</span>
+              <span className="text-primary">One Place</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base text-gray-400 sm:text-lg">
               Browse builders, parts makers, electrical specialists, and the
@@ -209,7 +209,7 @@ const Companies = () => {
                   onClick={() => setVerifiedOnly((v) => !v)}
                   className={
                     verifiedOnly
-                      ? "bg-lime-500 text-gray-950 hover:bg-lime-400"
+                      ? "bg-primary text-primary-foreground hover:bg-amber-500"
                       : "border-white/10 bg-transparent text-gray-300 hover:bg-gray-900 hover:text-white"
                   }
                 >
@@ -222,7 +222,7 @@ const Companies = () => {
                   onClick={() => setFeaturedFirst((v) => !v)}
                   className={
                     featuredFirst
-                      ? "bg-lime-500 text-gray-950 hover:bg-lime-400"
+                      ? "bg-primary text-primary-foreground hover:bg-amber-500"
                       : "border-white/10 bg-transparent text-gray-300 hover:bg-gray-900 hover:text-white"
                   }
                 >
@@ -246,7 +246,7 @@ const Companies = () => {
 
           {loading ? (
             <div className="flex items-center justify-center py-24 text-gray-400">
-              <Loader2 className="mr-3 h-6 w-6 animate-spin text-lime-400" />
+              <Loader2 className="mr-3 h-6 w-6 animate-spin text-primary" />
               Loading companies...
             </div>
           ) : sorted.length === 0 ? (
@@ -276,7 +276,7 @@ const Companies = () => {
                     onClick={() =>
                       setVisibleCount((count) => count + PAGE_SIZE)
                     }
-                    className="border-lime-500/40 bg-transparent text-lime-400 hover:bg-lime-500 hover:text-gray-950"
+                    className="border-primary/40 bg-transparent text-primary hover:bg-primary hover:text-gray-950"
                   >
                     Load More
                   </Button>
@@ -302,11 +302,11 @@ const CompanyCard = ({ company }: CompanyCardProps) => {
   return (
     <Card
       className={`relative flex h-full flex-col overflow-hidden bg-gray-900 transition-colors hover:bg-gray-900/70 ${
-        company.featured ? "border-lime-500" : "border-white/10"
+        company.featured ? "border-primary" : "border-white/10"
       }`}
     >
       {company.featured && (
-        <Badge className="absolute right-3 top-3 z-10 bg-lime-500 text-gray-950 hover:bg-lime-500">
+        <Badge className="absolute right-3 top-3 z-10 bg-primary text-primary-foreground hover:bg-primary">
           Featured
         </Badge>
       )}
@@ -332,7 +332,7 @@ const CompanyCard = ({ company }: CompanyCardProps) => {
                 {company.name}
               </h3>
               {company.verified && (
-                <BadgeCheck className="h-4 w-4 flex-shrink-0 text-lime-400" />
+                <BadgeCheck className="h-4 w-4 flex-shrink-0 text-primary" />
               )}
             </div>
             {company.tagline && (
@@ -345,7 +345,7 @@ const CompanyCard = ({ company }: CompanyCardProps) => {
 
         {/* Category */}
         <div className="mt-4">
-          <Badge className="bg-lime-500 text-gray-950 hover:bg-lime-500">
+          <Badge className="bg-primary text-primary-foreground hover:bg-primary">
             {company.category}
           </Badge>
         </div>
@@ -364,7 +364,7 @@ const CompanyCard = ({ company }: CompanyCardProps) => {
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                className="h-4 w-4 fill-lime-400 text-lime-400"
+                className="h-4 w-4 fill-primary text-primary"
               />
             ))}
           </div>
@@ -396,7 +396,7 @@ const CompanyCard = ({ company }: CompanyCardProps) => {
         <div className="mt-auto pt-5">
           <Button
             asChild
-            className="w-full bg-lime-500 text-gray-950 hover:bg-lime-400"
+            className="w-full bg-primary text-primary-foreground hover:bg-amber-500"
           >
             <Link to={`/companies/${company.slug}`}>
               View Company

@@ -272,7 +272,7 @@ export default function News() {
             <section className="vanciety-hero-topo py-10">
               <div className="container mx-auto px-4">
                 <div className="flex items-center gap-2 mb-6">
-                  <Badge className="bg-green-600 text-white">
+                  <Badge className="bg-primary text-primary-foreground">
                     <ShieldCheck className="w-3 h-3 mr-1" />
                     Real source links only
                   </Badge>

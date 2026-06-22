@@ -67,7 +67,7 @@ const SiteFooter = () => {
                     if (link.to.startsWith("mailto:")) {
                       return (
                         <li key={link.label}>
-                          <a href={link.to} className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-lime-400">
+                          <a href={link.to} className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-primary">
                             <Icon className="h-4 w-4" />
                             {link.label}
                           </a>
@@ -76,7 +76,7 @@ const SiteFooter = () => {
                     }
                     return (
                       <li key={link.label}>
-                        <Link to={link.to} className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-lime-400">
+                        <Link to={link.to} className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-primary">
                           <Icon className="h-4 w-4" />
                           {link.label}
                         </Link>
@@ -88,13 +88,13 @@ const SiteFooter = () => {
             ))}
           </div>
 
-          <div className="rounded-3xl border border-lime-400/20 bg-gradient-to-br from-white/8 via-white/5 to-lime-400/10 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-400">Start here</p>
+          <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-white/8 via-white/5 to-lime-400/10 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Start here</p>
             <h3 className="mt-2 text-2xl font-black tracking-tight text-white">Get Started Free</h3>
             <p className="mt-3 text-sm leading-6 text-white/70">
               Create your free account to save research, follow listings, see member tools, and unlock future location privacy controls.
             </p>
-            <Button asChild className="mt-5 w-full bg-lime-500 font-semibold text-gray-950 hover:bg-lime-400">
+            <Button asChild className="mt-5 w-full bg-primary font-semibold text-gray-950 hover:bg-amber-400">
               <Link to="/auth">
                 Join Free
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -108,11 +108,11 @@ const SiteFooter = () => {
           <div className="flex flex-wrap gap-4">
             {quickLinks.map((link) =>
               link.to.startsWith("mailto:") ? (
-                <a key={link.label} href={link.to} className="transition hover:text-lime-400">
+                <a key={link.label} href={link.to} className="transition hover:text-primary">
                   {link.label}
                 </a>
               ) : (
-                <Link key={link.label} to={link.to} className="transition hover:text-lime-400">
+                <Link key={link.label} to={link.to} className="transition hover:text-primary">
                   {link.label}
                 </Link>
               )

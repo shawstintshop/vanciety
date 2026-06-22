@@ -141,11 +141,11 @@ const Header = () => {
                 Campfire Boards
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/journals")}>
-                <BookOpen className="mr-2 h-4 w-4 text-emerald-400" />
+                <BookOpen className="mr-2 h-4 w-4 text-accent" />
                 Trip Journals
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/resources")}>
-                <MapPin className="mr-2 h-4 w-4 text-green-400" />
+                <MapPin className="mr-2 h-4 w-4 text-primary" />
                 Resource Board
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/icebreaker")}>

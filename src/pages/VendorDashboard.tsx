@@ -135,7 +135,7 @@ function statusBadgeClass(status: string): string {
     case "approved":
     case "complete":
     case "qualified":
-      return "bg-lime-500/15 text-lime-400 border-lime-500/30";
+      return "bg-primary/15 text-primary border-primary/30";
     case "new":
     case "pending":
     case "processing":
@@ -249,7 +249,7 @@ const VendorDashboard = () => {
         <Header />
         <main className="pt-16">
           <div className="flex items-center justify-center py-32">
-            <Loader2 className="h-8 w-8 animate-spin text-lime-500" />
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
         </main>
       </div>
@@ -272,7 +272,7 @@ const VendorDashboard = () => {
         <Header />
         <main className="pt-16">
           <div className="mx-auto flex max-w-2xl flex-col items-center justify-center px-6 py-32 text-center">
-            <Building2 className="mb-6 h-14 w-14 text-lime-500" />
+            <Building2 className="mb-6 h-14 w-14 text-primary" />
             <h1 className="mb-3 text-3xl font-bold">
               You don't have a company yet
             </h1>
@@ -283,7 +283,7 @@ const VendorDashboard = () => {
             </p>
             <Button
               asChild
-              className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+              className="bg-primary text-primary-foreground hover:bg-amber-500"
             >
               <Link to="/for-vendors">Become a Vendor</Link>
             </Button>
@@ -341,7 +341,7 @@ const VendorDashboard = () => {
                       onClick={() => setPanel(item.id)}
                       className={`flex flex-shrink-0 items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors ${
                         isActive
-                          ? "bg-lime-500/15 text-lime-400"
+                          ? "bg-primary/15 text-primary"
                           : "text-gray-300 hover:bg-white/5 hover:text-white"
                       }`}
                     >
@@ -350,7 +350,7 @@ const VendorDashboard = () => {
                         {item.label}
                       </span>
                       {item.id === "leads" && newLeadCount > 0 && (
-                        <Badge className="ml-auto bg-lime-500 px-1.5 text-gray-950 hover:bg-lime-500">
+                        <Badge className="ml-auto bg-primary px-1.5 text-gray-950 hover:bg-primary">
                           {newLeadCount}
                         </Badge>
                       )}
@@ -455,8 +455,8 @@ function StatCard({
   return (
     <Card className="border-white/10 bg-gray-900">
       <CardContent className="flex items-center gap-4 p-5">
-        <div className="rounded-lg bg-lime-500/10 p-3">
-          <Icon className="h-5 w-5 text-lime-400" />
+        <div className="rounded-lg bg-primary/10 p-3">
+          <Icon className="h-5 w-5 text-primary" />
         </div>
         <div>
           <p className="text-2xl font-bold leading-none">{value}</p>
@@ -515,7 +515,7 @@ function OverviewPanel({
         </CardHeader>
         <CardContent className="flex flex-wrap gap-3">
           <Button
-            className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+            className="bg-primary text-primary-foreground hover:bg-amber-500"
             onClick={() => onNavigate("products")}
           >
             <Plus className="mr-2 h-4 w-4" /> Add Product
@@ -613,7 +613,7 @@ function OverviewPanel({
                   <span className="font-medium">
                     {review.reviewer_name ?? "Anonymous"}
                   </span>
-                  <span className="flex items-center gap-1 text-sm text-lime-400">
+                  <span className="flex items-center gap-1 text-sm text-primary">
                     <Star className="h-4 w-4 fill-current" />
                     {review.rating}
                   </span>
@@ -794,7 +794,7 @@ function ProfilePanel({
           <Button
             onClick={handleSave}
             disabled={saving}
-            className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+            className="bg-primary text-primary-foreground hover:bg-amber-500"
           >
             {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Save Changes
@@ -803,7 +803,7 @@ function ProfilePanel({
             onClick={handlePublish}
             disabled={publishing || company.status === "published"}
             variant="outline"
-            className="border-lime-500/40 bg-transparent text-lime-400 hover:bg-lime-500/10"
+            className="border-primary/40 bg-transparent text-primary hover:bg-primary/10"
           >
             {publishing ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -908,7 +908,7 @@ function ProductsPanel({
           <Button
             size="sm"
             onClick={() => setShowForm((v) => !v)}
-            className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+            className="bg-primary text-primary-foreground hover:bg-amber-500"
           >
             <Plus className="mr-2 h-4 w-4" />
             {showForm ? "Cancel" : "Add Product"}
@@ -1013,7 +1013,7 @@ function ProductsPanel({
             <Button
               onClick={handleCreate}
               disabled={saving}
-              className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+              className="bg-primary text-primary-foreground hover:bg-amber-500"
             >
               {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Create Product
@@ -1141,7 +1141,7 @@ function ServicesPanel({
           <Button
             size="sm"
             onClick={() => setShowForm((v) => !v)}
-            className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+            className="bg-primary text-primary-foreground hover:bg-amber-500"
           >
             <Plus className="mr-2 h-4 w-4" />
             {showForm ? "Cancel" : "Add Service"}
@@ -1240,7 +1240,7 @@ function ServicesPanel({
             <Button
               onClick={handleCreate}
               disabled={saving}
-              className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+              className="bg-primary text-primary-foreground hover:bg-amber-500"
             >
               {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Create Service
@@ -1451,7 +1451,7 @@ function ReviewsPanel({ reviews }: { reviews: CompanyReview[] }) {
                   </TableCell>
                   <TableCell>{review.reviewer_name ?? "Anonymous"}</TableCell>
                   <TableCell>
-                    <span className="flex items-center gap-1 text-lime-400">
+                    <span className="flex items-center gap-1 text-primary">
                       <Star className="h-4 w-4 fill-current" />
                       {review.rating}
                     </span>
@@ -1553,7 +1553,7 @@ function AIToolsPanel({
           <Card key={tool.jobType} className="border-white/10 bg-gray-900">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
-                <Sparkles className="h-4 w-4 text-lime-400" />
+                <Sparkles className="h-4 w-4 text-primary" />
                 {tool.title}
               </CardTitle>
               <CardDescription>{tool.description}</CardDescription>
@@ -1562,7 +1562,7 @@ function AIToolsPanel({
               <Button
                 onClick={() => handleGenerate(tool.jobType)}
                 disabled={pending === tool.jobType}
-                className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+                className="bg-primary text-primary-foreground hover:bg-amber-500"
               >
                 {pending === tool.jobType ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1663,7 +1663,7 @@ function SettingsPanel({ company }: { company: Company }) {
           </div>
           <Button
             asChild
-            className="bg-lime-500 text-gray-950 hover:bg-lime-400"
+            className="bg-primary text-primary-foreground hover:bg-amber-500"
           >
             <Link to="/for-vendors">Upgrade</Link>
           </Button>
@@ -1708,7 +1708,7 @@ function ComingSoonPanel({
   return (
     <Card className="border-white/10 bg-gray-900">
       <CardContent className="flex flex-col items-center justify-center py-20 text-center">
-        <Rocket className="mb-4 h-10 w-10 text-lime-500" />
+        <Rocket className="mb-4 h-10 w-10 text-primary" />
         <h2 className="mb-2 text-xl font-semibold">{title}</h2>
         <p className="mb-1 max-w-md text-sm text-gray-400">{description}</p>
         <p className="text-xs text-gray-500">Coming soon to your plan.</p>
