@@ -283,9 +283,8 @@ const Header = () => {
                 { label: "Guides & Builds", to: "/van-intelligence", icon: Brain },
                 { label: "How-To Videos", to: "/videos", icon: Video },
                 { label: "Events", to: "/events", icon: Calendar },
-                { label: "Map", to: "/map", icon: MapPin },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
-                { label: "Find Members", to: "/map", icon: Users },
+                { label: "Find Members", to: "/dashboard", icon: Users },
                 { label: "Vana AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link

@@ -22,7 +22,6 @@ const R = {
   companies: "/manufacturers",
   events: "/events",
   videos: "/videos",
-  map: "/map",
   mechanics: "/vendors",
   auth: "/auth",
 };
