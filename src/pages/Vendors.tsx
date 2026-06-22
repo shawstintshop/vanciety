@@ -36,42 +36,54 @@ const SEED_VENDORS = [
     id: "seed-1", business_name: "Vancraft Customs", category: "builders",
     description: "Full custom Sprinter & Transit conversions. Off-grid solar, plumbing, and luxury interiors.",
     location: "Portland, OR", website_url: "https://vancraftcustoms.com",
-    logo_url: null, images: [], services: ["Custom Builds", "Solar Install", "Plumbing"],
+    logo_url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=80&h=80&fit=crop&auto=format",
+    banner_url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=200&fit=crop&auto=format",
+    images: [], services: ["Custom Builds", "Solar Install", "Plumbing"],
     rating: 4.9, reviews_count: 127, verified: true, featured: true, status: "active",
   },
   {
     id: "seed-2", business_name: "Winnebago", category: "manufacturers",
     description: "Iconic American RV & camper van manufacturer. Revel, Solis, and Ekko models.",
     location: "Forest City, IA", website_url: "https://www.winnebago.com",
-    logo_url: null, images: [], services: ["Class B Vans", "Adventure Vehicles"],
+    logo_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&h=80&fit=crop&auto=format",
+    banner_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=200&fit=crop&auto=format",
+    images: [], services: ["Class B Vans", "Adventure Vehicles"],
     rating: 4.7, reviews_count: 892, verified: true, featured: true, status: "active",
   },
   {
     id: "seed-3", business_name: "Victron Energy", category: "electrical",
     description: "Premium solar charge controllers, inverters, and battery monitors for off-grid living.",
     location: "Global", website_url: "https://www.victronenergy.com",
-    logo_url: null, images: [], services: ["Solar Controllers", "Inverters", "Battery Monitors"],
+    logo_url: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=80&h=80&fit=crop&auto=format",
+    banner_url: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=200&fit=crop&auto=format",
+    images: [], services: ["Solar Controllers", "Inverters", "Battery Monitors"],
     rating: 4.8, reviews_count: 2341, verified: true, featured: true, status: "active",
   },
   {
     id: "seed-4", business_name: "Escape Campervans", category: "rentals",
     description: "Colorful campervan rentals across the US. Pick up and drop off at major cities.",
     location: "Multiple US Locations", website_url: "https://www.escapecampervans.com",
-    logo_url: null, images: [], services: ["Van Rentals", "One-Way Trips", "Festival Vans"],
+    logo_url: "https://images.unsplash.com/photo-1527786356703-4b100091cd2c?w=80&h=80&fit=crop&auto=format",
+    banner_url: "https://images.unsplash.com/photo-1527786356703-4b100091cd2c?w=600&h=200&fit=crop&auto=format",
+    images: [], services: ["Van Rentals", "One-Way Trips", "Festival Vans"],
     rating: 4.5, reviews_count: 3200, verified: true, featured: false, status: "active",
   },
   {
     id: "seed-5", business_name: "Overland Expo", category: "tours",
     description: "Premier overland and van life events with classes, demos, and community gathering.",
     location: "Nationwide", website_url: "https://www.overlandexpo.com",
-    logo_url: null, images: [], services: ["Events", "Classes", "Community"],
+    logo_url: "https://images.unsplash.com/photo-1533577116850-9cc66cad8a9b?w=80&h=80&fit=crop&auto=format",
+    banner_url: "https://images.unsplash.com/photo-1533577116850-9cc66cad8a9b?w=600&h=200&fit=crop&auto=format",
+    images: [], services: ["Events", "Classes", "Community"],
     rating: 4.6, reviews_count: 1500, verified: true, featured: false, status: "active",
   },
   {
     id: "seed-6", business_name: "Amazon Van Life Essentials", category: "affiliate",
     description: "Curated van life gear, solar panels, kitchen setups, and must-have accessories — all available on Amazon.",
     location: "Online", website_url: "https://amazon.com",
-    logo_url: null, images: [], services: ["Solar Panels", "Kitchen Gear", "Storage", "Bedding"],
+    logo_url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=80&h=80&fit=crop&auto=format",
+    banner_url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=200&fit=crop&auto=format",
+    images: [], services: ["Solar Panels", "Kitchen Gear", "Storage", "Bedding"],
     rating: 4.4, reviews_count: 50000, verified: true, featured: true, status: "active",
   },
 ];
@@ -391,12 +403,21 @@ const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIco
         featured ? "border-orange-500/40 ring-1 ring-orange-500/20" : ""
       }`}
     >
-      {/* Card header with gradient */}
-      <div className={`relative h-40 ${getCategoryColor(vendor.category)} bg-opacity-90`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent" />
-        {vendor.logo_url ? (
+      {/* Card header — real image or gradient fallback */}
+      <div className={`relative h-40 overflow-hidden ${(vendor as any).banner_url ? '' : getCategoryColor(vendor.category) + ' bg-opacity-90'}`}>
+        {(vendor as any).banner_url ? (
+          <img
+            src={(vendor as any).banner_url}
+            alt={vendor.business_name}
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+          />
+        ) : null}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        {vendor.logo_url && !(vendor as any).banner_url && (
           <img src={vendor.logo_url} alt={vendor.business_name} className="absolute bottom-4 left-4 w-16 h-16 rounded-xl bg-white p-1 object-contain" />
-        ) : (
+        )}
+        {!(vendor as any).banner_url && !vendor.logo_url && (
           <div className="absolute bottom-4 left-4 w-16 h-16 rounded-xl bg-white/90 flex items-center justify-center">
             <CategoryIcon className="w-8 h-8 text-gray-700" />
           </div>
