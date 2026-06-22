@@ -8,8 +8,6 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import TopoBackground from "@/components/TopoBackground";
-import AIVanConcierge from "@/components/AIVanConcierge";
-import VancietyLogo from "@/components/VancietyLogo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -253,31 +251,37 @@ const Index = () => {
                   </div>
 
                   <div className="mt-6 grid gap-4 lg:grid-cols-2">
-                    <Link to="/van-intelligence?guide=egr-v6-diesel" className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-lime-500/40 hover:bg-lime-500/10">
-                      <div className="aspect-[16/9] overflow-hidden">
-                        <img src="/images/vana/vana-friendly-welcome.jpg" alt="Vana friendly welcome" className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
+                    <div className="rounded-2xl border border-lime-500/30 bg-lime-500/10 p-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400">Start here</p>
+                      <p className="mt-2 text-lg font-semibold text-white">Ask Vana first</p>
+                      <p className="mt-2 text-sm text-gray-300">
+                        Start with the assistant path, then jump straight to the exact repair, video,
+                        event, or community section you need.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <Link to="/van-intelligence?guide=egr-v6-diesel" className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                          EGR guide
+                        </Link>
+                        <Link to="/videos" className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                          Videos
+                        </Link>
+                        <Link to="/events" className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                          Events
+                        </Link>
+                        <Link to="/forum" className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                          Community
+                        </Link>
                       </div>
-                      <div className="p-4">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-lime-400">Start here</p>
-                        <p className="mt-1 text-sm font-semibold text-white">Ask Vana first</p>
-                        <p className="mt-1 text-sm text-gray-300">She sends visitors to the exact repair, events, video, or help path.</p>
-                      </div>
-                    </Link>
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                       {[
-                        { title: "Route guidance", image: "/images/vana/vana-route-guidance.jpg", to: "/van-intelligence?guide=egr-v6-diesel" },
-                        { title: "Tech support", image: "/images/vana/vana-tech-support.jpg", to: "/vendors" },
-                        { title: "Community finder", image: "/images/vana/vana-community-finder.jpg", to: "/friend-finder" },
-                        { title: "Problem solving", image: "/images/vana/vana-problem-solving.jpg", to: "/forum" },
-                        { title: "Adventure ready", image: "/images/vana/vana-adventure-ready.jpg", to: "/videos" },
+                        { title: "Route guidance", desc: "Go directly to the right guide or help page.", to: "/van-intelligence?guide=egr-v6-diesel" },
+                        { title: "Tech support", desc: "Open repair help, mechanics, and vendor paths fast.", to: "/vendors" },
+                        { title: "Community finder", desc: "Jump to member help and meetup tools when needed.", to: "/friend-finder" },
                       ].map((item) => (
-                        <Link key={item.title} to={item.to} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-lime-500/40 hover:bg-lime-500/10">
-                          <div className="aspect-[16/9] overflow-hidden">
-                            <img src={item.image} alt={item.title} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
-                          </div>
-                          <div className="p-4">
-                            <p className="text-sm font-semibold text-white">{item.title}</p>
-                          </div>
+                        <Link key={item.title} to={item.to} className="rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                          <p className="text-sm font-semibold text-white">{item.title}</p>
+                          <p className="mt-1 text-xs text-gray-400">{item.desc}</p>
                         </Link>
                       ))}
                     </div>
@@ -410,19 +414,30 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* AI Powered Everything card */}
+              {/* AI route card */}
               <div className="lg:col-span-5">
                 <div className="h-full rounded-2xl bg-gray-900 p-6 text-white">
                   <span className="inline-flex items-center gap-2 rounded-full bg-lime-500/15 px-3 py-1 text-xs font-semibold text-lime-400">
-                    <Cpu className="h-4 w-4" />
-                    AI Powered Everything
+                    <Sparkles className="h-4 w-4" />
+                    Start with the assistant
                   </span>
                   <p className="mt-4 text-gray-300">
-                    Ask Vana first. She routes visitors to the exact guide, video, event, or repair page they need before they start scrolling.
+                    Keep the homepage clean. Let visitors pick the exact path they need instead of scrolling through duplicate image blocks.
                   </p>
 
-                  <div className="mt-6">
-                    <AIVanConcierge compact />
+                  <div className="mt-6 grid gap-3">
+                    <Link to="/van-intelligence?guide=egr-v6-diesel" className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                      Open the EGR repair path
+                    </Link>
+                    <Link to="/videos" className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                      Watch how-to videos
+                    </Link>
+                    <Link to="/events" className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                      Find events and meetups
+                    </Link>
+                    <Link to="/forum" className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-lime-500/40 hover:bg-lime-500/10">
+                      Jump into community help
+                    </Link>
                   </div>
                 </div>
               </div>
