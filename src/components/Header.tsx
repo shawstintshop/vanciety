@@ -112,7 +112,7 @@ const Header = () => {
           {/* Community dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard"]))}>
+              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard", "/friend-finder"]))}>
                 <Users className="h-4 w-4" />
                 Community
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -123,7 +123,7 @@ const Header = () => {
                 <MessageSquare className="mr-2 h-4 w-4 text-primary-glow" />
                 Forum
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/map")}>
+              <DropdownMenuItem onClick={() => navigate("/friend-finder")}>
                 <Users className="mr-2 h-4 w-4 text-secondary" />
                 Find Members
               </DropdownMenuItem>
