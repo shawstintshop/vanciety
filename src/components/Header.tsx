@@ -123,13 +123,18 @@ const Header = () => {
           {/* Community dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard", "/friend-finder", "/campfire", "/journals", "/resources", "/icebreaker"]))}>
+              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard", "/friend-finder", "/campfire", "/journals", "/resources", "/icebreaker", "/spots"]))}>
                 <Users className="h-4 w-4" />
                 Community
                 <ChevronDown className="h-3 w-3 opacity-60" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-52 border-border bg-popover text-popover-foreground">
+              <DropdownMenuItem onClick={() => navigate("/spots")}>
+                <MapPin className="mr-2 h-4 w-4 text-primary" />
+                Van Life Spots
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate("/forum")}>
                 <MessageSquare className="mr-2 h-4 w-4 text-primary-glow" />
                 Forum
@@ -273,6 +278,7 @@ const Header = () => {
               {[
                 { label: "Events", to: "/events", icon: Calendar },
                 { label: "Forum", to: "/forum", icon: MessageSquare },
+                { label: "Van Life Spots", to: "/spots", icon: MapPin },
                 { label: "Find Members", to: "/friend-finder", icon: Users },
                 { label: "Campfire", to: "/campfire", icon: Flame },
                 { label: "Trip Journals", to: "/journals", icon: BookOpen },
