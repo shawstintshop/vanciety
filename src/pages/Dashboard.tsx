@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/useAuth";
-import { Bookmark, Bell, CreditCard, Package, PlusCircle, Sprout, Sparkles, Truck, Wrench } from "lucide-react";
+import { Bookmark, Bell, CreditCard, Package, PlusCircle, Sprout, Sparkles, Truck, Wrench, Rss, Check } from "lucide-react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { CATEGORY_META, type FeedCategory } from "@/hooks/useContentFeed";
 import { Link, Navigate } from "react-router-dom";
 
 const sampleAlerts = [
@@ -22,8 +25,49 @@ const sampleAlerts = [
   },
 ];
 
+const ALL_FEED_CATEGORIES: FeedCategory[] = [
+  "youtube", "news", "products", "how_to", "stealth", "overland", "builds", "camping"
+];
+
 const Dashboard = () => {
   const { user, loading } = useAuth();
+  const [feedCategories, setFeedCategories] = useState<FeedCategory[]>(ALL_FEED_CATEGORIES);
+  const [savingFeed, setSavingFeed] = useState(false);
+  const [feedSaved, setFeedSaved] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+    supabase
+      .from("profiles")
+      .select("feed_categories")
+      .eq("id", user.id)
+      .single()
+      .then(({ data }) => {
+        if ((data as any)?.feed_categories?.length) {
+          setFeedCategories((data as any).feed_categories as FeedCategory[]);
+        }
+      });
+  }, [user]);
+
+  const toggleCategory = (cat: FeedCategory) => {
+    setFeedCategories((prev) =>
+      prev.includes(cat)
+        ? prev.length > 1 ? prev.filter((c) => c !== cat) : prev
+        : [...prev, cat]
+    );
+  };
+
+  const saveFeedPrefs = async () => {
+    if (!user) return;
+    setSavingFeed(true);
+    await supabase
+      .from("profiles")
+      .update({ feed_categories: feedCategories } as any)
+      .eq("id", user.id);
+    setSavingFeed(false);
+    setFeedSaved(true);
+    setTimeout(() => setFeedSaved(false), 2500);
+  };
 
   if (!loading && !user) {
     return <Navigate to="/auth" replace />;
@@ -144,6 +188,53 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           </div>
+        </section>
+
+        {/* Feed preferences */}
+        <section className="container mx-auto px-4 pb-12">
+          <Card className="border-border/80 bg-card/90 shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-xl">
+                <Rss className="h-5 w-5 text-primary" />
+                My Feed Preferences
+              </CardTitle>
+              <CardDescription>
+                Choose which content categories appear in your home page feed.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                {ALL_FEED_CATEGORIES.map((cat) => {
+                  const meta = CATEGORY_META[cat];
+                  const active = feedCategories.includes(cat);
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => toggleCategory(cat)}
+                      className={`relative flex flex-col items-center gap-1.5 rounded-xl border p-3
+                        text-sm font-medium transition-all duration-150
+                        ${
+                          active
+                            ? "border-primary/60 bg-primary/10 text-foreground"
+                            : "border-border/40 bg-muted/30 text-muted-foreground hover:border-border"
+                        }`}
+                    >
+                      {active && (
+                        <Check className="absolute top-2 right-2 w-3.5 h-3.5 text-primary" />
+                      )}
+                      <span className="text-xl">{meta.emoji}</span>
+                      <span>{meta.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <Button onClick={saveFeedPrefs} disabled={savingFeed} className="gap-2">
+                {feedSaved ? (
+                  <><Check className="h-4 w-4" /> Saved!</>
+                ) : savingFeed ? "Saving..." : "Save preferences"}
+              </Button>
+            </CardContent>
+          </Card>
         </section>
 
         <section className="container mx-auto px-4 pb-12">
