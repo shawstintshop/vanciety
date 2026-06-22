@@ -31,7 +31,7 @@ const FEATURES: { icon: LucideIcon; title: string; desc: string; to: string }[] 
   {
     icon: ShoppingBag,
     title: "Marketplace",
-    desc: "Browse parts, gear, and accessories from trusted van life brands — all in one place.",
+    desc: "Buy and sell vans, parts, and gear directly with the Vanciety community.",
     to: "/marketplace",
   },
   {
@@ -317,7 +317,7 @@ const Index = () => {
             {/* Stats */}
             <div className="rounded-2xl border border-white/10 bg-gray-950 p-6 lg:col-span-2">
               <h3 className="text-xl font-black">
-                Vanciety by the <span className={LIME}>Numbers</span>
+                What's <span className={LIME}>Inside</span>
               </h3>
               <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {STATS.map(({ icon: Icon, value, label, sub }) => (
@@ -342,27 +342,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* ════════ STATS BAR ════════ */}
-        <section className="bg-gray-950 py-14 border-t border-white/10">
-          <div className="container mx-auto grid items-center gap-8 px-4 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <p className="text-lg text-gray-300">
-                Everything van lifers need — repair guides, gear, events, builders, and a community that actually helps.
-              </p>
-              <p className={`mt-2 font-bold ${LIME}`}>vanciety.com</p>
-            </div>
-            <div className="grid grid-cols-2 gap-6 lg:col-span-8 lg:grid-cols-4">
-              {STATS.map(({ icon: Icon, value, label, sub }) => (
-                <div key={label} className="text-center">
-                  <Icon className={`mx-auto mb-2 h-7 w-7 ${LIME}`} />
-                  <p className="text-xl font-black">{value}</p>
-                  <p className="text-sm font-semibold text-gray-300">{label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
       </main>
     </div>

@@ -10,7 +10,7 @@ const footerColumns = [
       { label: "Marketplace", to: "/marketplace", icon: ShoppingBag },
       { label: "How-To Videos", to: "/videos", icon: Video },
       { label: "Events", to: "/events", icon: MapPin },
-      { label: "Find Members", to: "/dashboard", icon: Users },
+      { label: "Find Members", to: "/friend-finder", icon: Users },
     ],
   },
   {
@@ -34,10 +34,10 @@ const footerColumns = [
 ];
 
 const quickLinks = [
-  { label: "Privacy", to: "/auth" },
-  { label: "Terms", to: "/auth" },
-  { label: "Support", to: "/auth" },
-  { label: "Accessibility", to: "/auth" },
+  { label: "Privacy", to: "/privacy" },
+  { label: "Terms", to: "/terms" },
+  { label: "Support", to: "mailto:hello@vanciety.com" },
+  { label: "Accessibility", to: "/accessibility" },
 ];
 
 const SiteFooter = () => {
@@ -50,11 +50,9 @@ const SiteFooter = () => {
             <p className="max-w-md text-sm leading-6 text-white/70">
               Vanciety brings van owners, builders, vendors, events, videos, research, and members into one clean hub.
             </p>
-            <div className="flex flex-wrap gap-2 text-xs text-white/60">
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Toppo / dark theme</span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">AI search</span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Member tools</span>
-            </div>
+            <p className="text-xs text-white/40">
+              Built for the van life community.
+            </p>
           </div>
 
           <div className="grid gap-8 sm:grid-cols-3">
@@ -108,11 +106,17 @@ const SiteFooter = () => {
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
           <p>© 2026 Vanciety. Real van life community.</p>
           <div className="flex flex-wrap gap-4">
-            {quickLinks.map((link) => (
-              <Link key={link.label} to={link.to} className="transition hover:text-lime-400">
-                {link.label}
-              </Link>
-            ))}
+            {quickLinks.map((link) =>
+              link.to.startsWith("mailto:") ? (
+                <a key={link.label} href={link.to} className="transition hover:text-lime-400">
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.label} to={link.to} className="transition hover:text-lime-400">
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
       </div>
