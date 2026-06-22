@@ -49,7 +49,9 @@ const Auth = () => {
         <Card className="vanciety-topo-card w-full max-w-md border-border/80 bg-card/95 shadow-hero">
           <CardHeader className="text-center">
             <div className="mb-4 flex justify-center">
-              <VancietyLogo className="h-16 w-[260px] max-w-full sm:h-18 sm:w-[280px]" />
+              <div className="rounded-2xl border border-border/70 bg-background/80 px-4 py-2 shadow-sm">
+                <VancietyLogo className="h-14 w-[260px] max-w-full sm:h-16 sm:w-[300px]" />
+              </div>
             </div>
             <div className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary-glow">
               <ShieldCheck className="h-3.5 w-3.5" />
@@ -58,7 +60,7 @@ const Auth = () => {
             <CardTitle className="text-2xl font-bold">Welcome to Vanciety</CardTitle>
             <CardDescription>Join the van life community to unlock posting, listings, Van Cards, and opt-in GPS features.</CardDescription>
           </CardHeader>
-          <AuthForm onEmailPasswordSubmit={handleEmailPasswordSubmit} isLoading={isLoading} />
+          <AuthForm onSubmit={handleEmailPasswordSubmit} isLoading={isLoading} />
         </Card>
       </main>
     </div>
