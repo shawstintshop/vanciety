@@ -215,7 +215,19 @@ const Videos = () => {
         </section>
 
         <section className="container mx-auto px-4">
-          <AIVanConcierge mode="video" compact />
+          <div className="relative">
+            <div className="pointer-events-none absolute -right-1 top-2 z-20 rounded-full border border-border/60 bg-background/85 px-2 py-1 shadow-sm backdrop-blur-sm">
+              <div className="flex items-center gap-1.5">
+                <img
+                  src="/images/vanciety-sprinter-society.png"
+                  alt="Vana mascot"
+                  className="h-5 w-5 object-contain"
+                />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Vana</span>
+              </div>
+            </div>
+            <AIVanConcierge mode="video" compact />
+          </div>
         </section>
 
         {/* Video Grid */}

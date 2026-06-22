@@ -10,7 +10,7 @@ interface Message {
 }
 
 interface AIVanConciergeProps {
-  mode?: 'home' | 'full';
+  mode?: 'home' | 'full' | 'video';
   compact?: boolean;
 }
 
@@ -69,7 +69,7 @@ const GUIDE_CARDS = [
   },
 ];
 
-const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ compact = false }) => {
+const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact = false }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -114,14 +114,25 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ compact = false }) => {
     <Card className={`bg-card/60 border border-border/60 ${compact ? '' : 'w-full max-w-2xl mx-auto'}`}>
       <CardContent className={`${compact ? 'p-4' : 'p-6'}`}>
         {/* Header */}
-        <div className="mb-4 flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5">
-            <img
-              src="/images/vanciety-sprinter-society.png"
-              alt="Vana mascot"
-              className="h-full w-full object-contain"
-            />
-          </div>
+        <div className={`mb-4 flex items-center gap-3 ${mode === 'video' ? 'justify-start' : ''}`}>
+          {mode === 'video' ? (
+            <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-sm">
+              <img
+                src="/images/vanciety-sprinter-society.png"
+                alt="Vana mascot"
+                className="h-full w-full object-contain"
+              />
+              <div className="absolute inset-0 rounded-full border border-white/10" />
+            </div>
+          ) : (
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5">
+              <img
+                src="/images/vanciety-sprinter-society.png"
+                alt="Vana mascot"
+                className="h-full w-full object-contain"
+              />
+            </div>
+          )}
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
               <Brain className="w-4 h-4 text-primary" />
