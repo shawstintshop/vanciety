@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import {
-  Bot, Search, Calendar, Wrench, Users,
+  Bot, Calendar, Wrench, Users,
   Video, ShoppingBag, Building2, Cpu, MapPin,
   MessageSquare, Map as MapIcon, ArrowRight,
   UserPlus, Compass, Mountain, Sparkles,
-  Tent, Star, Image as ImageIcon,
+  Tent, Image as ImageIcon,
 } from "lucide-react";
 import Header from "@/components/Header";
 import TopoBackground from "@/components/TopoBackground";
@@ -88,21 +88,13 @@ const ECOSYSTEM: { icon: LucideIcon; label: string }[] = [
   { icon: MapPin, label: "Friend Finder" },
 ];
 
-// ── Stats ───────────────────────────────────────────────────────
-const STATS: { icon: LucideIcon; value: string; label: string }[] = [
-  { icon: Tent, value: "10,000+", label: "Products" },
-  { icon: Building2, value: "1,000+", label: "Builders & Vendors" },
-  { icon: Calendar, value: "500+", label: "Events Per Year" },
-  { icon: Users, value: "100,000+", label: "Community Members" },
+// ── Stats — honest, verifiable numbers ─────────────────────────
+const STATS: { icon: LucideIcon; value: string; label: string; sub: string }[] = [
+  { icon: ShoppingBag, value: "Parts & Gear", label: "Marketplace", sub: "Browse community listings" },
+  { icon: Building2, value: "Builders", label: "Vendors & Shops", sub: "Verified van professionals" },
+  { icon: Calendar, value: "Events", label: "Meetups & Rallies", sub: "Find gatherings near you" },
+  { icon: Users, value: "Community", label: "Forum & Members", sub: "Real van lifers helping each other" },
 ];
-
-const Stars = () => (
-  <div className="flex items-center gap-0.5">
-    {[0, 1, 2, 3, 4].map((i) => (
-      <Star key={i} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
-    ))}
-  </div>
-);
 
 const Index = () => {
   return (
@@ -125,7 +117,7 @@ const Index = () => {
             <div className="mb-6">
               <Badge className="border border-lime-500/30 bg-lime-500/10 text-lime-300 hover:bg-lime-500/10">
                 <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                The #1 Van Life Hub
+                Van Life, All in One Place
               </Badge>
             </div>
 
@@ -328,11 +320,12 @@ const Index = () => {
                 Vanciety by the <span className={LIME}>Numbers</span>
               </h3>
               <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                {STATS.map(({ icon: Icon, value, label }) => (
+                {STATS.map(({ icon: Icon, value, label, sub }) => (
                   <div key={label} className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
                     <Icon className={`mx-auto mb-2 h-5 w-5 ${LIME}`} />
-                    <p className="text-xl font-black">{value}</p>
-                    <p className="text-xs text-gray-400">{label}</p>
+                    <p className="text-sm font-black text-white">{value}</p>
+                    <p className="text-xs font-semibold text-gray-300 mt-0.5">{label}</p>
+                    <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">{sub}</p>
                   </div>
                 ))}
               </div>
@@ -354,16 +347,17 @@ const Index = () => {
           <div className="container mx-auto grid items-center gap-8 px-4 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <p className="text-lg text-gray-300">
-                The #1 place to research, connect, buy, and adventure in the van life community.
+                Everything van lifers need — repair guides, gear, events, builders, and a community that actually helps.
               </p>
               <p className={`mt-2 font-bold ${LIME}`}>vanciety.com</p>
             </div>
             <div className="grid grid-cols-2 gap-6 lg:col-span-8 lg:grid-cols-4">
-              {STATS.map(({ icon: Icon, value, label }) => (
+              {STATS.map(({ icon: Icon, value, label, sub }) => (
                 <div key={label} className="text-center">
                   <Icon className={`mx-auto mb-2 h-7 w-7 ${LIME}`} />
-                  <p className="text-3xl font-black">{value}</p>
-                  <p className="text-sm text-gray-400">{label}</p>
+                  <p className="text-xl font-black">{value}</p>
+                  <p className="text-sm font-semibold text-gray-300">{label}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{sub}</p>
                 </div>
               ))}
             </div>
