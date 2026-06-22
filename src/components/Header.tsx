@@ -9,7 +9,6 @@ import {
 import {
   Search,
   Menu,
-  MapPin,
   Video,
   Calendar,
   ShoppingBag,
@@ -140,16 +139,10 @@ const Header = () => {
             Events
           </Link>
 
-          {/* Map — direct */}
-          <Link to="/map" className={navLinkClass(isActive("/map"))}>
-            <MapPin className="h-4 w-4" />
-            Map
-          </Link>
-
           {/* Community dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards"]))}>
+              <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/dashboard"]))}>
                 <Users className="h-4 w-4" />
                 Community
                 <ChevronDown className="h-3 w-3 opacity-60" />
