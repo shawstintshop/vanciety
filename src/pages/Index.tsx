@@ -6,6 +6,7 @@
 
 import { Link } from "react-router-dom";
 import HomeFeed from "@/components/HomeFeed";
+import LatestVideos from "@/components/LatestVideos";
 import VannaBubble from "@/components/VannaBubble";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -233,6 +234,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* ════════ LATEST VIDEOS ════════ */}
+        <LatestVideos />
 
         {/* ════════ FEATURES GRID ════════ */}
         <section className="bg-background py-16 border-b border-border topo-card">

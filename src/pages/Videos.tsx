@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 import { verifiedVideos } from "@/data/vancietyVerified";
+import { useLatestVideos, LATEST_VIDEOS } from "@/hooks/useLatestVideos";
 
 const verifiedVideoFallback = verifiedVideos.map((video) => ({
   id: video.youtubeId,
@@ -35,9 +36,15 @@ const Videos = () => {
   const [sourceNote, setSourceNote] = useState<string>("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const { toast } = useToast();
+  const { markAllSeen } = useLatestVideos();
   
   // Auto-sync YouTube videos daily
   useYouTubeSync();
+
+  // Mark all videos as seen when user visits the Videos page
+  useEffect(() => {
+    markAllSeen();
+  }, [markAllSeen]);
 
   const videoCategories = [
     { id: "all",                name: "All Videos" },

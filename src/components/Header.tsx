@@ -38,6 +38,7 @@ import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import VancietyLogo from "./VancietyLogo";
+import { useLatestVideos } from "@/hooks/useLatestVideos";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,6 +46,7 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { newCount: newVideoCount } = useLatestVideos();
 
   const handleSignOut = async () => {
     await signOut();
@@ -103,6 +105,11 @@ const Header = () => {
               <DropdownMenuItem onClick={() => navigate("/videos")}>
                 <Video className="mr-2 h-4 w-4 text-muted-foreground" />
                 How-To Videos
+                {newVideoCount > 0 && (
+                  <span className="ml-auto min-w-[18px] h-[18px] bg-primary text-[10px] font-bold text-background rounded-full flex items-center justify-center px-1">
+                    {newVideoCount}
+                  </span>
+                )}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
