@@ -20,7 +20,7 @@ const VancietyConceptVisual = ({
 }: VancietyConceptVisualProps) => {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-primary/10 via-background to-muted/30 ${compact ? 'aspect-[4/3]' : 'aspect-video'} ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-primary/10 via-background to-muted/30 ${compact ? 'aspect-[16/10]' : 'aspect-video'} ${className}`}
     >
       {src ? (
         <>

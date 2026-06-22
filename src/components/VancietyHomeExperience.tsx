@@ -100,29 +100,29 @@ const VancietyHomeExperience = () => {
           </div>
         </div>
 
-        <div className="mb-12 rounded-[2rem] border border-primary/25 bg-gradient-to-br from-card via-card to-primary/5 p-5 shadow-hero md:p-8">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mb-12 rounded-[2rem] border border-primary/25 bg-gradient-to-br from-card via-card to-primary/5 p-4 shadow-hero md:p-6">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
-              <Badge className="mb-4 bg-primary text-primary-foreground">
+              <Badge className="mb-3 bg-primary text-primary-foreground">
                 <Bot className="mr-2 h-4 w-4" />
                 AI helper on the home page
               </Badge>
-              <h3 className="mb-4 text-3xl font-bold md:text-4xl">Users should never feel lost.</h3>
-              <p className="mb-5 text-muted-foreground">
+              <h3 className="mb-3 text-2xl font-bold md:text-3xl">Users should never feel lost.</h3>
+              <p className="mb-4 text-sm text-muted-foreground md:text-base">
                 The homepage points people straight to Vanciety AI. They type what they want — camping, mechanics, meetups, gear, news, how-to, vendors, events — and the helper sends them to the right Vanciety section and source links.
               </p>
-              <Button asChild variant="hero" size="lg">
+              <Button asChild variant="hero" size="default">
                 <a href="#vanciety-ai-helper">Ask the AI helper</a>
               </Button>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {quickPrompts.map((prompt) => (
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-2">
+              {quickPrompts.slice(0, 4).map((prompt) => (
                 <a
                   key={prompt}
                   href="#vanciety-ai-helper"
-                  className="rounded-2xl border border-border/80 bg-background/62 p-4 text-sm font-medium transition hover:border-primary/70 hover:bg-primary/10"
+                  className="rounded-xl border border-border/80 bg-background/62 px-3 py-2 text-xs font-medium transition hover:border-primary/70 hover:bg-primary/10"
                 >
-                  <MessageCircle className="mb-2 h-4 w-4 text-primary-glow" />
+                  <MessageCircle className="mb-1.5 h-3.5 w-3.5 text-primary-glow" />
                   {prompt}
                 </a>
               ))}
