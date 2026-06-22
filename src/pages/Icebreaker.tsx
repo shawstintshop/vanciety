@@ -1,43 +1,37 @@
 /**
- * Icebreaker — Weekly One-Question Matching
+ * Member Spotlight — Weekly Community Knowledge Share
  *
- * Design: low-pressure, opt-in, one exchange at a time
- * - Weekly question changes every Monday
- * - Answer once, get matched with one other member who answered similarly
- * - One message exchange, no ongoing obligation
- * - Opt out any time
+ * Van lifers sharing local knowledge, tips, and experience with the community.
+ * No matching, no dating language — pure community wisdom sharing.
  */
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Sparkles, Clock, Users, CheckCircle2, Loader2, RefreshCw } from "lucide-react";
+import { MapPin, Clock, Users, CheckCircle2, Loader2, RefreshCw, Compass } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
 import { format, startOfISOWeek, addDays } from "date-fns";
 import Header from "@/components/Header";
 import { useNavigate } from "react-router-dom";
 
-// Weekly questions — rotate by week number
+// Weekly questions — all about sharing van life knowledge and local tips
 const WEEKLY_QUESTIONS = [
-  "What's the best solo camping spot you've ever found?",
-  "What's one thing van life taught you about yourself?",
-  "What's the most useful piece of gear you own under $30?",
-  "What's a place you'd go back to immediately if you could?",
-  "What's your go-to meal when you're parked somewhere beautiful?",
-  "What's the hardest part of van life that no one talks about?",
-  "What's one skill you wish you'd learned before hitting the road?",
-  "What's the most unexpected thing you love about living in a van?",
-  "What's a route or road you'd recommend to any van lifer?",
-  "What does a perfect slow day on the road look like for you?",
-  "What's something you carry that most people wouldn't think of?",
-  "What's the most important thing you do for your mental health on the road?",
+  "What's a hidden camping spot you'd share with a fellow Vanciety member passing through your area?",
+  "What's the best local diner or food spot near where you're parked right now?",
+  "What road or route would you warn other van lifers to avoid — and why?",
+  "What's one piece of advice you'd give someone new to van life in your region?",
+  "What's a free overnight spot you've used that most people don't know about?",
+  "What's the best truck stop, rest area, or Walmart lot you've slept at?",
+  "What's a local mechanic or shop you'd trust with your van — and where are they?",
+  "What's the most useful thing a local member ever told you when you were passing through?",
+  "What's a state or national forest road that's worth the drive?",
+  "What's a city or town that's surprisingly van-life friendly?",
+  "What's a spot to avoid for stealth camping and why?",
+  "What's the best dump station, water fill, or propane spot in your area?",
 ];
 
 function getWeekKey(date: Date = new Date()): string {
@@ -46,7 +40,6 @@ function getWeekKey(date: Date = new Date()): string {
 }
 
 function getWeekQuestion(weekKey: string): string {
-  // Hash the week key to pick a question
   let hash = 0;
   for (let i = 0; i < weekKey.length; i++) {
     hash = (hash * 31 + weekKey.charCodeAt(i)) % WEEKLY_QUESTIONS.length;
@@ -60,7 +53,7 @@ function getNextMonday(): Date {
   return addDays(monday, 7);
 }
 
-type IcebreakerAnswer = {
+type SpotlightAnswer = {
   id: string;
   user_id: string;
   week_key: string;
@@ -78,19 +71,17 @@ export default function Icebreaker() {
   const question = getWeekQuestion(weekKey);
   const nextMonday = getNextMonday();
 
-  const [myAnswer, setMyAnswer] = useState<IcebreakerAnswer | null>(null);
+  const [myAnswer, setMyAnswer] = useState<SpotlightAnswer | null>(null);
   const [answerText, setAnswerText] = useState("");
-  const [optedIn, setOptedIn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [match, setMatch] = useState<IcebreakerAnswer | null>(null);
-  const [matchLoading, setMatchLoading] = useState(false);
+  const [communityAnswers, setCommunityAnswers] = useState<SpotlightAnswer[]>([]);
+  const [answersLoading, setAnswersLoading] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState<number>(0);
 
   useEffect(() => {
     if (!user) return;
     setLoading(true);
-    // Fetch my answer for this week
     supabase
       .from("icebreaker_answers")
       .select("*, profiles(display_name)")
@@ -98,15 +89,11 @@ export default function Icebreaker() {
       .eq("week_key", weekKey)
       .maybeSingle()
       .then(({ data }) => {
-        setMyAnswer(data as IcebreakerAnswer | null);
-        if (data) {
-          setAnswerText(data.answer);
-          setOptedIn(data.is_opted_in);
-        }
+        setMyAnswer(data as SpotlightAnswer | null);
+        if (data) setAnswerText(data.answer);
         setLoading(false);
       });
 
-    // Count total answers this week (for social proof)
     supabase
       .from("icebreaker_answers")
       .select("id", { count: "exact", head: true })
@@ -117,81 +104,77 @@ export default function Icebreaker() {
 
   const submitAnswer = async () => {
     if (!user) { navigate("/auth"); return; }
-    if (!answerText.trim()) { toast.error("Write something first"); return; }
+    if (!answerText.trim()) { toast.error("Share something with the community first"); return; }
     setSubmitting(true);
     const { error } = await supabase.from("icebreaker_answers").upsert({
       user_id: user.id,
       week_key: weekKey,
       question,
       answer: answerText.trim(),
-      is_opted_in: optedIn,
+      is_opted_in: true,
     }, { onConflict: "user_id,week_key" });
     if (error) {
-      toast.error("Couldn't save answer");
+      toast.error("Couldn't save your tip");
     } else {
-      toast.success(optedIn ? "Answer submitted — you might get a match this week ✨" : "Answer saved (not in matching pool)");
-      // Refresh my answer
+      toast.success("Your local knowledge is now shared with the community 🚐");
       const { data } = await supabase
         .from("icebreaker_answers")
         .select("*, profiles(display_name)")
         .eq("user_id", user.id)
         .eq("week_key", weekKey)
         .maybeSingle();
-      setMyAnswer(data as IcebreakerAnswer | null);
+      setMyAnswer(data as SpotlightAnswer | null);
     }
     setSubmitting(false);
   };
 
-  const findMatch = async () => {
-    if (!user || !myAnswer) return;
-    setMatchLoading(true);
-    // Simple matching: find another opted-in answer from this week that isn't mine
+  const loadCommunityAnswers = async () => {
+    setAnswersLoading(true);
     const { data } = await supabase
       .from("icebreaker_answers")
       .select("*, profiles(display_name)")
       .eq("week_key", weekKey)
       .eq("is_opted_in", true)
-      .neq("user_id", user.id)
-      .limit(10);
+      .neq("user_id", user?.id ?? "")
+      .order("created_at", { ascending: false })
+      .limit(20);
 
     if (!data || data.length === 0) {
-      toast.info("No matches found yet — check back later as more members answer");
-      setMatchLoading(false);
-      return;
+      toast.info("No community tips yet this week — be the first to share!");
+    } else {
+      setCommunityAnswers(data as SpotlightAnswer[]);
     }
-    // Pick a random one from results
-    const randomMatch = data[Math.floor(Math.random() * data.length)] as IcebreakerAnswer;
-    setMatch(randomMatch);
-    setMatchLoading(false);
+    setAnswersLoading(false);
   };
 
   const initials = (name: string | null | undefined) =>
-    name ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "?";
+    name ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "VL";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <div className="container mx-auto max-w-2xl px-4 pt-24 pb-16">
+
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <Sparkles className="h-7 w-7 text-violet-400" />
-            <h1 className="text-3xl font-bold tracking-tight">Icebreaker</h1>
+            <Compass className="h-7 w-7 text-orange-400" />
+            <h1 className="text-3xl font-bold tracking-tight">Member Spotlight</h1>
           </div>
           <p className="text-muted-foreground text-sm max-w-lg">
-            One question. One match. One optional exchange. No ongoing obligation — just a gentle way to meet someone new.
+            One question. Every Vanciety member shares what they know. Local tips, hidden spots, roads to avoid, places to eat — real knowledge from people who've been there.
           </p>
         </div>
 
         {/* Week info */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
-          <Badge variant="outline" className="border-violet-500/40 text-violet-400 gap-1.5">
+          <Badge variant="outline" className="border-orange-500/40 text-orange-400 gap-1.5">
             <Clock className="h-3 w-3" />
             Week of {format(startOfISOWeek(new Date()), "MMM d")}
           </Badge>
           <Badge variant="outline" className="border-border/60 text-muted-foreground gap-1.5">
             <Users className="h-3 w-3" />
-            {totalAnswers} {totalAnswers === 1 ? "member" : "members"} answered this week
+            {totalAnswers} {totalAnswers === 1 ? "member" : "members"} shared this week
           </Badge>
           <span className="text-xs text-muted-foreground">
             New question {format(nextMonday, "EEE, MMM d")}
@@ -199,8 +182,11 @@ export default function Icebreaker() {
         </div>
 
         {/* Question card */}
-        <div className="mb-6 rounded-2xl border border-violet-500/30 bg-violet-500/5 px-6 py-5">
-          <p className="text-xs font-medium text-violet-400 uppercase tracking-wider mb-3">This week's question</p>
+        <div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/5 px-6 py-5">
+          <p className="text-xs font-medium text-orange-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+            <MapPin className="h-3.5 w-3.5" />
+            This week's community question
+          </p>
           <p className="text-xl font-bold leading-snug">{question}</p>
         </div>
 
@@ -210,37 +196,30 @@ export default function Icebreaker() {
           </div>
         ) : !user ? (
           <div className="rounded-2xl border border-dashed border-border/60 py-12 text-center">
-            <Sparkles className="mx-auto mb-3 h-8 w-8 text-violet-400/40" />
-            <p className="text-muted-foreground text-sm mb-4">Sign in to answer and get matched</p>
+            <Compass className="mx-auto mb-3 h-8 w-8 text-orange-400/40" />
+            <p className="text-muted-foreground text-sm mb-2 font-medium">Members only</p>
+            <p className="text-muted-foreground text-xs mb-4 max-w-xs mx-auto">
+              Sign in to share your local knowledge and read tips from other van lifers in the community.
+            </p>
             <Button onClick={() => navigate("/auth")}>Sign In</Button>
           </div>
         ) : myAnswer ? (
-          /* Already answered */
+          /* Already shared */
           <div className="space-y-4">
             <div className="rounded-2xl border border-green-500/30 bg-green-500/5 px-6 py-5">
               <div className="flex items-center gap-2 mb-3">
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
-                <p className="font-semibold text-sm text-green-400">Your answer this week</p>
+                <p className="font-semibold text-sm text-green-400">Your tip is live this week</p>
               </div>
               <p className="text-sm text-foreground/90 whitespace-pre-wrap">{myAnswer.answer}</p>
-              <div className="mt-3 flex items-center gap-3">
-                <Badge
-                  variant="outline"
-                  className={cn(
-                    "text-xs",
-                    myAnswer.is_opted_in
-                      ? "border-violet-500/40 text-violet-400"
-                      : "border-border/60 text-muted-foreground"
-                  )}
-                >
-                  {myAnswer.is_opted_in ? "In matching pool" : "Not in matching pool"}
-                </Badge>
-              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Other members passing through your area can see this. Thank you for sharing.
+              </p>
             </div>
 
-            {/* Edit answer */}
+            {/* Edit */}
             <div className="rounded-xl border border-border/40 bg-card/30 px-5 py-4">
-              <p className="text-sm font-medium mb-3">Update your answer</p>
+              <p className="text-sm font-medium mb-3">Update your tip</p>
               <Textarea
                 value={answerText}
                 onChange={(e) => setAnswerText(e.target.value)}
@@ -248,93 +227,77 @@ export default function Icebreaker() {
                 rows={3}
                 className="bg-background resize-none mb-3"
               />
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <Switch id="opted-in" checked={optedIn} onCheckedChange={setOptedIn} />
-                  <Label htmlFor="opted-in" className="cursor-pointer text-sm text-muted-foreground">
-                    Include me in matching
-                  </Label>
-                </div>
+              <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">{answerText.length}/300</span>
-              </div>
-              <Button size="sm" onClick={submitAnswer} disabled={submitting} className="w-full">
-                {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                Update Answer
-              </Button>
-            </div>
-
-            {/* Find a match */}
-            {myAnswer.is_opted_in && (
-              <div className="rounded-2xl border border-border/50 bg-card/30 px-6 py-5">
-                <p className="font-semibold text-sm mb-1">Find your match</p>
-                <p className="text-xs text-muted-foreground mb-4">
-                  See another member's answer. One exchange, no obligation. You can wave them from the Find Members page.
-                </p>
-
-                {match ? (
-                  <div className="rounded-xl border border-violet-500/30 bg-violet-500/5 px-5 py-4 mb-3">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Avatar className="h-9 w-9">
-                        <AvatarFallback className="bg-violet-500/20 text-violet-400 text-xs">
-                          {initials(match.profiles?.display_name)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium text-sm">{match.profiles?.display_name ?? "A member"}</p>
-                        <p className="text-xs text-muted-foreground">answered this week</p>
-                      </div>
-                    </div>
-                    <p className="text-sm text-foreground/90 whitespace-pre-wrap italic">"{match.answer}"</p>
-                    <p className="mt-3 text-xs text-muted-foreground">
-                      If you'd like to connect, find them on the Member Map and send a wave.
-                    </p>
-                  </div>
-                ) : null}
-
-                <Button
-                  variant={match ? "outline" : "default"}
-                  className="w-full gap-2"
-                  onClick={findMatch}
-                  disabled={matchLoading}
-                >
-                  {matchLoading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : match ? (
-                    <><RefreshCw className="h-4 w-4" /> Find another match</>
-                  ) : (
-                    <><Sparkles className="h-4 w-4" /> Find a match</>
-                  )}
+                <Button size="sm" onClick={submitAnswer} disabled={submitting}>
+                  {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                  Update Tip
                 </Button>
               </div>
-            )}
+            </div>
+
+            {/* Read community tips */}
+            <div className="rounded-2xl border border-border/50 bg-card/30 px-6 py-5">
+              <p className="font-semibold text-sm mb-1">What other members shared</p>
+              <p className="text-xs text-muted-foreground mb-4">
+                Real tips from van lifers across the country — spots, routes, warnings, and local knowledge.
+              </p>
+
+              {communityAnswers.length > 0 ? (
+                <div className="space-y-3 mb-4">
+                  {communityAnswers.map((a) => (
+                    <div key={a.id} className="rounded-xl border border-border/40 bg-background/50 px-4 py-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Avatar className="h-7 w-7">
+                          <AvatarFallback className="bg-orange-500/20 text-orange-400 text-xs">
+                            {initials(a.profiles?.display_name)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <p className="text-sm font-medium">{a.profiles?.display_name ?? "Vanciety Member"}</p>
+                      </div>
+                      <p className="text-sm text-foreground/85 whitespace-pre-wrap">{a.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+              <Button
+                variant={communityAnswers.length > 0 ? "outline" : "default"}
+                className="w-full gap-2"
+                onClick={loadCommunityAnswers}
+                disabled={answersLoading}
+              >
+                {answersLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : communityAnswers.length > 0 ? (
+                  <><RefreshCw className="h-4 w-4" /> Refresh tips</>
+                ) : (
+                  <><Compass className="h-4 w-4" /> Read community tips</>
+                )}
+              </Button>
+            </div>
           </div>
         ) : (
-          /* Answer form */
+          /* Share form */
           <div className="rounded-2xl border border-border/50 bg-card/30 px-6 py-6">
-            <p className="text-sm font-medium mb-3">Your answer</p>
+            <p className="text-sm font-medium mb-1">Share your local knowledge</p>
+            <p className="text-xs text-muted-foreground mb-4">
+              Your tip will be visible to Vanciety members passing through your area. Be specific — the more detail, the more useful it is to someone who's never been there.
+            </p>
             <Textarea
-              placeholder="Take your time — there's no right answer..."
+              placeholder="e.g. There's a great free spot off Forest Rd 45 near Bend, OR — pull past the gate about a mile, flat ground, no cell but peaceful. Avoid weekends in summer."
               value={answerText}
               onChange={(e) => setAnswerText(e.target.value)}
               maxLength={300}
-              rows={4}
+              rows={5}
               className="bg-background resize-none mb-3"
             />
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Switch id="opted-in-new" checked={optedIn} onCheckedChange={setOptedIn} />
-                <Label htmlFor="opted-in-new" className="cursor-pointer text-sm text-muted-foreground">
-                  Include me in matching
-                </Label>
-              </div>
               <span className="text-xs text-muted-foreground">{answerText.length}/300</span>
             </div>
-            <p className="text-xs text-muted-foreground mb-4">
-              Matching is opt-in. If included, you might be shown to one other member who answered similarly. No obligation to respond.
-            </p>
             <Button className="w-full" onClick={submitAnswer} disabled={submitting || !answerText.trim()}>
               {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-              Submit Answer
+              Share with the Community
             </Button>
           </div>
         )}

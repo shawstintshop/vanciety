@@ -32,6 +32,7 @@ import {
   Flame,
   MapPin,
   Zap,
+  Compass,
 } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -148,8 +149,8 @@ const Header = () => {
                 Resource Board
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/icebreaker")}>
-                <Zap className="mr-2 h-4 w-4 text-violet-400" />
-                Icebreaker
+                <Compass className="mr-2 h-4 w-4 text-orange-400" />
+                Member Spotlight
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -269,7 +270,7 @@ const Header = () => {
                 { label: "Campfire", to: "/campfire", icon: Flame },
                 { label: "Trip Journals", to: "/journals", icon: BookOpen },
                 { label: "Resources", to: "/resources", icon: MapPin },
-                { label: "Icebreaker", to: "/icebreaker", icon: Zap },
+                { label: "Member Spotlight", to: "/icebreaker", icon: Compass },
                 { label: "Vana AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
