@@ -2,7 +2,30 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
-import { Brain, Send, Loader2, MapPin, Wrench, Video, Users } from 'lucide-react';
+import { Send, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+
+// Inline SVG van mascot — no broken external image
+function VanIcon({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna">
+      <rect x="4" y="14" width="52" height="26" rx="5" fill="#F97316" />
+      <rect x="8" y="8" width="32" height="10" rx="4" fill="#EA580C" />
+      <rect x="10" y="10" width="14" height="8" rx="2" fill="#BAE6FD" opacity="0.9" />
+      <rect x="28" y="16" width="10" height="8" rx="2" fill="#BAE6FD" opacity="0.9" />
+      <rect x="42" y="16" width="8" height="8" rx="2" fill="#BAE6FD" opacity="0.9" />
+      <line x1="38" y1="14" x2="38" y2="40" stroke="#EA580C" strokeWidth="1.5" />
+      <circle cx="16" cy="40" r="7" fill="#1C1917" />
+      <circle cx="16" cy="40" r="3.5" fill="#78716C" />
+      <circle cx="48" cy="40" r="7" fill="#1C1917" />
+      <circle cx="48" cy="40" r="3.5" fill="#78716C" />
+      <rect x="5" y="22" width="4" height="5" rx="1" fill="#FDE68A" />
+      <circle cx="22" cy="28" r="1.5" fill="#FFF7ED" />
+      <circle cx="30" cy="28" r="1.5" fill="#FFF7ED" />
+      <path d="M22 32 Q26 35 30 32" stroke="#FFF7ED" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+    </svg>
+  );
+}
 
 interface Message {
   role: 'user' | 'assistant';
@@ -10,64 +33,20 @@ interface Message {
 }
 
 interface AIVanConciergeProps {
-  mode?: 'home' | 'full' | 'video' | 'marketplace';
+  mode?: 'home' | 'full' | 'video' | 'marketplace' | 'mechanic' | 'shop';
   compact?: boolean;
 }
 
-const SUGGESTIONS = [
-  { icon: MapPin, text: 'Best camp spots near me' },
-  { icon: Wrench, text: '2022 Sprinter V6 diesel EGR valve cleaning' },
-  { icon: Video, text: 'Van build videos to watch' },
-  { icon: Users, text: 'Find van lifers in my area' },
-];
+const MODE_SUGGESTIONS: Record<string, string[]> = {
+  home: ['Find van lifers near me', 'Best solar setup?', 'Stealth camping tips'],
+  full: ['Find van lifers near me', 'Best solar setup?', 'Stealth camping tips'],
+  video: ['Best van build videos?', 'Solar install guide?', 'Sprinter conversion tips?'],
+  marketplace: ['What should I check before buying?', 'How do I list my van?', 'Fair price for a Sprinter?'],
+  mechanic: ['Find a Sprinter mechanic', 'What certifications matter?', 'Common Sprinter issues?'],
+  shop: ['Best power station for van life?', 'What ventilation do I need?', 'Solar panel recommendations?'],
+};
 
-const VANA_FRAMES = [
-  '/images/vana/vana-friendly-welcome.jpg',
-  '/images/vana/vana-route-guidance.jpg',
-  '/images/vana/vana-problem-solving.jpg',
-  '/images/vana/vana-tech-support.jpg',
-  '/images/vana/vana-community-finder.jpg',
-  '/images/vana/vana-adventure-ready.jpg',
-];
 
-const GUIDE_CARDS = [
-  {
-    title: '2022 Sprinter VS30 V6 Diesel EGR Valve',
-    description: 'Diagnose, clean, remove, inspect, and verify the EGR valve with real videos and official references.',
-    to: '/van-intelligence?guide=egr-v6-diesel',
-    image: VANA_FRAMES[0],
-  },
-  {
-    title: 'Van events and real meetups',
-    description: 'Jump to official events, shows, and trip-planning sources first.',
-    to: '/events',
-    image: VANA_FRAMES[1],
-  },
-  {
-    title: 'Driveway meetups and member help',
-    description: 'Use the friend-finder path for member-based help and driveway style meetups.',
-    to: '/friend-finder',
-    image: VANA_FRAMES[2],
-  },
-  {
-    title: 'Builds, community, and questions',
-    description: 'Open the forum-style path for questions, build feedback, and member discussion.',
-    to: '/forum',
-    image: VANA_FRAMES[3],
-  },
-  {
-    title: 'Watch real videos',
-    description: 'Go straight to the video library for real install and maintenance videos.',
-    to: '/videos',
-    image: VANA_FRAMES[4],
-  },
-  {
-    title: 'About the platform',
-    description: 'See what Vanciety is and how the system is organized.',
-    to: '/about',
-    image: VANA_FRAMES[5],
-  },
-];
 
 const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact = false }) => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -81,63 +60,47 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
 
   const handleSend = async (text?: string) => {
     const query = (text ?? input).trim();
-    if (!query) return;
+    if (!query || loading) return;
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: query }]);
+    const newMessages: Message[] = [...messages, { role: 'user', content: query }];
+    setMessages(newMessages);
     setLoading(true);
-
-    // Simulated response — replace with real AI endpoint when ready
-    await new Promise(r => setTimeout(r, 900));
-    const reply = getLocalReply(query);
-    setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase.functions.invoke('vanciety-ai-concierge', {
+        body: {
+          question: query,
+          mode,
+          history: newMessages.slice(-6).map((m) => ({ role: m.role, content: m.content })),
+        },
+      });
+      const reply = error
+        ? "Sorry, I hit a snag — please try again!"
+        : (data?.answer ?? "I'm not sure about that one. Try asking in the /forum!");
+      setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: 'assistant', content: 'Oops — something went wrong. Try again!' }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const getLocalReply = (q: string): string => {
-    const lower = q.toLowerCase();
-    if (lower.includes('solar') || lower.includes('electric')) {
-      return "For a Sprinter van, a common solar setup is 400W panels + a 100Ah LiFePO4 battery + a Victron MPPT controller. Check our Videos page for step-by-step build guides from top creators like Will Prowse and Build A Green RV.";
-    }
-    if (lower.includes('camp') || lower.includes('spot') || lower.includes('sleep')) {
-      return "Check our Map page for verified camp spots, driveways, and boondocking locations contributed by the Vanciety community. We have 18+ Pacific Northwest locations and growing.";
-    }
-    if (lower.includes('video') || lower.includes('build') || lower.includes('watch')) {
-      return "Head to our Videos page — we have 21+ real van life videos from channels like Eamon & Bec, Kara and Nate, and Will Prowse, with more added regularly.";
-    }
-    if (lower.includes('friend') || lower.includes('meet') || lower.includes('community')) {
-      return "Use Friend Finder to connect with van lifers near you. It's privacy-first — approximate city-level sharing only, opt-in. Sign up to access it.";
-    }
-    return "Great question! Vanciety is your all-in-one van life hub. You can find camp spots on the Map, watch build videos, post in the Forum, and connect with other van lifers. What specifically can I help you with?";
-  };
+  const suggestions = MODE_SUGGESTIONS[mode] ?? MODE_SUGGESTIONS.home;
 
   return (
     <Card className={`bg-card/60 border border-border/60 ${compact ? '' : 'w-full max-w-2xl mx-auto'}`}>
       <CardContent className={`${compact ? 'p-4' : 'p-6'}`}>
         {/* Header */}
-        <div className={`mb-4 flex items-center gap-3 ${mode === 'video' ? 'justify-start' : ''}`}>
-          {mode === 'video' ? (
-            <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-sm">
-              <img
-                src="/images/vanciety-sprinter-society.png"
-                alt="Vana mascot"
-                className="h-full w-full object-contain"
-              />
-              <div className="absolute inset-0 rounded-full border border-white/10" />
-            </div>
-          ) : (
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5">
-              <img
-                src="/images/vanciety-sprinter-society.png"
-                alt="Vana mascot"
-                className="h-full w-full object-contain"
-              />
-            </div>
-          )}
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
-              <Brain className="w-4 h-4 text-primary" />
-            </div>
-            <span className="text-sm font-medium text-foreground">Vana — van life assistant</span>
+        <div className="mb-4 flex items-center gap-2.5">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-orange-600/15 border border-orange-500/30">
+            <VanIcon size={26} />
+          </div>
+          <div>
+            <span className="text-sm font-semibold text-foreground">Vanna</span>
+            <p className="text-xs text-muted-foreground">AI van life assistant</p>
+          </div>
+          <div className="ml-auto flex items-center gap-1.5">
+            <span className="w-2 h-2 bg-green-400 rounded-full" />
+            <span className="text-xs text-green-400">Online</span>
           </div>
         </div>
 
@@ -146,10 +109,15 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
           <div className={`space-y-3 mb-4 overflow-y-auto ${compact ? 'max-h-48' : 'max-h-72'}`}>
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`rounded-xl px-3 py-2 text-sm max-w-[85%] ${
+                {m.role === 'assistant' && (
+                  <div className="w-6 h-6 rounded-full bg-orange-600/15 border border-orange-500/20 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
+                    <VanIcon size={16} />
+                  </div>
+                )}
+                <div className={`rounded-xl px-3 py-2 text-sm max-w-[85%] leading-relaxed ${
                   m.role === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-foreground'
+                    ? 'bg-primary text-primary-foreground rounded-tr-sm'
+                    : 'bg-muted text-foreground rounded-tl-sm'
                 }`}>
                   {m.content}
                 </div>
@@ -157,8 +125,15 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
             ))}
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-muted rounded-xl px-3 py-2">
-                  <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+                <div className="w-6 h-6 rounded-full bg-orange-600/15 border border-orange-500/20 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
+                  <VanIcon size={16} />
+                </div>
+                <div className="bg-muted rounded-xl rounded-tl-sm px-3 py-2.5">
+                  <div className="flex gap-1 items-center">
+                    <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
                 </div>
               </div>
             )}
@@ -166,40 +141,19 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
           </div>
         )}
 
-        {/* Suggestions */}
+        {/* Quick suggestions */}
         {messages.length === 0 && (
-          <>
-            <div className="grid grid-cols-2 gap-2 mb-4 sm:grid-cols-2 lg:grid-cols-2">
-              {SUGGESTIONS.map(({ icon: Icon, text }) => (
-                <button
-                  key={text}
-                  onClick={() => handleSend(text)}
-                  className="flex items-center gap-2 rounded-lg border border-border/60 bg-background/50 px-3 py-2 text-left text-xs text-muted-foreground hover:border-primary/40 hover:text-foreground transition-colors"
-                >
-                  <Icon className="w-3 h-3 shrink-0" />
-                  {text}
-                </button>
-              ))}
-            </div>
-
-            <div className="mb-4 grid gap-3">
-              {GUIDE_CARDS.map((guide) => (
-                <a
-                  key={guide.title}
-                  href={guide.to}
-                  className="group overflow-hidden rounded-2xl border border-border/60 bg-background/60 transition hover:border-primary/50 hover:bg-primary/5"
-                >
-                  <div className="aspect-[16/9] overflow-hidden">
-                    <img src={guide.image} alt={guide.title} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm font-semibold text-foreground">{guide.title}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">{guide.description}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {suggestions.map((s) => (
+              <button
+                key={s}
+                onClick={() => handleSend(s)}
+                className="text-xs bg-background/50 border border-border/60 hover:border-primary/40 hover:text-foreground text-muted-foreground rounded-full px-3 py-1.5 transition-colors"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
         )}
 
         {/* Input */}
@@ -207,12 +161,13 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
           <Input
             value={input}
             onChange={e => setInput(e.target.value)}
-            placeholder="Ask about van life..."
+            placeholder="Ask Vanna anything..."
             className="flex-1 h-9 text-sm bg-background/60"
             disabled={loading}
+            maxLength={500}
           />
           <Button type="submit" size="sm" disabled={loading || !input.trim()} className="h-9 w-9 p-0">
-            <Send className="w-4 h-4" />
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           </Button>
         </form>
       </CardContent>

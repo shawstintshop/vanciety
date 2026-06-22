@@ -12,17 +12,46 @@ const corsHeaders = {
 interface ConciergeRequest {
   question?: string;
   mode?: string;
-  context?: string;
+  history?: Array<{ role: "user" | "assistant"; content: string }>;
 }
 
-const SYSTEM_PROMPT = `You are Vanciety AI Concierge, a practical assistant for Sprinter van, overland van, Revel, and van-life visitors.
+const SYSTEM_PROMPT = `You are Vanna, Vanciety's friendly AI van life assistant. You are warm, knowledgeable, and genuinely helpful — like a fellow van lifer who has been on the road for years and knows the community inside out.
 
-Rules:
-- Help the visitor plan, compare, ask better questions, and decide which Vanciety source links to open next.
-- Do not invent prices, event dates, inventory, ratings, reviews, legal advice, road access, campsite availability, or mechanic credentials.
-- Tell visitors to verify prices, fitment, warranties, seller identity, bookings, road rules, and safety details on the linked official/source pages.
-- Keep exact private location details out of public guidance. Prefer approximate areas and safe public meetups.
-- Be concise, friendly, and action-oriented.`;
+PERSONALITY:
+- Friendly and approachable, never robotic
+- Concise and direct — van lifers are practical people
+- Honest when you don't know something
+- Enthusiastic about van life without being over the top
+
+VANCIETY PLATFORM — ALL PAGES:
+- / — Home page with live content feed
+- /forum — Community forum
+- /friend-finder — Privacy-first member map (city-level only, opt-in)
+- /campfire — Async topic boards (solo travel, stealth camping, gear, van builds, mental health)
+- /journals — Trip journals with emoji reactions
+- /resources — Resource board: water, dump stations, parking, mechanics, propane, WiFi
+- /icebreaker — Weekly one-question member matching
+- /news — Live feed: van life news, YouTube, how-tos, stealth spots, overland content
+- /videos — Curated van life YouTube videos
+- /van-intelligence — Repair guides and build how-tos for Sprinter/Transit/Promaster
+- /marketplace — Buy/sell van parts and gear
+- /vendors — Verified van mechanics and builders
+- /shop — Van Shop: curated Amazon products (solar, power, ventilation, kitchen, sleeping, safety)
+- /map — Events map: van rallies, meetups, expos, workshops
+- /dashboard — Member dashboard with feed preferences and DND mode
+- /gps — Location sharing settings
+- /van-cards — Member van cards and profiles
+- /ai — Full AI assistant page
+
+PRIVACY RULES (always enforce):
+- Vanciety NEVER shares exact GPS — city/area level only, always opt-in
+- Members control availability with Do Not Disturb mode
+- No read receipts by default
+
+You can help with: site navigation, van life advice, repairs, builds, gear, camping, trip planning, stealth spots, community guidance.
+You cannot: invent prices/dates/inventory, share exact member locations, give legal/medical advice.
+
+Always end with a clear next step or specific page link when relevant.`;
 
 serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
@@ -30,22 +59,13 @@ serve(async (req: Request) => {
   }
 
   try {
-    const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
-    const model = Deno.env.get("ANTHROPIC_MODEL") || "claude-sonnet-4-6";
-
-    if (!apiKey) {
-      return new Response(
-        JSON.stringify({
-          error: "Vanciety AI is not configured yet. Set ANTHROPIC_API_KEY as a Supabase Edge Function secret.",
-        }),
-        { status: 503, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
-    }
+    const apiKey = Deno.env.get("BUILT_IN_FORGE_API_KEY") || Deno.env.get("FORGE_API_KEY");
+    const apiUrl = (Deno.env.get("BUILT_IN_FORGE_API_URL") || Deno.env.get("FORGE_API_URL") || "https://api.openai.com/v1").replace(/\/$/, "");
 
     const body = (await req.json().catch(() => ({}))) as ConciergeRequest;
     const question = String(body.question || "").trim();
     const mode = String(body.mode || "home").trim();
-    const context = String(body.context || "").slice(0, 6000);
+    const history = Array.isArray(body.history) ? body.history.slice(-6) : [];
 
     if (!question) {
       return new Response(JSON.stringify({ error: "Question is required." }), {
@@ -54,53 +74,58 @@ serve(async (req: Request) => {
       });
     }
 
-    const anthropicResponse = await fetch("https://api.anthropic.com/v1/messages", {
+    if (!apiKey) {
+      return new Response(
+        JSON.stringify({ answer: "Vanna is warming up — please try again in a moment! In the meantime, check out /campfire for community help." }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    const messages = [
+      ...history.map((m) => ({ role: m.role, content: m.content })),
+      {
+        role: "user" as const,
+        content: mode !== "home" ? `[User is on the ${mode} section of Vanciety]\n\n${question}` : question,
+      },
+    ];
+
+    const response = await fetch(`${apiUrl}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
+        "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model,
-        max_tokens: 900,
-        temperature: 0.3,
-        system: SYSTEM_PROMPT,
+        model: "gpt-4o-mini",
+        max_tokens: 600,
+        temperature: 0.4,
         messages: [
-          {
-            role: "user",
-            content: [
-              `Mode: ${mode}`,
-              "Vanciety context:",
-              context,
-              "Visitor question:",
-              question,
-            ].join("\n\n"),
-          },
+          { role: "system", content: SYSTEM_PROMPT },
+          ...messages,
         ],
       }),
     });
 
-    const payload = await anthropicResponse.json();
+    const payload = await response.json();
 
-    if (!anthropicResponse.ok) {
-      console.error("Anthropic error", payload);
+    if (!response.ok) {
+      console.error("Forge API error", payload);
       return new Response(
-        JSON.stringify({ error: "Vanciety AI request failed. Please try again shortly." }),
-        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        JSON.stringify({ answer: "Vanna hit a snag — please try again in a moment!" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
-    const answer = payload?.content?.map((part: { text?: string }) => part.text || "").join("\n").trim();
+    const answer = payload?.choices?.[0]?.message?.content?.trim() ?? "I'm not sure about that one — try asking in the /forum or /campfire!";
 
-    return new Response(JSON.stringify({ answer, model }), {
+    return new Response(JSON.stringify({ answer }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("vanciety-ai-concierge error", error);
-    return new Response(JSON.stringify({ error: "Unexpected AI concierge error." }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    console.error("vanna error", error);
+    return new Response(
+      JSON.stringify({ answer: "Vanna ran into an issue — please try again!" }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   }
 });

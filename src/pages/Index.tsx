@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import HomeFeed from "@/components/HomeFeed";
+import VannaBubble from "@/components/VannaBubble";
 import type { LucideIcon } from "lucide-react";
 import {
   Bot, Calendar, Wrench, Users,
@@ -347,6 +348,9 @@ const Index = () => {
         <HomeFeed />
 
       </main>
+
+      {/* Vanna — floating AI assistant, home page only */}
+      <VannaBubble />
     </div>
   );
 };

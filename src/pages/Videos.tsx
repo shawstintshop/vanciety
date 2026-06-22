@@ -211,14 +211,16 @@ const Videos = () => {
 
         <section className="container mx-auto px-4">
           <div className="relative">
-            <div className="pointer-events-none absolute -right-1 top-2 z-20 rounded-full border border-border/60 bg-background/85 px-2 py-1 shadow-sm backdrop-blur-sm">
+            <div className="pointer-events-none absolute -right-1 top-2 z-20 rounded-full border border-orange-500/30 bg-background/85 px-2 py-1 shadow-sm backdrop-blur-sm">
               <div className="flex items-center gap-1.5">
-                <img
-                  src="/images/vanciety-sprinter-society.png"
-                  alt="Vana mascot"
-                  className="h-5 w-5 object-contain"
-                />
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Vana</span>
+                <svg width="16" height="12" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna">
+                  <rect x="4" y="14" width="52" height="26" rx="5" fill="#F97316" />
+                  <rect x="8" y="8" width="32" height="10" rx="4" fill="#EA580C" />
+                  <rect x="10" y="10" width="14" height="8" rx="2" fill="#BAE6FD" opacity="0.9" />
+                  <circle cx="16" cy="40" r="7" fill="#1C1917" />
+                  <circle cx="48" cy="40" r="7" fill="#1C1917" />
+                </svg>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-orange-400">Vanna</span>
               </div>
             </div>
             <AIVanConcierge mode="video" compact />
