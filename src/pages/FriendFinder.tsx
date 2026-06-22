@@ -323,7 +323,7 @@ const FriendFinder = () => {
   // ── Not signed in ─────────────────────────────────────────────────────
   if (!user) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background topo-card">
         <Header />
         <main className="pt-16">
           {/* Hero */}
@@ -432,7 +432,7 @@ const FriendFinder = () => {
 
   // ── Signed-in member view ─────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background topo-card">
       <Header />
       <main className="pt-16">
 

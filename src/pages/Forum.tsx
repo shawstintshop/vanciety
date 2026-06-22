@@ -131,7 +131,7 @@ const Forum = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background topo-card">
       <Header />
       
       <main className="pt-16">

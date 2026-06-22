@@ -42,7 +42,7 @@ const quickLinks = [
 
 const SiteFooter = () => {
   return (
-    <footer className="mt-auto border-t border-border/60 bg-[#050608] text-white">
+    <footer className="mt-auto border-t border-border/60 bg-[#050608] text-white topo-footer">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1.5fr_1fr]">
           <div className="space-y-4">

@@ -88,7 +88,7 @@ export default function News() {
   const eventCategories = ["Official Events", "Adventure Van Expo", "Overland", "Northwest", "Oregon", "Colorado", "Arizona"];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background topo-card">
       <Header />
       <main className="pt-16">
         {/* Hero */}

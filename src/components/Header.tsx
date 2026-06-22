@@ -71,7 +71,7 @@ const Header = () => {
     }`;
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/88 shadow-[0_10px_40px_rgba(0,0,0,.24)] backdrop-blur-xl">
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/88 shadow-[0_10px_40px_rgba(0,0,0,.24)] backdrop-blur-xl topo-header">
       <div className="container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
         <VancietyLogo className="h-12 w-[180px] max-w-[200px] sm:h-14 sm:w-[220px] md:h-16 md:w-[240px]" />
 

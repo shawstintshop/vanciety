@@ -175,7 +175,7 @@ const Index = () => {
         </section>
 
         {/* ════════ VANA AI HIGHLIGHT ════════ */}
-        <section className="bg-card py-16 border-b border-border">
+        <section className="bg-card py-16 border-b border-border topo-section-dark">
           <div className="container mx-auto px-4">
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
@@ -235,7 +235,7 @@ const Index = () => {
         </section>
 
         {/* ════════ FEATURES GRID ════════ */}
-        <section className="bg-background py-16 border-b border-border">
+        <section className="bg-background py-16 border-b border-border topo-card">
           <div className="container mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="text-3xl font-black sm:text-4xl text-foreground">
@@ -267,7 +267,7 @@ const Index = () => {
         </section>
 
         {/* ════════ HOW IT WORKS ════════ */}
-        <section className="relative isolate overflow-hidden py-16">
+        <section className="relative isolate overflow-hidden py-16 topo-bold">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url(/images/vans-driveway-meetup.jpg)" }}
@@ -306,7 +306,7 @@ const Index = () => {
         </section>
 
         {/* ════════ ECOSYSTEM + STATS ════════ */}
-        <section className="bg-card py-16 border-b border-border">
+        <section className="bg-card py-16 border-b border-border topo-section-mid">
           <div className="container mx-auto grid gap-6 px-4 lg:grid-cols-3">
             {/* Ecosystem */}
             <div className="rounded-xl border border-border bg-background p-6">

@@ -184,7 +184,7 @@ const Marketplace = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background topo-card">
       <Seo
         title="Vanciety Marketplace | Vans, Parts, Gear, and Listings"
         description="Shop and list vans, parts, tools, and adventure gear on the Vanciety marketplace with verified fallback links when inventory is still growing."

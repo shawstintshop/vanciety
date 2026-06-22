@@ -245,7 +245,7 @@ const VanIntelligence = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background topo-card">
       <Header />
       <main className="pt-16">
         <section className="vanciety-hero-topo border-b border-border/60 py-12">

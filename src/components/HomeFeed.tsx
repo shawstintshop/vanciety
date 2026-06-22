@@ -36,7 +36,7 @@ export default function HomeFeed({ allowedCategories }: HomeFeedProps) {
   );
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 bg-background topo-section-mid">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex items-start justify-between mb-8 gap-4 flex-wrap">
