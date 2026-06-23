@@ -35,6 +35,7 @@ import TripJournals from "./pages/TripJournals";
 import ResourceBoard from "./pages/ResourceBoard";
 import Icebreaker from "./pages/Icebreaker";
 import VanLifeSpots from "./pages/VanLifeSpots";
+import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
 
@@ -58,6 +59,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <TooltipProvider>
           <Toaster />

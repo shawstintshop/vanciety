@@ -156,7 +156,7 @@ export default function ResourceBoard() {
   const getCat = (id: string) => CATEGORIES.find((c) => c.id === id);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
       <div className="container mx-auto max-w-5xl px-4 pt-24 pb-16">
         {/* Header */}

@@ -186,11 +186,11 @@ const faqs = [
 
 const ForVendors = () => {
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
       <main className="pt-16">
         {/* Hero */}
-        <section className="bg-gray-950 px-6 py-20 sm:py-28">
+        <section className="bg-background px-6 py-20 sm:py-28">
           <div className="mx-auto max-w-4xl text-center">
             <Badge className="mb-6 border-primary/40 bg-primary/10 text-primary hover:bg-primary/10">
               For Van Life Brands
@@ -222,7 +222,7 @@ const ForVendors = () => {
               {valueProps.map(({ icon: Icon, title, description }) => (
                 <Card
                   key={title}
-                  className="border-gray-800 bg-gray-950 text-white"
+                  className="border-gray-800 bg-background text-foreground topo-card"
                 >
                   <CardContent className="p-8">
                     <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -286,7 +286,7 @@ const ForVendors = () => {
                       className={`mt-8 w-full ${
                         tier.popular
                           ? "bg-primary text-primary-foreground hover:bg-amber-500"
-                          : "bg-gray-900 text-white hover:bg-gray-800"
+                          : "bg-gray-900 text-foreground hover:bg-gray-800"
                       }`}
                     >
                       <a href={tier.href}>{tier.cta}</a>
@@ -299,7 +299,7 @@ const ForVendors = () => {
         </section>
 
         {/* Social proof */}
-        <section className="bg-gray-950 px-6 py-20">
+        <section className="bg-background px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <div className="text-center">
               <h2 className="text-2xl font-bold sm:text-3xl">
@@ -321,13 +321,13 @@ const ForVendors = () => {
               {testimonials.map((t) => (
                 <Card
                   key={t.name}
-                  className="border-gray-800 bg-gray-900 text-white"
+                  className="border-gray-800 bg-gray-900 text-foreground"
                 >
                   <CardContent className="p-8">
                     <Quote className="h-8 w-8 text-primary" />
                     <p className="mt-4 text-gray-300">{t.quote}</p>
                     <div className="mt-6">
-                      <p className="font-semibold text-white">{t.name}</p>
+                      <p className="font-semibold text-foreground">{t.name}</p>
                       <p className="text-sm text-primary">{t.company}</p>
                     </div>
                   </CardContent>
@@ -357,7 +357,7 @@ const ForVendors = () => {
                       {index + 1}
                     </span>
                   </div>
-                  <h3 className="text-base font-semibold text-white">{title}</h3>
+                  <h3 className="text-base font-semibold text-foreground">{title}</h3>
                 </div>
               ))}
             </div>
@@ -365,7 +365,7 @@ const ForVendors = () => {
         </section>
 
         {/* FAQ */}
-        <section className="bg-gray-950 px-6 py-20">
+        <section className="bg-background px-6 py-20">
           <div className="mx-auto max-w-3xl">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-extrabold sm:text-4xl">
@@ -379,7 +379,7 @@ const ForVendors = () => {
                   value={`item-${index}`}
                   className="border-gray-800"
                 >
-                  <AccordionTrigger className="text-left text-white hover:text-primary hover:no-underline">
+                  <AccordionTrigger className="text-left text-foreground hover:text-primary hover:no-underline">
                     {faq.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-400">
@@ -405,7 +405,7 @@ const ForVendors = () => {
               <Button
                 asChild
                 size="lg"
-                className="bg-gray-950 text-white hover:bg-gray-800"
+                className="bg-background text-foreground topo-card hover:bg-gray-800"
               >
                 <Link to={VENDOR_CTA} className="inline-flex items-center gap-2">
                   List Your Company Free

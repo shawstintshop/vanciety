@@ -151,7 +151,7 @@ export default function Icebreaker() {
     name ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "VL";
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
       <div className="container mx-auto max-w-2xl px-4 pt-24 pb-16">
 

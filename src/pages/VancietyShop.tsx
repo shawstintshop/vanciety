@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 /**
  * VanShop — Curated Amazon affiliate product page
  * Affiliate tag: a2wz7k05xdigc-20
@@ -133,7 +134,8 @@ export default function VancietyShop() {
       : AFFILIATE_PRODUCTS.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-background text-foreground topo-card">
+      <Header />
       {/* Hero */}
       <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border-b border-zinc-800 px-4 py-12">
         <div className="max-w-6xl mx-auto">

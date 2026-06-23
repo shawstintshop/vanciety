@@ -174,7 +174,7 @@ export default function Campfire() {
   const currentBoard = BOARDS.find((b) => b.id === activeBoard);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
       <div className="container mx-auto max-w-5xl px-4 pt-24 pb-16">
         {/* Header */}

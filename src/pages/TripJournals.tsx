@@ -168,7 +168,7 @@ export default function TripJournals() {
     name ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "?";
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
       <div className="container mx-auto max-w-3xl px-4 pt-24 pb-16">
         {/* Header */}
