@@ -18,22 +18,25 @@ export default function LatestVideos() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { homepageVideos, newCount, seenIds, markSeen, markAllSeen } = useLatestVideos();
-  const [notified, setNotified] = useState(false);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Show toast notification once per session when there are new videos
+  // Show toast at most once per day — only when there are genuinely unseen videos
   useEffect(() => {
-    if (newCount > 0 && !notified) {
-      setNotified(true);
-      setTimeout(() => {
-        toast({
-          title: `${newCount} new van life video${newCount > 1 ? "s" : ""} 🎬`,
-          description: "Fresh uploads from your favourite channels are ready.",
-          duration: 5000,
-        });
-      }, 2000);
-    }
-  }, [newCount, notified, toast]);
+    if (newCount <= 0) return;
+    const TOAST_KEY = "vanciety_video_toast_date";
+    const today = new Date().toDateString();
+    if (localStorage.getItem(TOAST_KEY) === today) return;
+    localStorage.setItem(TOAST_KEY, today);
+    const timer = setTimeout(() => {
+      toast({
+        title: `${newCount} new van life video${newCount > 1 ? "s" : ""} 🎬`,
+        description: "Fresh uploads from your favourite channels are ready.",
+        duration: 5000,
+      });
+    }, 3000);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleVideoClick = (youtubeId: string) => {
     markSeen(youtubeId);
