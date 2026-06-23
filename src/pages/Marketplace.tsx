@@ -103,8 +103,8 @@ const Marketplace = () => {
       return bTime - aTime;
     });
 
-  const featuredItems = visibleMarketplaceItems.filter((item) => Boolean(item.featured || item.is_featured || item.promoted)).slice(0, 4);
-  const latestItems = visibleMarketplaceItems.filter((item) => !Boolean(item.featured || item.is_featured || item.promoted));
+  const featuredItems = visibleMarketplaceItems.filter((item) => item.featured || item.is_featured || item.promoted).slice(0, 4);
+  const latestItems = visibleMarketplaceItems.filter((item) => !(item.featured || item.is_featured || item.promoted));
 
   useEffect(() => {
     fetchMarketplaceItems();
