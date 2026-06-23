@@ -13,16 +13,19 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLatestVideos } from "@/hooks/useLatestVideos";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function LatestVideos() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user } = useAuth();
   const { homepageVideos, newCount, seenIds, markSeen, markAllSeen } = useLatestVideos();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Show toast at most once per day — only when there are genuinely unseen videos
+  // Show toast at most once per day — members only, never visitors
   useEffect(() => {
-    if (newCount <= 0) return;
+    if (!user) return;          // not signed in — never notify
+    if (newCount <= 0) return;  // no new videos
     const TOAST_KEY = "vanciety_video_toast_date";
     const today = new Date().toDateString();
     if (localStorage.getItem(TOAST_KEY) === today) return;
@@ -36,7 +39,7 @@ export default function LatestVideos() {
     }, 3000);
     return () => clearTimeout(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   const handleVideoClick = (youtubeId: string) => {
     markSeen(youtubeId);
