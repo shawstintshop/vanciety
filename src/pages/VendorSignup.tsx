@@ -186,14 +186,12 @@ const VendorSignup = () => {
           
           {/* ── Header ─────────────────────────────────────── */}
           <div className="text-center mb-10">
-            <Badge className="mb-4 bg-orange-600 text-white text-sm px-4 py-1">
+            <Badge className="mb-4 bg-primary text-primary-foreground text-sm px-4 py-1">
               <Sparkles className="w-3.5 h-3.5 mr-1.5" />
               Vendor Registration
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-3">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">
-                List Your Business
-              </span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 text-foreground">
+              List Your Business
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Join the fastest-growing van life directory. Reach thousands of builders,
@@ -213,7 +211,7 @@ const VendorSignup = () => {
                 <div
                   className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
                     step >= s.n
-                      ? "bg-orange-500 text-white"
+                      ? "bg-primary text-primary-foreground"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >
@@ -239,19 +237,19 @@ const VendorSignup = () => {
                     <Card
                       key={cat.id}
                       className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
-                        selected ? "border-orange-500 ring-2 ring-orange-500/30 bg-orange-500/5" : "hover:border-orange-500/30"
+                        selected ? "border-primary ring-2 ring-primary/30 bg-primary/5" : "hover:border-primary/30"
                       }`}
                       onClick={() => updateForm("category", cat.id)}
                     >
                       <CardContent className="p-4 flex items-center gap-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${selected ? "bg-orange-500 text-white" : "bg-muted"}`}>
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${selected ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
                           <Icon className="w-6 h-6" />
                         </div>
                         <div className="flex-1">
                           <h3 className="font-semibold">{cat.label}</h3>
                           <p className="text-sm text-muted-foreground">{cat.desc}</p>
                         </div>
-                        {selected && <Check className="w-5 h-5 text-orange-500" />}
+                        {selected && <Check className="w-5 h-5 text-primary" />}
                       </CardContent>
                     </Card>
                   );
@@ -411,10 +409,10 @@ const VendorSignup = () => {
                   </div>
                 </div>
 
-                <Card className="border-orange-500/20 bg-orange-500/5">
+                <Card className="border-primary/20 bg-primary/5">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-lg">
-                      <Sparkles className="w-5 h-5 text-orange-500" />
+                      <Sparkles className="w-5 h-5 text-primary" />
                       AI listing optimization preview
                     </CardTitle>
                     <CardDescription>
@@ -423,11 +421,11 @@ const VendorSignup = () => {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">Suggested snippet</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Suggested snippet</p>
                       <p className="mt-2 text-sm text-muted-foreground">{aiSnippet}</p>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">Suggested tags</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Suggested tags</p>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {(aiTags.length ? aiTags : [categoryLabel]).map((tag) => (
                           <Badge key={tag} variant="secondary">{tag}</Badge>
@@ -473,7 +471,7 @@ const VendorSignup = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div
-                  className="border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer hover:border-orange-500/50 hover:bg-orange-500/5 transition-colors"
+                  className="border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-colors"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   {logoPreview ? (
@@ -483,8 +481,8 @@ const VendorSignup = () => {
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-3">
-                      <div className="w-16 h-16 rounded-full bg-orange-500/10 flex items-center justify-center">
-                        <Camera className="w-8 h-8 text-orange-500" />
+                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Camera className="w-8 h-8 text-primary" />
                       </div>
                       <div>
                         <p className="font-semibold">Upload Business Logo</p>
@@ -501,9 +499,9 @@ const VendorSignup = () => {
                   />
                 </div>
 
-                <div className="rounded-xl bg-blue-500/5 border border-blue-500/20 p-4">
+                <div className="rounded-xl bg-primary/5 border border-primary/20 p-4">
                   <div className="flex items-start gap-3">
-                    <Sparkles className="w-5 h-5 text-blue-500 mt-0.5" />
+                    <Sparkles className="w-5 h-5 text-primary mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-sm">More media after signup</h4>
                       <p className="text-sm text-muted-foreground">
@@ -575,9 +573,9 @@ const VendorSignup = () => {
               </Card>
 
               {!user && (
-                <Card className="border-yellow-500/30 bg-yellow-500/5">
+                <Card className="border-border bg-muted/40">
                   <CardContent className="p-4 flex items-center gap-4">
-                    <Shield className="w-8 h-8 text-yellow-600" />
+                    <Shield className="w-8 h-8 text-muted-foreground" />
                     <div className="flex-1">
                       <h4 className="font-semibold">Sign in to submit</h4>
                       <p className="text-sm text-muted-foreground">You need a free Vanciety account to list your business.</p>
@@ -615,11 +613,11 @@ const VendorSignup = () => {
                 <Card
                   key={tier.id}
                   className={`relative overflow-hidden ${
-                    tier.popular ? "border-orange-500 ring-2 ring-orange-500/30" : ""
+                    tier.popular ? "border-primary ring-2 ring-primary/30" : ""
                   }`}
                 >
                   {tier.popular && (
-                    <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
                       Most Popular
                     </div>
                   )}
@@ -633,7 +631,7 @@ const VendorSignup = () => {
                   <CardContent className="space-y-3">
                     {tier.features.map((f) => (
                       <div key={f} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
                         <span>{f}</span>
                       </div>
                     ))}

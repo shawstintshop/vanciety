@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, MapPin, Star, BadgeCheck, ArrowRight, Globe, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -30,32 +31,23 @@ const Manufacturers = () => {
     <div className="vanciety-page min-h-screen bg-background">
       <Header />
       <main className="pt-16">
-        {/* Hero */}
-        <section className="vanciety-hero-topo py-12">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="mb-3 text-4xl font-bold md:text-5xl">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">Van Manufacturers & Brands</span>
-            </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
-              The hub for Sprinter, vanlife & overland manufacturers — explore brands, products, and reviews.
-              Are you a brand? <Link to="/vendor-signup" className="text-primary hover:underline">Claim your page</Link>.
-            </p>
-
-            {/* Search */}
-            <div className="mx-auto flex max-w-2xl gap-2">
-              <div className="relative flex-1">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search brands, products, or locations…"
-                  className="h-12 pl-10 text-base"
-                />
-              </div>
+        <PageHero
+          label="Manufacturers & Brands"
+          title="Van Manufacturers & Brands"
+          subtitle="The hub for Sprinter, vanlife & overland manufacturers — explore brands, products, and reviews."
+          icon={Sparkles}
+        >
+          <div className="flex flex-col gap-4 max-w-2xl">
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search brands, products, or locations…"
+                className="h-12 pl-10 text-base bg-background/60 border-border/60"
+              />
             </div>
-
-            {/* Category pills */}
-            <div className="mt-5 flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap gap-2">
               {MANUFACTURER_CATEGORIES.map((c) => (
                 <button
                   key={c.id}
@@ -71,7 +63,7 @@ const Manufacturers = () => {
               ))}
             </div>
           </div>
-        </section>
+        </PageHero>
 
         {/* Grid */}
         <section className="container mx-auto px-4 py-10">
@@ -115,7 +107,7 @@ const Manufacturers = () => {
 
                 <div className="flex items-center justify-between border-t border-border/40 pt-3">
                   <span className="flex items-center gap-1 text-sm font-semibold text-foreground">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star className="h-4 w-4 fill-primary text-primary" />
                     {m.rating.toFixed(1)}
                     <span className="font-normal text-muted-foreground">({m.reviewsCount})</span>
                   </span>

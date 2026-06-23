@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -114,12 +115,12 @@ const DEMO_MEMBERS: DemoMember[] = [
 
 // ── Category filter config ──────────────────────────────────
 const CATEGORIES = [
-  { id: "all", label: "All Events", icon: MapPin, color: "text-orange-500" },
-  { id: "rally", label: "Rallies", icon: Truck, color: "text-red-500" },
-  { id: "expo", label: "Expos", icon: Star, color: "text-blue-500" },
-  { id: "meetup", label: "Meetups", icon: Users, color: "text-teal-500" },
-  { id: "workshop", label: "Workshops", icon: Wrench, color: "text-yellow-600" },
-  { id: "gathering", label: "Gatherings", icon: Tent, color: "text-orange-500" },
+  { id: "all", label: "All Events", icon: MapPin, color: "text-primary" },
+  { id: "rally", label: "Rallies", icon: Truck, color: "text-primary" },
+  { id: "expo", label: "Expos", icon: Star, color: "text-primary" },
+  { id: "meetup", label: "Meetups", icon: Users, color: "text-primary" },
+  { id: "workshop", label: "Workshops", icon: Wrench, color: "text-primary" },
+  { id: "gathering", label: "Gatherings", icon: Tent, color: "text-primary" },
 ];
 
 const Map = () => {
@@ -474,22 +475,13 @@ const Map = () => {
       />
       <Header />
 
-      <div className="relative shrink-0 overflow-hidden border-b border-white/10 h-40 md:h-48 hidden sm:block">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bannerImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-        <div className="relative z-10 container mx-auto flex h-full items-end px-4 pb-5 md:pb-6">
-          <div className="max-w-3xl text-white">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-              {isEventsPage ? "Events" : "Map & Mechanics"}
-            </p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">{bannerTitle}</h1>
-            <p className="mt-2 max-w-2xl text-sm text-white/80 md:text-base">{bannerSubtitle}</p>
-          </div>
-        </div>
-      </div>
+      <PageHero
+        label={isEventsPage ? "Events" : "Map & Mechanics"}
+        title={bannerTitle}
+        subtitle={bannerSubtitle}
+        icon={isEventsPage ? Calendar : MapPin}
+        compact
+      />
 
             {/* Full-screen map layout — flex-col so control bar never overlaps map */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -537,9 +529,9 @@ const Map = () => {
               {/* Layer toggles (multi-select) */}
               <div className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-hide border-b border-border/40">
                 {[
-                  { key: "events" as const, label: "Events", icon: Calendar, count: filteredEvents.length, dot: "bg-orange-500" },
-                  { key: "members" as const, label: "Live Members", icon: Users, count: members.length, dot: "bg-green-500" },
-                  { key: "manufacturers" as const, label: "Manufacturers", icon: Factory, count: MANUFACTURERS.length, dot: "bg-violet-400" },
+                  { key: "events" as const, label: "Events", icon: Calendar, count: filteredEvents.length, dot: "bg-primary" },
+                  { key: "members" as const, label: "Live Members", icon: Users, count: members.length, dot: "bg-secondary" },
+                  { key: "manufacturers" as const, label: "Manufacturers", icon: Factory, count: MANUFACTURERS.length, dot: "bg-accent" },
                 ].map((layer) => {
                   const Icon = layer.icon;
                   const on = activeLayers[layer.key];
@@ -599,7 +591,7 @@ const Map = () => {
         {/* ── Layer Count Badge (floating, layer-aware) ──── */}
         <div className="absolute bottom-24 left-4 z-[500]">
           <Badge className="bg-background/90 backdrop-blur-xl text-foreground shadow-lg border border-border/60 text-sm px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2 text-orange-500" />
+            <Sparkles className="w-4 h-4 mr-2 text-primary" />
             {[
               activeLayers.events && `${filteredEvents.length} events`,
               activeLayers.members && `${members.length} members`,
@@ -614,7 +606,7 @@ const Map = () => {
             <div className="bg-background/92 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 overflow-hidden flex flex-col max-h-full">
               <div className="p-3 border-b border-border/40 flex items-center justify-between">
                 <h3 className="font-semibold text-sm flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-orange-500" />
+                  <Calendar className="w-4 h-4 text-primary" />
                   Upcoming Events
                 </h3>
                 <Badge variant="secondary" className="text-xs">{filteredEvents.length}</Badge>
@@ -628,7 +620,7 @@ const Map = () => {
                       onClick={() => handleEventClick(event)}
                       className={`w-full text-left p-3 rounded-xl transition-all duration-200 ${
                         isSelected
-                          ? "bg-orange-500/10 border border-orange-500/30 ring-1 ring-orange-500/20"
+                          ? "bg-primary/10 border border-primary/30 ring-1 ring-primary/20"
                           : "hover:bg-muted/60 border border-transparent"
                       }`}
                     >
@@ -648,8 +640,8 @@ const Map = () => {
                           </p>
                           {event.rsvp_count !== undefined && event.rsvp_count > 0 && (
                             <div className="flex items-center gap-1 mt-1">
-                              <Users className="w-3 h-3 text-green-500" />
-                              <span className="text-xs text-emerald-600 font-medium">{event.rsvp_count} going</span>
+                              <Users className="w-3 h-3 text-primary" />
+                              <span className="text-xs text-primary font-medium">{event.rsvp_count} going</span>
                             </div>
                           )}
                         </div>
@@ -674,7 +666,7 @@ const Map = () => {
           <div className="absolute inset-0 z-[400] sm:hidden flex flex-col bg-background">
             <div className="flex items-center justify-between border-b border-border/40 px-4 py-3 shrink-0">
               <h3 className="font-semibold text-sm flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-orange-500" />
+                <Calendar className="w-4 h-4 text-primary" />
                 Event List
                 <Badge variant="secondary" className="text-xs ml-1">{filteredEvents.length}</Badge>
               </h3>
@@ -696,7 +688,7 @@ const Map = () => {
                     handleEventClick(event);
                     setMobileView("map");
                   }}
-                  className="w-full rounded-xl border border-border/40 bg-card p-3 text-left transition active:bg-orange-500/10"
+                  className="w-full rounded-xl border border-border/40 bg-card p-3 text-left transition active:bg-primary/10"
                 >
                   <div className="flex items-start gap-3">
                     <div className="text-2xl mt-0.5">
@@ -710,7 +702,7 @@ const Map = () => {
                         {event.cost_info && ` · ${event.cost_info}`}
                       </p>
                       {event.rsvp_count !== undefined && event.rsvp_count > 0 && (
-                        <p className="mt-0.5 text-xs text-green-500 font-medium">{event.rsvp_count} going</p>
+                        <p className="mt-0.5 text-xs text-primary font-medium">{event.rsvp_count} going</p>
                       )}
                     </div>
                     <div className="text-muted-foreground shrink-0 self-center">

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,57 +78,48 @@ const AIConcierge = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-16">
-        <section className="vanciety-hero-topo py-14">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-4xl text-center">
-              <Badge className="mb-4 bg-orange-600 text-white">
-                <Sparkles className="mr-2 h-3.5 w-3.5" />
-                Vana MVP
-              </Badge>
-              <h1 className="mb-4 text-4xl font-bold md:text-5xl">Ask Vana first</h1>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                This is the first functional routing version of Vana. She sends people to the exact guide,
-                vendor, video, event, or community path they need instead of making them hunt through every page.
-              </p>
-            </div>
-
-            <Card className="mx-auto mt-8 max-w-3xl border-orange-500/20 shadow-glow">
-              <CardContent className="p-6">
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                      placeholder="Try: 2022 Sprinter V6 diesel EGR cleaning"
-                      className="pl-10"
-                    />
-                  </div>
-                  <Button variant="hero" onClick={handleRoute} className="sm:min-w-44">
-                    Route Me
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+        <PageHero
+          label="Vana AI"
+          title="Ask Vana First"
+          subtitle="Vana routes you to the exact guide, vendor, video, event, or community path you need instead of making you hunt through every page."
+          icon={Bot}
+        >
+          <Card className="max-w-3xl border-primary/20 shadow-glow">
+            <CardContent className="p-6">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Try: 2022 Sprinter V6 diesel EGR cleaning"
+                    className="pl-10 bg-background/60 border-border/60"
+                  />
                 </div>
+                <Button variant="hero" onClick={handleRoute} className="sm:min-w-44">
+                  Route Me
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
 
-                {bestMatch ? (
-                  <div className="mt-4 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-4 text-left">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-500">Best route</p>
-                    <p className="mt-2 font-semibold">{bestMatch.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{bestMatch.description}</p>
-                  </div>
-                ) : query.trim() ? (
-                  <div className="mt-4 rounded-2xl border bg-card p-4 text-left">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Fallback route</p>
-                    <p className="mt-2 font-semibold">Search Van Intelligence for “{query.trim()}”</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      If there is not a direct lane yet, Vana sends the topic into the guide/research path first.
-                    </p>
-                  </div>
-                ) : null}
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+              {bestMatch ? (
+                <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4 text-left">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Best route</p>
+                  <p className="mt-2 font-semibold">{bestMatch.title}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{bestMatch.description}</p>
+                </div>
+              ) : query.trim() ? (
+                <div className="mt-4 rounded-2xl border bg-card p-4 text-left">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Fallback route</p>
+                  <p className="mt-2 font-semibold">Search Van Intelligence for "{query.trim()}"</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    If there is not a direct lane yet, Vana sends the topic into the guide/research path first.
+                  </p>
+                </div>
+              ) : null}
+            </CardContent>
+          </Card>
+        </PageHero>
 
         <section className="pb-14">
           <div className="container mx-auto grid gap-6 px-4 lg:grid-cols-[1.3fr_0.9fr]">

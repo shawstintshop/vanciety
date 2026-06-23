@@ -27,6 +27,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 
@@ -212,18 +213,15 @@ const Marketplace = () => {
       
       <main className="pt-16">
         {/* Hero Section */}
+        <PageHero
+          label="Marketplace"
+          title="Van Life Marketplace"
+          subtitle="Buy and sell vans, parts, gear, and accessories with the Vanciety community."
+          icon={ShoppingBag}
+        />
         <section className="bg-background border-b border-border py-12">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Van Life Marketplace
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Buy and sell vans, parts, gear, and accessories with the Vanciety community.
-              </p>
-            </div>
+            <div className="mb-8">
 
             {/* Search & Controls */}
             <div className="max-w-4xl mx-auto">
@@ -379,7 +377,7 @@ const Marketplace = () => {
         <section className="py-12"> 
           <div className="container mx-auto px-4">
             {loadError && (
-              <div className="mb-6 rounded-2xl border border-orange-500/30 bg-orange-500/10 p-4 text-sm">
+              <div className="mb-6 rounded-2xl border border-border bg-muted/40 p-4 text-sm">
                 <strong className="text-foreground">Unable to load listings right now.</strong>{" "}
                 <span className="text-muted-foreground">Please try refreshing the page. You can still browse trusted van life marketplaces below.</span>
               </div>

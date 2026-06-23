@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Users, AlertTriangle } from "lucide-react";
 import Header from "@/components/Header";
 import VanCard, { VanCardProfile } from "@/components/VanCard";
-import VancietyGroupImage from "@/components/VancietyGroupImage";
+import PageHero from "@/components/PageHero";
 
 const VanCards = () => {
   const [profiles, setProfiles] = useState<VanCardProfile[]>([]);
@@ -46,22 +46,13 @@ const VanCards = () => {
       <Header />
 
       <main className="pt-16">
-        {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
-          <div className="container mx-auto grid items-center gap-8 px-4 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">
-                Van Cards
-              </span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-              Meet the members of the Vanciety community
-            </p>
-            </div>
-            <VancietyGroupImage compact className="min-h-[250px]" />
-          </div>
-        </section>
+        {/* Unified Page Hero */}
+        <PageHero
+          label="Van Cards"
+          title="Van Cards"
+          subtitle="Meet the members of the Vanciety community"
+          icon={Users}
+        />
 
         {/* Content */}
         <section className="py-12">

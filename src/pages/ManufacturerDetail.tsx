@@ -19,7 +19,7 @@ const StarRow = ({ value, onSelect }: { value: number; onSelect?: (n: number) =>
         key={n}
         onClick={onSelect ? () => onSelect(n) : undefined}
         className={`h-5 w-5 ${onSelect ? "cursor-pointer" : ""} ${
-          n <= Math.round(value) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/40"
+          n <= Math.round(value) ? "fill-primary text-primary" : "text-muted-foreground/40"
         }`}
       />
     ))}

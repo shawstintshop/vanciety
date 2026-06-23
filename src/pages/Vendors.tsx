@@ -11,23 +11,24 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 
 // ── All Van Life Categories ──────────────────────────────────
 const VENDOR_CATEGORIES = [
-  { id: "all",            name: "All Vendors",          icon: ShoppingBag, color: "bg-orange-500" },
-  { id: "builders",       name: "Van Builders",         icon: Hammer,      color: "bg-blue-600" },
-  { id: "manufacturers",  name: "Manufacturers",        icon: Truck,       color: "bg-indigo-600" },
-  { id: "parts",          name: "Parts & Components",   icon: Wrench,      color: "bg-green-600" },
-  { id: "electrical",     name: "Electrical & Solar",   icon: Zap,         color: "bg-yellow-600" },
-  { id: "tours",          name: "Tours & Experiences",  icon: Compass,     color: "bg-pink-600" },
-  { id: "rentals",        name: "Van Rentals",          icon: Tent,        color: "bg-teal-600" },
-  { id: "gear",           name: "Accessories & Gear",   icon: Package,     color: "bg-purple-600" },
-  { id: "services",       name: "Services",             icon: Star,        color: "bg-cyan-600" },
-  { id: "affiliate",      name: "Top Picks (Affiliate)",icon: Link2,       color: "bg-rose-600" },
-  { id: "dealerships",    name: "Dealerships",          icon: ShoppingCart, color: "bg-amber-600" },
+  { id: "all",            name: "All Vendors",          icon: ShoppingBag, color: "bg-primary" },
+  { id: "builders",       name: "Van Builders",         icon: Hammer,      color: "bg-primary" },
+  { id: "manufacturers",  name: "Manufacturers",        icon: Truck,       color: "bg-primary" },
+  { id: "parts",          name: "Parts & Components",   icon: Wrench,      color: "bg-primary" },
+  { id: "electrical",     name: "Electrical & Solar",   icon: Zap,         color: "bg-primary" },
+  { id: "tours",          name: "Tours & Experiences",  icon: Compass,     color: "bg-primary" },
+  { id: "rentals",        name: "Van Rentals",          icon: Tent,        color: "bg-primary" },
+  { id: "gear",           name: "Accessories & Gear",   icon: Package,     color: "bg-primary" },
+  { id: "services",       name: "Services",             icon: Star,        color: "bg-primary" },
+  { id: "affiliate",      name: "Top Picks (Affiliate)",icon: Link2,       color: "bg-primary" },
+  { id: "dealerships",    name: "Dealerships",          icon: ShoppingCart, color: "bg-primary" },
 ];
 
 // ── Seed vendors (shown until DB has real data) ──────────────
@@ -197,27 +198,19 @@ const Vendors = () => {
 
       <main className="pt-16">
         {/* ── Hero Section ───────────────────────────────────── */}
-        <section className="vanciety-hero-topo py-14">
+        <PageHero
+          label="Vendor Directory"
+          title="Find Your Build Partners"
+          subtitle="Builders, manufacturers, parts suppliers, tours, rentals, gear — every vendor the van life community trusts, in one directory."
+          icon={ShoppingBag}
+        />
+        <section className="py-10">
           <div className="container mx-auto px-4">
             <div className="text-center mb-10">
-              <Badge className="mb-4 bg-orange-600 text-white text-sm px-4 py-1">
-                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-                Van Life Vendor Directory
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Find Your Build Partners
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Builders, manufacturers, parts suppliers, tours, rentals, gear — every vendor
-                the van life community trusts, in one directory.
-              </p>
-            </div>
 
             {/* ── Vendor Signup CTA ─────────────────────────── */}
             <div className="max-w-2xl mx-auto mb-10">
-              <Card className="border-2 border-orange-500/30 bg-gradient-to-r from-orange-500/5 to-amber-500/5">
+              <Card className="border-2 border-primary/30 bg-primary/5">
                 <CardContent className="p-6 flex flex-col sm:flex-row items-center gap-4">
                   <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-lg font-bold mb-1">Are you a vendor?</h3>
@@ -290,7 +283,7 @@ const Vendors = () => {
           <section className="py-8">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Star className="w-6 h-6 text-orange-500" />
+                <Star className="w-6 h-6 text-primary" />
                 Featured Vendors
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -356,7 +349,7 @@ const Vendors = () => {
         </section>
 
         {/* ── Bottom CTA ──────────────────────────────────── */}
-        <section className="py-16 bg-gradient-to-r from-orange-500/10 to-amber-500/10">
+        <section className="py-16 bg-primary/5">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4">Join the Vanciety Vendor Network</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -400,7 +393,7 @@ const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIco
   return (
     <Card
       className={`group hover:shadow-glow transition-all duration-300 overflow-hidden ${
-        featured ? "border-orange-500/40 ring-1 ring-orange-500/20" : ""
+        featured ? "border-primary/40 ring-1 ring-primary/20" : ""
       }`}
     >
       {/* Card header — real image or gradient fallback */}
@@ -424,18 +417,18 @@ const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIco
         )}
         <div className="absolute top-4 right-4 flex gap-2">
           {featured && (
-            <Badge className="bg-orange-500 text-white">
+            <Badge className="bg-primary text-primary-foreground">
               <Star className="w-3 h-3 mr-1" /> Featured
             </Badge>
           )}
           {vendor.verified && (
-            <Badge className="bg-green-600 text-white">
+            <Badge className="bg-secondary text-secondary-foreground">
               <Verified className="w-3 h-3 mr-1" /> Verified
             </Badge>
           )}
         </div>
         <div className="absolute top-4 left-4">
-          <Badge variant="secondary" className="bg-white/90 text-gray-800 text-xs">
+          <Badge variant="secondary" className="text-xs">
             {getCategoryLabel(vendor.category)}
           </Badge>
         </div>
@@ -470,7 +463,7 @@ const VendorCard = ({ vendor, getCategoryLabel, getCategoryColor, getCategoryIco
         {vendor.rating && (
           <div className="flex items-center gap-2 mb-4 text-sm">
             <div className="flex items-center gap-1">
-              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <Star className="w-4 h-4 text-primary fill-primary" />
               <span className="font-semibold">{vendor.rating}</span>
             </div>
             <span className="text-muted-foreground">

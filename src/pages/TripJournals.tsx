@@ -175,7 +175,7 @@ export default function TripJournals() {
         <div className="mb-8 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <BookOpen className="h-7 w-7 text-emerald-400" />
+              <BookOpen className="h-7 w-7 text-primary" />
               <h1 className="text-3xl font-bold tracking-tight">Trip Journals</h1>
             </div>
             <p className="text-muted-foreground text-sm max-w-lg">
@@ -370,7 +370,7 @@ export default function TripJournals() {
               </div>
             ) : journals.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-border/60 py-16 text-center">
-                <BookOpen className="mx-auto mb-3 h-8 w-8 text-emerald-400/40" />
+                <BookOpen className="mx-auto mb-3 h-8 w-8 text-primary/40" />
                 <p className="text-muted-foreground text-sm">No journals yet.</p>
                 <p className="text-muted-foreground text-xs mt-1">Write the first one — share a story from the road.</p>
               </div>

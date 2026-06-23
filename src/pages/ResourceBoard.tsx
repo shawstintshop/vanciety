@@ -49,13 +49,13 @@ type Category = {
 };
 
 const CATEGORIES: Category[] = [
-  { id: "water", label: "Water Fill", icon: Droplets, color: "text-blue-400" },
-  { id: "dump_station", label: "Dump Station", icon: Trash2, color: "text-orange-400" },
-  { id: "overnight_parking", label: "Overnight Parking", icon: ParkingSquare, color: "text-green-400" },
-  { id: "mechanic", label: "Mechanic", icon: Wrench, color: "text-yellow-400" },
-  { id: "propane", label: "Propane", icon: Flame, color: "text-red-400" },
-  { id: "laundry", label: "Laundry", icon: WashingMachine, color: "text-purple-400" },
-  { id: "wifi", label: "Free WiFi", icon: Wifi, color: "text-cyan-400" },
+  { id: "water", label: "Water Fill", icon: Droplets, color: "text-primary" },
+  { id: "dump_station", label: "Dump Station", icon: Trash2, color: "text-primary" },
+  { id: "overnight_parking", label: "Overnight Parking", icon: ParkingSquare, color: "text-primary" },
+  { id: "mechanic", label: "Mechanic", icon: Wrench, color: "text-primary" },
+  { id: "propane", label: "Propane", icon: Flame, color: "text-primary" },
+  { id: "laundry", label: "Laundry", icon: WashingMachine, color: "text-primary" },
+  { id: "wifi", label: "Free WiFi", icon: Wifi, color: "text-primary" },
   { id: "other", label: "Other", icon: Package, color: "text-muted-foreground" },
 ];
 
@@ -163,7 +163,7 @@ export default function ResourceBoard() {
         <div className="mb-8 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <MapPin className="h-7 w-7 text-green-400" />
+              <MapPin className="h-7 w-7 text-primary" />
               <h1 className="text-3xl font-bold tracking-tight">Resource Board</h1>
             </div>
             <p className="text-muted-foreground text-sm max-w-lg">
@@ -315,7 +315,7 @@ export default function ResourceBoard() {
           </div>
         ) : spots.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border/60 py-16 text-center">
-            <MapPin className="mx-auto mb-3 h-8 w-8 text-green-400/40" />
+            <MapPin className="mx-auto mb-3 h-8 w-8 text-primary/40" />
             <p className="text-muted-foreground text-sm">No spots found.</p>
             <p className="text-muted-foreground text-xs mt-1">Add the first one and help the community.</p>
           </div>
@@ -346,7 +346,7 @@ export default function ResourceBoard() {
                             className={cn(
                               "text-xs px-2 py-0",
                               spot.is_free
-                                ? "border-green-500/40 text-green-400"
+                                ? "border-primary/40 text-primary"
                                 : "border-border/60 text-muted-foreground"
                             )}
                           >

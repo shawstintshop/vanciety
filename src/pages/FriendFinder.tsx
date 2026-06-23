@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -38,11 +39,11 @@ import { useToast } from "@/hooks/use-toast";
 
 // ─── Mode badge colours ────────────────────────────────────────────────────
 const MODE_COLORS = {
-  driveway: "bg-emerald-600 text-white",
-  wave: "bg-orange-500 text-white",
-  guide: "bg-sky-600 text-white",
-  parked: "bg-slate-500 text-white",
-  traveling: "bg-amber-500 text-white",
+  driveway: "bg-primary text-primary-foreground",
+  wave: "bg-secondary text-secondary-foreground",
+  guide: "bg-accent text-accent-foreground",
+  parked: "bg-muted text-muted-foreground",
+  traveling: "bg-secondary text-secondary-foreground",
 } as const;
 
 // ─── Create a fuzzy city-area circle marker (no exact pin) ────────────────
@@ -59,7 +60,7 @@ function createAreaMarker(van: LiveVan, isSelf: boolean): L.CircleMarker {
 
   const statusLabel = van.status === "traveling" ? "On the road" : "Parked / nearby";
   const modeLabel = van.message ? `<div class="mt-1 text-xs italic opacity-80">"${van.message}"</div>` : "";
-  const selfNote = isSelf ? `<div class="mt-1 text-[10px] text-green-300">This is you</div>` : "";
+  const selfNote = isSelf ? `<div class="mt-1 text-[10px] text-primary-glow">This is you</div>` : "";
 
   marker.bindPopup(`
     <div style="min-width:160px;font-family:system-ui,sans-serif">
@@ -108,7 +109,7 @@ function WaveDialog({ van, onClose, onSend }: WaveDialogProps) {
           <div className="flex items-start justify-between">
             <div>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Waves className="h-5 w-5 text-orange-500" />
+                <Waves className="h-5 w-5 text-secondary" />
                 Send a Wave
               </CardTitle>
               <CardDescription className="mt-1">
@@ -166,7 +167,7 @@ function WaveDialog({ van, onClose, onSend }: WaveDialogProps) {
             <Button
               onClick={handleSend}
               disabled={sending || !message.trim()}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
+              className="flex-1 bg-secondary hover:bg-secondary/90 text-secondary-foreground"
             >
               {sending ? "Sending…" : (
                 <>
@@ -327,35 +328,25 @@ const FriendFinder = () => {
         <Header />
         <main className="pt-16">
           {/* Hero */}
-          <section className="vanciety-hero-topo py-16">
-            <div className="container mx-auto px-4">
-              <div className="mx-auto max-w-2xl text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                    <Users className="h-8 w-8 text-primary" />
-                  </div>
-                </div>
-                <Badge className="mb-4 bg-orange-600 text-white">Members Only</Badge>
-                <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-                  Find Van Lifers Near You
-                </h1>
-                <p className="mb-2 text-lg text-muted-foreground">
-                  See which Vanciety members are in your city. Offer your driveway, send a wave,
-                  or share what's good in your area.
-                </p>
-                <p className="mb-8 text-sm text-muted-foreground">
-                  <Lock className="mr-1 inline h-3.5 w-3.5" />
-                  Location data is city/area only — never exact. Only members can see members.
-                </p>
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                  <Link to="/auth">
-                    <LogIn className="mr-2 h-5 w-5" />
-                    Join Free to See the Map
-                  </Link>
-                </Button>
-              </div>
+          <PageHero
+            label="Members Only"
+            title="Find Van Lifers Near You"
+            subtitle="See which Vanciety members are in your city. Offer your driveway, send a wave, or share what's good in your area."
+            icon={Users}
+          >
+            <div className="flex flex-col items-start gap-3">
+              <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+                <Lock className="h-3.5 w-3.5" />
+                Location data is city/area only — never exact. Only members can see members.
+              </p>
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+                <Link to="/auth">
+                  <LogIn className="mr-2 h-5 w-5" />
+                  Join Free to See the Map
+                </Link>
+              </Button>
             </div>
-          </section>
+          </PageHero>
 
           {/* How it works */}
           <section className="py-14">
@@ -365,22 +356,22 @@ const FriendFinder = () => {
                 {[
                   {
                     icon: Home,
-                    color: "text-emerald-500",
-                    bg: "bg-emerald-500/10",
+                    color: "text-primary",
+                    bg: "bg-primary/10",
                     title: "Driveway Host",
                     desc: "Offer your driveway as a free overnight spot for van lifers passing through your city.",
                   },
                   {
                     icon: Waves,
-                    color: "text-orange-500",
-                    bg: "bg-orange-500/10",
+                    color: "text-secondary",
+                    bg: "bg-secondary/10",
                     title: "Roadside Wave",
                     desc: "Spot another van in your area. Send a quick \"hey\" — they choose whether to respond.",
                   },
                   {
                     icon: Compass,
-                    color: "text-sky-500",
-                    bg: "bg-sky-500/10",
+                    color: "text-accent",
+                    bg: "bg-accent/10",
                     title: "Area Guide",
                     desc: "You're local. Share the best spots, hidden gems, and safe places to park in your town.",
                   },
@@ -453,7 +444,7 @@ const FriendFinder = () => {
               {/* Sharing toggle — prominent */}
               <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3">
                 {isTracking ? (
-                  <Radio className="h-5 w-5 animate-pulse text-green-500" />
+                  <Radio className="h-5 w-5 animate-pulse text-primary" />
                 ) : (
                   <EyeOff className="h-5 w-5 text-muted-foreground" />
                 )}
@@ -515,7 +506,7 @@ const FriendFinder = () => {
             {/* Members online count */}
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
                 {vansLoading
                   ? "Loading members…"
                   : liveVans.length === 0
@@ -545,11 +536,11 @@ const FriendFinder = () => {
             {/* Map legend */}
             <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <span className="inline-block h-3 w-3 rounded-full bg-green-500 opacity-85" />
+                <span className="inline-block h-3 w-3 rounded-full bg-primary opacity-85" />
                 You
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="inline-block h-3 w-3 rounded-full bg-orange-500 opacity-65" />
+                <span className="inline-block h-3 w-3 rounded-full bg-secondary opacity-65" />
                 Other members
               </div>
               <div className="flex items-center gap-1.5">
@@ -593,10 +584,10 @@ const FriendFinder = () => {
               </p>
 
               {/* Driveway Host */}
-              <Card className={isDriveWayHost ? "border-emerald-500/50 bg-emerald-500/5" : ""}>
+              <Card className={isDriveWayHost ? "border-primary/50 bg-primary/5" : ""}>
                 <CardContent className="flex items-start gap-4 p-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10">
-                    <Home className="h-5 w-5 text-emerald-500" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                    <Home className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
@@ -614,7 +605,7 @@ const FriendFinder = () => {
                       You control who you actually invite — this just signals your openness.
                     </p>
                     {isDriveWayHost && (
-                      <Badge className="mt-2 bg-emerald-600 text-white text-xs">
+                      <Badge className="mt-2 bg-primary text-primary-foreground text-xs">
                         🏠 Showing as Driveway Host
                       </Badge>
                     )}
@@ -623,10 +614,10 @@ const FriendFinder = () => {
               </Card>
 
               {/* Area Guide */}
-              <Card className={isAreaGuide ? "border-sky-500/50 bg-sky-500/5" : ""}>
+              <Card className={isAreaGuide ? "border-accent/50 bg-accent/5" : ""}>
                 <CardContent className="flex items-start gap-4 p-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-500/10">
-                    <Compass className="h-5 w-5 text-sky-500" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+                    <Compass className="h-5 w-5 text-accent" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
@@ -644,7 +635,7 @@ const FriendFinder = () => {
                       local spots, parking tips, and hidden gems.
                     </p>
                     {isAreaGuide && (
-                      <Badge className="mt-2 bg-sky-600 text-white text-xs">
+                      <Badge className="mt-2 bg-accent text-accent-foreground text-xs">
                         🗺️ Showing as Area Guide
                       </Badge>
                     )}
@@ -656,7 +647,7 @@ const FriendFinder = () => {
               <Card>
                 <CardContent className="p-5 space-y-3">
                   <div className="flex items-center gap-2">
-                    <Radio className="h-4 w-4 text-orange-500" />
+                    <Radio className="h-4 w-4 text-secondary" />
                     <h3 className="font-semibold">Custom status message</h3>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -681,7 +672,7 @@ const FriendFinder = () => {
                     </Button>
                   </div>
                   {!isTracking && (
-                    <p className="text-xs text-amber-500 flex items-center gap-1">
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
                       <Info className="h-3.5 w-3.5" />
                       Turn on sharing first to set a status
                     </p>

@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useYouTubeSync } from "@/hooks/useYouTubeSync";
 import Header from "@/components/Header";
+import PageHero from "@/components/PageHero";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 import { verifiedVideos } from "@/data/vancietyVerified";
@@ -176,57 +177,41 @@ const Videos = () => {
       <Header />
       
       <main className="pt-16">
-        {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Video Library
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Real YouTube van builds, electrical tutorials, event videos, and off-road van content with verified links
-              </p>
-            </div>
-
-            {/* Search & Filter */}
-            <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4 mb-8">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search videos, channels, topics..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              <Button variant="outline" className="flex items-center gap-2">
-                <Filter className="w-4 h-4" />
-                Filters
-              </Button>
-            </div>
-
-            {/* Category Pills */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              {videoCategories.map((category) => (
-                <Button
-                  key={category.id}
-                  variant={selectedCategory === category.id ? "hero" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category.id)}
-                  className="flex items-center gap-2"
-                >
-                  {category.name}
-                </Button>
-              ))}
+        <PageHero
+          label="Video Library"
+          title="Van Life Videos"
+          subtitle="Real YouTube van builds, electrical tutorials, event videos, and off-road van content with verified links."
+          icon={Play}
+        >
+          <div className="flex flex-col md:flex-row gap-4 max-w-2xl">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                placeholder="Search videos, channels, topics..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 bg-background/60 border-border/60"
+              />
             </div>
           </div>
-        </section>
+          <div className="flex flex-wrap gap-2 mt-4">
+            {videoCategories.map((category) => (
+              <Button
+                key={category.id}
+                variant={selectedCategory === category.id ? "hero" : "outline"}
+                size="sm"
+                onClick={() => setSelectedCategory(category.id)}
+                className="flex items-center gap-2"
+              >
+                {category.name}
+              </Button>
+            ))}
+          </div>
+        </PageHero>
 
         <section className="container mx-auto px-4">
           <div className="relative">
-            <div className="pointer-events-none absolute -right-1 top-2 z-20 rounded-full border border-orange-500/30 bg-background/85 px-2 py-1 shadow-sm backdrop-blur-sm">
+            <div className="pointer-events-none absolute -right-1 top-2 z-20 rounded-full border border-primary/30 bg-background/85 px-2 py-1 shadow-sm backdrop-blur-sm">
               <div className="flex items-center gap-1.5">
                 <svg width="16" height="12" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna">
                   <rect x="4" y="14" width="52" height="26" rx="5" fill="#F97316" />
@@ -235,7 +220,7 @@ const Videos = () => {
                   <circle cx="16" cy="40" r="7" fill="#1C1917" />
                   <circle cx="48" cy="40" r="7" fill="#1C1917" />
                 </svg>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-orange-400">Vanna</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">Vanna</span>
               </div>
             </div>
             <AIVanConcierge mode="video" compact />
@@ -327,12 +312,12 @@ const Videos = () => {
                       )}
 
                       {/* Category Badge */}
-                      <div className="absolute top-3 left-3 bg-gradient-sunset px-2 py-1 rounded text-white text-xs font-semibold">
+                      <div className="absolute top-3 left-3 bg-primary/90 px-2 py-1 rounded text-primary-foreground text-xs font-semibold">
                         {videoCategories.find(c => c.id === video.category)?.name || 'Van Life'}
                       </div>
 
                       {video.source_badge && (
-                        <div className="absolute top-3 right-3 bg-blue-600 px-2 py-1 rounded text-white text-xs font-semibold">
+                        <div className="absolute top-3 right-3 bg-secondary/90 px-2 py-1 rounded text-secondary-foreground text-xs font-semibold">
                           {video.source_badge}
                         </div>
                       )}

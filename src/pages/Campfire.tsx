@@ -181,7 +181,7 @@ export default function Campfire() {
         <div className="mb-8 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <Flame className="h-7 w-7 text-orange-400" />
+              <Flame className="h-7 w-7 text-primary" />
               <h1 className="text-3xl font-bold tracking-tight">Campfire</h1>
             </div>
             <p className="text-muted-foreground text-sm max-w-lg">
@@ -377,7 +377,7 @@ export default function Campfire() {
                   </div>
                 ) : posts.length === 0 ? (
                   <div className="rounded-2xl border border-dashed border-border/60 py-16 text-center">
-                    <Flame className="mx-auto mb-3 h-8 w-8 text-orange-400/40" />
+                    <Flame className="mx-auto mb-3 h-8 w-8 text-primary/40" />
                     <p className="text-muted-foreground text-sm">No posts yet in this board.</p>
                     <p className="text-muted-foreground text-xs mt-1">Be the first to start a conversation.</p>
                   </div>
