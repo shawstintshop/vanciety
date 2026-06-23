@@ -34,6 +34,7 @@ import Campfire from "./pages/Campfire";
 import TripJournals from "./pages/TripJournals";
 import ResourceBoard from "./pages/ResourceBoard";
 import Icebreaker from "./pages/Icebreaker";
+import VanLifeSpots from "./pages/VanLifeSpots";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
 
