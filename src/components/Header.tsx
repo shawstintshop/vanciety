@@ -66,16 +66,21 @@ const Header = () => {
   const isGroupActive = (paths: string[]) => paths.some((p) => location.pathname.startsWith(p));
 
   const navLinkClass = (active: boolean) =>
-    `flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+    `flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold tracking-[0.01em] transition-all duration-200 shadow-sm ring-1 ring-transparent ${
       active
-        ? "bg-primary/15 text-primary-glow"
-        : "text-foreground/80 hover:bg-primary/10 hover:text-primary-glow"
+        ? "bg-[#1f5f2d]/92 text-[#f1d6a4] ring-[#8ecf98]/28 shadow-[0_4px_14px_rgba(0,0,0,0.24)]"
+        : "text-[#f1d6a4]/92 hover:bg-[#1f5f2d]/24 hover:text-[#f5dfb2] hover:ring-[#8ecf98]/18"
     }`;
 
+  const navPanelClass =
+    "border border-[#8ecf98]/18 bg-[rgba(14,33,18,0.72)] shadow-[0_14px_42px_rgba(0,0,0,0.34)] backdrop-blur-2xl backdrop-saturate-150";
+
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/88 shadow-[0_10px_40px_rgba(0,0,0,.24)] backdrop-blur-xl topo-header">
-      <div className="container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
-        <VancietyLogo className="h-12 w-[180px] max-w-[200px] sm:h-14 sm:w-[220px] md:h-16 md:w-[240px]" />
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-[#8ecf98]/18 bg-[rgba(14,33,18,0.74)] shadow-[0_18px_48px_rgba(0,0,0,0.5)] backdrop-blur-3xl backdrop-saturate-200 topo-header">
+      <div className="relative container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(142,207,152,0.09),rgba(31,95,45,0.05),transparent)]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#8ecf98]/18" />
+        <VancietyLogo variant="wordmark" className="h-11 w-[190px] max-w-[220px] sm:h-12 sm:w-[220px] md:h-14 md:w-[250px]" />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary navigation">
@@ -162,7 +167,7 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/icebreaker")}>
                 <Compass className="mr-2 h-4 w-4 text-orange-400" />
-                Member Spotlight
+                Member Tips
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -283,7 +288,7 @@ const Header = () => {
                 { label: "Campfire", to: "/campfire", icon: Flame },
                 { label: "Trip Journals", to: "/journals", icon: BookOpen },
                 { label: "Resources", to: "/resources", icon: MapPin },
-                { label: "Member Spotlight", to: "/icebreaker", icon: Compass },
+                { label: "Member Tips", to: "/icebreaker", icon: Compass },
                 { label: "Vana AI", to: "/ai", icon: Sparkles },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
