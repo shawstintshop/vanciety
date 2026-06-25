@@ -158,18 +158,33 @@ export default function ResourceBoard() {
   return (
     <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
-      <div className="container mx-auto max-w-5xl px-4 pt-24 pb-16">
-        {/* Header */}
-        <div className="mb-8 flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <MapPin className="h-7 w-7 text-green-400" />
-              <h1 className="text-3xl font-bold tracking-tight">Resource Board</h1>
-            </div>
-            <p className="text-muted-foreground text-sm max-w-lg">
-              Crowd-sourced utility spots — water, dump stations, parking, mechanics and more. Pure utility, no social required.
-            </p>
-          </div>
+
+      {/* Hero */}
+      <section className="relative isolate overflow-hidden border-b border-white/10">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/sprinter-desert-camping.png)" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
+        </div>
+        <div className="relative z-10 container mx-auto max-w-5xl px-4 pt-28 pb-14">
+          <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
+            <MapPin className="mr-1.5 h-3.5 w-3.5" />
+            Resource Board
+          </Badge>
+          <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl">
+            The stuff you actually <span className="text-amber-400">need on the road.</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
+            Crowd-sourced utility spots — water fills, dump stations, overnight parking, mechanics,
+            propane, and more. Pure utility, no social required.
+          </p>
+        </div>
+      </section>
+
+      <div className="container mx-auto max-w-5xl px-4 pt-12 pb-16">
+        {/* Toolbar */}
+        <div className="mb-8 flex items-center justify-end gap-4">
           <Dialog open={createOpen} onOpenChange={setCreateOpen}>
             <DialogTrigger asChild>
               <Button className="shrink-0 gap-2">

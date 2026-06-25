@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Users, AlertTriangle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Users, AlertTriangle, IdCard } from "lucide-react";
 import Header from "@/components/Header";
 import VanCard, { VanCardProfile } from "@/components/VanCard";
-import VancietyGroupImage from "@/components/VancietyGroupImage";
 
 const VanCards = () => {
   const [profiles, setProfiles] = useState<VanCardProfile[]>([]);
@@ -47,19 +47,27 @@ const VanCards = () => {
 
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
-          <div className="container mx-auto grid items-center gap-8 px-4 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">
+        <section className="relative isolate overflow-hidden border-b border-white/10">
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: "url(/images/sprinter-white-4x4.png)" }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
+          </div>
+          <div className="relative z-10 container mx-auto px-4 py-20 lg:py-24">
+            <div className="max-w-3xl">
+              <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
+                <IdCard className="mr-1.5 h-3.5 w-3.5" />
                 Van Cards
-              </span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-              Meet the members of the Vanciety community
-            </p>
+              </Badge>
+              <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Meet the <span className="text-amber-400">Vanciety community.</span>
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-300">
+                Every member gets a Van Card — their rig, their build, their story. Browse the community
+                and see who's out there on the road.
+              </p>
             </div>
-            <VancietyGroupImage compact className="min-h-[250px]" />
           </div>
         </section>
 

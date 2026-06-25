@@ -436,6 +436,31 @@ const FriendFinder = () => {
       <Header />
       <main className="pt-16">
 
+        {/* Hero */}
+        <section className="relative isolate overflow-hidden border-b border-white/10">
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: "url(/images/vans-neighborhood-meetup.jpg)" }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
+          </div>
+          <div className="relative z-10 container mx-auto px-4 py-16 lg:py-20">
+            <div className="max-w-3xl">
+              <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
+                <Users className="mr-1.5 h-3.5 w-3.5" />
+                Friend Finder
+              </Badge>
+              <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Find van lifers <span className="text-amber-400">near you.</span>
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-300">
+                See which Vanciety members are in your area, offer your driveway, or send a wave —
+                all city-level only, never your exact location.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Page header */}
         <section className="border-b border-border bg-muted/20 py-6">
           <div className="container mx-auto px-4">

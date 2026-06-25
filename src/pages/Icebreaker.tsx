@@ -1,5 +1,5 @@
 /**
- * Member Spotlight — Weekly Community Knowledge Share
+ * Member Tips — Weekly Community Knowledge Share
  *
  * Van lifers sharing local knowledge, tips, and experience with the community.
  * No matching, no dating language — pure community wisdom sharing.
@@ -153,18 +153,31 @@ export default function Icebreaker() {
   return (
     <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
-      <div className="container mx-auto max-w-2xl px-4 pt-24 pb-16">
 
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Compass className="h-7 w-7 text-orange-400" />
-            <h1 className="text-3xl font-bold tracking-tight">Member Spotlight</h1>
-          </div>
-          <p className="text-muted-foreground text-sm max-w-lg">
-            One question. Every Vanciety member shares what they know. Local tips, hidden spots, roads to avoid, places to eat — real knowledge from people who've been there.
+      {/* Hero */}
+      <section className="relative isolate overflow-hidden border-b border-white/10">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/vans-neighborhood-meetup.jpg)" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
+        </div>
+        <div className="relative z-10 container mx-auto max-w-2xl px-4 pt-28 pb-14">
+          <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
+            <Compass className="mr-1.5 h-3.5 w-3.5" />
+            Member Tips
+          </Badge>
+          <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl">
+            One question. <span className="text-amber-400">Real local knowledge.</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
+            Every week, the Vanciety community answers a single question. Hidden spots, roads to avoid,
+            places to eat — practical tips from people who've actually been there.
           </p>
         </div>
+      </section>
+
+      <div className="container mx-auto max-w-2xl px-4 pt-12 pb-16">
 
         {/* Week info */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
