@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   MapPin, Star, BadgeCheck, Globe, Instagram, Youtube, Facebook,
@@ -11,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { getManufacturerBySlug, type ManufacturerComment } from "@/data/manufacturers";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 const StarRow = ({ value, onSelect }: { value: number; onSelect?: (n: number) => void }) => (
   <div className="flex">
@@ -28,13 +30,44 @@ const StarRow = ({ value, onSelect }: { value: number; onSelect?: (n: number) =>
 
 const ManufacturerDetail = () => {
   const { slug } = useParams();
+  const { user } = useAuth();
   const manufacturer = slug ? getManufacturerBySlug(slug) : undefined;
 
-  // Local comment state (Phase 2 persists to Supabase with RLS + auth)
+  // Comment state — seeded with static reviews, then merged with Supabase reviews
   const [comments, setComments] = useState<ManufacturerComment[]>(manufacturer?.comments ?? []);
   const [draftRating, setDraftRating] = useState(0);
   const [draftBody, setDraftBody] = useState("");
   const [draftName, setDraftName] = useState("");
+
+  // Load persisted reviews for this manufacturer slug on mount / slug change
+  useEffect(() => {
+    if (!slug) return;
+    let active = true;
+    const seed = manufacturer?.comments ?? [];
+    (async () => {
+      const { data, error } = await supabase
+        .from("manufacturer_reviews" as any)
+        .select("*")
+        .eq("manufacturer_slug", slug)
+        .order("created_at", { ascending: false });
+      if (!active) return;
+      if (error || !data) {
+        setComments(seed);
+        return;
+      }
+      const loaded: ManufacturerComment[] = (data as any[]).map((row) => ({
+        author: row.author_name || "Anonymous",
+        rating: row.rating,
+        date: (row.created_at ?? "").slice(0, 10),
+        body: row.body,
+      }));
+      setComments([...loaded, ...seed]);
+    })();
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
 
   const avgRating = useMemo(() => {
     if (!comments.length) return manufacturer?.rating ?? 0;
@@ -55,21 +88,43 @@ const ManufacturerDetail = () => {
     );
   }
 
-  const submitComment = (e: React.FormEvent) => {
+  const submitComment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!draftRating || !draftBody.trim()) {
       toast.error("Add a rating and a comment.");
       return;
     }
-    setComments((prev) => [
-      {
-        author: draftName.trim() || "Anonymous",
-        rating: draftRating,
-        date: new Date().toISOString().slice(0, 10),
-        body: draftBody.trim(),
-      },
-      ...prev,
-    ]);
+    if (!user) {
+      toast.error("Sign in to post a review");
+      return;
+    }
+
+    const authorName = draftName.trim() || user.email || "Anonymous";
+    const optimistic: ManufacturerComment = {
+      author: authorName,
+      rating: draftRating,
+      date: new Date().toISOString().slice(0, 10),
+      body: draftBody.trim(),
+    };
+
+    // Optimistic update
+    setComments((prev) => [optimistic, ...prev]);
+
+    const { error } = await supabase.from("manufacturer_reviews" as any).insert({
+      manufacturer_slug: slug,
+      user_id: user.id,
+      rating: draftRating,
+      body: draftBody.trim(),
+      author_name: draftName.trim() || user.email,
+    });
+
+    if (error) {
+      // Roll back optimistic item
+      setComments((prev) => prev.filter((c) => c !== optimistic));
+      toast.error("Could not post review. Please try again.");
+      return;
+    }
+
     setDraftRating(0);
     setDraftBody("");
     setDraftName("");

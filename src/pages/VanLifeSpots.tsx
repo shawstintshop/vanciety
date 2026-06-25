@@ -47,6 +47,7 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Home, Tent, Users, Wrench, Fuel, ShowerHead, UtensilsCrossed,
   Car, Droplets, Trash2, ShoppingBag, Wifi, MapPin, Plus,
@@ -96,6 +97,40 @@ export interface VanSpot {
   website?: string;
   hours?: string;
   tags: string[];
+}
+
+// ─── DB row shape (van_life_spots — not in generated types) ───────────────
+interface VanLifeSpotRow {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  type: string;
+  description: string | null;
+  added_by: string | null;
+  created_at: string;
+}
+
+// Map a DB row into the page's existing Spot shape, filling safe defaults
+function rowToSpot(row: VanLifeSpotRow): VanSpot {
+  return {
+    id: row.id,
+    category: (row.type || "other") as SpotCategoryId,
+    name: row.name,
+    description: row.description || "",
+    latitude: row.lat,
+    longitude: row.lng,
+    city: "",
+    state: "",
+    rating: 0,
+    votes: 0,
+    amenities: [],
+    addedBy: row.added_by || undefined,
+    addedAt: row.created_at,
+    verified: false,
+    memberOnly: false,
+    tags: [],
+  };
 }
 
 // ─── Seed spots (real locations, community-style) ─────────────────────────
@@ -228,7 +263,25 @@ const VanLifeSpots = () => {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [addForm, setAddForm] = useState<AddSpotForm>(DEFAULT_FORM);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [spots] = useState<VanSpot[]>(SEED_SPOTS);
+  const [dbSpots, setDbSpots] = useState<VanSpot[]>([]);
+
+  // SEED_SPOTS is the baseline; DB spots are layered on top so the map always
+  // has content even when the table is empty.
+  const spots: VanSpot[] = [...SEED_SPOTS, ...dbSpots];
+
+  // Fetch community-submitted spots from Supabase
+  const fetchSpots = useCallback(async () => {
+    const { data } = await supabase
+      .from("van_life_spots" as any)
+      .select("*")
+      .order("created_at", { ascending: false });
+    const rows = (data as any[] as VanLifeSpotRow[]) || [];
+    setDbSpots(rows.map(rowToSpot));
+  }, []);
+
+  useEffect(() => {
+    fetchSpots();
+  }, [fetchSpots]);
 
   // Filter spots
   const filteredSpots = spots.filter(spot => {
@@ -365,21 +418,46 @@ const VanLifeSpots = () => {
   }, [filteredSpots, mapLoaded]);
 
   // Handle add spot submit
-  const handleAddSpot = () => {
+  const handleAddSpot = async () => {
     if (!user) {
-      toast({ title: "Sign in required", description: "You must be a member to add spots.", variant: "destructive" });
+      toast({ title: "Sign in to add a spot", description: "You must be a member to add spots.", variant: "destructive" });
       return;
     }
     if (!addForm.name || !addForm.city || !addForm.description) {
       toast({ title: "Fill in required fields", description: "Name, city, and description are required.", variant: "destructive" });
       return;
     }
+
+    // The form doesn't collect exact coordinates; use the member's current
+    // location if available, otherwise the current map center, otherwise the
+    // US centroid as a final fallback.
+    const center = mapInstanceRef.current?.getCenter();
+    const lat = userLocation?.lat ?? center?.lat() ?? 39.8283;
+    const lng = userLocation?.lng ?? center?.lng() ?? -98.5795;
+
+    const { error } = await supabase
+      .from("van_life_spots" as any)
+      .insert({
+        name: addForm.name,
+        lat,
+        lng,
+        type: addForm.category,
+        description: addForm.description,
+        added_by: user.id,
+      });
+
+    if (error) {
+      toast({ title: "Could not add spot", description: error.message, variant: "destructive" });
+      return;
+    }
+
     toast({
-      title: "Spot submitted!",
-      description: "Your spot is under review and will appear on the map after verification.",
+      title: "Spot added!",
+      description: "Your spot is now on the map.",
     });
     setShowAddDialog(false);
     setAddForm(DEFAULT_FORM);
+    await fetchSpots();
   };
 
   const activeCatConfig = SPOT_CATEGORIES.find(c => c.id === activeCategory);
