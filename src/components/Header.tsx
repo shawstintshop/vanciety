@@ -227,7 +227,8 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="border-border bg-popover text-popover-foreground">
-                <DropdownMenuItem onClick={() => navigate("/van-cards")}>My Listings</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/profile")}>My Profile</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/dashboard")}>Dashboard</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/van-cards")}>Van Cards</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
