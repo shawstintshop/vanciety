@@ -80,7 +80,7 @@ const Header = () => {
       <div className="relative container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-2">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(142,207,152,0.09),rgba(31,95,45,0.05),transparent)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#8ecf98]/18" />
-        <VancietyLogo variant="wordmark" className="h-11 w-[190px] max-w-[220px] sm:h-12 sm:w-[220px] md:h-14 md:w-[250px]" />
+        <VancietyLogo variant="badge" className="h-14 w-14 sm:h-16 sm:w-16" />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary navigation">

@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -327,35 +328,20 @@ const FriendFinder = () => {
         <Header />
         <main className="pt-16">
           {/* Hero */}
-          <section className="vanciety-hero-topo py-16">
-            <div className="container mx-auto px-4">
-              <div className="mx-auto max-w-2xl text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                    <Users className="h-8 w-8 text-primary" />
-                  </div>
-                </div>
-                <Badge className="mb-4 bg-orange-600 text-white">Members Only</Badge>
-                <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-                  Find Van Lifers Near You
-                </h1>
-                <p className="mb-2 text-lg text-muted-foreground">
-                  See which Vanciety members are in your city. Offer your driveway, send a wave,
-                  or share what's good in your area.
-                </p>
-                <p className="mb-8 text-sm text-muted-foreground">
-                  <Lock className="mr-1 inline h-3.5 w-3.5" />
-                  Location data is city/area only — never exact. Only members can see members.
-                </p>
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                  <Link to="/auth">
-                    <LogIn className="mr-2 h-5 w-5" />
-                    Join Free to See the Map
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </section>
+          <HeroSection
+            image="/images/vans-neighborhood-meetup.jpg"
+            badge="Friend Finder"
+            title="Find van lifers"
+            accent="near you."
+            subtitle="See which Vanciety members are in your city. Location data is city/area only — never exact. Only members can see members."
+          >
+            <Button asChild size="lg" className="bg-primary text-black font-semibold hover:bg-amber-500">
+              <Link to="/auth">
+                <LogIn className="mr-2 h-5 w-5" />
+                Join Free to See the Map
+              </Link>
+            </Button>
+          </HeroSection>
 
           {/* How it works */}
           <section className="py-14">
@@ -437,29 +423,13 @@ const FriendFinder = () => {
       <main className="pt-16">
 
         {/* Hero */}
-        <section className="relative isolate overflow-hidden border-b border-white/10">
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/vans-neighborhood-meetup.jpg)" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
-          </div>
-          <div className="relative z-10 container mx-auto px-4 py-16 lg:py-20">
-            <div className="max-w-3xl">
-              <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
-                <Users className="mr-1.5 h-3.5 w-3.5" />
-                Friend Finder
-              </Badge>
-              <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Find van lifers <span className="text-amber-400">near you.</span>
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-300">
-                See which Vanciety members are in your area, offer your driveway, or send a wave —
-                all city-level only, never your exact location.
-              </p>
-            </div>
-          </div>
-        </section>
+        <HeroSection
+          image="/images/vans-neighborhood-meetup.jpg"
+          badge="Friend Finder"
+          title="Find van lifers"
+          accent="near you."
+          subtitle="See which Vanciety members are in your city."
+        />
 
         {/* Page header */}
         <section className="border-b border-border bg-muted/20 py-6">

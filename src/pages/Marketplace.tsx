@@ -27,8 +27,10 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
+import { marketplaceSources } from "@/data/vanIntelligence";
 
 const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -212,19 +214,16 @@ const Marketplace = () => {
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="bg-background border-b border-border py-12">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Van Life Marketplace
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Buy and sell vans, parts, gear, and accessories with the Vanciety community.
-              </p>
-            </div>
+        <HeroSection
+          image="/images/vanciety-driveway-meetup.jpg"
+          badge="Marketplace"
+          title="Buy and sell"
+          accent="van life gear."
+          subtitle="Vans, parts, solar, furniture and gear from the Vanciety community."
+        />
 
+        <section className="bg-background border-b border-border py-14">
+          <div className="container mx-auto px-4">
             {/* Search & Controls */}
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -371,8 +370,44 @@ const Marketplace = () => {
           </div>
         </section>
 
-        <section className="container mx-auto px-4">
+        <section className="container mx-auto px-4 py-4">
           <AIVanConcierge mode="marketplace" compact />
+        </section>
+
+        <section className="py-4">
+          <div className="container mx-auto px-4">
+            <div className="mb-4 flex items-end justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-bold">Trusted marketplace sources</h2>
+                <p className="text-sm text-muted-foreground">
+                  Real external marketplaces only. Prices and inventory must be checked at the source.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {marketplaceSources.map((source) => (
+                <a
+                  key={source.id}
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group rounded-2xl border border-border bg-card p-5 transition hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <Badge variant="outline" className="mb-3 text-[10px] uppercase tracking-wide text-muted-foreground">
+                        {source.badge}
+                      </Badge>
+                      <h3 className="font-semibold text-foreground group-hover:text-primary">{source.name}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground">{source.note}</p>
+                    </div>
+                    <ExternalLink className="mt-1 h-4 w-4 text-muted-foreground transition group-hover:text-primary" />
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">{source.category}</p>
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Listings Grid */}
@@ -414,7 +449,7 @@ const Marketplace = () => {
                       key={link.url}
                       href={link.url}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noreferrer noopener"
                       className="rounded-xl border bg-background p-4 hover:border-primary transition-colors"
                     >
                       <div className="flex items-center justify-between gap-3 mb-2">

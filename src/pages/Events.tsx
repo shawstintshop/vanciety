@@ -7,6 +7,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, MapPin, Plus, Ticket } from "lucide-react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -34,44 +35,20 @@ const Events = () => {
 
       <main className="pt-16">
         {/* 1. Hero */}
-        <section className="relative isolate overflow-hidden border-b border-white/10">
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/vanciety-large-van-event.jpg)" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
-          </div>
-
-          <div className="relative z-10 container mx-auto px-4 py-20 lg:py-28">
-            <div className="max-w-3xl">
-              <Badge className="mb-6 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
-                <CalendarDays className="mr-1.5 h-3.5 w-3.5" />
-                Events & Meetups
-              </Badge>
-              <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Find your people
-                <br />
-                <span className="text-amber-400">on the road.</span>
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
-                Rallies, festivals, and local meetups for Sprinter owners and van lifers. Plan your next
-                stop, meet the community, and swap stories around the campfire.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="bg-primary font-semibold text-primary-foreground hover:bg-amber-500">
-                  <Link to="/map">
-                    Open Event Map
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/25 bg-white/8 text-white hover:bg-white/12">
-                  <Link to="/auth">Submit Your Event</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroSection
+          image="/images/vanciety-large-van-event.jpg"
+          badge="Events & Meetups"
+          title="Find your people"
+          accent="on the road."
+          subtitle="Rallies, festivals, and local meetups for Sprinter owners and van lifers."
+        >
+          <Button asChild size="lg" className="bg-primary text-black font-semibold hover:bg-amber-500">
+            <Link to="/map">Open Event Map<ArrowRight className="ml-2 h-5 w-5" /></Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="border-white/25 text-white hover:bg-white/10">
+            <Link to="/auth">Submit Your Event</Link>
+          </Button>
+        </HeroSection>
 
         {/* 2. Upcoming events grid */}
         <section className="border-b border-border py-16 lg:py-20">

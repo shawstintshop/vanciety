@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Users, AlertTriangle, IdCard } from "lucide-react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import VanCard, { VanCardProfile } from "@/components/VanCard";
 
 const VanCards = () => {
@@ -21,6 +24,7 @@ const VanCards = () => {
       const { data, error: fetchError } = await supabase
         .from("profiles")
         .select("id, display_name, avatar_url, created_at, van_type")
+        // van_type tolerated if absent — VanCard handles a null value gracefully
         .order("created_at", { ascending: false });
 
       if (!active) return;
@@ -47,26 +51,30 @@ const VanCards = () => {
 
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="relative isolate overflow-hidden border-b border-white/10">
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/sprinter-white-4x4.png)" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
-          </div>
-          <div className="relative z-10 container mx-auto px-4 py-20 lg:py-24">
-            <div className="max-w-3xl">
-              <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
-                <IdCard className="mr-1.5 h-3.5 w-3.5" />
-                Van Cards
-              </Badge>
-              <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Meet the <span className="text-amber-400">Vanciety community.</span>
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-300">
-                Every member gets a Van Card — their rig, their build, their story. Browse the community
-                and see who's out there on the road.
-              </p>
+        <HeroSection
+          image="/images/sprinter-white-4x4.png"
+          badge="Van Cards"
+          title="Meet the"
+          accent="Vanciety community."
+          subtitle="Every member gets a Van Card — their rig, their build, their story."
+        />
+
+        {/* Create Your Van Card CTA */}
+        <section className="bg-card border-b border-border py-14">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-background p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                  <IdCard className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-black text-foreground">Create Your Van Card</h2>
+                  <p className="text-muted-foreground">Join Vanciety and add your rig, build, and story to the community.</p>
+                </div>
+              </div>
+              <Button asChild size="lg" className="bg-primary text-black font-semibold hover:bg-amber-500">
+                <Link to="/auth">Create Your Van Card</Link>
+              </Button>
             </div>
           </div>
         </section>

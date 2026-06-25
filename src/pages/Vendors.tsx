@@ -11,6 +11,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
@@ -197,23 +198,16 @@ const Vendors = () => {
 
       <main className="pt-16">
         {/* ── Hero Section ───────────────────────────────────── */}
-        <section className="vanciety-hero-topo py-14">
+        <HeroSection
+          image="/images/vanciety-van-tech-mechanics.jpg"
+          badge="Verified Vendors"
+          title="Find your build"
+          accent="partners."
+          subtitle="Certified mechanics, van builders, upfitters, and gear suppliers."
+        />
+
+        <section className="bg-background border-b border-border py-14">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-10">
-              <Badge className="mb-4 bg-orange-600 text-white text-sm px-4 py-1">
-                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-                Van Life Vendor Directory
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Find Your Build Partners
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Builders, manufacturers, parts suppliers, tours, rentals, gear — every vendor
-                the van life community trusts, in one directory.
-              </p>
-            </div>
 
             {/* ── Vendor Signup CTA ─────────────────────────── */}
             <div className="max-w-2xl mx-auto mb-10">

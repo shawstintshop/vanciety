@@ -138,16 +138,21 @@ export default function VanShop() {
     <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
       {/* Hero */}
-      <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border-b border-zinc-800 px-4 py-12">
-        <div className="max-w-6xl mx-auto">
+      <div className="relative isolate flex min-h-[500px] items-end overflow-hidden border-b border-zinc-800">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/sprinter-desert-camping.png)" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
+        <div className="relative z-10 max-w-6xl mx-auto px-4 pt-24 pb-16">
           <div className="flex items-center gap-3 mb-3">
             <ShoppingBag className="w-8 h-8 text-amber-400" />
             <span className="text-amber-400 font-semibold text-sm uppercase tracking-widest">Van Shop</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-zinc-100 mb-3">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-3">
             Gear that actually works
           </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl">
+          <p className="text-gray-300 text-lg max-w-2xl">
             Hand-picked by van lifers, for van lifers. Every product below is battle-tested on the road.
             Buying through these links supports Vanciety at no extra cost to you.
           </p>

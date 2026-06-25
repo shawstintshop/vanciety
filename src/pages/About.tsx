@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -52,45 +53,20 @@ const About = () => {
 
       <main className="pt-16">
         {/* 1. Hero */}
-        <section className="relative isolate overflow-hidden border-b border-white/10">
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/vanciety-large-van-event.jpg)" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
-          </div>
-
-          <div className="relative z-10 container mx-auto px-4 py-20 lg:py-28">
-            <div className="max-w-3xl">
-              <Badge className="mb-6 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
-                <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                About Vanciety
-              </Badge>
-              <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Built by van lifers,
-                <br />
-                <span className="text-amber-400">for van lifers.</span>
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
-                Vanciety is the home base for Sprinter owners and enthusiasts — repair guides, trusted
-                builders, gear, events, and a community of real van lifers, all powered by Vana, your
-                personal AI van assistant.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="bg-primary font-semibold text-primary-foreground hover:bg-amber-500">
-                  <Link to="/auth">
-                    Join Free
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-white/25 bg-white/8 text-white hover:bg-white/12">
-                  <Link to="/forum">Browse Forum</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroSection
+          image="/images/vanciety-large-van-event.jpg"
+          badge="About Vanciety"
+          title="Built by van lifers,"
+          accent="for van lifers."
+          subtitle="The van life community hub — repair guides, vendors, events, and community."
+        >
+          <Button asChild size="lg" className="bg-primary text-black font-semibold hover:bg-amber-500">
+            <Link to="/auth">Join Free<ArrowRight className="ml-2 h-5 w-5" /></Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="border-white/25 text-white hover:bg-white/10">
+            <Link to="/forum">Browse Forum</Link>
+          </Button>
+        </HeroSection>
 
         {/* 2. Mission */}
         <section className="border-b border-border bg-card py-16 lg:py-20 topo-section-dark">

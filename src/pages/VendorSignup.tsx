@@ -190,10 +190,8 @@ const VendorSignup = () => {
               <Sparkles className="w-3.5 h-3.5 mr-1.5" />
               Vendor Registration
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-3">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">
-                List Your Business
-              </span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 text-foreground">
+              List Your Business
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Join the fastest-growing van life directory. Reach thousands of builders,

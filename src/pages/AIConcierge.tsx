@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,19 +78,16 @@ const AIConcierge = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-16">
-        <section className="vanciety-hero-topo py-14">
+        <HeroSection
+          image="/images/sprinter-mountain-trail.png"
+          badge="Vana AI"
+          title="Ask Vana"
+          accent="first."
+          subtitle="She routes you to the exact guide, vendor, video, or community path you need."
+        />
+
+        <section className="bg-background py-14">
           <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-4xl text-center">
-              <Badge className="mb-4 bg-orange-600 text-white">
-                <Sparkles className="mr-2 h-3.5 w-3.5" />
-                Vana MVP
-              </Badge>
-              <h1 className="mb-4 text-4xl font-bold md:text-5xl">Ask Vana first</h1>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                This is the first functional routing version of Vana. She sends people to the exact guide,
-                vendor, video, event, or community path they need instead of making them hunt through every page.
-              </p>
-            </div>
 
             <Card className="mx-auto mt-8 max-w-3xl border-orange-500/20 shadow-glow">
               <CardContent className="p-6">

@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useYouTubeSync } from "@/hooks/useYouTubeSync";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 import { verifiedVideos } from "@/data/vancietyVerified";
@@ -177,19 +178,16 @@ const Videos = () => {
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="vanciety-hero-topo py-12">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Video Library
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Real YouTube van builds, electrical tutorials, event videos, and off-road van content with verified links
-              </p>
-            </div>
+        <HeroSection
+          image="/images/sprinter-mountain-trail.png"
+          badge="Video Library"
+          title="Every van build."
+          accent="Every repair. On video."
+          subtitle="Real YouTube van builds, electrical tutorials, and off-road van content."
+        />
 
+        <section className="bg-background border-b border-border py-14">
+          <div className="container mx-auto px-4">
             {/* Search & Filter */}
             <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4 mb-8">
               <div className="relative flex-1">

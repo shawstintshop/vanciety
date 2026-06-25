@@ -31,6 +31,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 const QUICK_REACTIONS = ["👍", "❤️", "🔥", "🙌", "🚐", "💯", "🌄", "✨"];
@@ -173,27 +174,7 @@ export default function TripJournals() {
       <Header />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/10">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/sprinter-mountain-trail.png)" }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
-        </div>
-        <div className="relative z-10 container mx-auto max-w-3xl px-4 pt-28 pb-14">
-          <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
-            <BookOpen className="mr-1.5 h-3.5 w-3.5" />
-            Trip Journals
-          </Badge>
-          <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl">
-            Stories from the <span className="text-amber-400">open road.</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-            Member road logs — written after the fact, no live location, no pressure. Real routes,
-            real miles, real experiences from the Vanciety community.
-          </p>
-        </div>
-      </section>
+      <HeroSection image="/images/sprinter-joshua-tree.png" badge="Trip Journals" title="Stories from" accent="the open road." subtitle="Member road logs — real routes, real miles, real experiences." />
 
       <div className="container mx-auto max-w-3xl px-4 pt-12 pb-16">
         {/* Toolbar */}

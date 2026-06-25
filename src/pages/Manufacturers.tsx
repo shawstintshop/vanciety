@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, MapPin, Star, BadgeCheck, ArrowRight, Globe, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,11 +32,16 @@ const Manufacturers = () => {
       <Header />
       <main className="pt-16">
         {/* Hero */}
-        <section className="vanciety-hero-topo py-12">
+        <HeroSection
+          image="/images/van-build-workshop.jpg"
+          badge="Manufacturers"
+          title="The companies"
+          accent="that build your life."
+          subtitle="Every major van manufacturer, model specs, and build options."
+        />
+
+        <section className="bg-background border-b border-border py-14">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="mb-3 text-4xl font-bold md:text-5xl">
-              <span className="bg-gradient-hero bg-clip-text text-transparent">Van Manufacturers & Brands</span>
-            </h1>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
               The hub for Sprinter, vanlife & overland manufacturers — explore brands, products, and reviews.
               Are you a brand? <Link to="/vendor-signup" className="text-primary hover:underline">Claim your page</Link>.

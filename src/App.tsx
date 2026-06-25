@@ -35,6 +35,7 @@ import TripJournals from "./pages/TripJournals";
 import ResourceBoard from "./pages/ResourceBoard";
 import Icebreaker from "./pages/Icebreaker";
 import VanLifeSpots from "./pages/VanLifeSpots";
+import Events from "./pages/Events";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
@@ -71,7 +72,7 @@ const App = () => (
               <Route path="/news" element={<News />} />
               <Route path="/map" element={<Map />} />
               <Route path="/spots" element={<VanLifeSpots />} />
-              <Route path="/events" element={<Map />} />
+              <Route path="/events" element={<Events />} />
               <Route path="/forum" element={<Forum />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/shop" element={<VancietyShop />} />

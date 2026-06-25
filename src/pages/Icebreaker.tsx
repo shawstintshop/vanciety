@@ -16,6 +16,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { format, startOfISOWeek, addDays } from "date-fns";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 // Weekly questions — all about sharing van life knowledge and local tips
@@ -155,27 +156,7 @@ export default function Icebreaker() {
       <Header />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/10">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/vans-neighborhood-meetup.jpg)" }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/45" />
-        </div>
-        <div className="relative z-10 container mx-auto max-w-2xl px-4 pt-28 pb-14">
-          <Badge className="mb-5 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
-            <Compass className="mr-1.5 h-3.5 w-3.5" />
-            Member Tips
-          </Badge>
-          <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl">
-            One question. <span className="text-amber-400">Real local knowledge.</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-            Every week, the Vanciety community answers a single question. Hidden spots, roads to avoid,
-            places to eat — practical tips from people who've actually been there.
-          </p>
-        </div>
-      </section>
+      <HeroSection image="/images/vans-neighborhood-meetup.jpg" badge="Member Tips" title="One question." accent="Real local knowledge." subtitle="Every week the Vanciety community answers a single question." />
 
       <div className="container mx-auto max-w-2xl px-4 pt-12 pb-16">
 

@@ -25,7 +25,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Header from "@/components/Header";
-import VancietyGroupImage from "@/components/VancietyGroupImage";
+import HeroSection from "@/components/HeroSection";
 
 const Forum = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -136,22 +136,16 @@ const Forum = () => {
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="bg-gray-950 border-b border-white/10 py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid items-center gap-8 mb-8 lg:grid-cols-[1fr_0.85fr]">
-              <div className="text-center lg:text-left">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Community Forum
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-                Connect, learn, and share with the van life community
-              </p>
-              </div>
-              <VancietyGroupImage compact className="min-h-[230px]" />
-            </div>
+        <HeroSection
+          image="/images/vans-neighborhood-meetup.jpg"
+          badge="Community Forum"
+          title="Ask anything."
+          accent="Get real answers."
+          subtitle="Thousands of van lifers sharing builds, advice, and road stories."
+        />
 
+        <section className="bg-background border-b border-border py-14">
+          <div className="container mx-auto px-4">
             {/* Live Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-4">
               {liveStats.map((stat) => (

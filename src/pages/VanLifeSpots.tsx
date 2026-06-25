@@ -24,6 +24,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -387,43 +388,19 @@ const VanLifeSpots = () => {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
-      {/* Page header */}
-      <div
-        className="relative py-8 px-4 border-b border-border/40"
-        style={{
-          backgroundImage: "url('/images/topo-dark-gold.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundBlendMode: "overlay",
-          backgroundColor: "hsl(var(--background))",
-        }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-sm font-medium text-primary uppercase tracking-widest">Van Life Spots</span>
-              </div>
-              <h1 className="text-3xl font-bold text-foreground">The Ground-Level Map</h1>
-              <p className="text-muted-foreground mt-1 max-w-xl">
-                Driveway surfing, secret camps, mechanics, food, showers, water — everything a van lifer needs, mapped by the community.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" size="sm" onClick={handleLocateMe} className="border-primary/40 text-primary hover:bg-primary/10">
-                <Navigation className="w-4 h-4 mr-2" />
-                Near Me
-              </Button>
-              <Button size="sm" onClick={() => setShowAddDialog(true)} className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Plus className="w-4 h-4 mr-2" />
-                Add a Spot
-              </Button>
-            </div>
-          </div>
+      {/* Hero */}
+      <HeroSection
+        image="/images/sprinter-monument-valley.png"
+        badge="Van Life Spots"
+        title="The ground-level"
+        accent="map."
+        subtitle="Driveway surfing, secret camps, mechanics, food, showers — mapped by the community."
+      />
 
-          {/* Search bar */}
-          <div className="mt-4 relative max-w-md">
+      {/* Toolbar */}
+      <div className="border-b border-border/40 bg-background px-4 py-4">
+        <div className="max-w-7xl mx-auto flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative w-full sm:max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Search by city, state, or keyword..."
@@ -431,6 +408,16 @@ const VanLifeSpots = () => {
               onChange={e => setSearchQuery(e.target.value)}
               className="pl-9 bg-background/60 border-border/60 backdrop-blur-sm"
             />
+          </div>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="sm" onClick={handleLocateMe} className="border-primary/40 text-primary hover:bg-primary/10">
+              <Navigation className="w-4 h-4 mr-2" />
+              Near Me
+            </Button>
+            <Button size="sm" onClick={() => setShowAddDialog(true)} className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Plus className="w-4 h-4 mr-2" />
+              Add a Spot
+            </Button>
           </div>
         </div>
       </div>
@@ -464,7 +451,7 @@ const VanLifeSpots = () => {
       </div>
 
       {/* Main layout: map + sidebar */}
-      <div className="flex-1 flex overflow-hidden" style={{ height: "calc(100vh - 220px)" }}>
+      <div className="flex-1 flex overflow-hidden min-h-0" style={{ minHeight: "calc(100vh - 64px)" }}>
 
         {/* Sidebar */}
         <div className="w-80 flex-shrink-0 border-r border-border/40 bg-background/95 overflow-y-auto hidden md:flex flex-col">

@@ -45,8 +45,13 @@ const Auth = () => {
   return (
     <div className="vanciety-page vanciety-page--auth min-h-screen bg-background">
       <Header />
-      <main className="vanciety-hero-topo flex min-h-screen items-center justify-center px-4 pb-12 pt-28">
-        <Card className="vanciety-topo-card w-full max-w-md border-border/80 bg-card/95 shadow-hero">
+      <main className="relative isolate flex min-h-screen items-center justify-center px-4 pb-12 pt-28">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/sprinter-red-rocks-arch.png)" }}
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
+        <Card className="relative z-10 w-full max-w-md border-border/80 bg-card/95 shadow-hero">
           <CardHeader className="text-center">
             <div className="mb-4 flex justify-center">
               <VancietyLogo className="h-14 w-[260px] max-w-full sm:h-16 sm:w-[300px]" />

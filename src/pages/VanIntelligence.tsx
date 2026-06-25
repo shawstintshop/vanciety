@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -248,35 +249,24 @@ const VanIntelligence = () => {
     <div className="min-h-screen bg-background topo-card">
       <Header />
       <main className="pt-16">
-        <section className="vanciety-hero-topo border-b border-border/60 py-12">
-          <div className="container mx-auto px-4">
-            <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </Button>
-
-            <div className="mx-auto max-w-4xl text-center">
-              <Badge className="mb-4 bg-primary text-primary-foreground">
-                <BookOpen className="mr-2 h-3.5 w-3.5" />
-                Repair research hub
-              </Badge>
-              <h1 className="text-4xl font-black tracking-tight md:text-6xl">
-                Find the exact fix for your Sprinter
-              </h1>
-              <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground md:text-xl">
-                Use facts first: factory references, manufacturer diagrams, real videos, and forum evidence. Then decide whether to clean, replace, or diagnose deeper.
-              </p>
-              <div className="mt-6 flex justify-center">
-                <Button variant="outline" onClick={saveThisGuide} className="gap-2">
-                  <BookmarkPlus className="h-4 w-4" />
-                  Save this guide
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroSection
+          image="/images/vanciety-van-tech-mechanics.jpg"
+          badge="Repair Research Hub"
+          title="Find the exact fix"
+          accent="for your Sprinter."
+          subtitle="Factory references, manufacturer diagrams, real videos, and forum evidence."
+        >
+          <Button variant="outline" onClick={saveThisGuide} className="gap-2 border-white/25 text-white hover:bg-white/10">
+            <BookmarkPlus className="h-4 w-4" />
+            Save this guide
+          </Button>
+        </HeroSection>
 
         <section className="container mx-auto px-4 py-12">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6 -ml-2">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <Card className="border-border/80 bg-card/90 shadow-lg">
               <CardHeader>

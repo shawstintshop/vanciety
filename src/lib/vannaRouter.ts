@@ -186,11 +186,11 @@ const RULES: IntentRule[] = [
   },
   // ── MEMBER SPOTLIGHT ────────────────────────────────────────────
   {
-    keywords: ["spotlight", "member", "feature", "weekly", "icebreaker", "introduce", "profile",
-               "who are you", "community member", "van lifer profile"],
+    keywords: ["member tips", "insider tips", "local tips", "community tips", "weekly", "member", "feature",
+               "icebreaker", "introduce", "profile"],
     page: "/icebreaker",
-    pageLabel: "Member Spotlight",
-    reply: "Member Spotlight is where the community shares knowledge and stories — a new member is featured each week with their van setup, tips, and experience. Great way to get inspired!",
+    pageLabel: "Member Tips",
+    reply: "Member Tips is where the community shares knowledge and stories — a new member is featured each week with their van setup, tips, and experience. Great way to get inspired!",
   },
   // ── SIGN UP / JOIN ──────────────────────────────────────────────
   {
