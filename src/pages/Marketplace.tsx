@@ -222,10 +222,6 @@ const Marketplace = () => {
         />
         <section className="bg-background border-b border-border py-12">
           <div className="container mx-auto px-4">
-            <div className="mb-8">
-
-        <section className="bg-background border-b border-border py-14">
-          <div className="container mx-auto px-4">
             {/* Search & Controls */}
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-4 mb-6">
