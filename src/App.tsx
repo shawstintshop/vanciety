@@ -19,6 +19,7 @@ import VendorDashboard from "./pages/VendorDashboard";
 import ForVendors from "./pages/ForVendors";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import GPSTracking from "./pages/GPSTracking";
 import VanCards from "./pages/VanCards";
@@ -86,6 +87,7 @@ const App = () => (
               <Route path="/dashboard/vendor" element={<VendorDashboard />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/gps" element={<GPSTracking />} />
               <Route path="/van-cards" element={<VanCards />} />
               <Route path="/van-intelligence" element={<VanIntelligence />} />

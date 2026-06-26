@@ -10,7 +10,7 @@ import AuthForm from '@/components/auth/AuthForm'; // Import the new AuthForm co
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn, signUp, user } = useAuth();
+  const { signInWithEmail, signUpWithEmail, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,24 +22,20 @@ const Auth = () => {
   const handleEmailPasswordSubmit = async (email: string, password: string, isSignUp: boolean) => {
     setIsLoading(true);
 
-    if (isSignUp) {
-      // For now, displayName is not handled by AuthForm, so we'll pass an empty string
-      const { error } = await signUp(email, password, '');
-      if (error) {
-        toast.error(error.message);
-      } else {
+    try {
+      if (isSignUp) {
+        // displayName is not collected here; users set it later on /profile
+        await signUpWithEmail(email, password, '');
         toast.success('Account created! Please check your email to verify your account.');
-      }
-    } else {
-      const { error } = await signIn(email, password);
-      if (error) {
-        toast.error(error.message);
       } else {
-        toast.success('Welcome back!');
-        navigate('/');
+        await signInWithEmail(email, password);
+        // AuthContext's onAuthStateChange handles the post-sign-in redirect
       }
+    } catch {
+      // AuthContext already surfaces the error via toast
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
