@@ -45,10 +45,10 @@ const CATEGORIES = ["All", "Clothing", "Headwear", "Drinkware", "Bags", "Accesso
 
 // ─── Normalize Fourthwall API product to display shape ────────────────────────
 function normalizeFWProduct(p: Record<string, unknown>) {
-  const colors = (p.colors as string[]) || [];
-  const sizes = (p.sizes as string[]) || [];
+  const colors = Array.isArray(p.colors) ? (p.colors as string[]) : [];
+  const sizes = Array.isArray(p.sizes) ? (p.sizes as string[]) : [];
   // Infer category from product name
-  const name = (p.name as string) || "";
+  const name = typeof p.name === "string" ? p.name : String(p.name || "");
   let category = "Accessories";
   if (/tee|shirt|hoodie|jacket|sweatshirt/i.test(name)) category = "Clothing";
   else if (/hat|cap|beanie/i.test(name)) category = "Headwear";
