@@ -77,8 +77,9 @@ const AIConcierge = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/dwkoSqnsLaqyoryO.jpg"
           label="Vana AI"
           title="Ask Vana First"
           subtitle="Vana routes you to the exact guide, vendor, video, event, or community path you need instead of making you hunt through every page."

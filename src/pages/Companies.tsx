@@ -127,7 +127,7 @@ const Companies = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         {/* Hero */}
         <section className="border-b border-white/10 bg-gradient-to-b from-gray-900 to-gray-950">
           <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:py-20">

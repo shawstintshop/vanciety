@@ -1,346 +1,249 @@
 /**
  * VancietyMerch — Official Vanciety Merch Store
- * Powered by Fourthwall: vanciety-shop.fourthwall.com
- *
- * Fetches live products from Fourthwall via Supabase edge function.
- * Falls back to static catalog if API is unavailable or store has no products yet.
- *
- * Aesthetic: Matte black everything, gold/tan badge logo, rugged overland brand
- * Colors: #0f0f0f background, #c9a96e gold accent, #1c1c1c card bg
- * Tagline: Community · Gear · Connect · Knowledge
- * "Build Experiences Not Things"
+ * Layout matches reference: announcement bar → nav → hero → trust bar → category grid → featured carousel → footer
+ * Colors: #0d0d0d bg, #c9a96e gold, #e8dcc8 warm white
+ * All purchases redirect to vanciety-shop.fourthwall.com
  */
 
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
-  ShoppingBag, Star, Shirt, ExternalLink,
-  ChevronRight, BadgeCheck, Truck, RotateCcw, Loader2,
+  ShoppingCart, Search, User, ChevronLeft, ChevronRight,
+  Shield, Mountain, Leaf, Users, Truck, RotateCcw, Lock,
+  Instagram, Youtube,
 } from "lucide-react";
-import Header from "@/components/Header";
-import PageHero from "@/components/PageHero";
-import { Badge } from "@/components/ui/badge";
-import { supabase } from "@/integrations/supabase/client";
 
-const FOURTHWALL_URL = "https://vanciety-shop.fourthwall.com";
-const GOLD = "#c9a96e";
-const GOLD_LIGHT = "#e2c896";
+const FW = "https://vanciety-shop.fourthwall.com";
 
-// ─── Static fallback catalog ─────────────────────────────────────────────────
-const FALLBACK_PRODUCTS = [
-  { id: "f1", name: "Vanciety Badge Tee", category: "Clothing", price: "$34", thumbnail: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80", colors: ["Black", "Olive"], sizes: ["S","M","L","XL","2XL"], tag: "Best Seller", productUrl: FOURTHWALL_URL },
-  { id: "f2", name: "Vanciety Pullover Hoodie", category: "Clothing", price: "$68", thumbnail: "https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600&q=80", colors: ["Black"], sizes: ["S","M","L","XL","2XL"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f3", name: "Vanciety Trucker Hat", category: "Headwear", price: "$36", thumbnail: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&q=80", colors: ["Black/Tan","All Black"], sizes: ["One Size"], tag: "New", productUrl: FOURTHWALL_URL },
-  { id: "f4", name: "Vanciety Snapback", category: "Headwear", price: "$32", thumbnail: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=600&q=80", colors: ["Black","Olive"], sizes: ["One Size"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f5", name: "Matte Black Tumbler 20oz", category: "Drinkware", price: "$42", thumbnail: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&q=80", colors: ["Matte Black"], sizes: ["20oz"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f6", name: "Vanciety Camp Mug", category: "Drinkware", price: "$24", thumbnail: "https://images.unsplash.com/photo-1572119865084-43c285814d63?w=600&q=80", colors: ["Matte Black"], sizes: ["11oz","15oz"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f7", name: "Vanciety Duffel Bag", category: "Bags", price: "$78", thumbnail: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", colors: ["Black"], sizes: ["30L"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f8", name: "Vanciety Canvas Tote", category: "Bags", price: "$28", thumbnail: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80", colors: ["Black"], sizes: ["One Size"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f9", name: "Vanciety Badge Patch", category: "Accessories", price: "$12", thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", colors: ["Black/Gold"], sizes: ['4"'], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f10", name: "Carabiner Keychain", category: "Accessories", price: "$14", thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80", colors: ["Black"], sizes: ["One Size"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f11", name: "Vanciety Sticker Pack", category: "Accessories", price: "$8", thumbnail: "https://images.unsplash.com/photo-1542621334-a254cf47733d?w=600&q=80", colors: ["Gold/Black"], sizes: ["5-pack"], tag: null, productUrl: FOURTHWALL_URL },
-  { id: "f12", name: "Vanciety Bomber Jacket", category: "Clothing", price: "$128", thumbnail: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80", colors: ["Black"], sizes: ["S","M","L","XL"], tag: "Premium", productUrl: FOURTHWALL_URL },
+const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-hero-aiUTgQUQy5yTcTuk8bRj8R.png";
+
+const CATS = [
+  { name: "TEES", sub: "30+ DESIGNS", img: "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-cat-tees-2pLrow5cFrYw9HFhTwU2qo.png", href: `${FW}/collections/tees` },
+  { name: "HOODIES & CREWS", sub: "PREMIUM COMFORT", img: "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-cat-hoodies-GRsQoX7RRmnjx6qiXwPehH.png", href: `${FW}/collections/hoodies` },
+  { name: "HATS", sub: "TOP IT OFF", img: "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-cat-hats-P6Nie5YNVzH9p36XJrNBaN.png", href: `${FW}/collections/hats` },
+  { name: "ACCESSORIES", sub: "GEAR FOR THE JOURNEY", img: "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-cat-accessories-dNVRCjvtbEDT6DAWuZKpAc.png", href: `${FW}/collections/accessories` },
+  { name: "STICKERS & DECALS", sub: "REP YOUR LIFESTYLE", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", href: `${FW}/collections/stickers` },
+  { name: "CAMP & VAN GEAR", sub: "ADVENTURE READY", img: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80", href: `${FW}/collections/gear` },
 ];
 
-const CATEGORIES = ["All", "Clothing", "Headwear", "Drinkware", "Bags", "Accessories"];
+const FEATURED = [
+  { name: "PEAKS TEE", price: "$29.99", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80" },
+  { name: "CAMPFIRE TEE", price: "$29.99", img: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&q=80" },
+  { name: "PINES TEE", price: "$29.99", img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80" },
+  { name: "EXPLORE MORE TEE", price: "$29.99", img: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&q=80" },
+  { name: "VAN LIFE HOODIE", price: "$59.99", img: "https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80" },
+  { name: "CREWNECK", price: "$59.99", img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80" },
+  { name: "VANCIETY HAT", price: "$34.99", img: "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-cat-hats-P6Nie5YNVzH9p36XJrNBaN.png" },
+  { name: "TRAVEL MUG", price: "$29.99", img: "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-cat-accessories-dNVRCjvtbEDT6DAWuZKpAc.png" },
+];
 
-// ─── Normalize Fourthwall API product to display shape ────────────────────────
-function normalizeFWProduct(p: Record<string, unknown>) {
-  const colors = Array.isArray(p.colors) ? (p.colors as string[]) : [];
-  const sizes = Array.isArray(p.sizes) ? (p.sizes as string[]) : [];
-  // Infer category from product name
-  const name = typeof p.name === "string" ? p.name : String(p.name || "");
-  let category = "Accessories";
-  if (/tee|shirt|hoodie|jacket|sweatshirt/i.test(name)) category = "Clothing";
-  else if (/hat|cap|beanie/i.test(name)) category = "Headwear";
-  else if (/mug|tumbler|bottle|cup|drinkware/i.test(name)) category = "Drinkware";
-  else if (/bag|tote|duffel|backpack/i.test(name)) category = "Bags";
+const TRUST = [
+  { icon: Shield, title: "PREMIUM QUALITY", sub: "Top tier materials & prints" },
+  { icon: Mountain, title: "BUILT TO LAST", sub: "For every adventure" },
+  { icon: Leaf, title: "DESIGNED IN CANADA", sub: "For van life & beyond" },
+  { icon: Users, title: "COMMUNITY DRIVEN", sub: "You're not just a customer" },
+];
 
-  return {
-    id: p.id as string,
-    name,
-    category,
-    price: p.price as string,
-    thumbnail: (p.thumbnail as string) || "",
-    colors,
-    sizes,
-    tag: null as string | null,
-    productUrl: (p.productUrl as string) || FOURTHWALL_URL,
-    available: p.available !== false,
-  };
-}
-
-// ─── Product Card ─────────────────────────────────────────────────────────────
-function ProductCard({ product }: { product: ReturnType<typeof normalizeFWProduct> | typeof FALLBACK_PRODUCTS[0] }) {
-  const [imgError, setImgError] = useState(false);
-
-  return (
-    <a
-      href={product.productUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex flex-col rounded-xl overflow-hidden border cursor-pointer transition-all duration-200 hover:-translate-y-1 no-underline"
-      style={{ background: "#1c1c1c", borderColor: "#2e2e2e", textDecoration: "none" }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.borderColor = GOLD + "60";
-        (e.currentTarget as HTMLAnchorElement).style.boxShadow = `0 8px 32px ${GOLD}18`;
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.borderColor = "#2e2e2e";
-        (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none";
-      }}
-    >
-      {/* Image */}
-      <div className="relative overflow-hidden aspect-square" style={{ background: "#141414" }}>
-        {product.thumbnail && !imgError ? (
-          <img
-            src={product.thumbnail}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <Shirt className="w-16 h-16 opacity-20" style={{ color: GOLD }} />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-        {/* Tag badge */}
-        {product.tag && (
-          <div className="absolute top-3 left-3">
-            <span className="text-xs font-bold px-2 py-1 rounded-full"
-              style={{ background: GOLD, color: "#0a0a0a" }}>
-              {product.tag}
-            </span>
-          </div>
-        )}
-
-        {/* Color chips */}
-        {product.colors.length > 0 && (
-          <div className="absolute bottom-3 right-3 flex gap-1.5 flex-wrap justify-end max-w-[80%]">
-            {product.colors.slice(0, 2).map((c) => (
-              <span key={c} className="text-xs px-2 py-0.5 rounded-full"
-                style={{ background: "rgba(0,0,0,0.75)", color: GOLD_LIGHT, border: `1px solid ${GOLD}40` }}>
-                {c}
-              </span>
-            ))}
-            {product.colors.length > 2 && (
-              <span className="text-xs px-2 py-0.5 rounded-full"
-                style={{ background: "rgba(0,0,0,0.75)", color: "#888", border: "1px solid #333" }}>
-                +{product.colors.length - 2}
-              </span>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Info */}
-      <div className="flex flex-col flex-1 p-4 gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-wider mb-1" style={{ color: "#666" }}>{product.category}</p>
-          <h3 className="font-bold text-white leading-snug">{product.name}</h3>
-          {product.sizes.length > 0 && (
-            <p className="text-xs mt-1" style={{ color: "#555" }}>
-              {product.sizes.slice(0, 4).join(" · ")}{product.sizes.length > 4 ? " ···" : ""}
-            </p>
-          )}
-        </div>
-        <div className="flex items-center justify-between pt-3 mt-auto" style={{ borderTop: "1px solid #2e2e2e" }}>
-          <span className="text-xl font-bold" style={{ color: GOLD }}>
-            {product.price}
-          </span>
-          <span
-            className="flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150"
-            style={{ background: GOLD, color: "#0a0a0a" }}
-          >
-            Shop Now <ChevronRight className="w-3.5 h-3.5" />
-          </span>
-        </div>
-      </div>
-    </a>
-  );
-}
-
-// ─── Main Page ────────────────────────────────────────────────────────────────
 export default function VancietyMerch() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [products, setProducts] = useState<ReturnType<typeof normalizeFWProduct>[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [isLive, setIsLive] = useState(false);
+  const [email, setEmail] = useState("");
+  const carousel = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    async function loadProducts() {
-      try {
-        const { data, error } = await supabase.functions.invoke("fourthwall-products");
-        if (!error && data?.products && data.products.length > 0) {
-          setProducts(data.products.map(normalizeFWProduct));
-          setIsLive(true);
-        } else {
-          // Fall back to static catalog
-          setProducts(FALLBACK_PRODUCTS.map(normalizeFWProduct));
-          setIsLive(false);
-        }
-      } catch {
-        setProducts(FALLBACK_PRODUCTS.map(normalizeFWProduct));
-        setIsLive(false);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadProducts();
-  }, []);
-
-  const displayProducts = loading ? [] : products;
-  const filtered = activeCategory === "All"
-    ? displayProducts
-    : displayProducts.filter((p) => p.category === activeCategory);
+  const scroll = (dir: "left" | "right") => {
+    carousel.current?.scrollBy({ left: dir === "left" ? -320 : 320, behavior: "smooth" });
+  };
 
   return (
-    <div className="min-h-screen" style={{ background: "#0f0f0f", color: "#fff" }}>
-      <Header />
+    <div style={{ background: "#0d0d0d", color: "#e8dcc8", fontFamily: "sans-serif", minHeight: "100vh" }}>
 
-      <PageHero
-        label="Vanciety Merch"
-        title="Build Experiences Not Things"
-        subtitle="Official Vanciety gear. Matte black everything. Gold badge. Built for the road."
-        icon={ShoppingBag}
-      />
-
-      {/* Store banner */}
-      <div className="py-3 text-center text-sm font-medium" style={{ background: GOLD, color: "#0a0a0a" }}>
-        <a
-          href={FOURTHWALL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 font-bold hover:opacity-80 transition-opacity"
-          style={{ color: "#0a0a0a" }}
-        >
-          <ExternalLink className="w-4 h-4" />
-          Shop the official Vanciety store at vanciety-shop.fourthwall.com
-        </a>
+      {/* Announcement bar */}
+      <div style={{ background: "#1a1408", borderBottom: "1px solid #c9a96e44", padding: "10px 16px", textAlign: "center" }}>
+        <span style={{ color: "#c9a96e", fontSize: "13px", letterSpacing: "0.1em", fontWeight: 700 }}>
+          ⚡ FREE SHIPPING ON ORDERS $75+ ⚡
+        </span>
       </div>
 
-      {/* Trust badges */}
-      <div className="border-b" style={{ borderColor: "#222" }}>
-        <div className="max-w-6xl mx-auto px-4 py-5 flex flex-wrap justify-center gap-6">
+      {/* Nav */}
+      <nav style={{ background: "#0d0d0d", borderBottom: "1px solid #2e2e2e", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px", position: "sticky", top: 0, zIndex: 50 }}>
+        <Link to="/">
+          <img src="/images/vanciety-logo-badge.png" alt="Vanciety" style={{ height: "40px", cursor: "pointer" }} />
+        </Link>
+        <div style={{ display: "flex", gap: "28px" }} className="hidden md:flex">
           {[
-            { icon: <Truck className="w-4 h-4" />, text: "Free shipping over $75" },
-            { icon: <BadgeCheck className="w-4 h-4" />, text: "Premium quality guaranteed" },
-            { icon: <RotateCcw className="w-4 h-4" />, text: "30-day returns" },
-            { icon: <Star className="w-4 h-4" />, text: "Powered by Fourthwall" },
-          ].map(({ icon, text }) => (
-            <div key={text} className="flex items-center gap-2 text-sm" style={{ color: "#aaa" }}>
-              <span style={{ color: GOLD }}>{icon}</span>{text}
+            { label: "SHOP", href: FW },
+            { label: "COLLECTIONS", href: `${FW}/collections` },
+            { label: "ABOUT", href: "/about" },
+            { label: "JOIN THE CREW", href: "/join" },
+            { label: "CONTACT", href: "/contact" },
+          ].map((item) => (
+            <a key={item.label} href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              style={{ color: "#e8dcc8", fontSize: "12px", letterSpacing: "0.1em", fontWeight: 700, textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#e8dcc8")}
+            >{item.label}</a>
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <Search size={18} style={{ color: "#e8dcc8", cursor: "pointer" }} />
+          <User size={18} style={{ color: "#e8dcc8", cursor: "pointer" }} />
+          <a href={FW} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "4px", color: "#e8dcc8", textDecoration: "none" }}>
+            <ShoppingCart size={18} />
+            <span style={{ fontSize: "13px" }}>0</span>
+          </a>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <div style={{ position: "relative", width: "100%", height: "clamp(400px, 58vw, 660px)", overflow: "hidden" }}>
+        <img src={HERO_IMG} alt="Vanciety — Built for the Road" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(13,13,13,0.6) 0%, rgba(13,13,13,0.2) 50%, rgba(13,13,13,0.5) 100%)" }} />
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", textAlign: "center", width: "90%", maxWidth: "700px" }}>
+          <p style={{ color: "#c9a96e", fontSize: "clamp(10px, 1.4vw, 13px)", letterSpacing: "0.25em", fontWeight: 700, marginBottom: "14px", textTransform: "uppercase" }}>
+            COMMUNITY · GEAR · CONNECT · KNOWLEDGE
+          </p>
+          <h1 style={{ color: "#fff", fontSize: "clamp(28px, 5vw, 64px)", fontWeight: 900, lineHeight: 1.05, textTransform: "uppercase", textShadow: "0 2px 24px rgba(0,0,0,0.9)", marginBottom: "28px", letterSpacing: "-0.01em", fontFamily: "Georgia, serif" }}>
+            BUILT FOR THE ROAD.<br />MADE FOR THE LIFESTYLE.
+          </h1>
+          <a href={FW} target="_blank" rel="noopener noreferrer"
+            style={{ display: "inline-block", background: "#c9a96e", color: "#0d0d0d", padding: "14px 40px", fontSize: "13px", fontWeight: 800, letterSpacing: "0.14em", textDecoration: "none", textTransform: "uppercase", transition: "all 0.2s" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#d4b87a"; (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.03)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#c9a96e"; (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)"; }}
+          >
+            SHOP THE COLLECTION
+          </a>
+        </div>
+      </div>
+
+      {/* Trust bar */}
+      <div style={{ background: "#111", borderTop: "1px solid #2e2e2e", borderBottom: "1px solid #2e2e2e", padding: "20px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px" }}>
+          {TRUST.map((b) => (
+            <div key={b.title} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <b.icon size={22} style={{ color: "#c9a96e", flexShrink: 0 }} />
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", color: "#e8dcc8" }}>{b.title}</div>
+                <div style={{ fontSize: "11px", color: "#777", marginTop: "2px" }}>{b.sub}</div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Featured CTA */}
-      <div className="max-w-6xl mx-auto px-4 pt-10 pb-4">
-        <div
-          className="rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6"
-          style={{ background: "#1a1a1a", border: `1px solid ${GOLD}30` }}
-        >
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: GOLD }}>
-              Community · Gear · Connect · Knowledge
-            </p>
-            <h2 className="text-2xl font-bold text-white mb-2">The Official Vanciety Store</h2>
-            <p className="text-sm" style={{ color: "#888" }}>
-              {isLive
-                ? `${products.length} products available — ships direct, no middleman.`
-                : "Premium print-on-demand gear. Every item ships direct. No middleman."}
-            </p>
-          </div>
-          <a
-            href={FOURTHWALL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-shrink-0 flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-all active:scale-95 hover:opacity-90"
-            style={{ background: GOLD, color: "#0a0a0a" }}
+      {/* Category grid — 6 tiles */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "2px" }} className="grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+        {CATS.map((cat) => (
+          <a key={cat.name} href={cat.href} target="_blank" rel="noopener noreferrer"
+            style={{ position: "relative", display: "block", aspectRatio: "3/4", overflow: "hidden", textDecoration: "none" }}
           >
-            <ShoppingBag className="w-5 h-5" />
-            Shop All Gear
+            <img src={cat.img} alt={cat.name}
+              style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.05) 60%)" }} />
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "14px 12px" }}>
+              <div style={{ color: "#fff", fontSize: "clamp(10px, 1.1vw, 13px)", fontWeight: 800, letterSpacing: "0.07em", textTransform: "uppercase" }}>{cat.name}</div>
+              <div style={{ color: "#c9a96e", fontSize: "clamp(8px, 0.85vw, 10px)", fontWeight: 600, letterSpacing: "0.1em", marginTop: "2px" }}>{cat.sub}</div>
+              <div style={{ marginTop: "10px", display: "inline-block", background: "rgba(13,13,13,0.85)", border: "1px solid #c9a96e", color: "#c9a96e", padding: "5px 12px", fontSize: "9px", fontWeight: 700, letterSpacing: "0.12em" }}>
+                SHOP NOW
+              </div>
+            </div>
           </a>
-        </div>
+        ))}
       </div>
 
-      {/* Category filter */}
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-150"
-              style={activeCategory === cat
-                ? { background: GOLD, color: "#0a0a0a" }
-                : { background: "#1c1c1c", color: "#888", border: "1px solid #2e2e2e" }
-              }
-            >
-              {cat}
-            </button>
-          ))}
+      {/* Featured Collections */}
+      <div style={{ padding: "56px 24px 40px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: "32px", display: "flex", alignItems: "center", justifyContent: "center", gap: "16px" }}>
+          <span style={{ color: "#c9a96e" }}>✦</span>
+          <h2 style={{ color: "#e8dcc8", fontSize: "clamp(13px, 1.8vw, 17px)", fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase" }}>FEATURED COLLECTIONS</h2>
+          <span style={{ color: "#c9a96e" }}>✦</span>
         </div>
-      </div>
-
-      {/* Products grid */}
-      <div className="max-w-6xl mx-auto px-4 pb-16">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: GOLD }}>
-              {activeCategory === "All" ? "All Products" : activeCategory}
-            </span>
-            <div className="flex-1 h-px w-16" style={{ background: "#2e2e2e" }} />
-            {isLive && (
-              <span className="text-xs px-2 py-0.5 rounded-full font-medium"
-                style={{ background: "#1c1c1c", color: "#5a5", border: "1px solid #2e2e2e" }}>
-                Live from store
-              </span>
-            )}
-          </div>
-          <Badge variant="outline" className="text-xs" style={{ borderColor: GOLD + "40", color: GOLD }}>
-            {loading ? "…" : `${filtered.length} items`}
-          </Badge>
-        </div>
-
-        {/* Loading state */}
-        {loading && (
-          <div className="flex items-center justify-center py-24">
-            <Loader2 className="w-8 h-8 animate-spin" style={{ color: GOLD }} />
-          </div>
-        )}
-
-        {/* Products */}
-        {!loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filtered.map((p) => (
-              <ProductCard key={p.id} product={p} />
+        <div style={{ position: "relative" }}>
+          <button onClick={() => scroll("left")} style={{ position: "absolute", left: "-20px", top: "50%", transform: "translateY(-50%)", zIndex: 10, background: "#1a1a1a", border: "1px solid #2e2e2e", color: "#e8dcc8", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+            <ChevronLeft size={18} />
+          </button>
+          <div ref={carousel} style={{ display: "flex", gap: "12px", overflowX: "auto", scrollbarWidth: "none", paddingBottom: "4px" }}>
+            {FEATURED.map((p) => (
+              <a key={p.name} href={FW} target="_blank" rel="noopener noreferrer"
+                style={{ flexShrink: 0, width: "180px", textDecoration: "none" }}>
+                <div style={{ width: "180px", height: "180px", overflow: "hidden", background: "#1a1a1a", marginBottom: "10px" }}>
+                  <img src={p.img} alt={p.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.3s ease" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                  />
+                </div>
+                <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", color: "#e8dcc8", textTransform: "uppercase" }}>{p.name}</div>
+                <div style={{ fontSize: "12px", color: "#c9a96e", marginTop: "3px" }}>{p.price}</div>
+              </a>
             ))}
           </div>
-        )}
-
-        {/* Bottom CTA */}
-        {!loading && (
-          <div className="mt-14 text-center">
-            <p className="text-sm mb-4" style={{ color: "#666" }}>
-              All products available at the official Vanciety Fourthwall store
-            </p>
-            <a
-              href={FOURTHWALL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-all active:scale-95 hover:opacity-90"
-              style={{ background: GOLD, color: "#0a0a0a" }}
-            >
-              <ExternalLink className="w-5 h-5" />
-              Visit the Full Store
-            </a>
-          </div>
-        )}
+          <button onClick={() => scroll("right")} style={{ position: "absolute", right: "-20px", top: "50%", transform: "translateY(-50%)", zIndex: 10, background: "#1a1a1a", border: "1px solid #2e2e2e", color: "#e8dcc8", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+            <ChevronRight size={18} />
+          </button>
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer style={{ background: "#0a0a0a", borderTop: "1px solid #2e2e2e", padding: "48px 24px 32px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "40px", marginBottom: "40px" }}>
+            <div>
+              <img src="/images/vanciety-logo-badge.png" alt="Vanciety" style={{ height: "56px", marginBottom: "12px" }} />
+              <p style={{ fontSize: "12px", color: "#777", lineHeight: 1.6 }}>More than a brand.<br />It's a way of life.</p>
+            </div>
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", color: "#e8dcc8", marginBottom: "8px", textTransform: "uppercase" }}>JOIN THE CREW</div>
+              <p style={{ fontSize: "12px", color: "#777", marginBottom: "12px", lineHeight: 1.5 }}>Get early access to drops, exclusive offers & more.</p>
+              <div style={{ display: "flex" }}>
+                <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)}
+                  style={{ flex: 1, background: "#1a1a1a", border: "1px solid #2e2e2e", borderRight: "none", color: "#e8dcc8", padding: "10px 12px", fontSize: "12px", outline: "none" }} />
+                <button onClick={() => { if (email) { alert("You're in! Welcome to the crew."); setEmail(""); } }}
+                  style={{ background: "#c9a96e", border: "none", color: "#0d0d0d", padding: "10px 16px", cursor: "pointer", fontWeight: 800, fontSize: "14px" }}>→</button>
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", color: "#e8dcc8", marginBottom: "12px", textTransform: "uppercase" }}>FOLLOW THE JOURNEY</div>
+              <p style={{ fontSize: "12px", color: "#777", marginBottom: "12px" }}>@vanciety.co</p>
+              <div style={{ display: "flex", gap: "12px" }}>
+                <a href="https://instagram.com/vanciety.co" target="_blank" rel="noopener noreferrer" style={{ color: "#777" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}><Instagram size={20} /></a>
+                <a href="https://youtube.com/@vanciety" target="_blank" rel="noopener noreferrer" style={{ color: "#777" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}><Youtube size={20} /></a>
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              {[
+                { icon: Lock, label: "SECURE CHECKOUT", sub: "Safe, fast & encrypted." },
+                { icon: RotateCcw, label: "HASSLE FREE RETURNS", sub: "30 day returns on all orders." },
+                { icon: Truck, label: "FAST SHIPPING", sub: "Ships within 3-5 business days." },
+              ].map((b) => (
+                <div key={b.label} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                  <b.icon size={15} style={{ color: "#c9a96e", flexShrink: 0, marginTop: "2px" }} />
+                  <div>
+                    <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.08em", color: "#e8dcc8" }}>{b.label}</div>
+                    <div style={{ fontSize: "10px", color: "#555", marginTop: "2px" }}>{b.sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ borderTop: "1px solid #1e1e1e", paddingTop: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
+            <p style={{ fontSize: "11px", color: "#444" }}>© 2025 Vanciety. All rights reserved.</p>
+            <div style={{ display: "flex", gap: "20px" }}>
+              {["Privacy Policy", "Terms of Service", "Shipping Policy"].map((label) => (
+                <a key={label} href="#" style={{ fontSize: "11px", color: "#444", textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#444")}>{label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

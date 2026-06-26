@@ -68,7 +68,7 @@ const CoordinatorApplication: React.FC = () => {
   return (
     <div className="min-h-screen bg-background topo-card">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         <div className="container mx-auto px-4 py-12 max-w-lg">
 
           {status === 'success' ? (

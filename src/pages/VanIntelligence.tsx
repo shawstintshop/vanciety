@@ -298,9 +298,9 @@ const VanIntelligence = () => {
   return (
     <div className="min-h-screen bg-background topo-card">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         <HeroSection
-          image="/images/vanciety-van-tech-mechanics.jpg"
+          image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/dwkoSqnsLaqyoryO.jpg"
           badge="Repair Research Hub"
           title="Find the exact fix"
           accent="for your Sprinter."

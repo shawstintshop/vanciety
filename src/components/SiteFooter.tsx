@@ -1,127 +1,126 @@
-import { ArrowRight, Mail, MapPin, MessageCircle, Shield, ShoppingBag, Video, Wrench, Users } from "lucide-react";
+/**
+ * SiteFooter — Matches reference merch page footer
+ * - Matte black background
+ * - Logo + tagline left
+ * - Join the Crew email signup
+ * - Follow the Journey social links
+ * - Trust badges: Secure Checkout, Hassle Free Returns, Fast Shipping
+ * - Bottom bar: copyright + policy links
+ */
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import VancietyLogo from "@/components/VancietyLogo";
-import { Button } from "@/components/ui/button";
+import { Instagram, Youtube, Lock, RotateCcw, Truck } from "lucide-react";
 
-const footerColumns = [
-  {
-    title: "Explore",
-    links: [
-      { label: "Marketplace", to: "/marketplace", icon: ShoppingBag },
-      { label: "How-To Videos", to: "/videos", icon: Video },
-      { label: "Events", to: "/events", icon: MapPin },
-      { label: "Find Members", to: "/friend-finder", icon: Users },
-    ],
-  },
-  {
-    title: "Build & Fix",
-    links: [
-      { label: "Van Intelligence", to: "/van-intelligence", icon: Wrench },
-      { label: "Vendors", to: "/vendors", icon: Wrench },
-      { label: "Forum", to: "/forum", icon: MessageCircle },
-      { label: "News", to: "/news", icon: Video },
-    ],
-  },
-  {
-    title: "Account",
-    links: [
-      { label: "Sign In", to: "/auth", icon: Shield },
-      { label: "Member Dashboard", to: "/dashboard", icon: Users },
-      { label: "Vendor Signup", to: "/vendor-signup", icon: ShoppingBag },
-      { label: "Contact", to: "mailto:hello@vanciety.com", icon: Mail },
-    ],
-  },
-];
+export default function SiteFooter() {
+  const [email, setEmail] = useState("");
 
-const quickLinks = [
-  { label: "Privacy", to: "/privacy" },
-  { label: "Terms", to: "/terms" },
-  { label: "Support", to: "mailto:hello@vanciety.com" },
-  { label: "Accessibility", to: "/accessibility" },
-];
-
-const SiteFooter = () => {
   return (
-    <footer className="mt-auto border-t border-border/60 bg-[#050608] text-white topo-footer">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_1.5fr_1fr]">
-          <div className="space-y-4">
-            <VancietyLogo className="h-10 w-[220px] max-w-full" />
-            <p className="max-w-md text-sm leading-6 text-white/70">
-              Vanciety brings van owners, builders, vendors, events, videos, research, and members into one clean hub.
+    <footer style={{ background: "#0a0a0a", borderTop: "1px solid #2e2e2e" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "48px 24px 32px" }}>
+        {/* Main grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "40px", marginBottom: "40px" }}>
+
+          {/* Logo + tagline */}
+          <div>
+            <img src="/images/vanciety-logo-badge.png" alt="Vanciety" style={{ height: "56px", marginBottom: "12px" }} />
+            <p style={{ fontSize: "12px", color: "#777", lineHeight: 1.6 }}>
+              More than a brand.<br />It's a way of life.
             </p>
-            <p className="text-xs text-white/40">
-              Built for the van life community.
-            </p>
+            <div style={{ marginTop: "16px", display: "flex", flexDirection: "column", gap: "6px" }}>
+              {[
+                { label: "Forum", to: "/forum" },
+                { label: "Events", to: "/events" },
+                { label: "Marketplace", to: "/marketplace" },
+                { label: "Merch Store", to: "/merch" },
+              ].map(({ label, to }) => (
+                <Link key={label} to={to} style={{ fontSize: "12px", color: "#555", textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
+                >{label}</Link>
+              ))}
+            </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-3">
-            {footerColumns.map((column) => (
-              <div key={column.title}>
-                <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
-                  {column.title}
-                </h3>
-                <ul className="space-y-3">
-                  {column.links.map((link) => {
-                    const Icon = link.icon;
-                    if (link.to.startsWith("mailto:")) {
-                      return (
-                        <li key={link.label}>
-                          <a href={link.to} className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-primary">
-                            <Icon className="h-4 w-4" />
-                            {link.label}
-                          </a>
-                        </li>
-                      );
-                    }
-                    return (
-                      <li key={link.label}>
-                        <Link to={link.to} className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-primary">
-                          <Icon className="h-4 w-4" />
-                          {link.label}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+          {/* Join the Crew */}
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", color: "#e8dcc8", marginBottom: "8px", textTransform: "uppercase" }}>
+              JOIN THE CREW
+            </div>
+            <p style={{ fontSize: "12px", color: "#777", marginBottom: "12px", lineHeight: 1.5 }}>
+              Get early access to drops, exclusive offers & more.
+            </p>
+            <div style={{ display: "flex" }}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{ flex: 1, background: "#1a1a1a", border: "1px solid #2e2e2e", borderRight: "none", color: "#e8dcc8", padding: "10px 12px", fontSize: "12px", outline: "none" }}
+              />
+              <button
+                onClick={() => { if (email) { alert("You're in! Welcome to the crew."); setEmail(""); } }}
+                style={{ background: "#c9a96e", border: "none", color: "#0d0d0d", padding: "10px 16px", cursor: "pointer", fontWeight: 800, fontSize: "14px" }}
+              >→</button>
+            </div>
+          </div>
+
+          {/* Follow the Journey */}
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", color: "#e8dcc8", marginBottom: "12px", textTransform: "uppercase" }}>
+              FOLLOW THE JOURNEY
+            </div>
+            <p style={{ fontSize: "12px", color: "#777", marginBottom: "12px" }}>@vanciety.co</p>
+            <div style={{ display: "flex", gap: "12px" }}>
+              <a href="https://instagram.com/vanciety.co" target="_blank" rel="noopener noreferrer" style={{ color: "#777" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}
+              ><Instagram size={20} /></a>
+              <a href="https://youtube.com/@vanciety" target="_blank" rel="noopener noreferrer" style={{ color: "#777" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}
+              ><Youtube size={20} /></a>
+              <a href="https://tiktok.com/@vanciety" target="_blank" rel="noopener noreferrer" style={{ color: "#777", fontSize: "14px", fontWeight: 700 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}
+              >TK</a>
+              <a href="https://facebook.com/vanciety" target="_blank" rel="noopener noreferrer" style={{ color: "#777", fontSize: "14px", fontWeight: 700 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}
+              >FB</a>
+            </div>
+          </div>
+
+          {/* Trust badges */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+            {[
+              { icon: Lock, label: "SECURE CHECKOUT", sub: "Safe, fast & encrypted." },
+              { icon: RotateCcw, label: "HASSLE FREE RETURNS", sub: "30 day returns on all orders." },
+              { icon: Truck, label: "FAST SHIPPING", sub: "Ships within 3-5 business days." },
+            ].map(({ icon: Icon, label, sub }) => (
+              <div key={label} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                <Icon size={15} style={{ color: "#c9a96e", flexShrink: 0, marginTop: "2px" }} />
+                <div>
+                  <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.08em", color: "#e8dcc8" }}>{label}</div>
+                  <div style={{ fontSize: "10px", color: "#555", marginTop: "2px" }}>{sub}</div>
+                </div>
               </div>
             ))}
           </div>
-
-          <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-white/8 via-white/5 to-lime-400/10 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Start here</p>
-            <h3 className="mt-2 text-2xl font-black tracking-tight text-white">Get Started Free</h3>
-            <p className="mt-3 text-sm leading-6 text-white/70">
-              Create your free account to save research, follow listings, see member tools, and unlock future location privacy controls.
-            </p>
-            <Button asChild className="mt-5 w-full bg-primary font-semibold text-gray-950 hover:bg-amber-400">
-              <Link to="/auth">
-                Join Free
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Vanciety. Real van life community.</p>
-          <div className="flex flex-wrap gap-4">
-            {quickLinks.map((link) =>
-              link.to.startsWith("mailto:") ? (
-                <a key={link.label} href={link.to} className="transition hover:text-primary">
-                  {link.label}
-                </a>
-              ) : (
-                <Link key={link.label} to={link.to} className="transition hover:text-primary">
-                  {link.label}
-                </Link>
-              )
-            )}
+        {/* Bottom bar */}
+        <div style={{ borderTop: "1px solid #1e1e1e", paddingTop: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
+          <p style={{ fontSize: "11px", color: "#444" }}>© 2025 Vanciety. All rights reserved.</p>
+          <div style={{ display: "flex", gap: "20px" }}>
+            {["Privacy Policy", "Terms of Service", "Shipping Policy"].map((label) => (
+              <a key={label} href="#" style={{ fontSize: "11px", color: "#444", textDecoration: "none" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#444")}
+              >{label}</a>
+            ))}
           </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default SiteFooter;
+}

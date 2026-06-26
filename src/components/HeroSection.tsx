@@ -17,7 +17,7 @@ export default function HeroSection({ image, badge, title, accent, subtitle, chi
         <img src={image} alt="" className="h-full w-full object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
       </div>
-      <div className="relative z-10 w-full container mx-auto px-4 pb-16 pt-32">
+      <div className="relative z-10 w-full container mx-auto px-4 pb-16 pt-36">
         <Badge className="mb-4 border border-primary/40 bg-primary/10 text-amber-300 text-xs font-bold uppercase tracking-widest">
           {badge}
         </Badge>

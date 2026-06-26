@@ -43,7 +43,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="pt-16">
+      <main className="pt-28">
         <section className="relative isolate flex min-h-[560px] items-end overflow-hidden border-b border-white/10 vanciety-hero-topo" data-topo-container>
           {/* Vanciety van hero — matte black Sprinter in the mountains */}
           <div

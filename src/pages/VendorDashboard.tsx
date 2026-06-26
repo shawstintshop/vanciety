@@ -247,7 +247,7 @@ const VendorDashboard = () => {
     return (
       <div className="min-h-screen bg-gray-950 text-white">
         <Header />
-        <main className="pt-16">
+        <main className="pt-28">
           <div className="flex items-center justify-center py-32">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
@@ -270,7 +270,7 @@ const VendorDashboard = () => {
     return (
       <div className="min-h-screen bg-gray-950 text-white">
         <Header />
-        <main className="pt-16">
+        <main className="pt-28">
           <div className="mx-auto flex max-w-2xl flex-col items-center justify-center px-6 py-32 text-center">
             <Building2 className="mb-6 h-14 w-14 text-primary" />
             <h1 className="mb-3 text-3xl font-bold">
@@ -313,7 +313,7 @@ const VendorDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>

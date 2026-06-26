@@ -51,10 +51,10 @@ const About = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="pt-16">
+      <main className="pt-28">
         {/* 1. Hero */}
         <HeroSection
-          image="/images/vanciety-large-van-event.jpg"
+          image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/NoDaXWxfTTDCNHnc.jpg"
           badge="About Vanciety"
           title="Built by van lifers,"
           accent="for van lifers."

@@ -79,8 +79,8 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-16">
-        <HeroSection image="/images/sprinter-desert-camping.png" badge="My Dashboard" title="Welcome back" accent="to Vanciety." subtitle="Your van life command center." />
+      <main className="pt-28">
+        <HeroSection image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/OcYosgrzkDuEjVgs.jpg" badge="My Dashboard" title="Welcome back" accent="to Vanciety." subtitle="Your van life command center." />
 
         <section className="container mx-auto px-4 py-12">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">

@@ -212,9 +212,10 @@ const Marketplace = () => {
       />
       <Header />
       
-      <main className="pt-16">
+      <main className="pt-28">
         {/* Hero Section */}
         <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/JkZQxDXOxONBVWVW.jpg"
           label="Marketplace"
           title="Van Life Marketplace"
           subtitle="Buy and sell vans, parts, gear, and accessories with the Vanciety community."

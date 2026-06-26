@@ -4,7 +4,7 @@ const Accessibility = () => {
   return (
     <div className="min-h-screen bg-background topo-card">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         <div className="container mx-auto px-4 py-12 max-w-3xl">
           <h1 className="text-4xl font-bold mb-2">Accessibility</h1>
           <p className="text-sm text-muted-foreground mb-10">Last updated: June 2026</p>

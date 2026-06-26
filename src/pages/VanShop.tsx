@@ -140,6 +140,7 @@ export default function VanShop() {
       <Header />
       {/* Hero */}
       <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/JkZQxDXOxONBVWVW.jpg"
         label="Van Shop"
         title="Gear That Actually Works"
         subtitle="Hand-picked by van lifers, for van lifers. Every product below is battle-tested on the road."

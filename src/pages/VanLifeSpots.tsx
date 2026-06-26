@@ -468,7 +468,7 @@ const VanLifeSpots = () => {
 
       {/* Hero */}
       <HeroSection
-        image="/images/sprinter-monument-valley.png"
+        image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/jtmnYZNdYLUOMICw.jpg"
         badge="Van Life Spots"
         title="The ground-level"
         accent="map."

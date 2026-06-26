@@ -196,7 +196,7 @@ const Vendors = () => {
       />
       <Header />
 
-      <main className="pt-16">
+      <main className="pt-28">
         {/* ── Hero Section ───────────────────────────────────── */}
         <PageHero
           label="Vendor Directory"

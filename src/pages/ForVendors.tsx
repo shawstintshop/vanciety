@@ -156,7 +156,7 @@ const ForVendors = () => {
   return (
     <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         {/* Hero */}
         <section className="bg-background px-6 py-20 sm:py-28">
           <div className="mx-auto max-w-4xl text-center">

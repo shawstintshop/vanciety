@@ -50,9 +50,10 @@ const VanCards = () => {
     <div className="vanciety-page vanciety-page--cards min-h-screen bg-background">
       <Header />
 
-      <main className="pt-16">
+      <main className="pt-28">
         {/* Unified Page Hero */}
         <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/OcYosgrzkDuEjVgs.jpg"
           label="Van Cards"
           title="Van Cards"
           subtitle="Meet the members of the Vanciety community"

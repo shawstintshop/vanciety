@@ -326,9 +326,10 @@ const FriendFinder = () => {
     return (
       <div className="min-h-screen bg-background topo-card">
         <Header />
-        <main className="pt-16">
+        <main className="pt-28">
           {/* Hero */}
           <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/sBJrRgUWBNifSBcb.jpg"
             label="Members Only"
             title="Find Van Lifers Near You"
             subtitle="See which Vanciety members are in your city. Offer your driveway, send a wave, or share what's good in your area."
@@ -425,7 +426,7 @@ const FriendFinder = () => {
   return (
     <div className="min-h-screen bg-background topo-card">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
 
         {/* Hero */}
         <HeroSection

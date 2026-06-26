@@ -177,7 +177,7 @@ export default function Campfire() {
   return (
     <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
-      <div className="container mx-auto max-w-5xl px-4 pt-24 pb-16">
+      <div className="container mx-auto max-w-5xl px-4 pt-28 pb-16">
         {/* Header */}
         <div className="mb-8 flex items-start justify-between gap-4">
           <div>

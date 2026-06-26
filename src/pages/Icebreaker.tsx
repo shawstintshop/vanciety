@@ -156,7 +156,7 @@ export default function Icebreaker() {
       <Header />
 
       {/* Hero */}
-      <HeroSection image="/images/vans-neighborhood-meetup.jpg" badge="Member Tips" title="One question." accent="Real local knowledge." subtitle="Every week the Vanciety community answers a single question." />
+      <HeroSection image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/QvfLsilQNZOdyoMZ.jpg" badge="Member Tips" title="One question." accent="Real local knowledge." subtitle="Every week the Vanciety community answers a single question." />
 
       <div className="container mx-auto max-w-2xl px-4 pt-12 pb-16">
 

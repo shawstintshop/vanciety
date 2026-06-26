@@ -476,6 +476,7 @@ const Map = () => {
       <Header />
 
       <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/jtmnYZNdYLUOMICw.jpg"
         label={isEventsPage ? "Events" : "Map & Mechanics"}
         title={bannerTitle}
         subtitle={bannerSubtitle}

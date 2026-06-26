@@ -30,8 +30,9 @@ const Manufacturers = () => {
   return (
     <div className="vanciety-page min-h-screen bg-background">
       <Header />
-      <main className="pt-16">
+      <main className="pt-28">
         <PageHero
+          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/HnQFgYRCRXWImcTc.jpg"
           label="Manufacturers & Brands"
           title="Van Manufacturers & Brands"
           subtitle="The hub for Sprinter, vanlife & overland manufacturers — explore brands, products, and reviews."
