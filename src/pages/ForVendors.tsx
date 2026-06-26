@@ -64,50 +64,18 @@ const tiers: Tier[] = [
   {
     name: "FREE",
     price: "$0/mo",
-    features: ["Basic listing", "Contact form", "Public profile"],
-    cta: "Get Started",
-    href: VENDOR_CTA,
-  },
-  {
-    name: "STARTER",
-    price: "$49/mo",
     features: [
+      "Basic listing",
+      "Contact form",
+      "Public profile",
       "Hosted mini-site",
-      "Products",
-      "Services",
+      "Products & services",
       "Lead capture",
       "Basic analytics",
     ],
-    cta: "Start Free Trial",
-    href: VENDOR_CTA,
-  },
-  {
-    name: "PRO",
-    price: "$149/mo",
-    features: [
-      "Everything in Starter",
-      "AI content",
-      "SEO tools",
-      "Promotions",
-      "Video indexing",
-      "Advanced analytics",
-    ],
-    cta: "Start Free Trial",
+    cta: "Get Started Free",
     href: VENDOR_CTA,
     popular: true,
-  },
-  {
-    name: "PARTNER",
-    price: "$499/mo",
-    features: [
-      "Everything in Pro",
-      "Featured placement",
-      "AI sales agent",
-      "Custom domain",
-      "Priority support",
-    ],
-    cta: "Contact Sales",
-    href: "mailto:sales@vanciety.com",
   },
 ];
 
@@ -242,13 +210,13 @@ const ForVendors = () => {
           <div className="mx-auto max-w-6xl">
             <div className="mb-14 text-center">
               <h2 className="text-3xl font-extrabold sm:text-4xl">
-                Simple, transparent pricing
+                Always free to list
               </h2>
               <p className="mt-4 text-lg text-gray-600">
-                Start free. Upgrade when you are ready to grow.
+                No credit card required. Get your business in front of the van life community today.
               </p>
             </div>
-            <div className="grid gap-6 lg:grid-cols-4">
+            <div className="mx-auto max-w-sm">
               {tiers.map((tier) => (
                 <Card
                   key={tier.name}
