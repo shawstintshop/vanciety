@@ -33,6 +33,7 @@ import {
   MapPin,
   Zap,
   Compass,
+  Shirt,
 } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -110,6 +111,15 @@ const Header = () => {
                     {newVideoCount}
                   </span>
                 )}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => navigate("/merch")}>
+                <Shirt className="mr-2 h-4 w-4 text-primary" />
+                Merch Store
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/shop")}>
+                <ShoppingBag className="mr-2 h-4 w-4 text-muted-foreground" />
+                Van Gear Shop
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -259,7 +269,8 @@ const Header = () => {
                 { label: "Vendors", to: "/vendors", icon: Wrench },
                 { label: "Van Intelligence", to: "/van-intelligence", icon: Brain },
                 { label: "How-To Videos", to: "/videos", icon: Video },
-                { label: "Sell an Item", to: "/shop", icon: PlusCircle },
+                { label: "Merch Store", to: "/merch", icon: Shirt },
+                { label: "Van Gear Shop", to: "/shop", icon: ShoppingBag },
               ].map(({ label, to, icon: Icon }) => (
                 <Link
                   key={label}

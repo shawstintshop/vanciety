@@ -27,6 +27,7 @@ import FriendFinder from "./pages/FriendFinder";
 import AIConcierge from "./pages/AIConcierge";
 import About from "./pages/About";
 import VancietyShop from "./pages/VancietyShop";
+import VancietyMerch from "./pages/VancietyMerch";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Accessibility from "./pages/Accessibility";
@@ -75,6 +76,7 @@ const App = () => (
               <Route path="/forum" element={<Forum />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/shop" element={<VancietyShop />} />
+              <Route path="/merch" element={<VancietyMerch />} />
               <Route path="/vendors" element={<Vendors />} />
               <Route path="/vendor-signup" element={<VendorSignup />} />
               <Route path="/manufacturers" element={<Manufacturers />} />

@@ -286,8 +286,8 @@ const DailyVanBriefing = () => {
 
             <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
               <CardHeader>
-                <CardTitle>Affiliate-ready angles</CardTitle>
-                <CardDescription>Search links become affiliate links after your associate tag is configured.</CardDescription>
+                <CardTitle>Gear picks for this week</CardTitle>
+                <CardDescription>Curated van life gear matched to today's news and conditions.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 {digest.affiliateOpportunities.slice(0, 4).map((item) => (
@@ -297,7 +297,7 @@ const DailyVanBriefing = () => {
                         <p className="text-sm font-semibold">{item.label}</p>
                         <p className="mt-1 text-xs text-muted-foreground">{item.angle}</p>
                       </div>
-                      <Badge variant={item.affiliateActive ? "default" : "outline"}>{item.affiliateActive ? "Affiliate" : "Setup"}</Badge>
+                      <Badge variant="outline">Gear</Badge>
                     </div>
                   </a>
                 ))}
@@ -340,7 +340,7 @@ const DailyVanBriefing = () => {
                   <Badge key={idea} variant="secondary">{idea}</Badge>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground">{digest.merchDropIdea.fulfillment}</p>
+              <p className="text-xs text-muted-foreground">Monthly drops — clothing, gear, and accessories for the van life community.</p>
             </CardContent>
           </Card>
         </div>
