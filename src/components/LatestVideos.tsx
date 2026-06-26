@@ -127,15 +127,15 @@ const LatestVideos = () => {
               className="group cursor-pointer overflow-hidden rounded-xl border border-border bg-card shadow-sm transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md"
               onClick={() => openVideo(video.youtube_id)}
             >
-              <div className="relative aspect-video bg-zinc-900">
-                <img
-                  src={video.thumbnail_url}
-                  alt={video.title}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              <div className="relative aspect-video bg-zinc-900 overflow-hidden">
+                {/* iframe embed loads the actual YouTube thumbnail — works on iOS Safari, no CORS issues */}
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.youtube_id}?autoplay=0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3`}
+                  title={video.title}
+                  className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.03]"
+                  style={{ border: 'none', pointerEvents: 'none' }}
                   loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.src = `https://img.youtube.com/vi/${video.youtube_id}/hqdefault.jpg`;
-                  }}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
