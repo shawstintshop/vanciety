@@ -196,6 +196,91 @@ const Index = () => {
           </div>
         </section>
 
+        {/* ── Merch Section ─────────────────────────────────────── */}
+        <section className="relative overflow-hidden border-y border-border">
+          {/* Dark matte background */}
+          <div className="absolute inset-0" style={{ background: "#0d0d0d" }} />
+          {/* Subtle gold grid pattern overlay */}
+          <div className="absolute inset-0 opacity-5"
+            style={{ backgroundImage: "linear-gradient(#c9a96e 1px, transparent 1px), linear-gradient(90deg, #c9a96e 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+
+          <div className="relative z-10 container mx-auto px-4 py-16">
+            <div className="flex flex-col lg:flex-row items-center gap-10">
+
+              {/* Left — copy */}
+              <div className="flex-1 text-center lg:text-left">
+                <Badge className="mb-4 text-xs font-bold tracking-widest uppercase"
+                  style={{ background: "#c9a96e20", color: "#c9a96e", border: "1px solid #c9a96e40" }}>
+                  Official Gear
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-4">
+                  Build Experiences<br />
+                  <span style={{ color: "#c9a96e" }}>Not Things.</span>
+                </h2>
+                <p className="text-base mb-2" style={{ color: "#aaa" }}>
+                  Community · Gear · Connect · Knowledge
+                </p>
+                <p className="text-sm mb-8 max-w-md mx-auto lg:mx-0" style={{ color: "#666" }}>
+                  Premium print-on-demand gear. Matte black everything. Gold badge.
+                  Tees, hoodies, hats, mugs, bags, patches — built for the road.
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                  <Link to="/merch">
+                    <Button className="font-bold px-8 py-3 text-base"
+                      style={{ background: "#c9a96e", color: "#0a0a0a", border: "none" }}>
+                      <ShoppingBag className="w-5 h-5 mr-2" />
+                      Shop Merch
+                    </Button>
+                  </Link>
+                  <a href="https://vanciety-shop.fourthwall.com" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="font-bold px-8 py-3 text-base"
+                      style={{ borderColor: "#c9a96e40", color: "#c9a96e", background: "transparent" }}>
+                      Visit Store
+                    </Button>
+                  </a>
+                </div>
+
+                {/* Product type chips */}
+                <div className="flex flex-wrap gap-2 mt-8 justify-center lg:justify-start">
+                  {["Tees", "Hoodies", "Hats", "Mugs", "Bags", "Patches", "Jackets"].map((item) => (
+                    <span key={item} className="text-xs px-3 py-1 rounded-full"
+                      style={{ background: "#1c1c1c", color: "#888", border: "1px solid #2e2e2e" }}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right — product grid preview */}
+              <div className="flex-shrink-0 w-full lg:w-[480px]">
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { label: "Badge Tee", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&q=80" },
+                    { label: "Hoodie", img: "https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=300&q=80" },
+                    { label: "Trucker Hat", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=300&q=80" },
+                    { label: "Tumbler", img: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=300&q=80" },
+                    { label: "Duffel", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&q=80" },
+                    { label: "Patch", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80" },
+                  ].map(({ label, img }) => (
+                    <Link key={label} to="/merch"
+                      className="group relative aspect-square rounded-lg overflow-hidden block"
+                      style={{ background: "#1c1c1c" }}>
+                      <img src={img} alt={label}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                      <span className="absolute bottom-2 left-2 text-xs font-bold text-white">{label}</span>
+                    </Link>
+                  ))}
+                </div>
+                <p className="text-center text-xs mt-3" style={{ color: "#555" }}>
+                  All items ship direct · Premium quality · 30-day returns
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
         <HomeFeed />
       </main>
 
