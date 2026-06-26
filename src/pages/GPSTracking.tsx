@@ -18,7 +18,7 @@ const GPSTracking = () => {
           <div className="max-w-2xl mx-auto">
             <GPSSettings />
           </div>
-        </section>
+        </div>
       </main>
     </div>
   );

@@ -18,6 +18,12 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				display: ['Bebas Neue', 'sans-serif'],
+				heading: ['Teko', 'sans-serif'],
+				condensed: ['Barlow Condensed', 'sans-serif'],
+				sans: ['Inter', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

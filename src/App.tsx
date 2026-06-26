@@ -19,6 +19,7 @@ import VendorDashboard from "./pages/VendorDashboard";
 import ForVendors from "./pages/ForVendors";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import GPSTracking from "./pages/GPSTracking";
 import VanCards from "./pages/VanCards";
@@ -36,6 +37,7 @@ import TripJournals from "./pages/TripJournals";
 import ResourceBoard from "./pages/ResourceBoard";
 import Icebreaker from "./pages/Icebreaker";
 import VanLifeSpots from "./pages/VanLifeSpots";
+import Events from "./pages/Events";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
@@ -72,7 +74,7 @@ const App = () => (
               <Route path="/news" element={<News />} />
               <Route path="/map" element={<Map />} />
               <Route path="/spots" element={<VanLifeSpots />} />
-              <Route path="/events" element={<Map />} />
+              <Route path="/events" element={<Events />} />
               <Route path="/forum" element={<Forum />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/shop" element={<VancietyShop />} />
@@ -87,6 +89,7 @@ const App = () => (
               <Route path="/dashboard/vendor" element={<VendorDashboard />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/gps" element={<GPSTracking />} />
               <Route path="/van-cards" element={<VanCards />} />
               <Route path="/van-intelligence" element={<VanIntelligence />} />

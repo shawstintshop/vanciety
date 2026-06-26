@@ -486,7 +486,7 @@ const Map = () => {
             {/* Full-screen map layout — flex-col so control bar never overlaps map */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* ── Top Control Bar (always on top, never overlaps) ── */}
-        <div className="relative z-[500] shrink-0 bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2 sm:absolute sm:top-4 sm:left-4 sm:right-4 sm:bg-transparent sm:border-0 sm:px-0 sm:py-0">
+        <div className="sticky top-16 z-[500] shrink-0 bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2 sm:top-[72px] sm:bg-transparent sm:border-0 sm:px-4 sm:py-3">
           <div className="max-w-4xl mx-auto">
             <div className="bg-background/90 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 p-3">
               <div className="flex items-center gap-3">

@@ -38,7 +38,7 @@ const VideoCarousel = () => {
         .from('youtube_videos')
         .select('*')
         .order('view_count', { ascending: false })
-        .limit(8);
+        .limit(6);
 
       if (error || !data || data.length === 0) {
         console.info('Using verified fallback videos for homepage carousel', error?.message);
@@ -82,11 +82,11 @@ const VideoCarousel = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {videos.map((video) => (
             <div
               key={video.id || video.youtube_id}
-              className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer border"
+              className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] cursor-pointer border"
               onClick={() => openVideo(video.youtube_id)}
             >
               <div className="relative aspect-video">

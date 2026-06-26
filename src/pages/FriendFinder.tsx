@@ -427,6 +427,15 @@ const FriendFinder = () => {
       <Header />
       <main className="pt-16">
 
+        {/* Hero */}
+        <HeroSection
+          image="/images/vans-neighborhood-meetup.jpg"
+          badge="Friend Finder"
+          title="Find van lifers"
+          accent="near you."
+          subtitle="See which Vanciety members are in your city."
+        />
+
         {/* Page header */}
         <section className="border-b border-border bg-muted/20 py-6">
           <div className="container mx-auto px-4">

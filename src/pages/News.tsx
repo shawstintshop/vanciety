@@ -6,6 +6,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { Search, Rss, RefreshCw, Calendar, ExternalLink, MapPin, ShieldCheck, TrendingUp, Clock } from "lucide-react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import FeedCard from "@/components/FeedCard";
 import { useContentFeed, CATEGORY_META, type FeedCategory } from "@/hooks/useContentFeed";
 import { Badge } from "@/components/ui/badge";
@@ -92,25 +93,26 @@ export default function News() {
       <Header />
       <main className="pt-16">
         {/* Hero */}
-        <section className="py-12 border-b border-border/40 bg-gradient-to-b from-muted/30 to-background">
+        <HeroSection
+          image="/images/sprinter-red-rocks-arch.png"
+          badge="Van Life News"
+          title="What's happening"
+          accent="in van life."
+          subtitle="Latest news, product launches, and community updates."
+        />
+
+        <section className="bg-background border-b border-border py-10">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Rss className="w-5 h-5 text-primary" />
-                <Badge className="bg-primary/10 text-primary border-primary/20">Updated daily</Badge>
+                <Rss className="w-5 h-5 text-amber-400" />
+                <Badge className="bg-primary/10 text-amber-300 border-primary/20">Updated daily</Badge>
                 {usingFallback && pageTab === "feed" && (
                   <Badge variant="outline" className="text-xs text-muted-foreground">
                     Sample content — live feed coming soon
                   </Badge>
                 )}
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Van Life Content Hub
-              </h1>
-              <p className="text-lg text-muted-foreground mb-6">
-                YouTube videos, news, how-tos, stealth spots, overland builds, and verified events —
-                all in one place.
-              </p>
 
               {/* Page tab switcher */}
               <div className="inline-flex rounded-full border border-border/60 bg-muted/40 p-1 mb-6">

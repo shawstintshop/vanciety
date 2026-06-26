@@ -65,7 +65,7 @@ export default function FeedCard({ item, compact = false }: FeedCardProps) {
           <img
             src={item.thumbnail_url!}
             alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
             loading="lazy"
             onError={() => setImgFailed(true)}
           />

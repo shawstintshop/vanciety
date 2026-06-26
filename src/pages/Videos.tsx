@@ -252,8 +252,8 @@ const Videos = () => {
             </div>
 
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[...Array(6)].map((_, i) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {[...Array(4)].map((_, i) => (
                   <Card key={i} className="animate-pulse">
                     <div className="aspect-video bg-muted"></div>
                     <CardContent className="p-4">
@@ -271,11 +271,11 @@ const Videos = () => {
                 </Button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {videos.map((video) => (
                   <Card 
                     key={video.id} 
-                    className="group bg-gradient-card hover:shadow-glow transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden"
+                    className="group bg-gradient-card hover:shadow-glow transition-all duration-300 hover:scale-[1.02] cursor-pointer overflow-hidden"
                     onClick={() => openVideo(video.youtube_id)}
                   >
                     <div className="relative aspect-video">

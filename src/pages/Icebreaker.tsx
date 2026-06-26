@@ -1,5 +1,5 @@
 /**
- * Member Spotlight — Weekly Community Knowledge Share
+ * Member Tips — Weekly Community Knowledge Share
  *
  * Van lifers sharing local knowledge, tips, and experience with the community.
  * No matching, no dating language — pure community wisdom sharing.
@@ -16,6 +16,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { format, startOfISOWeek, addDays } from "date-fns";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 // Weekly questions — all about sharing van life knowledge and local tips
@@ -153,18 +154,11 @@ export default function Icebreaker() {
   return (
     <div className="min-h-screen bg-background text-foreground topo-card">
       <Header />
-      <div className="container mx-auto max-w-2xl px-4 pt-24 pb-16">
 
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Compass className="h-7 w-7 text-orange-400" />
-            <h1 className="text-3xl font-bold tracking-tight">Member Spotlight</h1>
-          </div>
-          <p className="text-muted-foreground text-sm max-w-lg">
-            One question. Every Vanciety member shares what they know. Local tips, hidden spots, roads to avoid, places to eat — real knowledge from people who've been there.
-          </p>
-        </div>
+      {/* Hero */}
+      <HeroSection image="/images/vans-neighborhood-meetup.jpg" badge="Member Tips" title="One question." accent="Real local knowledge." subtitle="Every week the Vanciety community answers a single question." />
+
+      <div className="container mx-auto max-w-2xl px-4 pt-12 pb-16">
 
         {/* Week info */}
         <div className="mb-6 flex flex-wrap items-center gap-3">

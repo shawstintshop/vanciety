@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,20 +80,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-16">
-        <section className="vanciety-hero-topo border-b border-border/60 py-12">
-          <div className="container mx-auto px-4">
-            <Badge className="mb-4 bg-primary text-primary-foreground">
-              <Sparkles className="mr-2 h-3.5 w-3.5" />
-              Mission control
-            </Badge>
-            <div className="max-w-4xl">
-              <h1 className="text-4xl font-black tracking-tight md:text-6xl">Welcome back, {displayName}</h1>
-              <p className="mt-4 max-w-3xl text-lg text-muted-foreground md:text-xl">
-                This is your member home: van details, bills, saved research, wish lists, and alerts for the products you care about.
-              </p>
-            </div>
-          </div>
-        </section>
+        <HeroSection image="/images/sprinter-desert-camping.png" badge="My Dashboard" title="Welcome back" accent="to Vanciety." subtitle="Your van life command center." />
 
         <section className="container mx-auto px-4 py-12">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">

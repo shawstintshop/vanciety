@@ -37,6 +37,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 type Board = {

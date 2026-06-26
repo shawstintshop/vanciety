@@ -10,6 +10,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -30,6 +31,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 const QUICK_REACTIONS = ["👍", "❤️", "🔥", "🙌", "🚐", "💯", "🌄", "✨"];

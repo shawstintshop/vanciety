@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, BookOpen, CheckCircle2, ExternalLink, Gauge, MapPinned, ShieldAlert, TriangleAlert, Video, Wrench, BookmarkPlus } from "lucide-react";
+import { ArrowLeft, BookOpen, CheckCircle2, ExternalLink, Gauge, MapPinned, ShieldAlert, TriangleAlert, Video, Wrench, BookmarkPlus, Sparkles, Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -163,6 +166,54 @@ const VanIntelligence = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  // ── AI diagnosis (server-side via the van-intelligence-ai edge function;
+  //    ANTHROPIC_API_KEY stays in Supabase secrets, never in the browser) ──
+  const [issue, setIssue] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResult, setAiResult] = useState<string | null>(null);
+  const [aiError, setAiError] = useState<string | null>(null);
+
+  // ── Knowledge-base articles loaded from van_intelligence_articles ──
+  type KbArticle = { id: string; title: string; category: string; body: string; tags: string[]; source_url: string | null };
+  const [articles, setArticles] = useState<KbArticle[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("van_intelligence_articles" as any)
+        .select("id, title, category, body, tags, source_url")
+        .order("created_at", { ascending: false });
+      if (active && data) setArticles(data as unknown as KbArticle[]);
+    })();
+    return () => { active = false; };
+  }, []);
+
+  const runDiagnosis = async () => {
+    if (!issue.trim()) {
+      toast.info("Describe the van issue first.");
+      return;
+    }
+    setAiLoading(true);
+    setAiError(null);
+    setAiResult(null);
+    try {
+      const { data, error } = await supabase.functions.invoke("van-intelligence-ai", {
+        body: { issue: issue.trim() },
+      });
+      if (error) throw error;
+      if (data?.ok && data.diagnosis) {
+        setAiResult(data.diagnosis as string);
+      } else {
+        setAiError((data?.error as string) || "Could not get a diagnosis. Try again.");
+      }
+    } catch {
+      setAiError("AI request failed. Please try again in a moment.");
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   const saveThisGuide = async () => {
     if (!user) {
       toast.info("Sign in to save this guide.");
@@ -248,35 +299,89 @@ const VanIntelligence = () => {
     <div className="min-h-screen bg-background topo-card">
       <Header />
       <main className="pt-16">
-        <section className="vanciety-hero-topo border-b border-border/60 py-12">
-          <div className="container mx-auto px-4">
-            <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </Button>
-
-            <div className="mx-auto max-w-4xl text-center">
-              <Badge className="mb-4 bg-primary text-primary-foreground">
-                <BookOpen className="mr-2 h-3.5 w-3.5" />
-                Repair research hub
-              </Badge>
-              <h1 className="text-4xl font-black tracking-tight md:text-6xl">
-                Find the exact fix for your Sprinter
-              </h1>
-              <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground md:text-xl">
-                Use facts first: factory references, manufacturer diagrams, real videos, and forum evidence. Then decide whether to clean, replace, or diagnose deeper.
-              </p>
-              <div className="mt-6 flex justify-center">
-                <Button variant="outline" onClick={saveThisGuide} className="gap-2">
-                  <BookmarkPlus className="h-4 w-4" />
-                  Save this guide
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroSection
+          image="/images/vanciety-van-tech-mechanics.jpg"
+          badge="Repair Research Hub"
+          title="Find the exact fix"
+          accent="for your Sprinter."
+          subtitle="Factory references, manufacturer diagrams, real videos, and forum evidence."
+        >
+          <Button variant="outline" onClick={saveThisGuide} className="gap-2 border-white/25 text-white hover:bg-white/10">
+            <BookmarkPlus className="h-4 w-4" />
+            Save this guide
+          </Button>
+        </HeroSection>
 
         <section className="container mx-auto px-4 py-12">
+          <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6 -ml-2">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+
+          {/* AI diagnosis — Claude Haiku via secure server-side edge function */}
+          <Card className="mb-8 border-primary/30 bg-card/90 shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-2xl">
+                <Sparkles className="h-5 w-5 text-primary" />
+                Describe your van issue
+              </CardTitle>
+              <CardDescription>
+                Get an AI diagnosis and step-by-step repair guidance. Always confirm exact parts against the factory reference for your engine and VIN.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Textarea
+                value={issue}
+                onChange={(e) => setIssue(e.target.value)}
+                placeholder="e.g. 2019 Sprinter 3.0 V6 — rough idle, hesitation, and a P0299 underboost code that returns after clearing."
+                rows={3}
+                className="resize-none"
+              />
+              <div className="flex flex-wrap items-center gap-3">
+                <Button onClick={runDiagnosis} disabled={aiLoading} className="gap-2">
+                  {aiLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                  {aiLoading ? "Diagnosing…" : "Get AI Diagnosis"}
+                </Button>
+                <span className="text-xs text-muted-foreground">Powered by Claude · API keys stay server-side</span>
+              </div>
+              {aiError && (
+                <div className="rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">{aiError}</div>
+              )}
+              {aiResult && (
+                <div className="rounded-xl border border-border/60 bg-background/50 p-4 text-sm leading-relaxed whitespace-pre-wrap">{aiResult}</div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Knowledge base — loaded from van_intelligence_articles */}
+          {articles.length > 0 && (
+            <Card className="mb-8 border-border/80 bg-card/90 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                  Knowledge base
+                </CardTitle>
+                <CardDescription>Verified repair-research articles from the Vanciety library.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {articles.map((a) => (
+                  <div key={a.id} className="rounded-xl border border-border/60 bg-background/50 p-4">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="text-[10px] uppercase">{a.category}</Badge>
+                      <h3 className="font-semibold">{a.title}</h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
+                    {a.source_url && (
+                      <a href={a.source_url} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                        Source <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <Card className="border-border/80 bg-card/90 shadow-lg">
               <CardHeader>

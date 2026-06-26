@@ -10,7 +10,7 @@ import AuthForm from '@/components/auth/AuthForm'; // Import the new AuthForm co
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn, signUp, user } = useAuth();
+  const { signInWithEmail, signUpWithEmail, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,31 +22,32 @@ const Auth = () => {
   const handleEmailPasswordSubmit = async (email: string, password: string, isSignUp: boolean) => {
     setIsLoading(true);
 
-    if (isSignUp) {
-      // For now, displayName is not handled by AuthForm, so we'll pass an empty string
-      const { error } = await signUp(email, password, '');
-      if (error) {
-        toast.error(error.message);
-      } else {
+    try {
+      if (isSignUp) {
+        // displayName is not collected here; users set it later on /profile
+        await signUpWithEmail(email, password, '');
         toast.success('Account created! Please check your email to verify your account.');
-      }
-    } else {
-      const { error } = await signIn(email, password);
-      if (error) {
-        toast.error(error.message);
       } else {
-        toast.success('Welcome back!');
-        navigate('/');
+        await signInWithEmail(email, password);
+        // AuthContext's onAuthStateChange handles the post-sign-in redirect
       }
+    } catch {
+      // AuthContext already surfaces the error via toast
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
     <div className="vanciety-page vanciety-page--auth min-h-screen bg-background">
       <Header />
-      <main className="vanciety-hero-topo flex min-h-screen items-center justify-center px-4 pb-12 pt-28">
-        <Card className="vanciety-topo-card w-full max-w-md border-border/80 bg-card/95 shadow-hero">
+      <main className="relative isolate flex min-h-screen items-center justify-center px-4 pb-12 pt-28">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/sprinter-red-rocks-arch.png)" }}
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
+        <Card className="relative z-10 w-full max-w-md border-border/80 bg-card/95 shadow-hero">
           <CardHeader className="text-center">
             <div className="mb-4 flex justify-center">
               <VancietyLogo className="h-14 w-[260px] max-w-full sm:h-16 sm:w-[300px]" />

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Users, AlertTriangle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Users, AlertTriangle, IdCard } from "lucide-react";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import VanCard, { VanCardProfile } from "@/components/VanCard";
 import PageHero from "@/components/PageHero";
 
@@ -21,6 +25,7 @@ const VanCards = () => {
       const { data, error: fetchError } = await supabase
         .from("profiles")
         .select("id, display_name, avatar_url, created_at, van_type")
+        // van_type tolerated if absent — VanCard handles a null value gracefully
         .order("created_at", { ascending: false });
 
       if (!active) return;

@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Header from '@/components/Header';
 import { CheckCircle2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const CoordinatorApplication: React.FC = () => {
   const [organizationName, setOrganizationName] = useState('');
@@ -16,33 +17,50 @@ const CoordinatorApplication: React.FC = () => {
   const [references, setReferences] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [submittedEmail, setSubmittedEmail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
     setError(null);
 
-    // Build a mailto: link so the application goes directly to the Vanciety team inbox
-    // until a backend form handler is wired up
-    const subject = encodeURIComponent(`Coordinator Application: ${organizationName}`);
-    const body = encodeURIComponent(
-      `Organization Name: ${organizationName}\n` +
-      `Organization Type: ${organizationType}\n` +
-      `Contact Email: ${contactEmail}\n\n` +
-      `Past Events / Experience:\n${pastEvents}\n\n` +
-      `References:\n${references || 'None provided'}`
-    );
-
     try {
-      window.location.href = `mailto:hello@vanciety.com?subject=${subject}&body=${body}`;
+      const { error: insertError } = await supabase
+        .from('coordinator_applications' as any)
+        .insert({
+          name: organizationName,
+          email: contactEmail,
+          organization_type: organizationType,
+          experience: pastEvents,
+          social_links: references,
+          region: null,
+          status: 'pending',
+        });
+
+      if (insertError) {
+        setError('Something went wrong submitting your application. Please try again, or email hello@vanciety.com directly.');
+        setStatus('error');
+        return;
+      }
+
+      // Fire-and-forget the confirmation email. A failure here must not block success.
+      supabase.functions
+        .invoke('send-coordinator-confirmation', {
+          body: { name: organizationName, email: contactEmail },
+        })
+        .catch((err) => {
+          console.error('Confirmation email failed:', err);
+        });
+
+      setSubmittedEmail(contactEmail);
       setStatus('success');
       setOrganizationName('');
       setOrganizationType('');
       setContactEmail('');
       setPastEvents('');
       setReferences('');
-    } catch {
-      setError('Unable to open your email client. Please email hello@vanciety.com directly with your application details.');
+    } catch (err) {
+      setError('Something went wrong submitting your application. Please try again, or email hello@vanciety.com directly.');
       setStatus('error');
     }
   };
@@ -56,9 +74,10 @@ const CoordinatorApplication: React.FC = () => {
           {status === 'success' ? (
             <div className="text-center py-16">
               <CheckCircle2 className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-2xl font-bold mb-2">Application Ready to Send</h2>
+              <h2 className="text-2xl font-bold mb-2">Application Submitted</h2>
               <p className="text-muted-foreground mb-6">
-                Your email client should have opened with your application pre-filled. Send it to complete your submission. If it didn't open, email us directly at{' '}
+                Thanks — your coordinator application has been received. A confirmation email is on its way to{' '}
+                <span className="text-foreground font-medium">{submittedEmail}</span>. Our team reviews all applications within 5 business days. Questions? Reach us at{' '}
                 <a href="mailto:hello@vanciety.com" className="text-primary hover:underline">
                   hello@vanciety.com
                 </a>
@@ -153,11 +172,11 @@ const CoordinatorApplication: React.FC = () => {
                     className="w-full"
                     disabled={status === 'submitting'}
                   >
-                    {status === 'submitting' ? 'Preparing...' : 'Submit Application'}
+                    {status === 'submitting' ? 'Submitting...' : 'Submit Application'}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center">
-                    Clicking submit will open your email client with your application pre-filled. We review all applications within 5 business days.
+                    We'll email a confirmation and review within 5 business days.
                   </p>
 
                 </form>
