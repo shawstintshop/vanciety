@@ -88,60 +88,64 @@
   }
 
   .dark {
-    /* Dark Mode — Overland Night / Charcoal Terrain */
-    --background: 210 10% 8%;
-    --foreground: 38 18% 90%;
+    /* Dark Mode — Matte Black / Van Wrap Gold (matches merch image)
+       Background: pure matte black like the van wrap
+       Primary:    warm tan-gold like the Vanciety badge lettering
+       Foreground: warm off-white parchment
+    */
+    --background: 0 0% 5%;       /* #0d0d0d — matte black van wrap */
+    --foreground: 38 25% 88%;    /* #e8dcc8 — warm parchment white */
 
-    --card: 210 10% 11%;
-    --card-foreground: 38 18% 90%;
+    --card: 0 0% 8%;             /* #141414 — slightly lifted card */
+    --card-foreground: 38 25% 88%;
 
-    --popover: 210 10% 11%;
-    --popover-foreground: 38 18% 90%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 38 25% 88%;
 
-    /* Aged Brass Primary */
-    --primary: 42 65% 42%;
-    --primary-foreground: 210 10% 8%;
-    --primary-glow: 42 70% 52%;
+    /* Tan-Gold Primary — matches badge lettering in merch image */
+    --primary: 38 52% 55%;       /* #c9a96e — warm tan gold */
+    --primary-foreground: 0 0% 5%;
+    --primary-glow: 38 58% 65%;
 
     /* Ember Orange Secondary */
     --secondary: 25 85% 55%;
-    --secondary-foreground: 210 10% 8%;
+    --secondary-foreground: 0 0% 5%;
 
     /* Survey Blue Accent */
     --accent: 205 55% 40%;
-    --accent-foreground: 38 18% 90%;
+    --accent-foreground: 38 25% 88%;
 
-    --muted: 210 10% 15%;
-    --muted-foreground: 38 8% 62%;
+    --muted: 0 0% 12%;           /* #1f1f1f — subtle card lift */
+    --muted-foreground: 38 10% 58%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 38 18% 90%;
+    --destructive-foreground: 38 25% 88%;
 
-    --border: 210 10% 20%;
-    --input: 210 10% 15%;
-    --ring: 42 65% 42%;
+    --border: 0 0% 18%;          /* #2e2e2e — dark border */
+    --input: 0 0% 12%;
+    --ring: 38 52% 55%;
 
-    /* Topo Design Tokens — Dark */
-    --gradient-hero: linear-gradient(135deg, hsl(210 10% 6%) 0%, hsl(210 12% 11%) 60%, hsl(42 25% 14%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(210 10% 11%) 0%, hsl(210 10% 13%) 100%);
-    --gradient-sunset: linear-gradient(90deg, hsl(25 85% 55%) 0%, hsl(15 90% 50%) 50%, hsl(5 85% 45%) 100%);
-    --gradient-terrain: linear-gradient(180deg, hsl(42 65% 42%) 0%, hsl(42 55% 30%) 100%);
+    /* Topo Design Tokens — Matte Black / Gold */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 0% 7%) 60%, hsl(38 20% 12%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%) 0%, hsl(0 0% 10%) 100%);
+    --gradient-sunset: linear-gradient(90deg, hsl(38 52% 55%) 0%, hsl(32 60% 48%) 50%, hsl(25 65% 42%) 100%);
+    --gradient-terrain: linear-gradient(180deg, hsl(38 52% 55%) 0%, hsl(38 45% 38%) 100%);
 
-    --shadow-glow: 0 0 30px hsl(42 65% 42% / 0.2);
-    --shadow-card: 0 10px 30px -10px hsl(210 15% 3% / 0.6);
-    --shadow-hero: 0 25px 50px -15px hsl(210 15% 3% / 0.9);
+    --shadow-glow: 0 0 30px hsl(38 52% 55% / 0.25);
+    --shadow-card: 0 10px 30px -10px hsl(0 0% 0% / 0.7);
+    --shadow-hero: 0 25px 50px -15px hsl(0 0% 0% / 0.95);
 
-    --topo-line: hsl(42 30% 55% / 0.10);
-    --topo-line-dark: hsl(42 30% 55% / 0.08);
+    --topo-line: hsl(38 30% 55% / 0.12);
+    --topo-line-dark: hsl(38 30% 55% / 0.08);
 
-    --sidebar-background: 210 10% 10%;
-    --sidebar-foreground: 38 10% 88%;
-    --sidebar-primary: 42 65% 42%;
-    --sidebar-primary-foreground: 210 10% 8%;
-    --sidebar-accent: 210 8% 16%;
-    --sidebar-accent-foreground: 38 10% 88%;
-    --sidebar-border: 210 8% 16%;
-    --sidebar-ring: 42 65% 42%;
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 38 15% 85%;
+    --sidebar-primary: 38 52% 55%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 38 15% 85%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 38 52% 55%;
   }
 }
 

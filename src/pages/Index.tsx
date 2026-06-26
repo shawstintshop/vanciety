@@ -44,16 +44,18 @@ const Index = () => {
       <Header />
 
       <main className="pt-16">
-        <section className="relative isolate flex min-h-[500px] items-end overflow-hidden border-b border-white/10 vanciety-hero-topo" data-topo-container>
+        <section className="relative isolate flex min-h-[560px] items-end overflow-hidden border-b border-white/10 vanciety-hero-topo" data-topo-container>
+          {/* Vanciety van hero — matte black Sprinter in the mountains */}
           <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/sprinter-red-rocks-arch.png)" }}
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url(/images/vanciety-van-hero.jpg)" }}
           />
-          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
+          {/* Deep gradient overlay for text legibility */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/55 to-black/90" />
           <TopoBackground className="z-[1]" intensity="medium" />
 
           <div className="relative z-10 container mx-auto px-4 pt-24 pb-16">
-            <Badge className="mb-4 border border-primary/40 bg-primary/10 text-amber-300 hover:bg-primary/15">
+            <Badge className="mb-4 border border-primary/40 bg-primary/10 text-primary hover:bg-primary/15">
               <Sparkles className="mr-1.5 h-3.5 w-3.5" />
               Van Life, all in one place
             </Badge>
