@@ -10,9 +10,32 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram, Youtube, Lock, RotateCcw, Truck } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function SiteFooter() {
   const [email, setEmail] = useState("");
+  const [subLoading, setSubLoading] = useState(false);
+  const [subDone, setSubDone] = useState(false);
+
+  const handleSubscribe = async () => {
+    if (!email || subLoading || subDone) return;
+    setSubLoading(true);
+    try {
+      const { error } = await supabase.from('newsletter_subscribers').insert({
+        email,
+        source_page: 'footer',
+        status: 'active',
+        email_opt_in: true,
+      });
+      if (error && error.code !== '23505') throw error;
+      setSubDone(true);
+      setEmail('');
+    } catch {
+      // silently ignore
+    } finally {
+      setSubLoading(false);
+    }
+  };
 
   return (
     <footer style={{ background: "#0a0a0a", borderTop: "1px solid #2e2e2e" }}>
@@ -58,9 +81,10 @@ export default function SiteFooter() {
                 style={{ flex: 1, background: "#1a1a1a", border: "1px solid #2e2e2e", borderRight: "none", color: "#e8dcc8", padding: "10px 12px", fontSize: "12px", outline: "none" }}
               />
               <button
-                onClick={() => { if (email) { alert("You're in! Welcome to the crew."); setEmail(""); } }}
-                style={{ background: "#c9a96e", border: "none", color: "#0d0d0d", padding: "10px 16px", cursor: "pointer", fontWeight: 800, fontSize: "14px" }}
-              >→</button>
+                onClick={handleSubscribe}
+                disabled={subLoading || subDone}
+                style={{ background: subDone ? "#2e7d32" : "#c9a96e", border: "none", color: subDone ? "#fff" : "#0d0d0d", padding: "10px 16px", cursor: subDone ? "default" : "pointer", fontWeight: 800, fontSize: "14px", minWidth: "40px" }}
+              >{subDone ? "✓" : subLoading ? "…" : "→"}</button>
             </div>
           </div>
 

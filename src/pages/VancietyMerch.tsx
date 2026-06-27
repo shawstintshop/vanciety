@@ -2,18 +2,68 @@
  * VancietyMerch — Official Vanciety Merch Store
  * Layout matches reference: announcement bar → nav → hero → trust bar → category grid → featured carousel → footer
  * Colors: #0d0d0d bg, #c9a96e gold, #e8dcc8 warm white
- * All purchases redirect to vanciety-shop.fourthwall.com
+ * Fourthwall Storefront API: live products + cart + checkout redirect
  */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ShoppingCart, Search, User, ChevronLeft, ChevronRight,
   Shield, Mountain, Leaf, Users, Truck, RotateCcw, Lock,
-  Instagram, Youtube,
+  Instagram, Youtube, X, Plus, Minus, Loader2, CheckCircle,
 } from "lucide-react";
 
+// ─── Fourthwall Storefront API ────────────────────────────────────────────────
+const FW_API = "https://storefront-api.fourthwall.com/v1";
+// Public storefront token — read-only, safe to expose
+const FW_TOKEN = (import.meta as any).env?.VITE_FOURTHWALL_TOKEN || "";
+
+interface FWVariant { id: string; name: string; unitPrice: { value: number; currency: string }; price?: { value: number; currency: string }; }
+interface FWProduct { id: string; slug: string; name: string; description?: string; images?: { url: string }[]; variants: FWVariant[]; tags?: string[]; }
+interface CartItem { variantId: string; productId: string; productName: string; variantName: string; price: number; currency: string; quantity: number; image?: string; }
+
+function formatPrice(amount: number, currency = "USD") {
+  // Fourthwall API returns dollar amounts (e.g. 21.89), not cents
+  return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(amount);
+}
+
+async function apiFetchProducts(): Promise<FWProduct[]> {
+  if (!FW_TOKEN) return [];
+  try {
+    const res = await fetch(`${FW_API}/collections/all/products?storefront_token=${FW_TOKEN}&size=50`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.results || [];
+  } catch { return []; }
+}
+
+async function apiCreateCart(variantId: string, quantity: number): Promise<string | null> {
+  if (!FW_TOKEN) return `https://vanciety-shop.fourthwall.com`;
+  try {
+    const res = await fetch(`${FW_API}/carts?storefront_token=${FW_TOKEN}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: [{ variantId, quantity }] }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.checkoutUrl || null;
+  } catch { return null; }
+}
+
 const FW = "https://vanciety-shop.fourthwall.com";
+
+// Fallback static featured products (shown when API token not configured)
+const STATIC_FEATURED = [
+  { id: "s1", slug: "peaks-tee", name: "PEAKS TEE", description: "Premium heavyweight cotton.", images: [{ url: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80" }], variants: [{ id: "sv1", name: "Black / M", price: { value: 2999, currency: "USD" } }], tags: ["Tees"] },
+  { id: "s2", slug: "campfire-tee", name: "CAMPFIRE TEE", description: "Soft ringspun cotton.", images: [{ url: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&q=80" }], variants: [{ id: "sv2", name: "Black / M", price: { value: 2999, currency: "USD" } }], tags: ["Tees"] },
+  { id: "s3", slug: "pines-tee", name: "PINES TEE", description: "Relaxed fit.", images: [{ url: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80" }], variants: [{ id: "sv3", name: "Black / M", price: { value: 2999, currency: "USD" } }], tags: ["Tees"] },
+  { id: "s4", slug: "explore-tee", name: "EXPLORE MORE TEE", description: "Adventure ready.", images: [{ url: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&q=80" }], variants: [{ id: "sv4", name: "Black / M", price: { value: 2999, currency: "USD" } }], tags: ["Tees"] },
+  { id: "s5", slug: "van-life-hoodie", name: "VAN LIFE HOODIE", description: "12oz fleece.", images: [{ url: "https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80" }], variants: [{ id: "sv5", name: "Black / M", price: { value: 5999, currency: "USD" } }], tags: ["Hoodies"] },
+  { id: "s6", slug: "crewneck", name: "CREWNECK", description: "Heavyweight fleece.", images: [{ url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80" }], variants: [{ id: "sv6", name: "Black / M", price: { value: 5999, currency: "USD" } }], tags: ["Hoodies"] },
+  { id: "s7", slug: "vanciety-hat", name: "VANCIETY HAT", description: "Structured snapback.", images: [{ url: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80" }], variants: [{ id: "sv7", name: "Black / One Size", price: { value: 3499, currency: "USD" } }], tags: ["Hats"] },
+  { id: "s8", slug: "travel-mug", name: "TRAVEL MUG", description: "20oz insulated.", images: [{ url: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80" }], variants: [{ id: "sv8", name: "Matte Black", price: { value: 2999, currency: "USD" } }], tags: ["Accessories"] },
+] as FWProduct[];
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/94256494/JRiSVZqcQng3CprwFxMAGR/merch-hero-aiUTgQUQy5yTcTuk8bRj8R.png";
 
@@ -47,6 +97,50 @@ const TRUST = [
 export default function VancietyMerch() {
   const [email, setEmail] = useState("");
   const carousel = useRef<HTMLDivElement>(null);
+  const [liveProducts, setLiveProducts] = useState<FWProduct[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [checkingOut, setCheckingOut] = useState(false);
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  // Try to load live products from Fourthwall API
+  useEffect(() => {
+    apiFetchProducts().then((products) => {
+      if (products.length > 0) setLiveProducts(products);
+    });
+  }, []);
+
+  const displayProducts = liveProducts.length > 0 ? liveProducts : STATIC_FEATURED;
+  const cartCount = cart.reduce((s, i) => s + i.quantity, 0);
+  const cartTotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+  const cartCurrency = cart[0]?.currency || "USD";
+
+  const addToCart = (product: FWProduct) => {
+    const variant = product.variants[0];
+    if (!variant) return;
+    setCart((prev) => {
+      const existing = prev.find((i) => i.variantId === variant.id);
+      const priceObj = variant.unitPrice || variant.price || { value: 0, currency: "USD" };
+      if (existing) return prev.map((i) => i.variantId === variant.id ? { ...i, quantity: i.quantity + 1 } : i);
+      return [...prev, { variantId: variant.id, productId: product.id, productName: product.name, variantName: variant.name, price: priceObj.value, currency: priceObj.currency, quantity: 1, image: product.images?.[0]?.url }];
+    });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1800);
+  };
+
+  const removeFromCart = (variantId: string) => setCart((prev) => prev.filter((i) => i.variantId !== variantId));
+  const updateQty = (variantId: string, qty: number) => {
+    if (qty <= 0) removeFromCart(variantId);
+    else setCart((prev) => prev.map((i) => i.variantId === variantId ? { ...i, quantity: qty } : i));
+  };
+
+  const handleCheckout = async () => {
+    if (cart.length === 0) return;
+    setCheckingOut(true);
+    const url = await apiCreateCart(cart[0].variantId, cart[0].quantity);
+    setCheckingOut(false);
+    window.open(url || FW, "_blank");
+  };
 
   const scroll = (dir: "left" | "right") => {
     carousel.current?.scrollBy({ left: dir === "left" ? -320 : 320, behavior: "smooth" });
@@ -153,7 +247,7 @@ export default function VancietyMerch() {
         ))}
       </div>
 
-      {/* Featured Collections */}
+      {/* Featured Collections — Live from Fourthwall API or static fallback */}
       <div style={{ padding: "56px 24px 40px", maxWidth: "1400px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "32px", display: "flex", alignItems: "center", justifyContent: "center", gap: "16px" }}>
           <span style={{ color: "#c9a96e" }}>✦</span>
@@ -165,20 +259,30 @@ export default function VancietyMerch() {
             <ChevronLeft size={18} />
           </button>
           <div ref={carousel} style={{ display: "flex", gap: "12px", overflowX: "auto", scrollbarWidth: "none", paddingBottom: "4px" }}>
-            {FEATURED.map((p) => (
-              <a key={p.name} href={FW} target="_blank" rel="noopener noreferrer"
-                style={{ flexShrink: 0, width: "180px", textDecoration: "none" }}>
-                <div style={{ width: "180px", height: "180px", overflow: "hidden", background: "#1a1a1a", marginBottom: "10px" }}>
-                  <img src={p.img} alt={p.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.3s ease" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                  />
+            {displayProducts.map((p) => {
+              const isAdded = addedId === p.id;
+              const priceObj = p.variants[0]?.unitPrice || p.variants[0]?.price;
+              return (
+                <div key={p.id} style={{ flexShrink: 0, width: "180px" }}>
+                  <div style={{ width: "180px", height: "180px", overflow: "hidden", background: "#1a1a1a", marginBottom: "10px", position: "relative", cursor: "pointer" }}
+                    onClick={() => window.open(liveProducts.length > 0 ? `${FW}/products/${p.slug}` : FW, "_blank")}>
+                    <img src={p.images?.[0]?.url || ""} alt={p.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.3s ease" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                    />
+                  </div>
+                  <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", color: "#e8dcc8", textTransform: "uppercase" }}>{p.name}</div>
+                  {priceObj && <div style={{ fontSize: "12px", color: "#c9a96e", marginTop: "3px" }}>{formatPrice(priceObj.value, priceObj.currency)}</div>}
+                  <button
+                    onClick={() => addToCart(p)}
+                    style={{ marginTop: "8px", width: "100%", background: isAdded ? "#22c55e" : "#c9a96e", color: "#0d0d0d", border: "none", padding: "7px 0", fontSize: "10px", fontWeight: 800, letterSpacing: "0.1em", cursor: "pointer", transition: "background 0.2s", display: "flex", alignItems: "center", justifyContent: "center", gap: "5px" }}
+                  >
+                    {isAdded ? <><CheckCircle size={12} /> ADDED</> : <><ShoppingCart size={12} /> ADD TO CART</>}
+                  </button>
                 </div>
-                <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", color: "#e8dcc8", textTransform: "uppercase" }}>{p.name}</div>
-                <div style={{ fontSize: "12px", color: "#c9a96e", marginTop: "3px" }}>{p.price}</div>
-              </a>
-            ))}
+              );
+            })}
           </div>
           <button onClick={() => scroll("right")} style={{ position: "absolute", right: "-20px", top: "50%", transform: "translateY(-50%)", zIndex: 10, background: "#1a1a1a", border: "1px solid #2e2e2e", color: "#e8dcc8", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
             <ChevronRight size={18} />
@@ -186,64 +290,70 @@ export default function VancietyMerch() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer style={{ background: "#0a0a0a", borderTop: "1px solid #2e2e2e", padding: "48px 24px 32px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "40px", marginBottom: "40px" }}>
-            <div>
-              <img src="/images/vanciety-logo-badge.png" alt="Vanciety" style={{ height: "56px", marginBottom: "12px" }} />
-              <p style={{ fontSize: "12px", color: "#777", lineHeight: 1.6 }}>More than a brand.<br />It's a way of life.</p>
+      {/* Floating Cart Button */}
+      {cartCount > 0 && (
+        <button
+          onClick={() => setCartOpen(true)}
+          style={{ position: "fixed", bottom: "28px", right: "28px", zIndex: 100, background: "#c9a96e", color: "#0d0d0d", border: "none", borderRadius: "50px", padding: "14px 22px", display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", fontWeight: 800, cursor: "pointer", boxShadow: "0 4px 24px rgba(201,169,110,0.4)" }}
+        >
+          <ShoppingCart size={18} />
+          Cart ({cartCount}) — {formatPrice(cartTotal, cartCurrency)}
+        </button>
+      )}
+
+      {/* Cart Drawer */}
+      {cartOpen && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 200 }}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)" }} onClick={() => setCartOpen(false)} />
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "min(380px, 100vw)", background: "#0d0d0d", borderLeft: "1px solid #2e2e2e", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px", borderBottom: "1px solid #2e2e2e" }}>
+              <span style={{ color: "#e8dcc8", fontWeight: 800, fontSize: "15px", letterSpacing: "0.08em" }}>YOUR CART ({cartCount})</span>
+              <button onClick={() => setCartOpen(false)} style={{ background: "none", border: "none", color: "#777", cursor: "pointer" }}><X size={20} /></button>
             </div>
-            <div>
-              <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", color: "#e8dcc8", marginBottom: "8px", textTransform: "uppercase" }}>JOIN THE CREW</div>
-              <p style={{ fontSize: "12px", color: "#777", marginBottom: "12px", lineHeight: 1.5 }}>Get early access to drops, exclusive offers & more.</p>
-              <div style={{ display: "flex" }}>
-                <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)}
-                  style={{ flex: 1, background: "#1a1a1a", border: "1px solid #2e2e2e", borderRight: "none", color: "#e8dcc8", padding: "10px 12px", fontSize: "12px", outline: "none" }} />
-                <button onClick={() => { if (email) { alert("You're in! Welcome to the crew."); setEmail(""); } }}
-                  style={{ background: "#c9a96e", border: "none", color: "#0d0d0d", padding: "10px 16px", cursor: "pointer", fontWeight: 800, fontSize: "14px" }}>→</button>
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", color: "#e8dcc8", marginBottom: "12px", textTransform: "uppercase" }}>FOLLOW THE JOURNEY</div>
-              <p style={{ fontSize: "12px", color: "#777", marginBottom: "12px" }}>@vanciety.co</p>
-              <div style={{ display: "flex", gap: "12px" }}>
-                <a href="https://instagram.com/vanciety.co" target="_blank" rel="noopener noreferrer" style={{ color: "#777" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}><Instagram size={20} /></a>
-                <a href="https://youtube.com/@vanciety" target="_blank" rel="noopener noreferrer" style={{ color: "#777" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}><Youtube size={20} /></a>
-              </div>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-              {[
-                { icon: Lock, label: "SECURE CHECKOUT", sub: "Safe, fast & encrypted." },
-                { icon: RotateCcw, label: "HASSLE FREE RETURNS", sub: "30 day returns on all orders." },
-                { icon: Truck, label: "FAST SHIPPING", sub: "Ships within 3-5 business days." },
-              ].map((b) => (
-                <div key={b.label} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                  <b.icon size={15} style={{ color: "#c9a96e", flexShrink: 0, marginTop: "2px" }} />
-                  <div>
-                    <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.08em", color: "#e8dcc8" }}>{b.label}</div>
-                    <div style={{ fontSize: "10px", color: "#555", marginTop: "2px" }}>{b.sub}</div>
+            <div style={{ flex: 1, overflowY: "auto", padding: "16px" }}>
+              {cart.length === 0 ? (
+                <div style={{ textAlign: "center", padding: "40px 0", color: "#555" }}>
+                  <ShoppingCart size={36} style={{ margin: "0 auto 12px", opacity: 0.3 }} />
+                  <p>Your cart is empty</p>
+                </div>
+              ) : cart.map((item) => (
+                <div key={item.variantId} style={{ display: "flex", gap: "12px", padding: "12px 0", borderBottom: "1px solid #1e1e1e" }}>
+                  {item.image && <img src={item.image} alt={item.productName} style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: "6px" }} />}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ color: "#e8dcc8", fontSize: "12px", fontWeight: 700 }}>{item.productName}</div>
+                    <div style={{ color: "#777", fontSize: "11px", marginTop: "2px" }}>{item.variantName}</div>
+                    <div style={{ color: "#c9a96e", fontSize: "13px", fontWeight: 700, marginTop: "4px" }}>{formatPrice(item.price, item.currency)}</div>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
+                    <button onClick={() => removeFromCart(item.variantId)} style={{ background: "none", border: "none", color: "#555", cursor: "pointer" }}><X size={14} /></button>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px", border: "1px solid #2e2e2e", borderRadius: "20px", padding: "4px 10px" }}>
+                      <button onClick={() => updateQty(item.variantId, item.quantity - 1)} style={{ background: "none", border: "none", color: "#e8dcc8", cursor: "pointer" }}><Minus size={12} /></button>
+                      <span style={{ color: "#e8dcc8", fontSize: "12px", fontWeight: 700, minWidth: "16px", textAlign: "center" }}>{item.quantity}</span>
+                      <button onClick={() => updateQty(item.variantId, item.quantity + 1)} style={{ background: "none", border: "none", color: "#e8dcc8", cursor: "pointer" }}><Plus size={12} /></button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-          <div style={{ borderTop: "1px solid #1e1e1e", paddingTop: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
-            <p style={{ fontSize: "11px", color: "#444" }}>© 2025 Vanciety. All rights reserved.</p>
-            <div style={{ display: "flex", gap: "20px" }}>
-              {["Privacy Policy", "Terms of Service", "Shipping Policy"].map((label) => (
-                <a key={label} href="#" style={{ fontSize: "11px", color: "#444", textDecoration: "none" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a96e")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#444")}>{label}</a>
-              ))}
-            </div>
+            {cart.length > 0 && (
+              <div style={{ padding: "16px 20px", borderTop: "1px solid #2e2e2e" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "12px" }}>
+                  <span style={{ color: "#777", fontSize: "13px" }}>Subtotal</span>
+                  <span style={{ color: "#e8dcc8", fontWeight: 800 }}>{formatPrice(cartTotal, cartCurrency)}</span>
+                </div>
+                <button
+                  onClick={handleCheckout}
+                  disabled={checkingOut}
+                  style={{ width: "100%", background: "#c9a96e", color: "#0d0d0d", border: "none", padding: "14px", fontSize: "12px", fontWeight: 800, letterSpacing: "0.12em", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
+                >
+                  {checkingOut ? <><Loader2 size={14} style={{ animation: "spin 1s linear infinite" }} /> LOADING…</> : <>CHECKOUT → FOURTHWALL</>}
+                </button>
+                <p style={{ textAlign: "center", fontSize: "10px", color: "#555", marginTop: "8px" }}>Secure checkout powered by Fourthwall</p>
+              </div>
+            )}
           </div>
         </div>
-      </footer>
+      )}
     </div>
   );
 }

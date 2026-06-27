@@ -12,7 +12,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { verifiedVideos } from "@/data/vancietyVerified";
-import VancietyConceptVisual from "@/components/VancietyConceptVisual";
 
 type CompactVideo = {
   id?: string;
@@ -83,16 +82,6 @@ const LatestVideos = () => {
   return (
     <section className="border-b border-border bg-background py-10 topo-section-dense">
       <div className="container mx-auto max-w-5xl px-4">
-        <VancietyConceptVisual
-          compact
-          className="mb-6"
-          src="/images/van-build-workshop.jpg"
-          alt="Van build workshop image"
-          title="Real videos, real builds"
-          caption="A smaller, curated set of verified YouTube videos keeps the section fast and focused."
-          badge="Videos"
-        />
-
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="mb-2 flex items-center gap-2">

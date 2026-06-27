@@ -39,6 +39,9 @@ import {
   Compass,
   Shirt,
   X,
+  Hammer,
+  Printer,
+  Rss,
 } from "lucide-react";
 import { FormEvent, useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -90,13 +93,6 @@ const Header = () => {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50">
-      {/* Gold Announcement Bar */}
-      <div style={{ background: "#1a1408", borderBottom: "1px solid rgba(201,169,110,0.3)", padding: "9px 16px", textAlign: "center" }}>
-        <span style={{ color: "#c9a96e", fontSize: "12px", letterSpacing: "0.12em", fontWeight: 700 }}>
-          ⚡ FREE SHIPPING ON ORDERS $75+ &nbsp;·&nbsp; COMMUNITY · GEAR · CONNECT · KNOWLEDGE ⚡
-        </span>
-      </div>
-
       {/* Main Nav Bar */}
       <nav style={{ background: scrolled ? "rgba(13,13,13,0.97)" : "#0d0d0d", borderBottom: "1px solid rgba(46,46,46,0.8)", backdropFilter: scrolled ? "blur(12px)" : "none", transition: "background 0.2s ease" }}>
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 md:px-6" style={{ height: "64px" }}>
@@ -112,7 +108,7 @@ const Header = () => {
             {/* SHOP dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className={navLinkClass(isGroupActive(["/marketplace", "/shop", "/vendors", "/van-intelligence", "/videos", "/merch"]))}>
+                <button className={navLinkClass(isGroupActive(["/marketplace", "/shop", "/vendors", "/van-intelligence", "/videos", "/merch", "/makers", "/3d-files"]))}>
                   SHOP <ChevronDown className="h-3 w-3 opacity-60" />
                 </button>
               </DropdownMenuTrigger>
@@ -133,6 +129,13 @@ const Header = () => {
                   )}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-[#2e2e2e]" />
+                <DropdownMenuItem onClick={() => navigate("/makers")} className={ddItem}>
+                  <Hammer className="mr-2 h-4 w-4 text-[#c9a96e]" /> Maker Marketplace
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/3d-files")} className={ddItem}>
+                  <Printer className="mr-2 h-4 w-4 text-[#c9a96e]" /> 3D Print Files
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-[#2e2e2e]" />
                 <DropdownMenuItem onClick={() => navigate("/merch")} className={ddItem}>
                   <Shirt className="mr-2 h-4 w-4 text-[#c9a96e]" /> Merch Store
                 </DropdownMenuItem>
@@ -142,19 +145,16 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* COLLECTIONS dropdown */}
+            {/* DIRECTORY dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className={navLinkClass(isGroupActive(["/manufacturers", "/companies", "/resources"]))}>
-                  COLLECTIONS <ChevronDown className="h-3 w-3 opacity-60" />
+                <button className={navLinkClass(isGroupActive(["/directory", "/manufacturers", "/companies", "/resources"]))}>
+                  DIRECTORY <ChevronDown className="h-3 w-3 opacity-60" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-52 border-[#2e2e2e] bg-[#0d0d0d] text-[#e8dcc8]">
-                <DropdownMenuItem onClick={() => navigate("/manufacturers")} className={ddItem}>
-                  <Wrench className="mr-2 h-4 w-4 text-[#c9a96e]" /> Manufacturers
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/companies")} className={ddItem}>
-                  <Package className="mr-2 h-4 w-4 text-[#c9a96e]" /> Companies
+                <DropdownMenuItem onClick={() => navigate("/directory")} className={ddItem}>
+                  <Wrench className="mr-2 h-4 w-4 text-[#c9a96e]" /> Business Directory
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/resources")} className={ddItem}>
                   <MapPin className="mr-2 h-4 w-4 text-[#c9a96e]" /> Resource Board
@@ -168,11 +168,15 @@ const Header = () => {
             {/* COMMUNITY dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/friend-finder", "/campfire", "/journals", "/icebreaker", "/spots"]))}>
+                <button className={navLinkClass(isGroupActive(["/forum", "/map", "/van-cards", "/friend-finder", "/campfire", "/journals", "/icebreaker", "/spots", "/feed"]))}>
                   COMMUNITY <ChevronDown className="h-3 w-3 opacity-60" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-52 border-[#2e2e2e] bg-[#0d0d0d] text-[#e8dcc8]">
+                <DropdownMenuItem onClick={() => navigate("/feed")} className={ddItem}>
+                  <Rss className="mr-2 h-4 w-4 text-[#c9a96e]" /> Social Feed Hub
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-[#2e2e2e]" />
                 <DropdownMenuItem onClick={() => navigate("/forum")} className={ddItem}>
                   <MessageSquare className="mr-2 h-4 w-4 text-[#c9a96e]" /> Forum
                 </DropdownMenuItem>
@@ -261,20 +265,24 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div style={{ background: "#0d0d0d", borderTop: "1px solid #2e2e2e", maxHeight: "80vh", overflowY: "auto" }}>
+      </nav>
+      {/* Mobile Menu — rendered outside nav to avoid overflow clipping */}
+      {isMenuOpen && (
+        <div style={{ background: "#0d0d0d", borderTop: "1px solid #2e2e2e", maxHeight: "calc(100vh - 64px)", overflowY: "auto", position: "absolute", top: "64px", left: 0, right: 0, zIndex: 48, boxShadow: "0 8px 32px rgba(0,0,0,0.7)" }}>
+          <div style={{ display: "contents" }}>
             <div className="mx-auto max-w-[1400px] px-4 py-5">
               <form onSubmit={handleSiteSearch} className="mb-5 flex items-center rounded border border-[#2e2e2e] bg-[#1a1a1a] px-3 py-2">
                 <Search className="mr-2 h-4 w-4 text-[#777]" />
                 <input type="search" value={siteSearch} onChange={(e) => setSiteSearch(e.target.value)} placeholder="Search parts, guides, gear..." className="min-w-0 flex-1 bg-transparent text-sm text-[#e8dcc8] outline-none placeholder:text-[#555]" />
               </form>
 
-              <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a96e]">Shop</div>
+              <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a96e]">Explore</div>
               <div className="mb-5 grid grid-cols-2 gap-2">
                 {[
                   { label: "Marketplace", to: "/marketplace", icon: Package },
-                  { label: "Vendors", to: "/vendors", icon: Wrench },
+                  { label: "Directory", to: "/directory", icon: Wrench },
+                  { label: "Maker Market", to: "/makers", icon: Hammer },
+                  { label: "3D Print Files", to: "/3d-files", icon: Printer },
                   { label: "Van Intelligence", to: "/van-intelligence", icon: Brain },
                   { label: "How-To Videos", to: "/videos", icon: Video },
                   { label: "Merch Store", to: "/merch", icon: Shirt },
@@ -289,6 +297,7 @@ const Header = () => {
               <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a96e]">Community</div>
               <div className="mb-5 grid grid-cols-2 gap-2">
                 {[
+                  { label: "Social Feed", to: "/feed", icon: Rss },
                   { label: "Events", to: "/events", icon: Calendar },
                   { label: "Forum", to: "/forum", icon: MessageSquare },
                   { label: "Van Life Spots", to: "/spots", icon: MapPin },
@@ -315,8 +324,8 @@ const Header = () => {
               </div>
             </div>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </header>
   );
 };

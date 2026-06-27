@@ -11,7 +11,7 @@ import {
   Hammer, Truck, Wrench, Compass, Tent, Package, Link2,
   ShoppingCart, Building, ChevronRight
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
@@ -76,6 +76,8 @@ const VendorSignup = () => {
   
   const [step, setStep] = useState(1); // 1=category, 2=details, 3=media, 4=confirm
   const [loading, setLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiDone, setAiDone] = useState(false);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   
@@ -97,6 +99,60 @@ const VendorSignup = () => {
   const updateForm = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
+
+  const handleAIAutofill = useCallback(async () => {
+    const url = form.website_url.trim();
+    if (!url) {
+      toast({ title: "Enter your website URL first", description: "Paste your website URL in the Website field below, then click Auto-fill.", variant: "destructive" });
+      return;
+    }
+    setAiLoading(true);
+    setAiDone(false);
+    try {
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
+      const json = await res.json();
+      const html: string = json.contents || "";
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const meta = (prop: string, name?: string) =>
+        doc.querySelector(`meta[property="${prop}"]`)?.getAttribute("content") ||
+        (name ? doc.querySelector(`meta[name="${name}"]`)?.getAttribute("content") : undefined) ||
+        "";
+      const rawTitle = meta("og:title", "title") || doc.querySelector("title")?.textContent || "";
+      const cleanName = rawTitle.replace(/[-|\u2013\u2014].*$/, "").trim();
+      const desc = meta("og:description", "description");
+      const bodyText = doc.body?.textContent || "";
+      const phoneMatch = bodyText.match(/(\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})/);
+      const locMatch = bodyText.match(/([A-Z][a-zA-Z ]+,\s*[A-Z]{2})/);
+      const hrefs = Array.from(doc.querySelectorAll("a[href]")).map((a) => (a as HTMLAnchorElement).href);
+      const ig = hrefs.find((h) => h.includes("instagram.com")) || "";
+      const fb = hrefs.find((h) => h.includes("facebook.com")) || "";
+      const yt = hrefs.find((h) => h.includes("youtube.com")) || "";
+      const headingTexts = Array.from(doc.querySelectorAll("h1,h2,h3,nav a"))
+        .map((el) => el.textContent?.trim() || "")
+        .filter((t) => t.length > 2 && t.length < 45 && !/^(home|contact|about|blog|cart|login|search|menu|close)$/i.test(t))
+        .slice(0, 8)
+        .join(", ");
+      setForm((prev) => ({
+        ...prev,
+        business_name: prev.business_name || cleanName,
+        description: prev.description || desc,
+        contact_phone: prev.contact_phone || (phoneMatch?.[1] ?? ""),
+        location: prev.location || (locMatch?.[1] ?? ""),
+        social_instagram: prev.social_instagram || ig,
+        social_facebook: prev.social_facebook || fb,
+        social_youtube: prev.social_youtube || yt,
+        services: prev.services || headingTexts,
+      }));
+      setAiDone(true);
+      toast({ title: "\u2728 Auto-fill complete!", description: "Review the fields below and adjust anything that looks off." });
+    } catch {
+      toast({ title: "Auto-fill failed", description: "Couldn't reach your site. Fill in the details manually.", variant: "destructive" });
+    } finally {
+      setAiLoading(false);
+    }
+  }, [form.website_url, toast]);
 
   const aiTags = inferSeoTags(`${form.business_name} ${form.description} ${form.services}`);
   const categoryLabel = CATEGORIES.find((category) => category.id === form.category)?.label || "Vendor";
@@ -275,6 +331,31 @@ const VendorSignup = () => {
                 <CardTitle>Business Details</CardTitle>
                 <CardDescription>Tell us about your business so customers can find you.</CardDescription>
               </CardHeader>
+              {/* AI Auto-fill banner */}
+              <div className="mx-6 mb-2 rounded-xl border border-primary/30 bg-primary/5 p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <div className="flex-1">
+                  <p className="font-semibold text-sm flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    Auto-fill from your website
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Enter your website URL below, then click the button to instantly populate your profile.</p>
+                </div>
+                <Button
+                  size="sm"
+                  variant={aiDone ? "outline" : "hero"}
+                  onClick={handleAIAutofill}
+                  disabled={aiLoading}
+                  className="shrink-0"
+                >
+                  {aiLoading ? (
+                    <><span className="animate-spin mr-1.5">⟳</span> Scanning site...</>
+                  ) : aiDone ? (
+                    <><Check className="w-3.5 h-3.5 mr-1.5 text-green-500" /> Auto-filled</>
+                  ) : (
+                    <><Sparkles className="w-3.5 h-3.5 mr-1.5" /> Auto-fill Now</>
+                  )}
+                </Button>
+              </div>
               <CardContent className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">

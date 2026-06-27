@@ -178,7 +178,6 @@ const Videos = () => {
       
       <main className="pt-28">
         <PageHero
-          heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/QcJpuuqQtVPoVvjX.jpg"
           label="Video Library"
           title="Van Life Videos"
           subtitle="Real YouTube van builds, electrical tutorials, event videos, and off-road van content with verified links."

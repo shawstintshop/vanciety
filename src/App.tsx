@@ -18,6 +18,7 @@ import CompanyProfile from "./pages/CompanyProfile";
 import VendorDashboard from "./pages/VendorDashboard";
 import ForVendors from "./pages/ForVendors";
 import Auth from "./pages/Auth";
+import Waitlist from "./pages/Waitlist";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -37,7 +38,12 @@ import TripJournals from "./pages/TripJournals";
 import ResourceBoard from "./pages/ResourceBoard";
 import Icebreaker from "./pages/Icebreaker";
 import VanLifeSpots from "./pages/VanLifeSpots";
+import AdminVendors from "./pages/AdminVendors";
 import Events from "./pages/Events";
+import Directory from "./pages/Directory";
+import Makers from "./pages/Makers";
+import PrintFiles from "./pages/PrintFiles";
+import SocialFeed from "./pages/SocialFeed";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
@@ -88,6 +94,7 @@ const App = () => (
               <Route path="/for-vendors" element={<ForVendors />} />
               <Route path="/dashboard/vendor" element={<VendorDashboard />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/waitlist" element={<Waitlist />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/gps" element={<GPSTracking />} />
@@ -103,6 +110,11 @@ const App = () => (
               <Route path="/journals" element={<TripJournals />} />
               <Route path="/resources" element={<ResourceBoard />} />
               <Route path="/icebreaker" element={<Icebreaker />} />
+              <Route path="/admin/vendors" element={<AdminVendors />} />
+              <Route path="/directory" element={<Directory />} />
+              <Route path="/makers" element={<Makers />} />
+              <Route path="/3d-files" element={<PrintFiles />} />
+              <Route path="/feed" element={<SocialFeed />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
