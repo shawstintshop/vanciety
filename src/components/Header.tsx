@@ -139,6 +139,9 @@ const Header = () => {
                 <DropdownMenuItem onClick={() => navigate("/extrusion")} className={ddItem}>
                   <Ruler className="mr-2 h-4 w-4 text-[#c9a96e]" /> Extrusion Guide
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/van-builder")} className={ddItem}>
+                  <Wrench className="mr-2 h-4 w-4 text-[#c9a96e]" /> Galley Builder
+                </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-[#2e2e2e]" />
                 <DropdownMenuItem onClick={() => navigate("/merch")} className={ddItem}>
                   <Shirt className="mr-2 h-4 w-4 text-[#c9a96e]" /> Merch Store
@@ -291,6 +294,7 @@ const Header = () => {
                   { label: "Maker Market", to: "/makers", icon: Hammer },
                   { label: "3D Print Files", to: "/3d-files", icon: Printer },
                   { label: "Extrusion Guide", to: "/extrusion", icon: Ruler },
+                  { label: "Galley Builder", to: "/van-builder", icon: Wrench },
                   { label: "Build Guides", to: "/build-resources", icon: BookOpen },
                   { label: "Van Intelligence", to: "/van-intelligence", icon: Brain },
                   { label: "How-To Videos", to: "/videos", icon: Video },

@@ -44,6 +44,7 @@ import Directory from "./pages/Directory";
 import Makers from "./pages/Makers";
 import PrintFiles from "./pages/PrintFiles";
 import ExtrusionGuide from '@/pages/ExtrusionGuide';
+import VanBuilder from './pages/VanBuilder';
 import Extrusion from "./pages/Extrusion";
 import Resources from "./pages/Resources";
 import SocialFeed from "./pages/SocialFeed";
@@ -121,6 +122,7 @@ const App = () => (
               <Route path="/3d-files" element={<PrintFiles />} />
               <Route path="/extrusion" element={<Extrusion />} />
               <Route path="/extrusion-guide" element={<ExtrusionGuide />} />
+              <Route path="/van-builder" element={<VanBuilder />} />
               <Route path="/build-resources" element={<Resources />} />
               <Route path="/feed" element={<SocialFeed />} />
               <Route path="/wrench-day" element={<WrenchDay />} />
