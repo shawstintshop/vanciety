@@ -50,6 +50,8 @@ import Resources from "./pages/Resources";
 import SocialFeed from "./pages/SocialFeed";
 import WrenchDay from "./pages/WrenchDay";
 import ScrollToTop from "./components/ScrollToTop";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
 
@@ -100,13 +102,13 @@ const App = () => (
               <Route path="/dashboard/vendor" element={<VendorDashboard />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/waitlist" element={<Waitlist />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/gps" element={<GPSTracking />} />
-              <Route path="/van-cards" element={<VanCards />} />
-              <Route path="/van-intelligence" element={<VanIntelligence />} />
-              <Route path="/friend-finder" element={<FriendFinder />} />
-              <Route path="/ai" element={<AIConcierge />} />
+              <Route path="/dashboard" element={<ProtectedRoute label="Member Dashboard"><Dashboard /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute label="Your Profile"><Profile /></ProtectedRoute>} />
+              <Route path="/gps" element={<ProtectedRoute label="GPS Tracking"><GPSTracking /></ProtectedRoute>} />
+              <Route path="/van-cards" element={<ProtectedRoute label="Van Cards"><VanCards /></ProtectedRoute>} />
+              <Route path="/van-intelligence" element={<ProtectedRoute label="Van Intelligence"><VanIntelligence /></ProtectedRoute>} />
+              <Route path="/friend-finder" element={<ProtectedRoute label="Friend Finder"><FriendFinder /></ProtectedRoute>} />
+              <Route path="/ai" element={<ProtectedRoute label="AI Concierge"><AIConcierge /></ProtectedRoute>} />
               <Route path="/about" element={<About />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
@@ -117,6 +119,7 @@ const App = () => (
               <Route path="/resource-board" element={<ResourceBoard />} />
               <Route path="/icebreaker" element={<Icebreaker />} />
               <Route path="/admin/vendors" element={<AdminVendors />} />
+              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/makers" element={<Makers />} />
               <Route path="/3d-files" element={<PrintFiles />} />
