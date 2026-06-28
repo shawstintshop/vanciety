@@ -61,7 +61,7 @@ const Index = () => {
             </Badge>
 
             <div className="max-w-3xl">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
                 Everything you need
                 <br />
                 <span className="text-primary">for van life, in one place.</span>
@@ -83,7 +83,7 @@ const Index = () => {
                 </Button>
               </div>
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              <div className="mt-8 grid gap-3 grid-cols-1 sm:grid-cols-3">
                 {[
                   { title: "Repair Guides", desc: "Step-by-step help for common van issues.", to: "/van-intelligence" },
                   { title: "Events Near You", desc: "Rallies, meetups, and workshops on the map.", to: "/events" },
@@ -215,7 +215,7 @@ const Index = () => {
                   style={{ background: "#c9a96e20", color: "#c9a96e", border: "1px solid #c9a96e40" }}>
                   Official Gear
                 </Badge>
-                <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-4">
+                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
                   Build Experiences<br />
                   <span style={{ color: "#c9a96e" }}>Not Things.</span>
                 </h2>
@@ -254,7 +254,7 @@ const Index = () => {
               </div>
 
               {/* Right — product grid preview */}
-              <div className="flex-shrink-0 w-full lg:w-[480px]">
+              <div className="flex-shrink-0 w-full max-w-sm mx-auto lg:mx-0 lg:max-w-none lg:w-[480px]">
                 <div className="grid grid-cols-3 gap-2">
                   {[
                     { label: "Badge Tee", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&q=80" },

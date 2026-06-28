@@ -205,8 +205,21 @@ const SocialFeed = () => {
         Promise.all(NEWS_FEEDS.slice(0, 2).map((f) => fetchNewsFeed(f.url, f.name))).then((r) => r.flat()),
       ]);
 
+      // Van-only filter — block generic automotive/non-van content
+      const VAN_BLOCK_TERMS = [
+        "car and driver", "how to buy", "how to lease", "trade-in", "lease end",
+        "uv light sanitize", "crash test", "chevy blazer", "pontiac aztek",
+        "hot wheels", "jaguar xj", "morgan coupe", "convertible comparison",
+        "camry solara", "funeral", "obituary", "fleet equipment", "buy or lease",
+        "new car", "used car", "car insurance", "car loan", "kia want to",
+        "hyundai and kia", "car interiors with uv", "trade in your car"
+      ];
+      const isVanContent = (item: FeedItem) => {
+        const text = (item.title + " " + item.description).toLowerCase();
+        return !VAN_BLOCK_TERMS.some((kw) => text.includes(kw));
+      };
       const all = [...redditResults, ...ytResults, ...newsResults]
-        .filter((item) => item.title && item.url)
+        .filter((item) => item.title && item.url && isVanContent(item))
         .sort((a, b) => b.published.getTime() - a.published.getTime());
 
       setItems(all);

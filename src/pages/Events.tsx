@@ -167,7 +167,7 @@ const Events = () => {
               </Button>
             </div>
 
-            <div className="mb-6 flex flex-wrap gap-2">
+            <div className="mb-6 flex gap-2 overflow-x-auto pb-2 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
               {FILTER_TABS.map((tab) => (
                 <button key={tab.value} onClick={() => setActiveFilter(tab.value)}
                   className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${activeFilter === tab.value ? "border-primary bg-primary/10 text-amber-300" : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}>

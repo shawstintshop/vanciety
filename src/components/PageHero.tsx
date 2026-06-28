@@ -27,7 +27,7 @@ export default function PageHero({
   compact = false,
   heroImage,
 }: PageHeroProps) {
-  const minH = compact ? "280px" : "420px";
+  const minH = compact ? "240px" : "380px";
 
   if (heroImage) {
     return (
@@ -48,7 +48,7 @@ export default function PageHero({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-6 pb-12 pt-28">
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-6 pb-10 pt-20 sm:pb-12 sm:pt-28">
           {(label || Icon) && (
             <div className="flex items-center gap-2 mb-3">
               {Icon && <Icon className="w-5 h-5 text-[#c9a96e]" />}
@@ -61,7 +61,7 @@ export default function PageHero({
           )}
           <h1
             className="font-display tracking-wider text-white uppercase leading-none"
-            style={{ fontSize: compact ? "clamp(28px,4vw,42px)" : "clamp(36px,6vw,72px)", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
+            style={{ fontSize: compact ? "clamp(22px,5vw,42px)" : "clamp(26px,7vw,72px)", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
           >
             {title}
           </h1>
