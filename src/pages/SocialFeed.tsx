@@ -62,11 +62,14 @@ const YT_CHANNELS = [
 // ─── Van life subreddits ──────────────────────────────────────────────────────
 const SUBREDDITS = ["vandwellers", "vanlife", "overlanding", "CampingandHiking", "SprinterVans"];
 
-// ─── Van life news RSS feeds ──────────────────────────────────────────────────
+// ─── Van life news RSS feeds — van/overland/Sprinter ONLY ────────────────────
 const NEWS_FEEDS = [
   { url: "https://www.thevanlifeguide.com/feed/", name: "Van Life Guide" },
   { url: "https://www.mortonsonthemove.com/feed/", name: "Mortons on the Move" },
   { url: "https://www.explorist.life/feed/", name: "Explorist Life" },
+  { url: "https://gnomad.com/feed/", name: "Gnomad Home" },
+  { url: "https://www.outsidevan.com/blog/feed/", name: "Outside Van" },
+  { url: "https://www.faroutride.com/feed/", name: "Farout Ride" },
 ];
 
 // ─── CORS proxy ───────────────────────────────────────────────────────────────
@@ -202,21 +205,32 @@ const SocialFeed = () => {
       const [redditResults, ytResults, newsResults] = await Promise.all([
         Promise.all(SUBREDDITS.map((s) => fetchRedditPosts(s))).then((r) => r.flat()),
         Promise.all(YT_CHANNELS.slice(0, 3).map((c) => fetchYouTubeChannel(c.id, c.name))).then((r) => r.flat()),
-        Promise.all(NEWS_FEEDS.slice(0, 2).map((f) => fetchNewsFeed(f.url, f.name))).then((r) => r.flat()),
+        Promise.all(NEWS_FEEDS.map((f) => fetchNewsFeed(f.url, f.name))).then((r) => r.flat()),
       ]);
 
-      // Van-only filter — block generic automotive/non-van content
-      const VAN_BLOCK_TERMS = [
-        "car and driver", "how to buy", "how to lease", "trade-in", "lease end",
-        "uv light sanitize", "crash test", "chevy blazer", "pontiac aztek",
-        "hot wheels", "jaguar xj", "morgan coupe", "convertible comparison",
-        "camry solara", "funeral", "obituary", "fleet equipment", "buy or lease",
-        "new car", "used car", "car insurance", "car loan", "kia want to",
-        "hyundai and kia", "car interiors with uv", "trade in your car"
+      // Van-only ALLOWLIST — item MUST contain at least one van/overland keyword
+      const VAN_REQUIRED_TERMS = [
+        "van", "sprinter", "transit", "promaster", "revel", "winnebago",
+        "camper", "vanlife", "van life", "overland", "overlanding",
+        "4x4", "off-road", "offroad", "off road", "van build", "van conversion",
+        "van tour", "stealth camp", "boondock", "van dwelling", "van living",
+        "van dweller", "solar panel", "lithium battery", "diesel heater",
+        "maxxair", "fan-tastic", "victron", "dometic", "webasto", "espar",
+        "aluminess", "van maintenance", "van repair", "van upgrade", "van hack",
+        "van product", "van gear", "van accessory", "van expo", "van rally",
+        "van meetup", "van event", "vanfest", "rubber tramp", "xscapers",
+        "adventure van", "camper van", "campervan", "van life", "van build",
+        "pnw camp", "northwest camp", "washington camp", "oregon camp",
+        "skoolie", "van conversion", "sprinter van", "transit van"
       ];
       const isVanContent = (item: FeedItem) => {
-        const text = (item.title + " " + item.description).toLowerCase();
-        return !VAN_BLOCK_TERMS.some((kw) => text.includes(kw));
+        const text = (item.title + " " + (item.description || "")).toLowerCase();
+        // Reddit posts from van subreddits are always van content
+        if (item.source === "reddit") return true;
+        // YouTube from our curated channels is always van content
+        if (item.source === "youtube") return true;
+        // News items must match at least one van keyword
+        return VAN_REQUIRED_TERMS.some((kw) => text.includes(kw));
       };
       const all = [...redditResults, ...ytResults, ...newsResults]
         .filter((item) => item.title && item.url && isVanContent(item))
