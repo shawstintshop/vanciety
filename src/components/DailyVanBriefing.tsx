@@ -164,12 +164,34 @@ const DailyVanBriefing = () => {
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState<string | null>(null);
 
+  // Van-only content guard — blocks off-topic automotive/funeral/fleet items
+  const filterVanOnly = (data: VanNewsDigest): VanNewsDigest => {
+    const BLOCKED_SOURCES = new Set([
+      "Verkuilen-Van Deurzen Family Funeral Home",
+      "Fleet Equipment Magazine",
+      "Car and Driver",
+    ]);
+    const BLOCKED_KW = [
+      "funeral home", "how to buy or lease", "lease a new car",
+      "safety evaluations, until now", "ameriBRAKES", "brake coverage for transit",
+      "big trucks like the ford", "eluded safety evaluations",
+    ];
+    return {
+      ...data,
+      items: (data.items || []).filter((item) => {
+        if (BLOCKED_SOURCES.has(item.source)) return false;
+        const t = item.title.toLowerCase();
+        return !BLOCKED_KW.some((kw) => t.includes(kw));
+      }),
+    };
+  };
+
   useEffect(() => {
     let isMounted = true;
     fetch(`/data/van-news-digest.json?ts=${Date.now()}`)
       .then((response) => (response.ok ? response.json() : fallbackDigest))
       .then((data: VanNewsDigest) => {
-        if (isMounted) setDigest(data);
+        if (isMounted) setDigest(filterVanOnly(data));
       })
       .catch(() => {
         if (isMounted) setDigest(fallbackDigest);
