@@ -44,6 +44,7 @@ import Directory from "./pages/Directory";
 import Makers from "./pages/Makers";
 import PrintFiles from "./pages/PrintFiles";
 import SocialFeed from "./pages/SocialFeed";
+import WrenchDay from "./pages/WrenchDay";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import SiteFooter from "./components/SiteFooter";
@@ -115,6 +116,7 @@ const App = () => (
               <Route path="/makers" element={<Makers />} />
               <Route path="/3d-files" element={<PrintFiles />} />
               <Route path="/feed" element={<SocialFeed />} />
+              <Route path="/wrench-day" element={<WrenchDay />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
