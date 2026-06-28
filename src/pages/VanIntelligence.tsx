@@ -6,20 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, BookOpen, CheckCircle2, ExternalLink, Gauge, MapPinned, ShieldAlert, TriangleAlert, Video, Wrench, BookmarkPlus, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, BookOpen, CheckCircle2, ExternalLink, Gauge, MapPinned, ShieldAlert, TriangleAlert, Video, Wrench, BookmarkPlus, Sparkles, Loader2, Search, Users } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-const VANA_FRAMES = [
-  { src: "/images/vana/vana-friendly-welcome.jpg", alt: "Vana friendly welcome" },
-  { src: "/images/vana/vana-problem-solving.jpg", alt: "Vana problem solving" },
-  { src: "/images/vana/vana-route-guidance.jpg", alt: "Vana route guidance" },
-  { src: "/images/vana/vana-tech-support.jpg", alt: "Vana tech support" },
-  { src: "/images/vana/vana-community-finder.jpg", alt: "Vana community finder" },
-  { src: "/images/vana/vana-adventure-ready.jpg", alt: "Vana adventure ready" },
-];
 
 const PRECHECKS = [
   "Rough idle, hesitation, reduced power, or limp mode.",
@@ -129,36 +120,24 @@ const TOOL_LIST = [
   "OBD scanner for codes and verification",
 ];
 
-const visualSteps = [
-  { title: "1. Start here", image: VANA_FRAMES[0].src, note: "Use Vana to route to the right path." },
-  { title: "2. Problem solve", image: VANA_FRAMES[1].src, note: "Match the symptom to the EGR issue." },
-  { title: "3. Route guidance", image: VANA_FRAMES[2].src, note: "Open the factory source and part lookup." },
-  { title: "4. Tech support", image: VANA_FRAMES[3].src, note: "Watch a teardown video before touching the van." },
-  { title: "5. Community finder", image: VANA_FRAMES[4].src, note: "Check forums for owner-confirmed fixes." },
-  { title: "6. Adventure ready", image: VANA_FRAMES[5].src, note: "Clean, test, and move back to the road." },
-];
-
 const visualCards = [
   {
-    title: "A. Visual route map",
-    copy: "Six frames that show the visitor the path from symptom to source to repair.",
-    compact: false,
-    image: VANA_FRAMES[0].src,
-    badge: "Route",
+    title: "A. Diagnose the symptom",
+    copy: "Start with what you're experiencing — rough idle, limp mode, fault codes — before touching anything.",
+    badge: "Diagnose",
+    Icon: Search,
   },
   {
-    title: "B. Factory + video support",
-    copy: "Keep the visual cards smaller than the text sections so they read as cues, not billboards.",
-    compact: true,
-    image: VANA_FRAMES[2].src,
-    badge: "Support",
+    title: "B. Factory source first",
+    copy: "Cross-reference the official Mercedes-Benz service documentation and parts lookup before ordering.",
+    badge: "Factory",
+    Icon: BookOpen,
   },
   {
     title: "C. Community confirmation",
-    copy: "Use one compact image card for forum and owner evidence.",
-    compact: true,
-    image: VANA_FRAMES[4].src,
+    copy: "Verify the fix with real owner reports from Sprinter-Source, MBWorld, and van life forums.",
     badge: "Community",
+    Icon: Users,
   },
 ];
 
@@ -429,8 +408,8 @@ const VanIntelligence = () => {
           <div className="grid gap-6 lg:grid-cols-3">
             {visualCards.map((card) => (
               <Card key={card.title} className="overflow-hidden border-border/80 bg-card/90 shadow-lg">
-                <div className={card.compact ? "aspect-[4/3]" : "aspect-video"}>
-                  <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" />
+                <div className="flex items-center justify-center bg-[#111] border-b border-border/60 py-10">
+                  <card.Icon className="h-14 w-14 text-primary opacity-75" />
                 </div>
                 <CardHeader className="space-y-2">
                   <Badge className="w-fit bg-primary text-primary-foreground">{card.badge}</Badge>
