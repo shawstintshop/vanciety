@@ -78,15 +78,15 @@ export default function HomeFeed({ allowedCategories }: HomeFeedProps) {
           </div>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex gap-2 flex-wrap mb-8">
+        {/* Category tabs — horizontal scroll on mobile */}
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
           {visibleTabs.map((cat) => {
             const meta = CATEGORY_META[cat];
             return (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-150
+                className={`shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-150
                   ${activeCategory === cat
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"

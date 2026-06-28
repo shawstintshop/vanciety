@@ -279,7 +279,7 @@ export default function News() {
                     Real source links only
                   </Badge>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
                   {eventCategories.map((category, index) => (
                     <Badge key={category} variant={index === 0 ? "default" : "outline"} className="px-3 py-1">
                       {category}

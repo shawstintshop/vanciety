@@ -12,7 +12,7 @@ import TopoBackground from "@/components/TopoBackground";
 import DailyVanBriefing from "@/components/DailyVanBriefing";
 import LatestVideos from "@/components/LatestVideos";
 import HomeFeed from "@/components/HomeFeed";
-import VannaBubble from "@/components/VannaBubble";
+import VanaBubble from "@/components/VanaBubble";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -286,7 +286,7 @@ const Index = () => {
         <HomeFeed />
       </main>
 
-      <VannaBubble />
+      <VanaBubble />
     </div>
   );
 };

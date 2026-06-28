@@ -194,7 +194,7 @@ const Videos = () => {
               />
             </div>
           </div>
-          <div className="flex flex-wrap gap-2 mt-4">
+          <div className="flex gap-2 overflow-x-auto pb-2 mt-4 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
             {videoCategories.map((category) => (
               <Button
                 key={category.id}
@@ -213,14 +213,14 @@ const Videos = () => {
           <div className="relative">
             <div className="pointer-events-none absolute -right-1 top-2 z-20 rounded-full border border-primary/30 bg-background/85 px-2 py-1 shadow-sm backdrop-blur-sm">
               <div className="flex items-center gap-1.5">
-                <svg width="16" height="12" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna">
+                <svg width="16" height="12" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vana">
                   <rect x="4" y="14" width="52" height="26" rx="5" fill="#F97316" />
                   <rect x="8" y="8" width="32" height="10" rx="4" fill="#EA580C" />
                   <rect x="10" y="10" width="14" height="8" rx="2" fill="#BAE6FD" opacity="0.9" />
                   <circle cx="16" cy="40" r="7" fill="#1C1917" />
                   <circle cx="48" cy="40" r="7" fill="#1C1917" />
                 </svg>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">Vanna</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">Vana</span>
               </div>
             </div>
             <AIVanConcierge mode="video" compact />

@@ -1,8 +1,8 @@
 /**
- * AIVanConcierge — Embedded Vanna widget
+ * AIVanConcierge — Embedded Vana widget
  * Used on Videos, Marketplace, Vendors, Shop, and AI pages.
  *
- * Uses the client-side vannaRouter for instant responses + page links.
+ * Uses the client-side vanaRouter for instant responses + page links.
  * Drop-in replacement for the Supabase edge function version.
  */
 
@@ -12,12 +12,12 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Send, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { routeVannaQuestion } from '@/lib/vannaRouter';
+import { routeVanaQuestion } from '@/lib/vanaRouter';
 
 // Inline SVG van mascot
 function VanIcon({ size = 28 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna">
+    <svg width={size} height={size} viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vana">
       <rect x="4" y="14" width="52" height="26" rx="5" fill="#F97316" />
       <rect x="8" y="8" width="32" height="10" rx="4" fill="#EA580C" />
       <rect x="10" y="10" width="14" height="8" rx="2" fill="#BAE6FD" opacity="0.9" />
@@ -78,7 +78,7 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
     setLoading(true);
 
     setTimeout(() => {
-      const result = routeVannaQuestion(query);
+      const result = routeVanaQuestion(query);
       setMessages((prev) => [
         ...prev,
         { role: 'assistant', content: result.answer, page: result.page, pageLabel: result.pageLabel },
@@ -102,7 +102,7 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
             <VanIcon size={26} />
           </div>
           <div>
-            <span className="text-sm font-semibold text-foreground">Vanna</span>
+            <span className="text-sm font-semibold text-foreground">Vana</span>
             <p className="text-xs text-muted-foreground">AI van life guide</p>
           </div>
           <div className="ml-auto flex items-center gap-1.5">
@@ -180,7 +180,7 @@ const AIVanConcierge: React.FC<AIVanConciergeProps> = ({ mode = 'home', compact 
           <Input
             value={input}
             onChange={e => setInput(e.target.value)}
-            placeholder="Ask Vanna anything..."
+            placeholder="Ask Vana anything..."
             className="flex-1 h-9 text-sm bg-background/60"
             disabled={loading}
             maxLength={500}

@@ -347,3 +347,49 @@ button:active, [role="button"]:active {
   transform: scale(0.97);
   transition: transform 0.12s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+/* ============================================================
+   MOBILE IMPROVEMENTS
+   ============================================================ */
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure filter tab buttons don't shrink on mobile scroll */
+.scrollbar-none > button,
+.scrollbar-none > a {
+  flex-shrink: 0;
+}
+
+/* Mobile typography improvements */
+@media (max-width: 640px) {
+  /* Tighter hero headings on mobile */
+  .vanciety-hero-topo h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    line-height: 1.1;
+  }
+
+  /* Prevent horizontal overflow on all pages */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Better card spacing on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Announcement bar — tighter on mobile */
+  .topo-header {
+    font-size: 0.6rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * vannaRouter.ts — Vanna AI Intent Router
+ * vanaRouter.ts — Vana AI Intent Router
  * =========================================
  * Pure client-side. No API key, no network call, zero latency.
  *
@@ -11,7 +11,7 @@
  * the edge function again and keep this as a fallback.
  */
 
-export interface VannaResponse {
+export interface VanaResponse {
   answer: string;
   /** Relative path to navigate to, e.g. "/forum" */
   page?: string;
@@ -202,11 +202,11 @@ const RULES: IntentRule[] = [
   },
   // ── VANNA / AI ──────────────────────────────────────────────────
   {
-    keywords: ["vanna", "vana", "ai", "assistant", "chat", "bot", "help me", "who are you",
+    keywords: ["vana", "vana", "ai", "assistant", "chat", "bot", "help me", "who are you",
                "what can you do", "what is this"],
     page: "/ai",
-    pageLabel: "Open Vanna AI",
-    reply: "I'm Vanna — Vanciety's AI van life guide! I can point you to repair guides, gear recommendations, community boards, events, and more. The full Vanna AI page has an expanded chat interface. What do you need help with?",
+    pageLabel: "Open Vana AI",
+    reply: "I'm Vana — Vanciety's AI van life guide! I can point you to repair guides, gear recommendations, community boards, events, and more. The full Vana AI page has an expanded chat interface. What do you need help with?",
   },
   // ── SAFETY / SECURITY ───────────────────────────────────────────
   {
@@ -235,7 +235,7 @@ const RULES: IntentRule[] = [
 ];
 
 // ── Fallback when nothing matches ───────────────────────────────
-const FALLBACK: VannaResponse = {
+const FALLBACK: VanaResponse = {
   answer: "Great question! I'm not sure which part of Vanciety fits that best — try the Forum where the community can give you a real answer, or browse the site to find what you need.",
   page: "/forum",
   pageLabel: "Ask in the Forum",
@@ -255,7 +255,7 @@ function scoreRule(rule: IntentRule, q: string): number {
 }
 
 // ── Main export ──────────────────────────────────────────────────
-export function routeVannaQuestion(question: string): VannaResponse {
+export function routeVanaQuestion(question: string): VanaResponse {
   if (!question.trim()) return FALLBACK;
 
   let best: IntentRule | null = null;

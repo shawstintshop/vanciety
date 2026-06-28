@@ -230,13 +230,13 @@ const Vendors = () => {
                 <Input placeholder="Search vendors, services, location..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10" />
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex gap-2 overflow-x-auto pb-2 mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
               {VENDOR_CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
                 const count = categoryCounts[cat.id] || 0;
                 return (
                   <button key={cat.id} onClick={() => setSelectedCategory(cat.id)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-150 ${selectedCategory === cat.id ? "bg-primary text-primary-foreground border-primary" : "bg-background text-muted-foreground border-border hover:border-primary/50 hover:text-foreground"}`}>
+                    className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-150 ${selectedCategory === cat.id ? "bg-primary text-primary-foreground border-primary" : "bg-background text-muted-foreground border-border hover:border-primary/50 hover:text-foreground"}`}>
                     <Icon className="h-3 w-3" />{cat.name}{count > 0 && <span className="ml-1 opacity-60">({count})</span>}
                   </button>
                 );

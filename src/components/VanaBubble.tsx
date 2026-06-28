@@ -1,8 +1,8 @@
 /**
- * VannaBubble — Floating Vanna AI assistant widget
+ * VanaBubble — Floating Vana AI assistant widget
  * Appears ONLY on the home page (Index.tsx)
  *
- * Uses the client-side vannaRouter for instant, zero-latency responses
+ * Uses the client-side vanaRouter for instant, zero-latency responses
  * that link users to the best Vanciety page for their question.
  * When the real AI backend is restored, swap handleSend() to call
  * the edge function and use this as a fallback.
@@ -11,7 +11,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { X, Send, ExternalLink, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { routeVannaQuestion } from "@/lib/vannaRouter";
+import { routeVanaQuestion } from "@/lib/vanaRouter";
 
 interface Message {
   role: "user" | "assistant";
@@ -21,7 +21,7 @@ interface Message {
   pageLabel?: string;
 }
 
-const GREETING = "Hey there! 👋 I'm Vanna, your Vanciety guide. Ask me anything — stealth camping spots, solar setups, repair help, how to connect with other van lifers, or just where to find things on the site!";
+const GREETING = "Hey there! 👋 I'm Vana, your Vanciety guide. Ask me anything — stealth camping spots, solar setups, repair help, how to connect with other van lifers, or just where to find things on the site!";
 
 const QUICK_PROMPTS = [
   "How do I find van lifers near me?",
@@ -30,10 +30,10 @@ const QUICK_PROMPTS = [
   "How do I post in the community?",
 ];
 
-// Vanna AI icon — gold Vanciety brand mark
-function VannaIcon({ size = 48 }: { size?: number }) {
+// Vana AI icon — gold Vanciety brand mark
+function VanaIcon({ size = 48 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vanna AI">
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vana AI">
       <circle cx="24" cy="24" r="22" fill="#c9a96e" opacity="0.15" />
       <path d="M24 10 L30 22 L42 22 L32 30 L36 42 L24 34 L12 42 L16 30 L6 22 L18 22 Z" fill="#c9a96e" opacity="0.9" />
       <circle cx="24" cy="24" r="5" fill="#0d0d0d" />
@@ -42,7 +42,7 @@ function VannaIcon({ size = 48 }: { size?: number }) {
   );
 }
 
-export default function VannaBubble() {
+export default function VanaBubble() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -91,7 +91,7 @@ export default function VannaBubble() {
 
     // Simulate a brief "thinking" delay for natural feel
     setTimeout(() => {
-      const result = routeVannaQuestion(query);
+      const result = routeVanaQuestion(query);
       const assistantMsg: Message = {
         role: "assistant",
         content: result.answer,
@@ -123,8 +123,8 @@ export default function VannaBubble() {
           0% { opacity: 0; transform: translateY(20px) scale(0.97); }
           100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .vanna-icon-pulse { animation: vanBounceFloat 4s ease-in-out infinite; }
-        .vanna-panel-enter { animation: chatSlideUp 0.22s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        .vana-icon-pulse { animation: vanBounceFloat 4s ease-in-out infinite; }
+        .vana-panel-enter { animation: chatSlideUp 0.22s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
         .nudge-pop { animation: nudgePop 0.3s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
       `}</style>
 
@@ -138,7 +138,7 @@ export default function VannaBubble() {
             style={{ background: "#1a1a1a", border: "1px solid rgba(201,169,110,0.4)" }}
             onClick={handleOpen}
           >
-            <p className="font-semibold" style={{ color: "#c9a96e" }}>Ask Vanna</p>
+            <p className="font-semibold" style={{ color: "#c9a96e" }}>Ask Vana</p>
             <p className="text-xs mt-0.5" style={{ color: "#a89070" }}>Your Vanciety AI guide</p>
             <button
               className="absolute -top-1.5 -right-1.5 rounded-full w-4 h-4 flex items-center justify-center text-xs"
@@ -151,17 +151,17 @@ export default function VannaBubble() {
           </div>
         )}
 
-        {/* Vanna AI button */}
+        {/* Vana AI button */}
         <button
           onClick={() => isOpen ? setIsOpen(false) : handleOpen()}
           className="relative w-14 h-14 rounded-full hover:scale-105 active:scale-95 transition-all duration-150 flex items-center justify-center"
           style={{ background: "#0d0d0d", border: "2px solid rgba(201,169,110,0.6)", boxShadow: "0 4px 24px rgba(201,169,110,0.2)" }}
-          aria-label={isOpen ? "Close Vanna" : "Open Vanna AI assistant"}
+          aria-label={isOpen ? "Close Vana" : "Open Vana AI assistant"}
         >
           {isOpen ? (
             <ChevronDown className="w-5 h-5" style={{ color: "#c9a96e" }} />
           ) : (
-            <VannaIcon size={36} />
+            <VanaIcon size={36} />
           )}
           <span className="absolute top-0.5 right-0.5 w-2.5 h-2.5 bg-green-400 rounded-full" style={{ border: "2px solid #0d0d0d" }} />
         </button>
@@ -170,16 +170,16 @@ export default function VannaBubble() {
       {/* Chat panel */}
       {isOpen && (
         <div
-          className="vanna-panel-enter fixed bottom-28 right-6 z-50 w-[340px] max-w-[calc(100vw-2rem)] bg-gray-950 border border-gray-800 rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden"
+          className="vana-panel-enter fixed bottom-28 right-6 z-50 w-[340px] max-w-[calc(100vw-2rem)] bg-gray-950 border border-gray-800 rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden"
           style={{ maxHeight: "min(540px, calc(100vh - 160px))" }}
         >
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-3" style={{ background: "#111", borderBottom: "1px solid #2e2e2e" }}>
             <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(201,169,110,0.1)", border: "1px solid rgba(201,169,110,0.3)" }}>
-              <VannaIcon size={22} />
+              <VanaIcon size={22} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-white">Vanna</p>
+              <p className="text-sm font-semibold text-white">Vana</p>
               <p className="text-xs text-amber-400">Your Vanciety guide</p>
             </div>
             <button
@@ -198,7 +198,7 @@ export default function VannaBubble() {
                 <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} w-full`}>
                   {m.role === "assistant" && (
                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mr-2 mt-0.5" style={{ background: "rgba(201,169,110,0.1)", border: "1px solid rgba(201,169,110,0.2)" }}>
-                      <VannaIcon size={16} />
+                      <VanaIcon size={16} />
                     </div>
                   )}
                   <div
@@ -229,7 +229,7 @@ export default function VannaBubble() {
             {loading && (
               <div className="flex justify-start">
                 <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mr-2 mt-0.5" style={{ background: "rgba(201,169,110,0.1)", border: "1px solid rgba(201,169,110,0.2)" }}>
-                  <VannaIcon size={16} />
+                  <VanaIcon size={16} />
                 </div>
                 <div className="bg-gray-800 rounded-2xl rounded-tl-sm px-3 py-2.5">
                   <div className="flex gap-1 items-center">
@@ -268,7 +268,7 @@ export default function VannaBubble() {
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Vanna anything..."
+              placeholder="Ask Vana anything..."
               className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none transition-colors"
             style={{ outline: "none" }}
               disabled={loading}

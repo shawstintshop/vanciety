@@ -79,7 +79,7 @@ const DEMO_EVENTS: MapEvent[] = [
   {
     id: "demo-7", name: "Southeast Van Meetup", description: "Monthly meetup for the growing Southeast van life scene. Beach camping, seafood cookout, and laid-back vibes on the coast. Perfect for snowbirds and full-timers passing through.",
     short_description: "Beach camping meetup — seafood cookout, chill vibes",
-    start_date: "2026-08-09T15:00:00", city: "Savannah", state: "GA",
+    start_date: "2026-08-09T15:00:00", city: "Savanah", state: "GA",
     latitude: 32.0809, longitude: -81.0912,
     category: "meetup", cost_info: "Free", expected_attendance: 75, rsvp_count: 41,
     tags: ["beach", "seafood", "southeast"],
