@@ -111,7 +111,8 @@ const App = () => (
               <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/campfire" element={<Campfire />} />
               <Route path="/journals" element={<TripJournals />} />
-              <Route path="/resources" element={<ResourceBoard />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/resource-board" element={<ResourceBoard />} />
               <Route path="/icebreaker" element={<Icebreaker />} />
               <Route path="/admin/vendors" element={<AdminVendors />} />
               <Route path="/directory" element={<Directory />} />

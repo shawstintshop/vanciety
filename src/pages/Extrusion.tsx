@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import {
   Ruler, Package, Wrench, DollarSign, ChevronRight, ExternalLink,
   Layers, AlertTriangle, CheckCircle, Info, Hammer, Zap, Globe,
-  BarChart2, BookOpen, Printer, ArrowRight,
+  BarChart2, BookOpen, Printer, ArrowRight, Play,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +21,43 @@ const TABS = [
   { id: "builds",    label: "Build Examples",  icon: Layers },
   { id: "tools",     label: "Tool List",       icon: Wrench },
   { id: "fasteners", label: "Fasteners",       icon: Package },
+  { id: "videos",    label: "Videos & Guides",  icon: Play },
+];
+
+// ── Videos & How-To ─────────────────────────────────────────────────────────
+const VIDEOS = [
+  { id: "AKssPWSYZwg", title: "How to Use 8020 Extruded Aluminum in Your Van Build", channel: "Engineers Who Van Life", desc: "Valuable tricks developed over years — smoother builds, stronger results.", tag: "Overview" },
+  { id: "XqiroMdqZ0Y", title: "How To Build A Van With 80/20 Aluminum (INSANELY STRONG)", channel: "Van Build", desc: "Complete van structure built entirely from 80/20 aluminum extrusions — modular, strong, removable.", tag: "Full Build" },
+  { id: "Exan1UkdiTg", title: "How to Frame Camper Van Upper Cabinets Using 80/20 Aluminum", channel: "Van Build", desc: "Step-by-step upper cabinet framing — strong, lightweight, clean finish.", tag: "Cabinets" },
+  { id: "PMhNgHJVwcc", title: "How to Use 80/20 Aluminum to Frame Bamboo Van Cabinets", channel: "Van Build", desc: "Profiles used, fastening methods, and what to consider when installing 8020.", tag: "Cabinets" },
+  { id: "7uO2mWpkNBg", title: "8020 Aluminum in Your Camper Van Build — Masterclass", channel: "Van Build", desc: "Deep dive into the most important considerations before using 8020 in a camper van build.", tag: "Overview" },
+  { id: "vTV9USYrLI4", title: "How to Build an 80/20 Aluminum Solar Panel Rack for Your Van", channel: "Van Build", desc: "Build a roof solar rack using 80/20 aluminum — includes product links and mounting details.", tag: "Solar" },
+  { id: "SCSJsWFelAk", title: "Is Extruded Aluminum the Best Material for Van Building?", channel: "Van Build", desc: "Honest overview of extruded aluminum cabinetry — pros, cons, and real-world results.", tag: "Overview" },
+  { id: "PrpBxLhH18Q", title: "How to Assemble T-Slot Frames Using 80/20 Fasteners", channel: "80/20 Inc.", desc: "Official 80/20 guide to assembling T-slot frames with the most popular fastener types.", tag: "Fasteners" },
+];
+
+const HOW_TO_STEPS = [
+  { step: "01", title: "Plan Your Layout", desc: "Measure your van interior precisely. Sketch your layout — bed, kitchen, storage, electrical. Decide which modules need to be removable. Use SketchUp Free or Fusion 360 to model before cutting.", link: "https://www.sketchup.com/plans-and-pricing/sketchup-free", linkLabel: "SketchUp Free" },
+  { step: "02", title: "Choose Your Profile Series", desc: "For most van builds: 1515 (1.5\"×1.5\") for interior cabinets, 1530 for bed rails over 48\", 2525 for roof rack cross members. See the Size Guide tab for the full application chart.", link: null, linkLabel: null },
+  { step: "03", title: "Order Cut-to-Length", desc: "Order from Tnutz or 80/20 with cut-to-length service. Provide exact dimensions in inches. Order 5–10% extra for mistakes. Get T-nuts, end caps, and corner brackets in the same order.", link: "https://www.tnutz.com", linkLabel: "Order from Tnutz" },
+  { step: "04", title: "Prep Your Cuts", desc: "Use a miter saw with a non-ferrous metal blade (80-tooth carbide). Cut at 90° or 45° for corner joints. Deburr all cut ends with a file or deburring tool. Mark all pieces before assembly.", link: "https://www.amazon.com/s?k=non+ferrous+metal+blade+miter+saw", linkLabel: "Non-Ferrous Blades on Amazon" },
+  { step: "05", title: "Drill and Tap End Holes", desc: "For end-to-face connections, drill a pilot hole in the end of the extrusion and tap it for the appropriate thread (3/8-16 for 15-series, M8 for 30mm metric). Use a drill press for accuracy.", link: "https://www.amazon.com/s?k=hand+tap+set", linkLabel: "Tap Sets on Amazon" },
+  { step: "06", title: "Assemble with T-Slot Hardware", desc: "Slide T-nuts into the slots before assembly — you cannot add them after. Use drop-in T-nuts for quick assembly. Apply blue Loctite 243 to every fastener. Torque to spec (see Fasteners tab).", link: "https://www.amazon.com/s?k=loctite+243+blue", linkLabel: "Loctite 243 on Amazon" },
+  { step: "07", title: "Mount to Van Structure", desc: "Attach extrusion frames to van ribs using L-brackets and self-tapping screws into the van's structural ribs. Never drill through the van floor without sealing. Use rubber isolation pads to prevent vibration noise.", link: null, linkLabel: null },
+  { step: "08", title: "Add Panels and Surfaces", desc: "Attach plywood, aluminum composite panel, or bamboo to the extrusion frame using T-slot panel brackets or through-bolts. 1/2\" Baltic birch plywood is the standard for van builds.", link: "https://www.amazon.com/s?k=t+slot+panel+bracket", linkLabel: "Panel Brackets on Amazon" },
+];
+
+const EXTERNAL_LINKS = [
+  { label: "Engineers Who Van Life — Full 80/20 Guide", url: "https://engineerswhovanlife.com/extruded-aluminum-van-build-guide/", desc: "The most comprehensive free extrusion guide on the internet." },
+  { label: "FarOutRide — Transit Bed Platform Build", url: "https://faroutride.com/bed-platform/", desc: "Step-by-step bed platform with 80/20. Ford Transit specific but universal concepts." },
+  { label: "Engineers Who Van Life — Bed System Guide", url: "https://engineerswhovanlife.com/8020-campervan-bed-system/", desc: "Complete bed system with dimensions, cut lists, and hardware." },
+  { label: "Engineers Who Van Life — Cabinet Build Guide", url: "https://engineerswhovanlife.com/8020-van-cabinets/", desc: "Upper and lower cabinet builds with 80/20 — step-by-step." },
+  { label: "The Wanderful — Cabinet Build Guide", url: "https://thewanderful.co/blog/how-to-build-cabinets-in-your-van-using-extruded-aluminum-8020", desc: "Profiles used, fastening methods, and installation tips." },
+  { label: "80/20 Inc. — Official Store", url: "https://8020.net", desc: "The original T-slot aluminum. Best selection, ships cut-to-length." },
+  { label: "Tnutz — Best Value US Supplier", url: "https://www.tnutz.com", desc: "15–30% cheaper than 80/20. Same quality, excellent service." },
+  { label: "CraftyAmigo — Free 80/20 Design Tool", url: "https://craftyamigo.com/", desc: "Free browser-based 80/20 design tool. Build and visualize before you cut." },
+  { label: "Printables — Van Life 3D Files", url: "https://www.printables.com/tag/vanlife", desc: "3D print files for extrusion brackets, mounts, and accessories." },
+  { label: "r/vandwellers — Reddit Community", url: "https://www.reddit.com/r/vandwellers/", desc: "1M+ members. Best community for van build advice and inspiration." },
 ];
 
 // ── Size guide data ───────────────────────────────────────────────────────────
@@ -117,6 +154,52 @@ const FASTENERS_METRIC = [
   { type: "T-nut",     size: "M6",        use: "Bosch Rexroth 30mm series",   pn: "ISO standard" },
 ];
 
+// ── VideoGrid sub-component ──────────────────────────────────────────────────
+const VideoGrid = ({ videos }: { videos: typeof VIDEOS }) => {
+  const [playing, setPlaying] = useState<string | null>(null);
+  return (
+    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {videos.map((v) => (
+        <div key={v.id} style={{ background: "#141414", border: "1px solid #2e2e2e", borderRadius: "6px", overflow: "hidden" }}>
+          {playing === v.id ? (
+            <div style={{ position: "relative", paddingBottom: "56.25%", background: "#000" }}>
+              <iframe
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                src={`https://www.youtube.com/embed/${v.id}?autoplay=1`}
+                title={v.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          ) : (
+            <button
+              onClick={() => setPlaying(v.id)}
+              style={{ position: "relative", display: "block", width: "100%", cursor: "pointer", background: "none", border: "none", padding: 0 }}
+            >
+              <img
+                src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`}
+                alt={v.title}
+                style={{ width: "100%", display: "block", aspectRatio: "16/9", objectFit: "cover" }}
+              />
+              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: "rgba(201,169,110,0.9)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Play style={{ width: "18px", height: "18px", color: "#0d0d0d", marginLeft: "3px" }} />
+                </div>
+              </div>
+              <span style={{ position: "absolute", top: "8px", right: "8px", background: "rgba(13,13,13,0.85)", border: "1px solid rgba(201,169,110,0.4)", color: "#c9a96e", fontSize: "9px", fontFamily: "monospace", fontWeight: 700, padding: "2px 6px", letterSpacing: "0.1em" }}>{v.tag.toUpperCase()}</span>
+            </button>
+          )}
+          <div style={{ padding: "12px" }}>
+            <div style={{ fontFamily: "monospace", fontWeight: 700, fontSize: "12px", color: "#e8dcc8", lineHeight: 1.4, marginBottom: "4px" }}>{v.title}</div>
+            <div style={{ fontSize: "10px", color: "#c9a96e", fontFamily: "monospace", fontWeight: 700, marginBottom: "6px" }}>{v.channel}</div>
+            <div style={{ fontSize: "11px", color: "#5a5248", lineHeight: 1.5 }}>{v.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 // ── Component ─────────────────────────────────────────────────────────────────
 const Extrusion = () => {
   const [activeTab, setActiveTab] = useState("size");
@@ -159,8 +242,8 @@ const Extrusion = () => {
             {[
               { val: "8",   lbl: "Profile Specs" },
               { val: "11",  lbl: "US + EU Suppliers" },
-              { val: "10",  lbl: "Build Templates" },
-              { val: "50+", lbl: "Cut List Items" },
+              { val: "8",   lbl: "Build Videos" },
+              { val: "10",  lbl: "External Guides" },
             ].map(({ val, lbl }) => (
               <div key={lbl} style={{ background: "#141414", border: "1px solid #2e2e2e" }} className="rounded p-4 text-center">
                 <div style={{ fontFamily: "monospace", color: "#c9a96e" }} className="text-2xl font-black">{val}</div>
@@ -625,6 +708,62 @@ const Extrusion = () => {
               <div style={{ background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.25)", borderLeft: "3px solid #ef4444" }} className="flex gap-3 p-4">
                 <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
                 <div><div style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 700, color: "#ef4444", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "4px" }}>Warning</div><p style={{ color: "#9a8f7e", fontSize: "12px", lineHeight: 1.6 }}><strong style={{ color: "#e8dcc8" }}>15-series and 20mm metric T-nuts are NOT interchangeable.</strong> The slot widths differ — always verify before ordering hardware.</p></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* VIDEOS & GUIDES */}
+        {activeTab === "videos" && (
+          <div className="flex flex-col gap-10">
+            {/* How-to steps */}
+            <div>
+              <h2 style={{ fontFamily: "monospace", color: "#e8dcc8" }} className="text-xl font-black">HOW TO BUILD WITH ALUMINUM EXTRUSION</h2>
+              <p style={{ color: "#9a8f7e" }} className="mt-1 text-sm">8-step process from planning to finished build. Each step links to tools and resources.</p>
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {HOW_TO_STEPS.map((s) => (
+                  <div key={s.step} style={{ background: "#141414", border: "1px solid #2e2e2e", padding: "20px", borderRadius: "6px" }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
+                      <div style={{ fontFamily: "monospace", fontWeight: 900, fontSize: "28px", color: "rgba(201,169,110,0.25)", lineHeight: 1, flexShrink: 0 }}>{s.step}</div>
+                      <div>
+                        <h3 style={{ fontFamily: "monospace", fontWeight: 800, fontSize: "14px", color: "#c9a96e", marginBottom: "6px" }}>{s.title}</h3>
+                        <p style={{ color: "#9a8f7e", fontSize: "12px", lineHeight: 1.7, marginBottom: s.link ? "10px" : 0 }}>{s.desc}</p>
+                        {s.link && (
+                          <a href={s.link} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "5px", color: "#c9a96e", fontSize: "11px", fontFamily: "monospace", fontWeight: 700, textDecoration: "none" }}>
+                            <ExternalLink style={{ width: "11px", height: "11px" }} />{s.linkLabel}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* YouTube videos */}
+            <div>
+              <h2 style={{ fontFamily: "monospace", color: "#e8dcc8" }} className="text-xl font-black">BUILD VIDEOS</h2>
+              <p style={{ color: "#9a8f7e" }} className="mt-1 text-sm">Real builds, real techniques — click any thumbnail to watch inline.</p>
+              <VideoGrid videos={VIDEOS} />
+            </div>
+
+            {/* External links */}
+            <div>
+              <h2 style={{ fontFamily: "monospace", color: "#e8dcc8" }} className="text-xl font-black">GUIDES & RESOURCES</h2>
+              <p style={{ color: "#9a8f7e" }} className="mt-1 text-sm">The best free extrusion guides, supplier links, and community resources on the internet.</p>
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {EXTERNAL_LINKS.map((l) => (
+                  <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer"
+                    style={{ background: "#141414", border: "1px solid #2e2e2e", borderRadius: "6px", padding: "14px 16px", textDecoration: "none", display: "flex", alignItems: "flex-start", gap: "10px", transition: "border-color 0.15s" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#c9a96e")}
+                    onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2e2e2e")}>
+                    <ExternalLink style={{ width: "13px", height: "13px", color: "#c9a96e", flexShrink: 0, marginTop: "2px" }} />
+                    <div>
+                      <div style={{ fontFamily: "monospace", fontWeight: 700, fontSize: "12px", color: "#e8dcc8", marginBottom: "3px" }}>{l.label}</div>
+                      <div style={{ fontSize: "11px", color: "#9a8f7e", lineHeight: 1.5 }}>{l.desc}</div>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
