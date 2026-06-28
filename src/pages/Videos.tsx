@@ -176,7 +176,7 @@ const Videos = () => {
       />
       <Header />
       
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         <PageHero
           label="Video Library"
           title="Van Life Videos"

@@ -146,7 +146,7 @@ const Vendors = () => {
     <div className="min-h-screen bg-background">
       <Seo title="Vanciety Vendors | Builders, Parts, Electrical & Van Services" description="Browse the most comprehensive van life vendor directory. Featured vendor: Avatar Off-Road. Builders, electrical, parts, rentals, and more." canonicalPath="/vendors" />
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         <PageHero title="Vendor Directory" subtitle="Every van life brand, builder, and supplier — in one place." badge="VENDORS" />
 
         {/* AVATAR PREMIUM FEATURED VENDOR */}
@@ -158,11 +158,11 @@ const Vendors = () => {
               <div className="flex-1 h-px bg-[#c9a96e]/20" />
             </div>
             <div className="relative rounded-xl overflow-hidden mb-8 border border-[#c9a96e]/20">
-              <img src={AVATAR_VENDOR.banner_url} alt="Avatar Off-Road" className="w-full h-72 object-cover object-center" />
+              <img src={AVATAR_VENDOR.banner_url} alt="Avatar Off-Road" className="w-full h-44 sm:h-72 object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-8">
                 <img src={AVATAR_VENDOR.logo_url} alt="Avatar Off-Road Logo" className="h-14 w-auto mb-4 object-contain object-left" style={{ filter: "brightness(1.1)" }} />
-                <h2 className="text-3xl font-black text-white uppercase tracking-wide mb-1">{AVATAR_VENDOR.business_name}</h2>
+                <h2 className="text-xl sm:text-3xl font-black text-white uppercase tracking-wide mb-1">{AVATAR_VENDOR.business_name}</h2>
                 <p className="text-[#c9a96e] text-sm font-semibold uppercase tracking-widest mb-3">{AVATAR_VENDOR.tagline}</p>
                 <div className="flex flex-wrap gap-2">
                   {AVATAR_VENDOR.badges.map((b) => (

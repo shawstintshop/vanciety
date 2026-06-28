@@ -257,7 +257,7 @@ const SocialFeed = () => {
   return (
     <div className="vanciety-page min-h-screen bg-background">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-border bg-[#0d0d0d]">
           <div className="pointer-events-none absolute inset-0">
@@ -278,11 +278,11 @@ const SocialFeed = () => {
                   <Flame className="h-3.5 w-3.5 text-[#c9a96e]" />
                   <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#c9a96e]">Live Social Feed</span>
                 </div>
-                <h1 className="mb-3 text-4xl font-black leading-tight text-[#e8dcc8] md:text-5xl">
+                <h1 className="mb-3 text-3xl font-black leading-tight text-[#e8dcc8] sm:text-4xl md:text-5xl">
                   Every Platform.<br />
                   <span className="text-[#c9a96e]">One Feed.</span>
                 </h1>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-base sm:text-lg text-muted-foreground">
                   Van life content from YouTube, Reddit, news blogs, and social media — all in one place. Stop bouncing between apps.
                 </p>
               </div>
@@ -306,7 +306,7 @@ const SocialFeed = () => {
         </section>
 
         {/* Source filter tabs */}
-        <div className="border-b border-border bg-background/80 sticky top-16 z-30 backdrop-blur-sm">
+        <div className="border-b border-border bg-background/80 sticky top-16 sm:top-20 z-30 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="flex gap-1.5 overflow-x-auto py-3 scrollbar-none">
               {SOURCES.map((s) => {
@@ -339,10 +339,10 @@ const SocialFeed = () => {
         </div>
 
         {/* Main content */}
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex gap-6">
+        <div className="container mx-auto px-4 py-6 sm:py-8">
+          <div className="flex gap-6 min-w-0">
             {/* Feed */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 overflow-hidden">
               {loading ? (
                 <div className="flex flex-col items-center justify-center py-24 gap-4">
                   <Loader2 className="h-8 w-8 animate-spin text-[#c9a96e]" />

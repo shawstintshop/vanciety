@@ -7,7 +7,7 @@ const GPSTracking = () => {
   return (
     <div className="vanciety-page vanciety-page--gps min-h-screen bg-background">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         <PageHero
           heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/kYxxytNFujIYLWpl.jpg"
           label="GPS Tracking"

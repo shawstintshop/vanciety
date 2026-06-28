@@ -268,7 +268,7 @@ const Header = () => {
       </nav>
       {/* Mobile Menu — rendered outside nav to avoid overflow clipping */}
       {isMenuOpen && (
-        <div style={{ background: "#0d0d0d", borderTop: "1px solid #2e2e2e", maxHeight: "calc(100vh - 64px)", overflowY: "auto", position: "absolute", top: "64px", left: 0, right: 0, zIndex: 48, boxShadow: "0 8px 32px rgba(0,0,0,0.7)" }}>
+        <div style={{ background: "#0d0d0d", borderTop: "1px solid #2e2e2e", maxHeight: "calc(100dvh - 64px)", overflowY: "auto", overscrollBehavior: "contain", WebkitOverflowScrolling: "touch", position: "absolute", top: "64px", left: 0, right: 0, zIndex: 48, boxShadow: "0 8px 32px rgba(0,0,0,0.7)" }}>
           <div style={{ display: "contents" }}>
             <div className="mx-auto max-w-[1400px] px-4 py-5">
               <form onSubmit={handleSiteSearch} className="mb-5 flex items-center rounded border border-[#2e2e2e] bg-[#1a1a1a] px-3 py-2">

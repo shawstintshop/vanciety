@@ -79,7 +79,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         <HeroSection image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/OcYosgrzkDuEjVgs.jpg" badge="My Dashboard" title="Welcome back" accent="to Vanciety." subtitle="Your van life command center." />
 
         <section className="container mx-auto px-4 py-12">

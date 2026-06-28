@@ -412,7 +412,7 @@ const CompanyProfile = () => {
     return (
       <div className="min-h-screen bg-gray-950 text-white">
         <Header />
-        <main className="pt-28">
+        <main className="pt-16 sm:pt-20">
           <div className="flex items-center justify-center py-32">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
@@ -425,7 +425,7 @@ const CompanyProfile = () => {
     return (
       <div className="min-h-screen bg-gray-950 text-white">
         <Header />
-        <main className="pt-28">
+        <main className="pt-16 sm:pt-20">
           <div className="mx-auto flex max-w-xl flex-col items-center gap-4 px-4 py-32 text-center">
             <h1 className="text-2xl font-bold">Company not found</h1>
             <p className="text-gray-400">
@@ -448,7 +448,7 @@ const CompanyProfile = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="relative">
           <div className="relative h-72 w-full overflow-hidden sm:h-80 md:h-96">

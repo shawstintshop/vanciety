@@ -36,7 +36,7 @@ export default function HomeFeed({ allowedCategories }: HomeFeedProps) {
   );
 
   return (
-    <section className="py-16 bg-background topo-section-mid">
+    <section className="py-12 sm:py-16 bg-background topo-section-mid">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex items-start justify-between mb-8 gap-4 flex-wrap">
@@ -52,7 +52,7 @@ export default function HomeFeed({ allowedCategories }: HomeFeedProps) {
                 </Badge>
               )}
             </div>
-            <h2 className="text-3xl font-bold text-foreground">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
               Latest Van Life Content
             </h2>
             <p className="text-muted-foreground mt-1">

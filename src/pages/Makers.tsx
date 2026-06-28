@@ -297,7 +297,7 @@ const Makers = () => {
   return (
     <div className="vanciety-page min-h-screen bg-background">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-border bg-[#0d0d0d]">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(201,169,110,0.08)_0%,_transparent_60%)]" />

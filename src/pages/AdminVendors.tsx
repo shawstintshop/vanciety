@@ -122,7 +122,7 @@ export default function AdminVendors() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-24 pb-16">
+      <main className="pt-16 sm:pt-20 pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Page header */}
           <div className="flex items-center justify-between mb-8">

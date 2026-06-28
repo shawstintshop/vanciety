@@ -108,7 +108,7 @@ const Directory = () => {
   return (
     <div className="vanciety-page min-h-screen bg-background">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         <PageHero
           heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/HnQFgYRCRXWImcTc.jpg"
           label="Business Directory"

@@ -241,7 +241,7 @@ const Marketplace = () => {
       />
       <Header />
       
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         {/* Hero Section */}
         <PageHero
           heroImage="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/JkZQxDXOxONBVWVW.jpg"

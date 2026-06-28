@@ -43,8 +43,8 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="pt-28">
-        <section className="relative isolate flex min-h-[560px] items-end overflow-hidden border-b border-white/10 vanciety-hero-topo" data-topo-container>
+      <main className="pt-16">
+        <section className="relative isolate flex min-h-[520px] sm:min-h-[580px] items-end overflow-hidden border-b border-white/10 vanciety-hero-topo" data-topo-container>
           {/* Vanciety van hero — matte black Sprinter in the mountains */}
           <div
             className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
@@ -54,7 +54,7 @@ const Index = () => {
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/55 to-black/90" />
           <TopoBackground className="z-[1]" intensity="medium" />
 
-          <div className="relative z-10 container mx-auto px-4 pt-24 pb-16">
+          <div className="relative z-10 container mx-auto px-4 pt-20 pb-12 sm:pb-16">
             <Badge className="mb-4 border border-primary/40 bg-primary/10 text-primary hover:bg-primary/15">
               <Sparkles className="mr-1.5 h-3.5 w-3.5" />
               Van Life, all in one place
@@ -66,12 +66,12 @@ const Index = () => {
                 <br />
                 <span className="text-primary">for van life, in one place.</span>
               </h1>
-              <p className="text-lg text-gray-300 max-w-2xl mt-4">
+              <p className="text-base sm:text-lg text-gray-300 max-w-2xl mt-4">
                 Find repair guides, trusted builders, gear, events, and a community of real van lifers —
                 all powered by Vana, your personal AI van assistant.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 sm:mt-8 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="bg-primary text-black font-semibold hover:bg-amber-500">
                   <Link to="/auth">
                     Join Free
@@ -83,7 +83,7 @@ const Index = () => {
                 </Button>
               </div>
 
-              <div className="mt-8 grid gap-3 grid-cols-1 sm:grid-cols-3">
+              <div className="mt-6 sm:mt-8 grid gap-3 grid-cols-1 sm:grid-cols-3">
                 {[
                   { title: "Repair Guides", desc: "Step-by-step help for common van issues.", to: "/van-intelligence" },
                   { title: "Events Near You", desc: "Rallies, meetups, and workshops on the map.", to: "/events" },
@@ -103,31 +103,31 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="border-b border-border bg-card py-16 topo-section-dark">
+        <section className="border-b border-border bg-card py-12 sm:py-16 topo-section-dark">
           <div className="container mx-auto px-4">
-            <div className="mb-10 max-w-3xl">
+            <div className="mb-8 sm:mb-10 max-w-3xl">
               <Badge className="mb-3 border border-primary/30 bg-primary/10 text-amber-300">
                 <Bot className="mr-1.5 h-3.5 w-3.5" />
                 Vana and the live home surface
               </Badge>
-              <h2 className="text-3xl font-black text-foreground sm:text-4xl">Start with the right action, not a wall of links.</h2>
-              <p className="mt-3 text-muted-foreground sm:text-lg">
-                The home page now separates quick actions from content. That keeps the page usable on mobile and makes the real data easier to find.
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground">Start with the right action, not a wall of links.</h2>
+              <p className="mt-3 text-sm sm:text-base text-muted-foreground">
+                The home page separates quick actions from content — usable on mobile, real data easy to find.
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
               {QUICK_ACTIONS.map(({ icon: Icon, title, desc, to }) => (
                 <Link
                   key={title}
                   to={to}
-                  className="group rounded-xl border-2 border-border bg-background p-5 transition hover:border-primary/50 hover:bg-primary/5"
+                  className="group rounded-xl border-2 border-border bg-background p-4 sm:p-5 transition hover:border-primary/50 hover:bg-primary/5"
                 >
-                  <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary transition group-hover:bg-primary/25">
-                    <Icon className="h-5 w-5" />
+                  <span className="mb-3 sm:mb-4 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-primary/15 text-primary transition group-hover:bg-primary/25">
+                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </span>
-                  <p className="text-sm font-bold text-foreground">{title}</p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{desc}</p>
+                  <p className="text-xs sm:text-sm font-bold text-foreground">{title}</p>
+                  <p className="mt-1 sm:mt-1.5 text-xs leading-relaxed text-muted-foreground">{desc}</p>
                 </Link>
               ))}
             </div>
@@ -138,31 +138,31 @@ const Index = () => {
 
         <LatestVideos />
 
-        <section className="border-y border-border bg-card py-16 topo-section-mid">
+        <section className="border-y border-border bg-card py-12 sm:py-16 topo-section-mid">
           <div className="container mx-auto px-4">
-            <div className="mb-10 text-center">
-              <h2 className="text-3xl font-black text-foreground sm:text-4xl">
-                What’s inside
+            <div className="mb-8 sm:mb-10 text-center">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground">
+                What's inside
                 <span className="text-primary"> the member experience</span>
               </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-                These are the actual places people go after joining: content, guidance, discovery, and the member map.
+              <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-muted-foreground">
+                Content, guidance, discovery, and the member map — the actual places people go after joining.
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
               {CONTENT_HIGHLIGHTS.map(({ icon: Icon, title, label, desc, to }) => (
                 <Link
                   key={title}
                   to={to}
-                  className="group rounded-2xl border border-border bg-background p-6 transition hover:border-primary/50 hover:bg-primary/5"
+                  className="group rounded-2xl border border-border bg-background p-5 sm:p-6 transition hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary transition group-hover:bg-primary/25">
+                      <span className="mb-3 sm:mb-4 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary/15 text-primary transition group-hover:bg-primary/25">
                         <Icon className="h-5 w-5" />
                       </span>
-                      <p className="text-lg font-bold text-foreground">{title}</p>
+                      <p className="text-base sm:text-lg font-bold text-foreground">{title}</p>
                       <p className="mt-1 text-sm font-medium text-primary/90">{label}</p>
                       <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{desc}</p>
                     </div>
@@ -183,7 +183,7 @@ const Index = () => {
                 </Button>
               </div>
 
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-5 grid gap-3 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
                 {JOIN_FEATURES.map(({ icon: Icon, title, desc }) => (
                   <div key={title} className="rounded-lg border border-border bg-background/70 p-4">
                     <div className="flex items-center gap-2">
@@ -199,43 +199,43 @@ const Index = () => {
         </section>
 
         {/* ── Merch Section ─────────────────────────────────────── */}
-        <section className="relative overflow-hidden border-y border-border">
+        <section className="relative overflow-hidden border-y border-[#2e2e2e]">
           {/* Dark matte background */}
           <div className="absolute inset-0" style={{ background: "#0d0d0d" }} />
           {/* Subtle gold grid pattern overlay */}
           <div className="absolute inset-0 opacity-5"
             style={{ backgroundImage: "linear-gradient(#c9a96e 1px, transparent 1px), linear-gradient(90deg, #c9a96e 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
 
-          <div className="relative z-10 container mx-auto px-4 py-16">
-            <div className="flex flex-col lg:flex-row items-center gap-10">
+          <div className="relative z-10 container mx-auto px-4 py-12 sm:py-16">
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-10">
 
               {/* Left — copy */}
-              <div className="flex-1 text-center lg:text-left">
+              <div className="flex-1 text-center lg:text-left w-full">
                 <Badge className="mb-4 text-xs font-bold tracking-widest uppercase"
                   style={{ background: "#c9a96e20", color: "#c9a96e", border: "1px solid #c9a96e40" }}>
                   Official Gear
                 </Badge>
-                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white leading-tight mb-4">
                   Build Experiences<br />
                   <span style={{ color: "#c9a96e" }}>Not Things.</span>
                 </h2>
                 <p className="text-base mb-2" style={{ color: "#aaa" }}>
                   Community · Gear · Connect · Knowledge
                 </p>
-                <p className="text-sm mb-8 max-w-md mx-auto lg:mx-0" style={{ color: "#666" }}>
+                <p className="text-sm mb-6 sm:mb-8 max-w-md mx-auto lg:mx-0" style={{ color: "#666" }}>
                   Premium print-on-demand gear. Matte black everything. Gold badge.
                   Tees, hoodies, hats, mugs, bags, patches — built for the road.
                 </p>
                 <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
                   <Link to="/merch">
-                    <Button className="font-bold px-8 py-3 text-base"
+                    <Button className="font-bold px-6 sm:px-8 py-3 text-sm sm:text-base"
                       style={{ background: "#c9a96e", color: "#0a0a0a", border: "none" }}>
-                      <ShoppingBag className="w-5 h-5 mr-2" />
+                      <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                       Shop Merch
                     </Button>
                   </Link>
                   <a href="https://vanciety-shop.fourthwall.com" target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" className="font-bold px-8 py-3 text-base"
+                    <Button variant="outline" className="font-bold px-6 sm:px-8 py-3 text-sm sm:text-base"
                       style={{ borderColor: "#c9a96e40", color: "#c9a96e", background: "transparent" }}>
                       Visit Store
                     </Button>
@@ -243,7 +243,7 @@ const Index = () => {
                 </div>
 
                 {/* Product type chips */}
-                <div className="flex flex-wrap gap-2 mt-8 justify-center lg:justify-start">
+                <div className="flex flex-wrap gap-2 mt-6 sm:mt-8 justify-center lg:justify-start">
                   {["Tees", "Hoodies", "Hats", "Mugs", "Bags", "Patches", "Jackets"].map((item) => (
                     <span key={item} className="text-xs px-3 py-1 rounded-full"
                       style={{ background: "#1c1c1c", color: "#888", border: "1px solid #2e2e2e" }}>
@@ -254,7 +254,7 @@ const Index = () => {
               </div>
 
               {/* Right — product grid preview */}
-              <div className="flex-shrink-0 w-full max-w-sm mx-auto lg:mx-0 lg:max-w-none lg:w-[480px]">
+              <div className="w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:max-w-none lg:w-[480px] shrink-0">
                 <div className="grid grid-cols-3 gap-2">
                   {[
                     { label: "Badge Tee", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&q=80" },

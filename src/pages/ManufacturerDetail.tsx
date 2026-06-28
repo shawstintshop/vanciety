@@ -78,7 +78,7 @@ const ManufacturerDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="container mx-auto px-4 pt-28 text-center">
+        <main className="container mx-auto px-4 pt-16 sm:pt-20 text-center">
           <h1 className="text-2xl font-bold">Brand not found</h1>
           <Link to="/manufacturers" className="mt-4 inline-block text-primary hover:underline">
             ← Back to all manufacturers

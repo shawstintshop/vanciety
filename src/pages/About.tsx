@@ -63,7 +63,7 @@ const About = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         {/* 1. Hero */}
         <HeroSection
           image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/NoDaXWxfTTDCNHnc.jpg"

@@ -17,7 +17,7 @@ const NotFound = () => {
   return (
     <div className="vanciety-page vanciety-page--ai min-h-screen bg-background">
       <Header />
-      <main className="vanciety-hero-topo flex min-h-screen items-center justify-center px-4 pt-24 text-center">
+      <main className="vanciety-hero-topo flex min-h-screen items-center justify-center px-4 pt-16 sm:pt-20 text-center">
         <div className="max-w-lg">
           <div className="mb-6 flex justify-center">
             <VancietyLogo className="h-16 w-[260px] max-w-full sm:h-18 sm:w-[280px]" />

@@ -91,7 +91,7 @@ export default function News() {
   return (
     <div className="min-h-screen bg-background topo-card">
       <Header />
-      <main className="pt-28">
+      <main className="pt-16 sm:pt-20">
         {/* Hero */}
         <HeroSection
           image="https://files.manuscdn.com/user_upload_by_module/session_file/94256494/QcJpuuqQtVPoVvjX.jpg"

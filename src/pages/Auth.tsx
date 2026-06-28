@@ -41,7 +41,7 @@ const Auth = () => {
   return (
     <div className="vanciety-page vanciety-page--auth min-h-screen bg-background">
       <Header />
-      <main className="relative isolate flex min-h-screen items-center justify-center px-4 pb-12 pt-28">
+      <main className="relative isolate flex min-h-screen items-center justify-center px-4 pb-12 pt-16 sm:pt-20">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center"
           style={{ backgroundImage: "url(/images/sprinter-red-rocks-arch.png)" }}
