@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, CalendarDays, ExternalLink, Mail, Megaphone, PlayCircle, Shirt, Sparkles } from "lucide-react";
+import { ArrowRight, CalendarDays, ExternalLink, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -57,9 +57,9 @@ interface VanNewsDigest {
 
 const fallbackDigest: VanNewsDigest = {
   generatedAt: new Date().toISOString(),
-  title: "Today’s Van Intelligence Briefing",
+  title: "Today's Van Intelligence Briefing",
   subtitle: "Daily van-life news, events, gear angles, and creator prompts for Vanciety.",
-  sourcePolicy: "Today’s briefing opens official van-life event, camping, and gear sources while the daily digest feed is refreshed.",
+  sourcePolicy: "Today's briefing opens official van-life event, camping, and gear sources while the daily digest feed is refreshed.",
   topStory: "Daily van briefing generator is ready",
   categories: ["events", "gear", "camping"],
   items: [
@@ -106,8 +106,8 @@ const fallbackDigest: VanNewsDigest = {
     },
   ],
   socialCopy: {
-    facebook: "Today’s Vanciety van briefing is ready. Share the top stories, events, and gear ideas with your van group.",
-    x: "Today’s Vanciety van briefing: van news, events, gear and trip ideas.",
+    facebook: "Today's Vanciety van briefing is ready. Share the top stories, events, and gear ideas with your van group.",
+    x: "Today's Vanciety van briefing: van news, events, gear and trip ideas.",
     youtubeDescription: "Daily Vanciety van briefing. Add verified source links before publishing.",
   },
   videoPrompt: "Create a 45-60 second vertical van-life news video for Vanciety using a dark topo contour background and clean captions.",
@@ -150,19 +150,9 @@ const formatDate = (value: string | null) => {
   }
 };
 
-const copyToClipboard = async (label: string, text: string) => {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch {
-    // Clipboard may be blocked on non-secure origins; select/copy from the visible text instead.
-  }
-  return label;
-};
-
 const DailyVanBriefing = () => {
   const [digest, setDigest] = useState<VanNewsDigest>(fallbackDigest);
   const [loading, setLoading] = useState(true);
-  const [copied, setCopied] = useState<string | null>(null);
 
   // Van-only content guard — blocks off-topic automotive/funeral/fleet items
   const filterVanOnly = (data: VanNewsDigest): VanNewsDigest => {
@@ -220,12 +210,6 @@ const DailyVanBriefing = () => {
   const primaryItems = digest.items.slice(0, 5);
   const secondaryItems = digest.items.slice(5, 9);
 
-  const handleCopy = async (label: string, text: string) => {
-    await copyToClipboard(label, text);
-    setCopied(label);
-    window.setTimeout(() => setCopied(null), 2000);
-  };
-
   return (
     <section className="vanciety-topo-panel relative overflow-hidden py-16 sm:py-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.18),transparent_32%),linear-gradient(135deg,hsl(var(--background)),hsl(var(--muted)/0.28))]" />
@@ -247,125 +231,41 @@ const DailyVanBriefing = () => {
               </Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/news">Events & news</Link>
+              <Link to="/news">Events &amp; news</Link>
             </Button>
           </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[1.45fr_0.9fr]">
-          <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CalendarDays className="h-5 w-5 text-primary" /> Today’s briefing
-              </CardTitle>
-              <CardDescription>{loading ? "Loading latest briefing…" : digest.topStory}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {primaryItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block rounded-xl border border-border bg-background/75 p-4 transition hover:border-primary/50 hover:bg-primary/5"
-                >
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <Badge className={badgeClass(item.badge)}>{item.badge.replace(/_/g, " ")}</Badge>
-                    <span className="text-xs text-muted-foreground">{item.source}</span>
-                    <span className="text-xs text-muted-foreground">• {formatDate(item.publishedAt)}</span>
-                  </div>
-                  <h3 className="font-semibold leading-snug group-hover:text-primary">{item.title}</h3>
-                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{item.summary}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                    Open source <ExternalLink className="h-3 w-3" />
-                  </span>
-                </a>
-              ))}
-            </CardContent>
-          </Card>
-
-          <div className="space-y-5">
-            <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Megaphone className="h-5 w-5 text-primary" /> Social + video packet
-                </CardTitle>
-                <CardDescription>Copy-ready starting points for your groups, X, YouTube, email, and AI video generator.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button className="w-full justify-start" variant="outline" onClick={() => handleCopy("Facebook", digest.socialCopy.facebook)}>
-                  Copy Facebook group post
-                </Button>
-                <Button className="w-full justify-start" variant="outline" onClick={() => handleCopy("X", digest.socialCopy.x)}>
-                  Copy X post
-                </Button>
-                <Button className="w-full justify-start" variant="outline" onClick={() => handleCopy("Video prompt", digest.videoPrompt)}>
-                  <PlayCircle className="mr-2 h-4 w-4" /> Copy AI video prompt
-                </Button>
-                {copied && <p className="text-xs text-primary">Copied {copied} to clipboard.</p>}
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
-              <CardHeader>
-                <CardTitle>Gear picks for this week</CardTitle>
-                <CardDescription>Curated van life gear matched to today's news and conditions.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {digest.affiliateOpportunities.slice(0, 4).map((item) => (
-                  <a key={item.id} href={item.url} target="_blank" rel="noopener noreferrer" className="block rounded-lg border border-border bg-background/70 p-3 hover:border-primary/50">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <p className="text-sm font-semibold">{item.label}</p>
-                        <p className="mt-1 text-xs text-muted-foreground">{item.angle}</p>
-                      </div>
-                      <Badge variant="outline">Gear</Badge>
-                    </div>
-                  </a>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
-          <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Mail className="h-5 w-5 text-primary" /> {digest.emailListCTA.headline}
-              </CardTitle>
-              <CardDescription>{digest.emailListCTA.copy}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <input
-                  className="min-h-10 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm"
-                  placeholder="Vanciety briefing signup opens soon"
-                  disabled
-                />
-                <Button disabled>Join list</Button>
-              </div>
-              <p className="mt-2 text-xs text-muted-foreground">{digest.emailListCTA.status}</p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shirt className="h-5 w-5 text-primary" /> {digest.merchDropIdea.theme}
-              </CardTitle>
-              <CardDescription>{digest.merchDropIdea.releaseCadence}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="mb-3 flex flex-wrap gap-2">
-                {digest.merchDropIdea.productIdeas.map((idea) => (
-                  <Badge key={idea} variant="secondary">{idea}</Badge>
-                ))}
-              </div>
-              <p className="text-xs text-muted-foreground">Monthly drops — clothing, gear, and accessories for the van life community.</p>
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="border-border/70 bg-card/85 shadow-card backdrop-blur">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CalendarDays className="h-5 w-5 text-primary" /> Today's briefing
+            </CardTitle>
+            <CardDescription>{loading ? "Loading latest briefing…" : digest.topStory}</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {primaryItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl border border-border bg-background/75 p-4 transition hover:border-primary/50 hover:bg-primary/5"
+              >
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <Badge className={badgeClass(item.badge)}>{item.badge.replace(/_/g, " ")}</Badge>
+                  <span className="text-xs text-muted-foreground">{item.source}</span>
+                  <span className="text-xs text-muted-foreground">• {formatDate(item.publishedAt)}</span>
+                </div>
+                <h3 className="font-semibold leading-snug group-hover:text-primary">{item.title}</h3>
+                <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{item.summary}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                  Open source <ExternalLink className="h-3 w-3" />
+                </span>
+              </a>
+            ))}
+          </CardContent>
+        </Card>
 
         {secondaryItems.length > 0 && (
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
