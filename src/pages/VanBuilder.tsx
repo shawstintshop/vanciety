@@ -8,10 +8,9 @@
  *  3. Tabs: Cut Sheet | BOM | Assembly | CNC Export
  */
 
-import { useState, useRef, useMemo, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Grid, Environment, Text } from "@react-three/drei";
-import * as THREE from "three";
+import { useState, useMemo, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import Header from "@/components/Header";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -157,14 +156,10 @@ function Scene({ cfg }: { cfg: GalleyConfig }) {
       <Suspense fallback={null}>
         <GalleyModel cfg={cfg} />
       </Suspense>
-      <Grid
-        args={[40, 40]}
-        position={[0, -0.01, 0]}
-        cellColor="#2e2e2e"
-        sectionColor="#c9a96e22"
-        fadeDistance={30}
-        infiniteGrid
-      />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+        <planeGeometry args={[40, 40, 20, 20]} />
+        <meshStandardMaterial color="#111111" wireframe opacity={0.3} transparent />
+      </mesh>
       <OrbitControls
         enableDamping
         dampingFactor={0.05}
