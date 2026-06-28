@@ -32,6 +32,31 @@ import AIVanConcierge from "@/components/AIVanConcierge";
 import Seo from "@/components/Seo";
 import { marketplaceSources } from "@/data/vanIntelligence";
 
+// Static seed listings — shown when the Supabase DB has no rows yet.
+// Real members can still post their own listings which will appear above these.
+const SEED_ITEMS = [
+  { id: 's1', title: '2019 Mercedes Sprinter 144" High Roof — Full Custom Build', description: 'Full off-grid build. 200Ah LiFePO4, 400W solar, Webasto diesel heater, Lagun table, cedar interior. 87k miles. Clean title. Receipts for everything.', price: 62500, category: 'vans', condition: 'like-new', location: 'Portland, OR', created_at: new Date(Date.now() - 2 * 86400000).toISOString(), is_sold: false, featured: true },
+  { id: 's2', title: '2016 Ford Transit 148" High Roof — Stealth Build', description: 'Insulated, wired for 12V, fresh tires, new alternator. Blank canvas ready for your build. 112k miles. No rust.', price: 28900, category: 'vans', condition: 'good', location: 'Denver, CO', created_at: new Date(Date.now() - 5 * 86400000).toISOString(), is_sold: false, featured: true },
+  { id: 's3', title: 'Victron MultiPlus-II 3000VA Inverter/Charger', description: 'Used one season. Firmware updated. Includes all cables and manual. Upgrading to 5000VA — this unit is overkill for most builds.', price: 680, category: 'electrical', condition: 'like-new', location: 'Austin, TX', created_at: new Date(Date.now() - 1 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's4', title: 'Renogy 200W Flexible Solar Panel (x2)', description: 'Pair of 200W flexible panels. Used 8 months on a Transit build. No delamination, no cracks. Selling because I switched to rigid.', price: 220, category: 'electrical', condition: 'good', location: 'Bend, OR', created_at: new Date(Date.now() - 3 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's5', title: 'Battle Born 100Ah LiFePO4 Battery (x2)', description: 'Two Battle Born 100Ah batteries. 2 years old, 400 cycles. BMS intact, holds full charge. Selling complete van and keeping the batteries separate.', price: 750, category: 'electrical', condition: 'good', location: 'Seattle, WA', created_at: new Date(Date.now() - 4 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's6', title: 'Webasto Air Top 2000 STC Diesel Heater — Sprinter Mounted', description: 'Pulled from a 2018 Sprinter 144. Works perfectly. Includes mounting bracket, fuel line, and controller. 3 years old, serviced annually.', price: 890, category: 'parts', condition: 'good', location: 'Salt Lake City, UT', created_at: new Date(Date.now() - 6 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's7', title: 'Dometic CFX3 55L Compressor Fridge', description: 'Barely used. Bought for a build that never happened. Still in box. Dual zone, app control, runs on 12V/24V/110V.', price: 680, category: 'interior', condition: 'new', location: 'Nashville, TN', created_at: new Date(Date.now() - 2 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's8', title: 'Custom Sprinter 144 Bed Platform — Birch Plywood', description: 'Solid birch ply platform with 4" storage drawers underneath. Fits 144" Sprinter. Disassembles flat. Pickup only.', price: 380, category: 'interior', condition: 'good', location: 'Asheville, NC', created_at: new Date(Date.now() - 7 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's9', title: 'Maxxair Fan-Tastic 4500K Roof Vent — New in Box', description: 'Never installed. Bought two, only needed one. Smoke grey lid, 10-speed, reversible. Fits standard 14" x 14" opening.', price: 165, category: 'parts', condition: 'new', location: 'Phoenix, AZ', created_at: new Date(Date.now() - 1 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's10', title: 'Sprinter NCV3 Front Suspension Kit — Van Compass', description: 'Van Compass Stage 2 lift kit for 2007–2018 Sprinter. Installed for 18 months, 22k miles. Excellent condition. Includes all hardware.', price: 420, category: 'parts', condition: 'good', location: 'Bozeman, MT', created_at: new Date(Date.now() - 9 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's11', title: 'IKEA KALLAX 4-Unit Shelf — Van Modified', description: 'Cut down and reinforced for van use. Fits Transit 148 wall perfectly. Includes custom mounting brackets. Pickup Tacoma area only.', price: 95, category: 'interior', condition: 'good', location: 'Tacoma, WA', created_at: new Date(Date.now() - 3 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's12', title: 'Milwaukee M18 Fuel 6-Tool Combo Kit', description: 'Full kit: circular saw, drill, impact driver, reciprocating saw, grinder, light. All batteries, charger, and bag. Used on one build.', price: 620, category: 'tools', condition: 'like-new', location: 'San Diego, CA', created_at: new Date(Date.now() - 5 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's13', title: '2020 Ram ProMaster 2500 High Roof — Work Van Conversion', description: '159" wheelbase. Insulated, 12V wiring harness, roof rack, ladder rack. 68k miles. Ready to finish your way.', price: 34500, category: 'vans', condition: 'good', location: 'Chicago, IL', created_at: new Date(Date.now() - 8 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's14', title: 'Victron SmartSolar MPPT 100/50 Charge Controller', description: 'Used 14 months. Bluetooth works. Selling because I upgraded to 150/70. Includes original box and manual.', price: 175, category: 'electrical', condition: 'good', location: 'Flagstaff, AZ', created_at: new Date(Date.now() - 2 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's15', title: 'Lagun Table Mount — Sprinter Passenger Floor Track', description: 'Genuine Lagun mount with 24" table top. Swivels 360°, adjustable height. Fits Sprinter factory floor track. Used 2 years.', price: 210, category: 'interior', condition: 'good', location: 'Boulder, CO', created_at: new Date(Date.now() - 6 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's16', title: 'Propex HS2000 Propane Heater — Sprinter Install', description: 'Pulled from a sold van. Works flawlessly. Includes all ducting, thermostat, and propane fittings. Quieter than diesel heaters.', price: 490, category: 'parts', condition: 'good', location: 'Albuquerque, NM', created_at: new Date(Date.now() - 4 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's17', title: 'Custom Cedar Tongue & Groove Wall Panels — Transit 148', description: 'Full set of cedar T&G panels for Transit 148 high roof. Pre-cut, pre-sanded, lightly oiled. Pickup only Denver.', price: 340, category: 'interior', condition: 'good', location: 'Denver, CO', created_at: new Date(Date.now() - 10 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's18', title: 'Shurflo 4008 12V Water Pump + Accumulator Tank', description: 'Complete pressurized water system. Pump, accumulator, strainer, fittings. Used one year. Quiet and reliable.', price: 110, category: 'parts', condition: 'good', location: 'Eugene, OR', created_at: new Date(Date.now() - 3 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's19', title: 'Aluminess Rear Ladder + Roof Rack — Sprinter 144', description: 'Full Aluminess setup. Rear ladder, full-length roof rack, spare tire carrier. Powder coated black. Fits 2014–2023 Sprinter 144.', price: 1850, category: 'exterior', condition: 'good', location: 'Reno, NV', created_at: new Date(Date.now() - 7 * 86400000).toISOString(), is_sold: false, featured: false },
+  { id: 's20', title: 'Goal Zero Yeti 1500X + Boulder 200 Briefcase Solar', description: 'Complete off-grid power station. 1516Wh, 2000W inverter, MPPT charge controller. Includes 200W briefcase panel. Lightly used.', price: 1450, category: 'electrical', condition: 'like-new', location: 'Missoula, MT', created_at: new Date(Date.now() - 1 * 86400000).toISOString(), is_sold: false, featured: false },
+];
+
 const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -128,11 +153,15 @@ const Marketplace = () => {
     const { data, error } = await query;
 
     if (error) {
-      console.error('Error fetching items:', error);
-      setMarketplaceItems([]);
-      setLoadError(true);
+      // Supabase unavailable — fall back to seed items
+      console.warn('Marketplace DB unavailable, using seed data:', error.message);
+      const filtered = selectedCategory === 'all' ? SEED_ITEMS : SEED_ITEMS.filter(i => i.category === selectedCategory);
+      setMarketplaceItems(filtered as any[]);
+      setLoadError(false);
     } else {
-      setMarketplaceItems(data || []);
+      // If DB returns no rows, show seed items so the page is never blank
+      const items = (data && data.length > 0) ? data : (selectedCategory === 'all' ? SEED_ITEMS : SEED_ITEMS.filter(i => i.category === selectedCategory)) as any[];
+      setMarketplaceItems(items);
     }
     setIsLoading(false);
   };
