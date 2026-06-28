@@ -43,6 +43,8 @@ import Events from "./pages/Events";
 import Directory from "./pages/Directory";
 import Makers from "./pages/Makers";
 import PrintFiles from "./pages/PrintFiles";
+import Extrusion from "./pages/Extrusion";
+import Resources from "./pages/Resources";
 import SocialFeed from "./pages/SocialFeed";
 import WrenchDay from "./pages/WrenchDay";
 import ScrollToTop from "./components/ScrollToTop";
@@ -115,6 +117,8 @@ const App = () => (
               <Route path="/directory" element={<Directory />} />
               <Route path="/makers" element={<Makers />} />
               <Route path="/3d-files" element={<PrintFiles />} />
+              <Route path="/extrusion" element={<Extrusion />} />
+              <Route path="/build-resources" element={<Resources />} />
               <Route path="/feed" element={<SocialFeed />} />
               <Route path="/wrench-day" element={<WrenchDay />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
