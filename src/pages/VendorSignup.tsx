@@ -192,28 +192,16 @@ const VendorSignup = () => {
         }
       }
 
-      // Create vendor profile
+      // Create vendor profile — only columns that exist in the vendors table schema
       const { error } = await supabase.from("vendors").insert({
         user_id: user.id,
         business_name: form.business_name,
         category: form.category,
         description: form.description,
-        location: form.location,
+        location: form.location || null,
         website_url: form.website_url || null,
-        contact_email: form.contact_email || null,
-        contact_phone: form.contact_phone || null,
         email: form.contact_email || null,
         phone: form.contact_phone || null,
-        logo_url: logoUrl,
-        services: form.services.split(",").map((s) => s.trim()).filter(Boolean),
-        year_established: form.year_established ? parseInt(form.year_established) : null,
-        social_links: {
-          instagram: form.social_instagram || null,
-          youtube: form.social_youtube || null,
-          facebook: form.social_facebook || null,
-        },
-        status: "pending",
-        subscription_tier: "free",
       } as any);
 
       if (error) throw error;
@@ -691,43 +679,57 @@ const VendorSignup = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {PRICING_TIERS.map((tier) => (
-                <Card
+                <div
                   key={tier.id}
-                  className={`relative overflow-hidden ${
-                    tier.popular ? "border-primary ring-2 ring-primary/30" : ""
-                  }`}
+                  style={{
+                    background: tier.popular ? "rgba(201,169,110,0.06)" : "#141414",
+                    border: tier.popular ? "2px solid #c9a96e" : "1px solid #2e2e2e",
+                    borderRadius: "8px",
+                    padding: "28px 24px",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
                 >
                   {tier.popular && (
-                    <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
-                      Most Popular
+                    <div style={{ position: "absolute", top: 0, right: 0, background: "#c9a96e", color: "#0d0d0d", fontSize: "10px", fontWeight: 800, padding: "4px 12px", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                      MOST POPULAR
                     </div>
                   )}
-                  <CardHeader className="text-center pb-4">
-                    <CardTitle className="text-xl">{tier.name}</CardTitle>
-                    <div className="mt-2">
-                      <span className="text-4xl font-bold">{tier.price}</span>
-                      <span className="text-muted-foreground">{tier.period}</span>
+                  <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                    <div style={{ fontFamily: "monospace", fontWeight: 800, fontSize: "13px", color: "#c9a96e", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "8px" }}>{tier.name}</div>
+                    <div>
+                      <span style={{ fontFamily: "monospace", fontWeight: 900, fontSize: "40px", color: "#e8dcc8" }}>{tier.price}</span>
+                      <span style={{ color: "#9a8f7e", fontSize: "14px", marginLeft: "4px" }}>{tier.period}</span>
                     </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "24px" }}>
                     {tier.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                      <div key={f} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "#9a8f7e" }}>
+                        <Check style={{ width: "14px", height: "14px", color: "#c9a96e", flexShrink: 0 }} />
                         <span>{f}</span>
                       </div>
                     ))}
-                    <Button
-                      variant={tier.popular ? "hero" : "outline"}
-                      className="w-full mt-4"
-                      onClick={() => {
-                        if (step === 1) setStep(1);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                    >
-                      {tier.cta}
-                    </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <button
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      background: tier.popular ? "#c9a96e" : "transparent",
+                      border: tier.popular ? "none" : "1px solid #2e2e2e",
+                      color: tier.popular ? "#0d0d0d" : "#9a8f7e",
+                      fontFamily: "monospace",
+                      fontWeight: 800,
+                      fontSize: "12px",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      cursor: "pointer",
+                      borderRadius: "4px",
+                    }}
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  >
+                    {tier.cta}
+                  </button>
+                </div>
               ))}
             </div>
           </div>
