@@ -38,6 +38,7 @@ import {
   MapPin,
   Compass,
   Shirt,
+  Shield,
   X,
   Hammer,
   Printer,
@@ -260,8 +261,15 @@ const Header = () => {
                   <DropdownMenuItem onClick={() => navigate("/profile")} className={ddItem}>My Profile</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate("/dashboard")} className={ddItem}>Dashboard</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => navigate("/van-cards")} className={ddItem}>Van Cards</DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-[#2e2e2e]" />
-                  <DropdownMenuItem onClick={handleSignOut} className="hover:bg-[#1a1a1a] hover:text-red-400 focus:bg-[#1a1a1a] focus:text-red-400 cursor-pointer">
+                <DropdownMenuSeparator className="bg-[#2e2e2e]" />
+                <DropdownMenuItem onClick={() => navigate("/admin")} className={ddItem}>
+                  <Shield className="mr-2 h-4 w-4 text-[#c9a96e]" /> Admin Dashboard
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/admin/ai")} className={ddItem}>
+                  <Brain className="mr-2 h-4 w-4 text-[#c9a96e]" /> AI Admin Hub
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-[#2e2e2e]" />
+                <DropdownMenuItem onClick={handleSignOut} className="hover:bg-[#1a1a1a] hover:text-red-400 focus:bg-[#1a1a1a] focus:text-red-400 cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" /> Sign Out
                   </DropdownMenuItem>
                 </DropdownMenuContent>

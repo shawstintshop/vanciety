@@ -49,6 +49,7 @@ import Extrusion from "./pages/Extrusion";
 import Resources from "./pages/Resources";
 import SocialFeed from "./pages/SocialFeed";
 import WrenchDay from "./pages/WrenchDay";
+import AIAdmin from "./pages/AIAdmin";
 import ScrollToTop from "./components/ScrollToTop";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -120,6 +121,7 @@ const App = () => (
               <Route path="/icebreaker" element={<Icebreaker />} />
               <Route path="/admin/vendors" element={<AdminVendors />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/ai" element={<AIAdmin />} />
               <Route path="/directory" element={<Directory />} />
               <Route path="/makers" element={<Makers />} />
               <Route path="/3d-files" element={<PrintFiles />} />
