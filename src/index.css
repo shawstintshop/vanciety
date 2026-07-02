@@ -36,40 +36,113 @@
     --popover-foreground: 210 15% 12%;
 
     /* Aged Brass Primary — replaces Forest Green */
-  --primary: 38 12% 95%;
-  --secondary: 42 65% 42%;
-  --accent: 25 85% 55%;
-  --muted: 210 10% 8%;
-  --panel: 210 10% 11%;
-  --border: 0 0% 18%;
-  --gold: 38 52% 55%;
-  --parchment: 38 25% 88%;
-  --dark: 0 0% 5%;
-  --red: 0 84% 60%;
-  --green: 142 71% 45%;
-}
+    --primary: 42 65% 42%;
+    --primary-foreground: 38 12% 95%;
+    --primary-glow: 42 70% 52%;
 
-.dark {
-  --background: 0 0% 5%;
-  --foreground: 38 25% 88%;
-  --card: 0 0% 8%;
-  --card-foreground: 38 25% 88%;
-  --popover: 0 0% 8%;
-  --popover-foreground: 38 25% 88%;
-  --primary: 38 52% 55%;
-  --primary-foreground: 0 0% 5%;
-  --secondary: 25 85% 55%;
-  --secondary-foreground: 0 0% 5%;
-  --accent: 38 52% 55%;
-  --accent-foreground: 0 0% 5%;
-  --muted: 0 0% 12%;
-  --muted-foreground: 38 10% 58%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 38 25% 88%;
-  --border: 0 0% 18%;
-  --input: 0 0% 12%;
-  --ring: 38 52% 55%;
-}
+    /* Ember Orange Secondary */
+    --secondary: 25 85% 55%;
+    --secondary-foreground: 38 12% 95%;
+
+    /* Survey Blue Accent */
+    --accent: 205 55% 40%;
+    --accent-foreground: 38 12% 95%;
+
+    --muted: 210 8% 90%;
+    --muted-foreground: 210 10% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 38 12% 95%;
+
+    --border: 210 8% 86%;
+    --input: 210 8% 90%;
+    --ring: 42 65% 42%;
+
+    /* Topo Design Tokens — Light */
+    --gradient-hero: linear-gradient(135deg, hsl(38 12% 92%) 0%, hsl(38 15% 96%) 60%, hsl(42 20% 90%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(38 10% 98%) 0%, hsl(38 12% 95%) 100%);
+    --gradient-sunset: linear-gradient(90deg, hsl(42 65% 42%) 0%, hsl(32 60% 48%) 50%, hsl(25 65% 42%) 100%);
+    --gradient-terrain: linear-gradient(180deg, hsl(42 65% 42%) 0%, hsl(42 55% 30%) 100%);
+
+    --shadow-glow: 0 0 30px hsl(42 65% 42% / 0.2);
+    --shadow-card: 0 10px 30px -10px hsl(210 15% 5% / 0.15);
+    --shadow-hero: 0 25px 50px -15px hsl(210 15% 5% / 0.7);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --topo-line: hsl(210 8% 60% / 0.18);
+    --topo-line-dark: hsl(42 30% 55% / 0.12);
+
+    --sidebar-background: 38 10% 96%;
+    --sidebar-foreground: 210 10% 26%;
+    --sidebar-primary: 210 10% 10%;
+    --sidebar-primary-foreground: 38 10% 96%;
+    --sidebar-accent: 210 8% 90%;
+    --sidebar-accent-foreground: 210 10% 10%;
+    --sidebar-border: 210 8% 86%;
+    --sidebar-ring: 42 65% 42%;
+  }
+
+  .dark {
+    /* Dark Mode — Matte Black / Van Wrap Gold */
+    --background: 0 0% 5%;       /* #0d0d0d — matte black */
+    --foreground: 38 25% 88%;    /* #e8dcc8 — warm parchment */
+
+    --card: 0 0% 8%;
+    --card-foreground: 38 25% 88%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 38 25% 88%;
+
+    /* Tan-Gold Primary — matches badge lettering */
+    --primary: 38 52% 55%;       /* #c9a96e — warm tan gold */
+    --primary-foreground: 0 0% 5%;
+    --primary-glow: 38 58% 65%;
+
+    /* Ember Orange Secondary */
+    --secondary: 25 85% 55%;
+    --secondary-foreground: 0 0% 5%;
+
+    /* Survey Blue Accent */
+    --accent: 205 55% 40%;
+    --accent-foreground: 38 25% 88%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 38 10% 58%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 38 25% 88%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 12%;
+    --ring: 38 52% 55%;
+
+    /* Topo Design Tokens — Matte Black / Gold */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 0% 7%) 60%, hsl(38 20% 12%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%) 0%, hsl(0 0% 10%) 100%);
+    --gradient-sunset: linear-gradient(90deg, hsl(38 52% 55%) 0%, hsl(32 60% 48%) 50%, hsl(25 65% 42%) 100%);
+    --gradient-terrain: linear-gradient(180deg, hsl(38 52% 55%) 0%, hsl(38 45% 38%) 100%);
+
+    --shadow-glow: 0 0 30px hsl(38 52% 55% / 0.25);
+    --shadow-card: 0 10px 30px -10px hsl(0 0% 0% / 0.7);
+    --shadow-hero: 0 25px 50px -15px hsl(0 0% 0% / 0.95);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --topo-line: hsl(38 30% 55% / 0.12);
+    --topo-line-dark: hsl(38 30% 55% / 0.08);
+
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 38 15% 85%;
+    --sidebar-primary: 38 52% 55%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 38 15% 85%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 38 52% 55%;
+  }
 }
 
 @layer base {
